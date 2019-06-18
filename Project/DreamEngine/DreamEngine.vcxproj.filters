@@ -5,13 +5,17 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="Device">
+      <UniqueIdentifier>{237afe8b-094b-4f5a-915a-052be2bfd458}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Device\OpenGL">
+      <UniqueIdentifier>{5ed87e3a-f485-4845-bb9b-dccad9cb8c60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Log">
+      <UniqueIdentifier>{6336bca8-a86a-4b5b-b948-a297626a7837}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{161c7e26-1658-4275-a9b6-746824c0fab4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -19,7 +23,36 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\glad\src\glad.c">
-      <Filter>Source Files</Filter>
+      <Filter>Device\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\log.cpp">
+      <Filter>Log</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\OpenGLDevice.cpp">
+      <Filter>Device\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\DeviceFactory.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Src\const.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\log.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\IDevice.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\OpenGLDevice.h">
+      <Filter>Device\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\global.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\DeviceFactory.h">
+      <Filter>Device</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -131,8 +131,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Src\DeviceFactory.cpp" />
     <ClCompile Include="..\..\Src\glad\src\glad.c" />
+    <ClCompile Include="..\..\Src\log.cpp" />
     <ClCompile Include="..\..\Src\main.cpp" />
+    <ClCompile Include="..\..\Src\OpenGLDevice.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Src\const.h" />
+    <ClInclude Include="..\..\Src\DeviceFactory.h" />
+    <ClInclude Include="..\..\Src\global.h" />
+    <ClInclude Include="..\..\Src\IDevice.h" />
+    <ClInclude Include="..\..\Src\log.h" />
+    <ClInclude Include="..\..\Src\OpenGLDevice.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
