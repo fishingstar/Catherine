@@ -79,6 +79,9 @@
     <ClCompile Include="..\..\Src\global.cpp">
       <Filter>Global</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\FileUtility.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\const.h">
@@ -125,6 +128,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\DemoRenderer.h">
       <Filter>Render\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\FileUtility.h">
+      <Filter>Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

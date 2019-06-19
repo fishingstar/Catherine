@@ -1,23 +1,20 @@
 #include <OpenGLProgram.h>
 #include <LogUtility.h>
+#include <FileUtility.h>
 
 namespace Catherine
 {
 	const char * vertexShaderSource = "#version 330 core\n"
 		"layout (location = 0) in vec3 aPos;\n"
-		"layout (location = 1) in vec3 aColor;\n"
-		"out vec3 VertColor;\n"
 		"void main()\n"
 		"{\n"
 		"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-		"   VertColor = aColor;\n"
 		"}\0";
 	const char * fragmentShaderSource = "#version 330 core\n"
-		"in vec3 VertColor;\n"
 		"out vec4 FragColor;\n"
 		"void main()\n"
 		"{\n"
-		"   FragColor = vec4(VertColor, 1.0f);\n"
+		"   FragColor = vec4(0.1, 0.2, 0.3, 1.0f);\n"
 		"}\n\0";
 
 	GLProgram::GLProgram()
@@ -80,13 +77,28 @@ namespace Catherine
 		glUseProgram(m_Program);
 	}
 
+	void GLProgram::SetBool(const char * key, bool value)
+	{
+		glUniform1i(glGetUniformLocation(m_Program, key), value);
+	}
+
+	void GLProgram::SetInt(const char * key, int value)
+	{
+		glUniform1i(glGetUniformLocation(m_Program, key), value);
+	}
+
+	void GLProgram::SetFloat(const char * key, float value)
+	{
+		glUniform1f(glGetUniformLocation(m_Program, key), value);
+	}
+
 	GLuint GLProgram::CreateShader(GLenum param_Type, const char * param_FileName, const char * param_Default)
 	{
 		const char * tmp_source = nullptr;
 
 		if (param_FileName != nullptr)
 		{
-			
+			FileUtility::LoadFileContent(param_FileName, (void **)&tmp_source);
 		}
 
 		if (tmp_source == nullptr)

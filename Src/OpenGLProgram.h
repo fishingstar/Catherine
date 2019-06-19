@@ -16,6 +16,10 @@ namespace Catherine
 		virtual bool Link() override;
 		virtual void Use() override;
 
+		virtual void SetBool(const char * key, bool value) override;
+		virtual void SetInt(const char * key, int value) override;
+		virtual void SetFloat(const char * key, float value) override;
+
 	private:
 		GLuint CreateShader(GLenum param_Type, const char * param_FileName, const char * param_Default);
 

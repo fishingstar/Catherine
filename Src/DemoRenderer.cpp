@@ -9,7 +9,7 @@ namespace Catherine
 	bool DemoRenderer::Initialize()
 	{
 		m_Program = new GLProgram();
-		m_Program->AttachShader(nullptr, nullptr);
+		m_Program->AttachShader("./res/shader/simple.vs", "./res/shader/simple.fs");
 		m_Program->Compile();
 		m_Program->Link();
 
