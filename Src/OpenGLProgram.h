@@ -5,7 +5,7 @@
 
 namespace Catherine
 {
-	class GLProgram : IProgram
+	class GLProgram : public IProgram
 	{
 	public:
 		GLProgram();
@@ -17,7 +17,7 @@ namespace Catherine
 		virtual void Use() override;
 
 	private:
-		void CreateShader(GLenum param_Type, const char * param_FileName, const char * param_Default);
+		GLuint CreateShader(GLenum param_Type, const char * param_FileName, const char * param_Default);
 
 		bool CheckCompileStatus(GLuint param_Shader);
 		bool CheckLinkStatus(GLuint param_Program);

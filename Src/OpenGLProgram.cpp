@@ -28,8 +28,8 @@ namespace Catherine
 
 	void GLProgram::AttachShader(const char * vertex, const char * fragment)
 	{
-		CreateShader(GL_VERTEX_SHADER, vertex, vertexShaderSource);
-		CreateShader(GL_FRAGMENT_SHADER, fragment, fragmentShaderSource);
+		m_VertexShader = CreateShader(GL_VERTEX_SHADER, vertex, vertexShaderSource);
+		m_FragmentShader = CreateShader(GL_FRAGMENT_SHADER, fragment, fragmentShaderSource);
 	}
 
 	bool GLProgram::Compile()
@@ -58,6 +58,7 @@ namespace Catherine
 		glAttachShader(m_Program, m_VertexShader);
 		glAttachShader(m_Program, m_FragmentShader);
 		glLinkProgram(m_Program);
+
 		bool tmp_programOK = CheckLinkStatus(m_Program);
 		if (!tmp_programOK)
 		{
@@ -65,6 +66,8 @@ namespace Catherine
 			return false;
 		}
 
+		glDeleteShader(m_VertexShader);
+		glDeleteShader(m_FragmentShader);
 		return true;
 	}
 
@@ -73,7 +76,7 @@ namespace Catherine
 		glUseProgram(m_Program);
 	}
 
-	void GLProgram::CreateShader(GLenum param_Type, const char * param_FileName, const char * param_Default)
+	GLuint GLProgram::CreateShader(GLenum param_Type, const char * param_FileName, const char * param_Default)
 	{
 		const char * tmp_source = nullptr;
 
@@ -87,8 +90,10 @@ namespace Catherine
 			tmp_source = param_Default;
 		}
 
-		m_VertexShader = glCreateShader(param_Type);
-		glShaderSource(m_VertexShader, 1, &tmp_source, nullptr);
+		GLuint tmp_shader = glCreateShader(param_Type);
+		glShaderSource(tmp_shader, 1, &tmp_source, nullptr);
+
+		return tmp_shader;
 	}
 
 	bool GLProgram::CheckCompileStatus(GLuint param_Shader)

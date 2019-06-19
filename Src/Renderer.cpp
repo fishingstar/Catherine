@@ -14,7 +14,7 @@ namespace Catherine
 
 	void Renderer::PreRender()
 	{
-
+		
 	}
 
 	void Renderer::Render()

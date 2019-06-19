@@ -1,5 +1,6 @@
 #include <RendererFactory.h>
 #include <Renderer.h>
+#include <DemoRenderer.h>
 
 namespace Catherine
 {
@@ -11,7 +12,8 @@ namespace Catherine
 
 	IRenderer * RendererFactory::CreateMainRenderer() const
 	{
-		IRenderer * tmp_renderer = new Renderer();
+		//IRenderer * tmp_renderer = new Renderer();
+		IRenderer * tmp_renderer = new DemoRenderer();
 		return tmp_renderer;
 	}
 }

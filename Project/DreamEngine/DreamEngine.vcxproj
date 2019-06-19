@@ -132,6 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Client.cpp" />
+    <ClCompile Include="..\..\Src\DemoRenderer.cpp" />
     <ClCompile Include="..\..\Src\DeviceFactory.cpp" />
     <ClCompile Include="..\..\Src\glad\src\glad.c" />
     <ClCompile Include="..\..\Src\log.cpp" />
@@ -146,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Src\Client.h" />
     <ClInclude Include="..\..\Src\const.h" />
+    <ClInclude Include="..\..\Src\DemoRenderer.h" />
     <ClInclude Include="..\..\Src\DeviceFactory.h" />
     <ClInclude Include="..\..\Src\global.h" />
     <ClInclude Include="..\..\Src\IDevice.h" />
