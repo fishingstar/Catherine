@@ -46,6 +46,18 @@
     <ClCompile Include="..\..\Src\Client.cpp">
       <Filter>Client</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\LogUtility.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\TimeUtility.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Renderer.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\RendererFactory.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\const.h">
@@ -68,6 +80,21 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Client.h">
       <Filter>Client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\LogUtility.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\TimeUtility.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Renderer.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\IRenderer.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\RendererFactory.h">
+      <Filter>Render</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

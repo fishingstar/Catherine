@@ -1,21 +1,21 @@
 #include <Client.h>
-#include <log.h>
-
-using namespace Catherine;
+#include <LogUtility.h>
 
 int main()
 {
+	using namespace Catherine;
+
 	Client * tmp_client = Client::Instance();
 	if (tmp_client == nullptr)
 	{
-		LogModule::Instance()->LogError("Get Client Instance Failed...");
+		LogError("Get Client Instance Failed...");
 		return -1;
 	}
 
 	bool tmp_initialized = tmp_client->Initialize();
 	if (!tmp_initialized)
 	{
-		LogModule::Instance()->LogError("Client Initialize Failed...");
+		LogError("Client Initialize Failed...");
 		return -1;
 	}
 

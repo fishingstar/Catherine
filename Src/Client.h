@@ -1,9 +1,10 @@
 #pragma once
 
-#include <IDevice.h>
-
 namespace Catherine
 {
+	class IDevice;
+	class IRenderer;
+
 	class Client
 	{
 	public:
@@ -17,6 +18,7 @@ namespace Catherine
 		Client() { }
 
 		bool CreateDevice();
+		bool CreateRenderer();
 
 		void OnFrameBegin();
 		void OnFrameEnd();
@@ -27,5 +29,6 @@ namespace Catherine
 
 	private:
 		IDevice * m_Device = nullptr;
+		IRenderer * m_Renderer = nullptr;
 	};
 }

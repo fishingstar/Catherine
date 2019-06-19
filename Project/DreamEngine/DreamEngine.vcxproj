@@ -135,8 +135,12 @@
     <ClCompile Include="..\..\Src\DeviceFactory.cpp" />
     <ClCompile Include="..\..\Src\glad\src\glad.c" />
     <ClCompile Include="..\..\Src\log.cpp" />
+    <ClCompile Include="..\..\Src\LogUtility.cpp" />
     <ClCompile Include="..\..\Src\main.cpp" />
     <ClCompile Include="..\..\Src\OpenGLDevice.cpp" />
+    <ClCompile Include="..\..\Src\Renderer.cpp" />
+    <ClCompile Include="..\..\Src\RendererFactory.cpp" />
+    <ClCompile Include="..\..\Src\TimeUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Client.h" />
@@ -144,8 +148,13 @@
     <ClInclude Include="..\..\Src\DeviceFactory.h" />
     <ClInclude Include="..\..\Src\global.h" />
     <ClInclude Include="..\..\Src\IDevice.h" />
+    <ClInclude Include="..\..\Src\IRenderer.h" />
     <ClInclude Include="..\..\Src\log.h" />
+    <ClInclude Include="..\..\Src\LogUtility.h" />
     <ClInclude Include="..\..\Src\OpenGLDevice.h" />
+    <ClInclude Include="..\..\Src\Renderer.h" />
+    <ClInclude Include="..\..\Src\RendererFactory.h" />
+    <ClInclude Include="..\..\Src\TimeUtility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
