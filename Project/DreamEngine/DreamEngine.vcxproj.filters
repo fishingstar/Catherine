@@ -17,6 +17,15 @@
     <Filter Include="Global">
       <UniqueIdentifier>{161c7e26-1658-4275-a9b6-746824c0fab4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{eac9c1fe-3d64-438d-b1ac-3b6a969ec881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{7da214cd-ce7a-4519-975d-1749d4df3530}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Client">
+      <UniqueIdentifier>{9d97060d-1214-4ca4-b3cf-324c76f03b95}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\main.cpp">
@@ -33,6 +42,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\DeviceFactory.cpp">
       <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Client.cpp">
+      <Filter>Client</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +65,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\DeviceFactory.h">
       <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Client.h">
+      <Filter>Client</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

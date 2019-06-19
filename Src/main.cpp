@@ -1,35 +1,28 @@
-#include <global.h>
+#include <Client.h>
 #include <log.h>
-#include <DeviceFactory.h>
 
 using namespace Catherine;
 
 int main()
 {
-	g_Device = DeviceFactory::Instance()->CreateDevice();
-	if (g_Device == nullptr)
+	Client * tmp_client = Client::Instance();
+	if (tmp_client == nullptr)
 	{
-		LogModule::Instance()->LogError("Create Device Failed...");
+		LogModule::Instance()->LogError("Get Client Instance Failed...");
 		return -1;
 	}
 
-	bool tmp_initialized = g_Device->Initialize();
+	bool tmp_initialized = tmp_client->Initialize();
 	if (!tmp_initialized)
 	{
-		LogModule::Instance()->LogError("Device Initialize Failed...");
+		LogModule::Instance()->LogError("Client Initialize Failed...");
 		return -1;
 	}
 
-	while (!g_Device->WindowShouldClose())
-	{
-		g_Device->OnFrameBegin();
+	// Main Loop
+	tmp_client->Run();
 
-		// logic, render
+	tmp_client->Uninitialize();
 
-		g_Device->OnFrameEnd();
-	}
-
-	g_Device->Uninitialize();
-	
 	return 0;
 }
