@@ -4,5 +4,5 @@
 
 namespace Catherine
 {
-	IDevice * g_Device = nullptr;
+	extern IDevice * g_Device;
 }

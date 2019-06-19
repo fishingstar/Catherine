@@ -135,6 +135,7 @@
     <ClCompile Include="..\..\Src\DemoRenderer.cpp" />
     <ClCompile Include="..\..\Src\DeviceFactory.cpp" />
     <ClCompile Include="..\..\Src\glad\src\glad.c" />
+    <ClCompile Include="..\..\Src\global.cpp" />
     <ClCompile Include="..\..\Src\log.cpp" />
     <ClCompile Include="..\..\Src\LogUtility.cpp" />
     <ClCompile Include="..\..\Src\main.cpp" />

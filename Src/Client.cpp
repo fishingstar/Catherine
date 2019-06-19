@@ -7,6 +7,8 @@
 
 namespace Catherine
 {
+	extern IDevice * g_Device;
+
 	Client * Client::Instance()
 	{
 		static Client s_instance;

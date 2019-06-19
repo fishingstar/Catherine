@@ -15,6 +15,9 @@ namespace Catherine
 
 		virtual bool WindowShouldClose() override;
 
+		virtual void ClearColor(float red, float green, float blue, float alpha) override;
+		virtual void Clear() override;
+
 	private:
 		void ProcessInput();
 	};

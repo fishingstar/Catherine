@@ -18,5 +18,7 @@ namespace Catherine
 
 	private:
 		IProgram * m_Program = nullptr;
+		
+		unsigned int m_VAO = 0;
 	};
 }

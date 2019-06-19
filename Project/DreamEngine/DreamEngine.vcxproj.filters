@@ -76,6 +76,9 @@
     <ClCompile Include="..\..\Src\DemoRenderer.cpp">
       <Filter>Render\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\global.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\const.h">

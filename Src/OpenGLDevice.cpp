@@ -51,6 +51,16 @@ namespace Catherine
 		return glfwWindowShouldClose(window);
 	}
 
+	void OpenGLDevice::ClearColor(float red, float green, float blue, float alpha)
+	{
+		glClearColor(red, green, blue, alpha);
+	}
+
+	void OpenGLDevice::Clear()
+	{
+		glClear(GL_COLOR_BUFFER_BIT);
+	}
+
 	void OpenGLDevice::OnFrameBegin()
 	{
 		ProcessInput();
