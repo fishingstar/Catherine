@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -143,6 +143,7 @@
     <ClCompile Include="..\..\Src\main.cpp" />
     <ClCompile Include="..\..\Src\OpenGLDevice.cpp" />
     <ClCompile Include="..\..\Src\OpenGLProgram.cpp" />
+    <ClCompile Include="..\..\Src\OpenGLTexture.cpp" />
     <ClCompile Include="..\..\Src\Renderer.cpp" />
     <ClCompile Include="..\..\Src\RendererFactory.cpp" />
     <ClCompile Include="..\..\Src\TimeUtility.cpp" />
@@ -154,15 +155,18 @@
     <ClInclude Include="..\..\Src\DeviceFactory.h" />
     <ClInclude Include="..\..\Src\FileUtility.h" />
     <ClInclude Include="..\..\Src\global.h" />
+    <ClInclude Include="..\..\Src\OpenGLTexture.h" />
     <ClInclude Include="..\..\Src\IDevice.h" />
     <ClInclude Include="..\..\Src\IProgram.h" />
     <ClInclude Include="..\..\Src\IRenderer.h" />
+    <ClInclude Include="..\..\Src\ITexture.h" />
     <ClInclude Include="..\..\Src\log.h" />
     <ClInclude Include="..\..\Src\LogUtility.h" />
     <ClInclude Include="..\..\Src\OpenGLDevice.h" />
     <ClInclude Include="..\..\Src\OpenGLProgram.h" />
     <ClInclude Include="..\..\Src\Renderer.h" />
     <ClInclude Include="..\..\Src\RendererFactory.h" />
+    <ClInclude Include="..\..\Src\stb_image.h" />
     <ClInclude Include="..\..\Src\TimeUtility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

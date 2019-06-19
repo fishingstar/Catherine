@@ -82,6 +82,9 @@
     <ClCompile Include="..\..\Src\FileUtility.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\OpenGLTexture.cpp">
+      <Filter>Device\OpenGL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\const.h">
@@ -130,6 +133,15 @@
       <Filter>Render\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\FileUtility.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\ITexture.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\OpenGLTexture.h">
+      <Filter>Device\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\stb_image.h">
       <Filter>Utility</Filter>
     </ClInclude>
   </ItemGroup>

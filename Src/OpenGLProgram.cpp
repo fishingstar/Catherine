@@ -92,7 +92,7 @@ namespace Catherine
 		glUniform1f(glGetUniformLocation(m_Program, key), value);
 	}
 
-	GLuint GLProgram::CreateShader(GLenum param_Type, const char * param_FileName, const char * param_Default)
+	unsigned int GLProgram::CreateShader(GLenum param_Type, const char * param_FileName, const char * param_Default)
 	{
 		const char * tmp_source = nullptr;
 
@@ -106,15 +106,15 @@ namespace Catherine
 			tmp_source = param_Default;
 		}
 
-		GLuint tmp_shader = glCreateShader(param_Type);
+		unsigned int tmp_shader = glCreateShader(param_Type);
 		glShaderSource(tmp_shader, 1, &tmp_source, nullptr);
 
 		return tmp_shader;
 	}
 
-	bool GLProgram::CheckCompileStatus(GLuint param_Shader)
+	bool GLProgram::CheckCompileStatus(unsigned int param_Shader)
 	{
-		GLint tmp_result = 0;
+		int tmp_result = 0;
 		char tmp_log[1024] = { 0 };
 
 		glGetShaderiv(param_Shader, GL_COMPILE_STATUS, &tmp_result);
@@ -127,9 +127,9 @@ namespace Catherine
 		return tmp_result;
 	}
 
-	bool GLProgram::CheckLinkStatus(GLuint param_Program)
+	bool GLProgram::CheckLinkStatus(unsigned int param_Program)
 	{
-		GLint tmp_result = 0;
+		int tmp_result = 0;
 		char tmp_log[1024] = { 0 };
 
 		glGetProgramiv(param_Program, GL_LINK_STATUS, &tmp_result);

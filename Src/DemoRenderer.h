@@ -5,6 +5,7 @@
 namespace Catherine
 {
 	class IProgram;
+	class ITexture;
 
 	class DemoRenderer : public IRenderer
 	{
@@ -18,7 +19,9 @@ namespace Catherine
 
 	private:
 		IProgram * m_Program = nullptr;
-		
+		ITexture * m_Texture1 = nullptr;
+		ITexture * m_Texture2 = nullptr;
+
 		unsigned int m_VAO = 0;
 	};
 }

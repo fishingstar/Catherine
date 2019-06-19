@@ -21,15 +21,15 @@ namespace Catherine
 		virtual void SetFloat(const char * key, float value) override;
 
 	private:
-		GLuint CreateShader(GLenum param_Type, const char * param_FileName, const char * param_Default);
+		unsigned int CreateShader(GLenum param_Type, const char * param_FileName, const char * param_Default);
 
-		bool CheckCompileStatus(GLuint param_Shader);
-		bool CheckLinkStatus(GLuint param_Program);
+		bool CheckCompileStatus(unsigned int param_Shader);
+		bool CheckLinkStatus(unsigned int param_Program);
 
 	private:
-		GLuint m_Program = 0;
+		unsigned int m_Program = 0;
 
-		GLuint m_VertexShader = 0;
-		GLuint m_FragmentShader = 0;
+		unsigned int m_VertexShader = 0;
+		unsigned int m_FragmentShader = 0;
 	};
 }
