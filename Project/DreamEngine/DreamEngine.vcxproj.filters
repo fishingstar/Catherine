@@ -26,6 +26,18 @@
     <Filter Include="Client">
       <UniqueIdentifier>{9d97060d-1214-4ca4-b3cf-324c76f03b95}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Render\Renderer">
+      <UniqueIdentifier>{e249bf5a-a827-4aab-a79d-a9e368f58a77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\Material">
+      <UniqueIdentifier>{5e2e24ea-cd0d-4a90-bf4c-ee50af8887bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\Pipeline">
+      <UniqueIdentifier>{752b1d7d-ecbf-4d9f-acc7-afc2ef243d9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Device\DirectX">
+      <UniqueIdentifier>{03c4afd0-4a40-4454-876a-0687d811098a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\main.cpp">
@@ -53,10 +65,13 @@
       <Filter>Utility</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\Renderer.cpp">
-      <Filter>Render</Filter>
+      <Filter>Render\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\RendererFactory.cpp">
-      <Filter>Render</Filter>
+      <Filter>Render\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\OpenGLProgram.cpp">
+      <Filter>Device\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -87,14 +102,20 @@
     <ClInclude Include="..\..\Src\TimeUtility.h">
       <Filter>Utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\Renderer.h">
-      <Filter>Render</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\IRenderer.h">
-      <Filter>Render</Filter>
+      <Filter>Render\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Renderer.h">
+      <Filter>Render\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\RendererFactory.h">
-      <Filter>Render</Filter>
+      <Filter>Render\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\IProgram.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\OpenGLProgram.h">
+      <Filter>Device\OpenGL</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

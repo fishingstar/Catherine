@@ -138,6 +138,7 @@
     <ClCompile Include="..\..\Src\LogUtility.cpp" />
     <ClCompile Include="..\..\Src\main.cpp" />
     <ClCompile Include="..\..\Src\OpenGLDevice.cpp" />
+    <ClCompile Include="..\..\Src\OpenGLProgram.cpp" />
     <ClCompile Include="..\..\Src\Renderer.cpp" />
     <ClCompile Include="..\..\Src\RendererFactory.cpp" />
     <ClCompile Include="..\..\Src\TimeUtility.cpp" />
@@ -148,10 +149,12 @@
     <ClInclude Include="..\..\Src\DeviceFactory.h" />
     <ClInclude Include="..\..\Src\global.h" />
     <ClInclude Include="..\..\Src\IDevice.h" />
+    <ClInclude Include="..\..\Src\IProgram.h" />
     <ClInclude Include="..\..\Src\IRenderer.h" />
     <ClInclude Include="..\..\Src\log.h" />
     <ClInclude Include="..\..\Src\LogUtility.h" />
     <ClInclude Include="..\..\Src\OpenGLDevice.h" />
+    <ClInclude Include="..\..\Src\OpenGLProgram.h" />
     <ClInclude Include="..\..\Src\Renderer.h" />
     <ClInclude Include="..\..\Src\RendererFactory.h" />
     <ClInclude Include="..\..\Src\TimeUtility.h" />
