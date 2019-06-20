@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Src\Camera.cpp" />
     <ClCompile Include="..\..\Src\Client.cpp" />
     <ClCompile Include="..\..\Src\DemoMesh.cpp" />
     <ClCompile Include="..\..\Src\DemoRenderer.cpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="..\..\Src\VertexLayout.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Src\Camera.h" />
     <ClInclude Include="..\..\Src\Client.h" />
     <ClInclude Include="..\..\Src\const.h" />
     <ClInclude Include="..\..\Src\DemoMesh.h" />
@@ -159,6 +161,7 @@
     <ClInclude Include="..\..\Src\DeviceFactory.h" />
     <ClInclude Include="..\..\Src\FileUtility.h" />
     <ClInclude Include="..\..\Src\global.h" />
+    <ClInclude Include="..\..\Src\ICamera.h" />
     <ClInclude Include="..\..\Src\IMesh.h" />
     <ClInclude Include="..\..\Src\Mesh.h" />
     <ClInclude Include="..\..\Src\OpenGLTexture.h" />

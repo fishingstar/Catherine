@@ -1,6 +1,7 @@
 #include <OpenGLProgram.h>
 #include <LogUtility.h>
 #include <FileUtility.h>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace Catherine
 {
@@ -90,6 +91,11 @@ namespace Catherine
 	void GLProgram::SetFloat(const char * key, float value)
 	{
 		glUniform1f(glGetUniformLocation(m_Program, key), value);
+	}
+
+	void GLProgram::SetMat4x4(const char * key, const glm::mat4x4 & value)
+	{
+		glUniformMatrix4fv(glGetUniformLocation(m_Program, key), 1, GL_FALSE, glm::value_ptr(value));
 	}
 
 	unsigned int GLProgram::CreateShader(GLenum param_Type, const char * param_FileName, const char * param_Default)

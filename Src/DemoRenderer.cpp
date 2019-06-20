@@ -3,6 +3,7 @@
 #include <VertexLayout.h>
 #include <OpenGLProgram.h>
 #include <OpenGLTexture.h>
+#include <Camera.h>
 #include <global.h>
 
 namespace Catherine
@@ -11,6 +12,13 @@ namespace Catherine
 
 	bool DemoRenderer::Initialize()
 	{
+		ICamera * tmp_camera = new Camera();
+		tmp_camera->SetPosition(1.0f, 1.0, 1.0f);
+		tmp_camera->SetRotate(45.0f, -45.0f, 0.0f);
+		tmp_camera->SetProjectionMode(ProjectionMode::Persperctive);
+		const glm::mat4x4 & tmp_view = tmp_camera->GetViewMatrix();
+		const glm::mat4x4 & tmp_projection = tmp_camera->GetProjectionMatrix();
+
 		m_Program = new GLProgram();
 		m_Program->AttachShader("./res/shader/simple.vs", "./res/shader/simple.fs");
 		m_Program->Compile();
@@ -19,6 +27,8 @@ namespace Catherine
 		m_Program->Use();
 		m_Program->SetInt("diffuse1", 0);
 		m_Program->SetInt("diffuse2", 1);
+		m_Program->SetMat4x4("view", tmp_view);
+		m_Program->SetMat4x4("projection", tmp_projection);
 
 		g_Device->ClearColor(0.2f, 0.3f, 0.4f, 1.0f);
 
@@ -36,7 +46,6 @@ namespace Catherine
 		glGenBuffers(1, &VBO);
 		glGenBuffers(1, &EBO);
 
-		// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
 		glBindVertexArray(m_VAO);
 
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
