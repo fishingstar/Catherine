@@ -20,6 +20,7 @@ namespace Catherine
 		int height = 0;
 		int channels = 0;
 
+		stbi_set_flip_vertically_on_load(true);
 		unsigned char * tmp_data = stbi_load(param_Path, &width, &height, &channels, 0);
 		if (tmp_data)
 		{
