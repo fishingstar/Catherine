@@ -31,6 +31,7 @@ namespace Catherine
 		m_Program->SetMat4x4("projection", tmp_projection);
 
 		g_Device->ClearColor(0.2f, 0.3f, 0.4f, 1.0f);
+		g_Device->EnableDepthTest(true);
 
 		IMesh * tmp_mesh = new DemoMesh();
 		tmp_mesh->LoadFromFile(nullptr);
@@ -44,15 +45,11 @@ namespace Catherine
 		unsigned int VBO, EBO;
 		glGenVertexArrays(1, &m_VAO);
 		glGenBuffers(1, &VBO);
-		glGenBuffers(1, &EBO);
 
 		glBindVertexArray(m_VAO);
 
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, tmp_vertexSize, tmp_vertex, GL_STATIC_DRAW);
-
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, tmp_indexSize, tmp_index, GL_STATIC_DRAW);
 
 		unsigned int tmp_count = tmp_layout->Count();
 		for (unsigned int i = 0; i < tmp_count; ++i)
@@ -92,7 +89,7 @@ namespace Catherine
 
 		glBindVertexArray(m_VAO);
 
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 	}
 
 	void DemoRenderer::PostRender()

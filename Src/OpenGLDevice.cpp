@@ -61,6 +61,18 @@ namespace Catherine
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	}
 
+	void OpenGLDevice::EnableDepthTest(bool enable)
+	{
+		if (enable)
+		{
+			glEnable(GL_DEPTH_TEST);
+		}
+		else
+		{
+			glDisable(GL_DEPTH_TEST);
+		}
+	}
+
 	void OpenGLDevice::OnFrameBegin()
 	{
 		ProcessInput();

@@ -15,5 +15,7 @@ namespace Catherine
 
 		virtual void ClearColor(float red, float green, float blue, float alpha) = 0;
 		virtual void Clear() = 0;
+
+		virtual void EnableDepthTest(bool enable) = 0;
 	};
 }
