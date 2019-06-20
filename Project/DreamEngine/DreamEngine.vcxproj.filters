@@ -38,6 +38,9 @@
     <Filter Include="Device\DirectX">
       <UniqueIdentifier>{03c4afd0-4a40-4454-876a-0687d811098a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mesh">
+      <UniqueIdentifier>{2e7b0b11-cf5c-4b12-8f4a-8d8b876b1bf0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\main.cpp">
@@ -84,6 +87,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\OpenGLTexture.cpp">
       <Filter>Device\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\VertexLayout.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Mesh.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\DemoMesh.cpp">
+      <Filter>Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +155,18 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\stb_image.h">
       <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\IMesh.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\VertexLayout.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Mesh.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\DemoMesh.h">
+      <Filter>Mesh</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

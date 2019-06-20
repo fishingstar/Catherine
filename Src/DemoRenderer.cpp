@@ -1,4 +1,6 @@
 #include <DemoRenderer.h>
+#include <DemoMesh.h>
+#include <VertexLayout.h>
 #include <OpenGLProgram.h>
 #include <OpenGLTexture.h>
 #include <global.h>
@@ -20,18 +22,14 @@ namespace Catherine
 
 		g_Device->ClearColor(0.2f, 0.3f, 0.4f, 1.0f);
 
-		float vertices[] = {
-			// positions          // colors           // texture coords
-			 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
-			 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-			-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
-		};
+		IMesh * tmp_mesh = new DemoMesh();
+		tmp_mesh->LoadFromFile(nullptr);
 
-		unsigned int indices[] = {
-			0, 1, 3, // first triangle
-			1, 2, 3  // second triangle
-		};
+		unsigned int tmp_vertexSize = 0;
+		const void * tmp_vertex = tmp_mesh->GetVertexBuffer(tmp_vertexSize);
+		unsigned int tmp_indexSize = 0;
+		const void * tmp_index = tmp_mesh->GetIndexBuffer(tmp_indexSize);
+		const VertexLayout * tmp_layout = tmp_mesh->GetVertexLayout();
 
 		unsigned int VBO, EBO;
 		glGenVertexArrays(1, &m_VAO);
@@ -42,20 +40,18 @@ namespace Catherine
 		glBindVertexArray(m_VAO);
 
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, tmp_vertexSize, tmp_vertex, GL_STATIC_DRAW);
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, tmp_indexSize, tmp_index, GL_STATIC_DRAW);
 
-		// position attribute
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)0);
-		glEnableVertexAttribArray(0);
-		// color attribute
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)(3 * sizeof(float)));
-		glEnableVertexAttribArray(1);
-
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)(6 * sizeof(float)));
-		glEnableVertexAttribArray(2);
+		unsigned int tmp_count = tmp_layout->Count();
+		for (unsigned int i = 0; i < tmp_count; ++i)
+		{
+			const VertexLayout::AttributeItem & tmp_item = tmp_layout->GetItem(i);
+			glVertexAttribPointer(i, tmp_item.count, tmp_item.type, tmp_item.normalized, tmp_item.stride, (void *)tmp_item.offset);
+			glEnableVertexAttribArray(i);
+		}
 
 		m_Texture1 = new GLTexture();
 		m_Texture1->LoadFromFile("./res/texture/wall.jpg");
