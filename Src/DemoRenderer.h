@@ -4,8 +4,8 @@
 
 namespace Catherine
 {
-	class IProgram;
-	class ITexture;
+	class ICamera;
+	class IMaterial;
 
 	class DemoRenderer : public IRenderer
 	{
@@ -18,9 +18,8 @@ namespace Catherine
 		virtual void PostRender() override;
 
 	private:
-		IProgram * m_Program = nullptr;
-		ITexture * m_Texture1 = nullptr;
-		ITexture * m_Texture2 = nullptr;
+		ICamera * m_Camera = nullptr;
+		IMaterial * m_Material = nullptr;
 
 		unsigned int m_VAO = 0;
 	};

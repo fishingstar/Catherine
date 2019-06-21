@@ -47,6 +47,9 @@
     <Filter Include="World\Camera">
       <UniqueIdentifier>{4a996a89-a633-493c-bf93-f14a8e8abd4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World\World">
+      <UniqueIdentifier>{d87655fb-152b-4c5e-b82c-f5a8b85164df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\main.cpp">
@@ -105,6 +108,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\Camera.cpp">
       <Filter>World\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\GameWorld.cpp">
+      <Filter>World\World</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Material.cpp">
+      <Filter>Render\Material</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +191,18 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Camera.h">
       <Filter>World\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\IWorld.h">
+      <Filter>World\World</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\GameWorld.h">
+      <Filter>World\World</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\IMaterial.h">
+      <Filter>Render\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Material.h">
+      <Filter>Render\Material</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

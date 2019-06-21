@@ -3,6 +3,7 @@
 #include <VertexLayout.h>
 #include <OpenGLProgram.h>
 #include <OpenGLTexture.h>
+#include <Material.h>
 #include <Camera.h>
 #include <global.h>
 
@@ -12,23 +13,10 @@ namespace Catherine
 
 	bool DemoRenderer::Initialize()
 	{
-		ICamera * tmp_camera = new Camera();
-		tmp_camera->SetPosition(1.0f, 1.0, 1.0f);
-		tmp_camera->SetRotate(45.0f, -45.0f, 0.0f);
-		tmp_camera->SetProjectionMode(ProjectionMode::Persperctive);
-		const glm::mat4x4 & tmp_view = tmp_camera->GetViewMatrix();
-		const glm::mat4x4 & tmp_projection = tmp_camera->GetProjectionMatrix();
-
-		m_Program = new GLProgram();
-		m_Program->AttachShader("./res/shader/simple.vs", "./res/shader/simple.fs");
-		m_Program->Compile();
-		m_Program->Link();
-
-		m_Program->Use();
-		m_Program->SetInt("diffuse1", 0);
-		m_Program->SetInt("diffuse2", 1);
-		m_Program->SetMat4x4("view", tmp_view);
-		m_Program->SetMat4x4("projection", tmp_projection);
+		m_Camera = new Camera();
+		m_Camera->SetPosition(1.0f, 1.0, 1.0f);
+		m_Camera->SetRotate(45.0f, -45.0f, 0.0f);
+		m_Camera->SetProjectionMode(ProjectionMode::Persperctive);
 
 		g_Device->ClearColor(0.2f, 0.3f, 0.4f, 1.0f);
 		g_Device->EnableDepthTest(true);
@@ -59,11 +47,8 @@ namespace Catherine
 			glEnableVertexAttribArray(i);
 		}
 
-		m_Texture1 = new GLTexture();
-		m_Texture1->LoadFromFile("./res/texture/wall.jpg");
-
-		m_Texture2 = new GLTexture();
-		m_Texture2->LoadFromFile("./res/texture/container.jpg");
+		m_Material = new Material();
+		m_Material->Initialize(nullptr);
 
 		return true;
 	}
@@ -82,10 +67,11 @@ namespace Catherine
 	{
 		g_Device->Clear();
 
-		m_Texture1->Use(0);
-		m_Texture2->Use(1);
-
-		m_Program->Use();
+		const glm::mat4x4 & tmp_view = m_Camera->GetViewMatrix();
+		const glm::mat4x4 & tmp_projection = m_Camera->GetProjectionMatrix();
+		m_Material->SetMat4x4("view", tmp_view);
+		m_Material->SetMat4x4("projection", tmp_projection);
+		m_Material->Use();
 
 		glBindVertexArray(m_VAO);
 
