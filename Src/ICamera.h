@@ -34,8 +34,11 @@ namespace Catherine
 		virtual const glm::vec3 & GetClearColor() const = 0;
 		virtual void SetClearColor(const glm::vec3 & color) = 0;
 
-		virtual void SetPosition(float x, float y, float z) = 0;
-		virtual void SetRotate(float x, float y, float z) = 0;
+		virtual const glm::vec3 & GetPosition() const = 0;
+		virtual void SetPosition(const glm::vec3 & pos) = 0;
+
+		virtual const glm::vec3 & GetRotation() const = 0;
+		virtual void SetRotation(const glm::vec3 & rotation) = 0;
 
 		virtual const glm::mat4x4 & GetViewMatrix() = 0;
 		virtual const glm::mat4x4 & GetProjectionMatrix() = 0;

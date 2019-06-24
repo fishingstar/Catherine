@@ -98,22 +98,30 @@ namespace Catherine
 		m_ClearColor = color;
 	}
 
-	void Camera::SetPosition(float x, float y, float z)
+	const glm::vec3 & Camera::GetPosition() const
 	{
-		glm::vec3 tmp_vector = glm::vec3(x, y, z);
-		if (tmp_vector != m_Position)
+		return m_Position;
+	}
+
+	void Camera::SetPosition(const glm::vec3 & pos)
+	{
+		if (pos != m_Position)
 		{
-			m_Position = tmp_vector;
+			m_Position = pos;
 			m_ViewDirty = true;
 		}
 	}
 
-	void Camera::SetRotate(float x, float y, float z)
+	const glm::vec3 & Camera::GetRotation() const
 	{
-		glm::vec3 tmp_vector = glm::vec3(x, y, z);
-		if (tmp_vector != m_Rotate)
+		return m_Rotation;
+	}
+
+	void Camera::SetRotation(const glm::vec3 & rotation)
+	{
+		if (rotation != m_Rotation)
 		{
-			m_Rotate = tmp_vector;
+			m_Rotation = rotation;
 			m_ViewDirty = true;
 		}
 	}
@@ -141,8 +149,8 @@ namespace Catherine
 	void Camera::UpdateViewMatrix()
 	{
 		glm::mat4x4 tmp_rotate = glm::mat4x4(1);
-		tmp_rotate = glm::rotate(tmp_rotate, glm::radians(m_Rotate.x), glm::vec3(-1.0f, 0.0f, 0.0f));
-		tmp_rotate = glm::rotate(tmp_rotate, glm::radians(m_Rotate.y), glm::vec3(0.0f, -1.0f, 0.0f));
+		tmp_rotate = glm::rotate(tmp_rotate, glm::radians(m_Rotation.x), glm::vec3(-1.0f, 0.0f, 0.0f));
+		tmp_rotate = glm::rotate(tmp_rotate, glm::radians(m_Rotation.y), glm::vec3(0.0f, -1.0f, 0.0f));
 		m_Forward = tmp_rotate * glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);
 
 		glm::vec3 tmp_right = glm::cross(m_Forward, glm::vec3(0.0f, 1.0f, 0.0f));

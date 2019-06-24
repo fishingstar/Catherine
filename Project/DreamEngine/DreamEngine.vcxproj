@@ -137,10 +137,12 @@
     <ClCompile Include="..\..\Src\DemoMesh.cpp" />
     <ClCompile Include="..\..\Src\DemoRenderer.cpp" />
     <ClCompile Include="..\..\Src\DeviceFactory.cpp" />
+    <ClCompile Include="..\..\Src\Light.cpp" />
     <ClCompile Include="..\..\Src\FileUtility.cpp" />
     <ClCompile Include="..\..\Src\GameWorld.cpp" />
     <ClCompile Include="..\..\Src\glad\src\glad.c" />
     <ClCompile Include="..\..\Src\global.cpp" />
+    <ClCompile Include="..\..\Src\JsonParser.cpp" />
     <ClCompile Include="..\..\Src\log.cpp" />
     <ClCompile Include="..\..\Src\LogUtility.cpp" />
     <ClCompile Include="..\..\Src\main.cpp" />
@@ -153,6 +155,7 @@
     <ClCompile Include="..\..\Src\RendererFactory.cpp" />
     <ClCompile Include="..\..\Src\TimeUtility.cpp" />
     <ClCompile Include="..\..\Src\VertexLayout.cpp" />
+    <ClCompile Include="..\..\Src\XMLParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Camera.h" />
@@ -162,13 +165,16 @@
     <ClInclude Include="..\..\Src\DemoRenderer.h" />
     <ClInclude Include="..\..\Src\DeviceCommon.h" />
     <ClInclude Include="..\..\Src\DeviceFactory.h" />
+    <ClInclude Include="..\..\Src\Light.h" />
     <ClInclude Include="..\..\Src\FileUtility.h" />
     <ClInclude Include="..\..\Src\GameWorld.h" />
     <ClInclude Include="..\..\Src\global.h" />
     <ClInclude Include="..\..\Src\ICamera.h" />
+    <ClInclude Include="..\..\Src\ILight.h" />
     <ClInclude Include="..\..\Src\IMaterial.h" />
     <ClInclude Include="..\..\Src\IMesh.h" />
     <ClInclude Include="..\..\Src\IWorld.h" />
+    <ClInclude Include="..\..\Src\JsonParser.h" />
     <ClInclude Include="..\..\Src\Material.h" />
     <ClInclude Include="..\..\Src\Mesh.h" />
     <ClInclude Include="..\..\Src\OpenGLTexture.h" />
@@ -185,6 +191,7 @@
     <ClInclude Include="..\..\Src\stb_image.h" />
     <ClInclude Include="..\..\Src\TimeUtility.h" />
     <ClInclude Include="..\..\Src\VertexLayout.h" />
+    <ClInclude Include="..\..\Src\XMLParser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

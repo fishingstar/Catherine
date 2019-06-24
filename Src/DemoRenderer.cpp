@@ -5,6 +5,7 @@
 #include <OpenGLTexture.h>
 #include <Material.h>
 #include <Camera.h>
+#include <Light.h>
 #include <global.h>
 
 namespace Catherine
@@ -14,10 +15,16 @@ namespace Catherine
 	bool DemoRenderer::Initialize()
 	{
 		m_Camera = new Camera();
-		m_Camera->SetPosition(1.0f, 1.0, 1.0f);
-		m_Camera->SetRotate(45.0f, -45.0f, 0.0f);
+		m_Camera->SetPosition(glm::vec3(1.0f, 1.0f, 1.0f));
+		m_Camera->SetRotation(glm::vec3(45.0f, -45.0f, 0.0f));
 		m_Camera->SetProjectionMode(ProjectionMode::Persperctive);
 		m_Camera->SetClearColor(glm::vec3(0.2f, 0.3f, 0.4f));
+
+		m_Light = new Light();
+		m_Light->SetLightType(LightType::Point);
+		m_Light->SetPosition(glm::vec3(-1.0f, 1.0f, 1.0f));
+		m_Light->SetRotation(glm::vec3(0.0f, 0.0f, 0.0f));
+		m_Light->SetLightColor(glm::vec4(1.0f, 1.0f, 0.8f, 1.0f));
 
 		IMesh * tmp_mesh = new DemoMesh();
 		tmp_mesh->LoadFromFile(nullptr);
@@ -66,6 +73,10 @@ namespace Catherine
 	void DemoRenderer::Render()
 	{
 		const glm::vec3 & tmp_color = m_Camera->GetClearColor();
+		const glm::vec3 & tmp_cameraPos = m_Camera->GetPosition();
+		const glm::vec4 & tmp_lightColor = m_Light->GetLightColor();
+		const glm::vec4 & tmp_lightPos = m_Light->GetLightType() == LightType::Directional ? glm::vec4(m_Light->GetRotation(), 0.0f) : glm::vec4(m_Light->GetPosition(), 1.0f);
+
 		g_Device->ClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);
 		g_Device->Clear();
 
@@ -73,6 +84,10 @@ namespace Catherine
 		const glm::mat4x4 & tmp_projection = m_Camera->GetProjectionMatrix();
 		m_Material->SetMat4x4("view", tmp_view);
 		m_Material->SetMat4x4("projection", tmp_projection);
+		m_Material->SetVec3("viewPos", tmp_cameraPos);
+		m_Material->SetVec4("lightPos", tmp_lightPos);
+		m_Material->SetVec4("lightColor", tmp_lightColor);
+		m_Material->SetFloat("ambient", 0.2f);
 		m_Material->Use();
 
 		glBindVertexArray(m_VAO);

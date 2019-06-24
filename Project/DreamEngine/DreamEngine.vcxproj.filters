@@ -53,6 +53,12 @@
     <Filter Include="Device\Common">
       <UniqueIdentifier>{4bb87ca3-9cdd-46f1-9dd1-3990e00a1537}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utility\File">
+      <UniqueIdentifier>{0bb030a4-7a7e-450e-b21d-04ba09abb35d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World\Light">
+      <UniqueIdentifier>{9af75319-fc71-4ef2-83bf-338b66f61193}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\main.cpp">
@@ -91,9 +97,6 @@
     <ClCompile Include="..\..\Src\global.cpp">
       <Filter>Global</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\FileUtility.cpp">
-      <Filter>Utility</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\OpenGLTexture.cpp">
       <Filter>Device\OpenGL</Filter>
     </ClCompile>
@@ -117,6 +120,18 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\DeviceFactory.cpp">
       <Filter>Device\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\FileUtility.cpp">
+      <Filter>Utility\File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\XMLParser.cpp">
+      <Filter>Utility\File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\JsonParser.cpp">
+      <Filter>Utility\File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Light.cpp">
+      <Filter>World\Light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -156,14 +171,8 @@
     <ClInclude Include="..\..\Src\DemoRenderer.h">
       <Filter>Render\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\FileUtility.h">
-      <Filter>Utility</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\OpenGLTexture.h">
       <Filter>Device\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\stb_image.h">
-      <Filter>Utility</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\IMesh.h">
       <Filter>Mesh</Filter>
@@ -209,6 +218,24 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\DeviceCommon.h">
       <Filter>Device\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\FileUtility.h">
+      <Filter>Utility\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\stb_image.h">
+      <Filter>Utility\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\XMLParser.h">
+      <Filter>Utility\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\JsonParser.h">
+      <Filter>Utility\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\ILight.h">
+      <Filter>World\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Light.h">
+      <Filter>World\Light</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

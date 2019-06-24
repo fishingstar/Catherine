@@ -19,7 +19,10 @@ namespace Catherine
 		virtual void SetBool(const char * key, bool value) override;
 		virtual void SetInt(const char * key, int value) override;
 		virtual void SetFloat(const char * key, float value) override;
-		virtual void SetMat4x4(const char * key, const glm::mat4x4 & value);
+		virtual void SetVec2(const char * key, const glm::vec2 & value) override;
+		virtual void SetVec3(const char * key, const glm::vec3 & value) override;
+		virtual void SetVec4(const char * key, const glm::vec4 & value) override;
+		virtual void SetMat4x4(const char * key, const glm::mat4x4 & value) override;
 
 	private:
 		unsigned int CreateShader(GLenum param_Type, const char * param_FileName, const char * param_Default);

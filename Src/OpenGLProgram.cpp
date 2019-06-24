@@ -93,6 +93,21 @@ namespace Catherine
 		glUniform1f(glGetUniformLocation(m_Program, key), value);
 	}
 
+	void GLProgram::SetVec2(const char * key, const glm::vec2 & value)
+	{
+		glUniform2fv(glGetUniformLocation(m_Program, key), 1, glm::value_ptr(value));
+	}
+
+	void GLProgram::SetVec3(const char * key, const glm::vec3 & value)
+	{
+		glUniform3fv(glGetUniformLocation(m_Program, key), 1, glm::value_ptr(value));
+	}
+
+	void GLProgram::SetVec4(const char * key, const glm::vec4 & value)
+	{
+		glUniform4fv(glGetUniformLocation(m_Program, key), 1, glm::value_ptr(value));
+	}
+
 	void GLProgram::SetMat4x4(const char * key, const glm::mat4x4 & value)
 	{
 		glUniformMatrix4fv(glGetUniformLocation(m_Program, key), 1, GL_FALSE, glm::value_ptr(value));

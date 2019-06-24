@@ -5,6 +5,7 @@
 namespace Catherine
 {
 	class ICamera;
+	class ILight;
 	class IMaterial;
 
 	class DemoRenderer : public IRenderer
@@ -19,6 +20,7 @@ namespace Catherine
 
 	private:
 		ICamera * m_Camera = nullptr;
+		ILight * m_Light = nullptr;
 		IMaterial * m_Material = nullptr;
 
 		unsigned int m_VAO = 0;

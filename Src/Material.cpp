@@ -27,12 +27,34 @@ namespace Catherine
 		return true;
 	}
 
+	void Material::SetInt(const char * key, int value)
+	{
+		m_Program->SetInt(key, value);
+	}
+
+	void Material::SetFloat(const char * key, float value)
+	{
+		m_Program->SetFloat(key, value);
+	}
+
+	void Material::SetVec2(const char * key, const glm::vec2 & value)
+	{
+		m_Program->SetVec2(key, value);
+	}
+
+	void Material::SetVec3(const char * key, const glm::vec3 & value)
+	{
+		m_Program->SetVec3(key, value);
+	}
+
+	void Material::SetVec4(const char * key, const glm::vec4 & value)
+	{
+		m_Program->SetVec4(key, value);
+	}
+
 	void Material::SetMat4x4(const char * key, const glm::mat4x4 & value)
 	{
-		if (m_Program)
-		{
-			m_Program->SetMat4x4(key, value);
-		}
+		m_Program->SetMat4x4(key, value);
 	}
 
 	void Material::Use()

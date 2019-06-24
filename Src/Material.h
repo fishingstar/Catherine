@@ -11,11 +11,16 @@ namespace Catherine
 	class Material : public IMaterial
 	{
 	public:
-		virtual bool Initialize(const char * param_Config);
+		virtual bool Initialize(const char * param_Config) override;
 
-		virtual void SetMat4x4(const char * key, const glm::mat4x4 & value);
+		virtual void SetInt(const char * key, int value) override;
+		virtual void SetFloat(const char * key, float value) override;
+		virtual void SetVec2(const char * key, const glm::vec2 & value) override;
+		virtual void SetVec3(const char * key, const glm::vec3 & value) override;
+		virtual void SetVec4(const char * key, const glm::vec4 & value) override;
+		virtual void SetMat4x4(const char * key, const glm::mat4x4 & value) override;
 
-		virtual void Use();
+		virtual void Use() override;
 
 	private:
 		bool m_DepthTestEnabled = true;
