@@ -1,7 +1,7 @@
 #pragma once
 
 #include <IMaterial.h>
-#include <vector>
+#include <DeviceCommon.h>
 
 namespace Catherine
 {
@@ -18,6 +18,12 @@ namespace Catherine
 		virtual void Use();
 
 	private:
+		bool m_DepthTestEnabled = true;
+		DepthTestMode m_DepthTestMode = DepthTestMode::LessEqual;
+
+		bool m_CullFaceEnabled = true;
+		CullFaceMode m_CullFaceMode = CullFaceMode::Back;
+
 		IProgram * m_Program = nullptr;
 
 		ITexture * m_Texture1 = nullptr;

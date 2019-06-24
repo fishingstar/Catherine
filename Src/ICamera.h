@@ -31,6 +31,9 @@ namespace Catherine
 		virtual float GetSize() const = 0;
 		virtual void SetSize(float param_Size) = 0;
 
+		virtual const glm::vec3 & GetClearColor() const = 0;
+		virtual void SetClearColor(const glm::vec3 & color) = 0;
+
 		virtual void SetPosition(float x, float y, float z) = 0;
 		virtual void SetRotate(float x, float y, float z) = 0;
 

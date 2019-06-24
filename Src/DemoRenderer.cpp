@@ -17,9 +17,7 @@ namespace Catherine
 		m_Camera->SetPosition(1.0f, 1.0, 1.0f);
 		m_Camera->SetRotate(45.0f, -45.0f, 0.0f);
 		m_Camera->SetProjectionMode(ProjectionMode::Persperctive);
-
-		g_Device->ClearColor(0.2f, 0.3f, 0.4f, 1.0f);
-		g_Device->EnableDepthTest(true);
+		m_Camera->SetClearColor(glm::vec3(0.2f, 0.3f, 0.4f));
 
 		IMesh * tmp_mesh = new DemoMesh();
 		tmp_mesh->LoadFromFile(nullptr);
@@ -30,7 +28,7 @@ namespace Catherine
 		const void * tmp_index = tmp_mesh->GetIndexBuffer(tmp_indexSize);
 		const VertexLayout * tmp_layout = tmp_mesh->GetVertexLayout();
 
-		unsigned int VBO, EBO;
+		unsigned int VBO;
 		glGenVertexArrays(1, &m_VAO);
 		glGenBuffers(1, &VBO);
 
@@ -50,6 +48,8 @@ namespace Catherine
 		m_Material = new Material();
 		m_Material->Initialize(nullptr);
 
+		g_Device->SetFrontFace(FrontFaceMode::CounterClockwise);
+
 		return true;
 	}
 
@@ -65,6 +65,8 @@ namespace Catherine
 
 	void DemoRenderer::Render()
 	{
+		const glm::vec3 & tmp_color = m_Camera->GetClearColor();
+		g_Device->ClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);
 		g_Device->Clear();
 
 		const glm::mat4x4 & tmp_view = m_Camera->GetViewMatrix();

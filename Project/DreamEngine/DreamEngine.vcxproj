@@ -160,6 +160,7 @@
     <ClInclude Include="..\..\Src\const.h" />
     <ClInclude Include="..\..\Src\DemoMesh.h" />
     <ClInclude Include="..\..\Src\DemoRenderer.h" />
+    <ClInclude Include="..\..\Src\DeviceCommon.h" />
     <ClInclude Include="..\..\Src\DeviceFactory.h" />
     <ClInclude Include="..\..\Src\FileUtility.h" />
     <ClInclude Include="..\..\Src\GameWorld.h" />

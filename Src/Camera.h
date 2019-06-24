@@ -25,6 +25,9 @@ namespace Catherine
 		virtual float GetSize() const;
 		virtual void SetSize(float param_Size);
 
+		virtual const glm::vec3 & GetClearColor() const;
+		virtual void SetClearColor(const glm::vec3 & color);
+
 		virtual void SetPosition(float x, float y, float z);
 		virtual void SetRotate(float x, float y, float z);
 
@@ -49,6 +52,8 @@ namespace Catherine
 
 		bool m_ProjectionDirty = true;
 		glm::mat4x4 m_ProjectionMatrix;
+
+		glm::vec3 m_ClearColor = glm::vec3(1.0, 1.0, 1.0);
 
 		glm::vec3 m_Position = glm::vec3(0.0f, 0.0f, 0.0f);
 		glm::vec3 m_Rotate = glm::vec3(0.0f, 0.0f, 0.0f);

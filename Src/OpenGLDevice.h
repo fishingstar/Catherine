@@ -18,7 +18,13 @@ namespace Catherine
 		virtual void ClearColor(float red, float green, float blue, float alpha) override;
 		virtual void Clear() override;
 
-		virtual void EnableDepthTest(bool enable);
+		virtual void SetFrontFace(FrontFaceMode mode);
+
+		virtual void EnableDepthTest(bool enabled);
+		virtual void SetDepthTestMode(DepthTestMode mode);
+
+		virtual void EnableCullFace(bool enabled);
+		virtual void SetCullFaceMode(CullFaceMode mode);
 
 	private:
 		void ProcessInput();

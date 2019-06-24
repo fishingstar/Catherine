@@ -61,16 +61,95 @@ namespace Catherine
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	}
 
-	void OpenGLDevice::EnableDepthTest(bool enable)
+	void OpenGLDevice::SetFrontFace(FrontFaceMode mode)
 	{
-		if (enable)
+		GLenum tmp_mode = GL_CCW;
+		switch (mode)
 		{
+		case FrontFaceMode::Clockwise:
+			tmp_mode = GL_CW;
+			break;
+		case FrontFaceMode::CounterClockwise:
+			tmp_mode = GL_CCW;
+			break;
+		default:
+			tmp_mode = GL_CCW;
+			break;
+		}
+		glFrontFace(tmp_mode);
+	}
+
+	void OpenGLDevice::EnableDepthTest(bool enabled)
+	{
+		if (enabled)
 			glEnable(GL_DEPTH_TEST);
-		}
 		else
-		{
 			glDisable(GL_DEPTH_TEST);
+	}
+
+	void OpenGLDevice::SetDepthTestMode(DepthTestMode mode)
+	{
+		GLenum tmp_mode = GL_LEQUAL;
+		switch (mode)
+		{
+		case DepthTestMode::Always:
+			tmp_mode = GL_ALWAYS;
+			break;
+		case DepthTestMode::Equal:
+			tmp_mode = GL_EQUAL;
+			break;
+		case DepthTestMode::Greater:
+			tmp_mode = GL_GREATER;
+			break;
+		case DepthTestMode::GreaterEqual:
+			tmp_mode = GL_GEQUAL;
+			break;
+		case DepthTestMode::Less:
+			tmp_mode = GL_LESS;
+			break;
+		case DepthTestMode::LessEqual:
+			tmp_mode = GL_LEQUAL;
+			break;
+		case DepthTestMode::Never:
+			tmp_mode = GL_NEVER;
+			break;
+		case DepthTestMode::NotEqual:
+			tmp_mode = GL_NOTEQUAL;
+			break;
+		default:
+			tmp_mode = GL_LEQUAL;
+			break;
 		}
+		glDepthFunc(tmp_mode);
+	}
+
+	void OpenGLDevice::EnableCullFace(bool enabled)
+	{
+		if (enabled)
+			glEnable(GL_CULL_FACE);
+		else
+			glDisable(GL_CULL_FACE);
+	}
+
+	void OpenGLDevice::SetCullFaceMode(CullFaceMode mode)
+	{
+		GLenum tmp_mode = GL_BACK;
+		switch (mode)
+		{
+		case CullFaceMode::Back:
+			tmp_mode = GL_BACK;
+			break;
+		case CullFaceMode::Front:
+			tmp_mode = GL_FRONT;
+			break;
+		case CullFaceMode::Both:
+			tmp_mode = GL_FRONT_AND_BACK;
+			break;
+		default:
+			tmp_mode = GL_BACK;
+			break;
+		}
+		glCullFace(tmp_mode);
 	}
 
 	void OpenGLDevice::OnFrameBegin()

@@ -88,6 +88,16 @@ namespace Catherine
 		}
 	}
 
+	const glm::vec3 & Camera::GetClearColor() const
+	{
+		return m_ClearColor;
+	}
+
+	void Camera::SetClearColor(const glm::vec3 & color)
+	{
+		m_ClearColor = color;
+	}
+
 	void Camera::SetPosition(float x, float y, float z)
 	{
 		glm::vec3 tmp_vector = glm::vec3(x, y, z);

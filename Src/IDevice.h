@@ -1,5 +1,7 @@
 #pragma once
 
+#include <DeviceCommon.h>
+
 namespace Catherine
 {
 	class IDevice
@@ -16,6 +18,12 @@ namespace Catherine
 		virtual void ClearColor(float red, float green, float blue, float alpha) = 0;
 		virtual void Clear() = 0;
 
-		virtual void EnableDepthTest(bool enable) = 0;
+		virtual void SetFrontFace(FrontFaceMode mode) = 0;
+
+		virtual void EnableDepthTest(bool enabled) = 0;
+		virtual void SetDepthTestMode(DepthTestMode mode) = 0;
+		
+		virtual void EnableCullFace(bool enabled) = 0;
+		virtual void SetCullFaceMode(CullFaceMode mode) = 0;
 	};
 }

@@ -50,6 +50,9 @@
     <Filter Include="World\World">
       <UniqueIdentifier>{d87655fb-152b-4c5e-b82c-f5a8b85164df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Device\Common">
+      <UniqueIdentifier>{4bb87ca3-9cdd-46f1-9dd1-3990e00a1537}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\main.cpp">
@@ -63,9 +66,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\OpenGLDevice.cpp">
       <Filter>Device\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\DeviceFactory.cpp">
-      <Filter>Device</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\Client.cpp">
       <Filter>Client</Filter>
@@ -115,6 +115,9 @@
     <ClCompile Include="..\..\Src\Material.cpp">
       <Filter>Render\Material</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\DeviceFactory.cpp">
+      <Filter>Device\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\const.h">
@@ -123,17 +126,11 @@
     <ClInclude Include="..\..\Src\log.h">
       <Filter>Log</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\IDevice.h">
-      <Filter>Device</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\OpenGLDevice.h">
       <Filter>Device\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\global.h">
       <Filter>Global</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\DeviceFactory.h">
-      <Filter>Device</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Client.h">
       <Filter>Client</Filter>
@@ -153,9 +150,6 @@
     <ClInclude Include="..\..\Src\RendererFactory.h">
       <Filter>Render\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\IProgram.h">
-      <Filter>Device</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\OpenGLProgram.h">
       <Filter>Device\OpenGL</Filter>
     </ClInclude>
@@ -164,9 +158,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\FileUtility.h">
       <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\ITexture.h">
-      <Filter>Device</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\OpenGLTexture.h">
       <Filter>Device\OpenGL</Filter>
@@ -203,6 +194,21 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Material.h">
       <Filter>Render\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\DeviceFactory.h">
+      <Filter>Device\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\IDevice.h">
+      <Filter>Device\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\IProgram.h">
+      <Filter>Device\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\ITexture.h">
+      <Filter>Device\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\DeviceCommon.h">
+      <Filter>Device\Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
