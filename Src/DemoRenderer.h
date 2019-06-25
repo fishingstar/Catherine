@@ -19,8 +19,15 @@ namespace Catherine
 		virtual void PostRender() override;
 
 	private:
+		// light应该在world里创建，这里为了demo中测试功能
+		void CreateLights();
+
+	private:
 		ICamera * m_Camera = nullptr;
-		ILight * m_Light = nullptr;
+		
+		ILight * m_DirLight = nullptr;
+		ILight * m_PointLight[4] = { nullptr };
+
 		IMaterial * m_Material = nullptr;
 
 		unsigned int m_VAO = 0;

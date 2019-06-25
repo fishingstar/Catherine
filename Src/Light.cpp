@@ -32,6 +32,56 @@ namespace Catherine
 		m_Intensity = intensity;
 	}
 
+	float Light::GetAttenuationConstant() const
+	{
+		return m_AttenuationConstant;
+	}
+
+	void Light::SetAttenuationConstant(float value)
+	{
+		m_AttenuationConstant = value;
+	}
+
+	float Light::GetAttenuationLinear() const
+	{
+		return m_AttenuationLinear;
+	}
+
+	void Light::SetAttenuationLinear(float value)
+	{
+		m_AttenuationLinear = value;
+	}
+
+	float Light::GetAttenuationQuadratic() const
+	{
+		return m_AttenuationQuadratic;
+	}
+
+	void Light::SetAttenuationQuadratic(float value)
+	{
+		m_AttenuationQuadratic = value;
+	}
+
+	float Light::GetRange() const
+	{
+		return m_Range;
+	}
+
+	void Light::SetRange(float value)
+	{
+		m_Range = value;
+	}
+
+	float Light::GetSpotAngle() const
+	{
+		return m_SpotAngle;
+	}
+
+	void Light::SetSpotAngle(float value)
+	{
+		m_SpotAngle = value;
+	}
+
 	const glm::vec3 & Light::GetPosition() const
 	{
 		return m_Position;

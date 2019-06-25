@@ -7,6 +7,7 @@
 #include <Camera.h>
 #include <Light.h>
 #include <global.h>
+#include <string>
 
 namespace Catherine
 {
@@ -20,11 +21,7 @@ namespace Catherine
 		m_Camera->SetProjectionMode(ProjectionMode::Persperctive);
 		m_Camera->SetClearColor(glm::vec3(0.2f, 0.3f, 0.4f));
 
-		m_Light = new Light();
-		m_Light->SetLightType(LightType::Point);
-		m_Light->SetPosition(glm::vec3(-1.0f, 1.0f, 1.0f));
-		m_Light->SetRotation(glm::vec3(0.0f, 0.0f, 0.0f));
-		m_Light->SetLightColor(glm::vec4(1.0f, 1.0f, 0.8f, 1.0f));
+		CreateLights();
 
 		IMesh * tmp_mesh = new DemoMesh();
 		tmp_mesh->LoadFromFile(nullptr);
@@ -73,21 +70,45 @@ namespace Catherine
 	void DemoRenderer::Render()
 	{
 		const glm::vec3 & tmp_color = m_Camera->GetClearColor();
-		const glm::vec3 & tmp_cameraPos = m_Camera->GetPosition();
-		const glm::vec4 & tmp_lightColor = m_Light->GetLightColor();
-		const glm::vec4 & tmp_lightPos = m_Light->GetLightType() == LightType::Directional ? glm::vec4(m_Light->GetRotation(), 0.0f) : glm::vec4(m_Light->GetPosition(), 1.0f);
-
 		g_Device->ClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);
 		g_Device->Clear();
 
+		const glm::vec3 & tmp_cameraPos = m_Camera->GetPosition();
 		const glm::mat4x4 & tmp_view = m_Camera->GetViewMatrix();
 		const glm::mat4x4 & tmp_projection = m_Camera->GetProjectionMatrix();
+		m_Material->SetMat4x4("model", glm::mat4x4(1));
 		m_Material->SetMat4x4("view", tmp_view);
 		m_Material->SetMat4x4("projection", tmp_projection);
 		m_Material->SetVec3("viewPos", tmp_cameraPos);
-		m_Material->SetVec4("lightPos", tmp_lightPos);
-		m_Material->SetVec4("lightColor", tmp_lightColor);
 		m_Material->SetFloat("ambient", 0.2f);
+
+		const glm::vec4 & tmp_lightColor = m_DirLight->GetLightColor();
+		const glm::vec3 & tmp_lightDir = glm::vec3(0.3f, -0.3f, -0.6f);
+		m_Material->SetVec3("dirLight.lightDir", tmp_lightDir);
+		m_Material->SetVec3("dirLight.lightColor", tmp_lightColor);
+
+		for (auto i = 0; i < 4; i++)
+		{
+			const glm::vec4 & tmp_pointColor = m_PointLight[i]->GetLightColor();
+			const glm::vec3 & tmp_pointPos = m_PointLight[i]->GetPosition();
+			float tmp_constant = m_PointLight[i]->GetAttenuationConstant();
+			float tmp_linear = m_PointLight[i]->GetAttenuationLinear();
+			float tmp_quadratic = m_PointLight[i]->GetAttenuationQuadratic();
+
+			std::string tmp_key;
+			std::string tmp_index = "pointLight[" + std::to_string(i) + "]";
+			tmp_key = tmp_index + ".lightPos";
+			m_Material->SetVec3(tmp_key.c_str(), tmp_pointPos);
+			tmp_key = tmp_index + ".lightColor";
+			m_Material->SetVec3(tmp_key.c_str(), tmp_pointColor);
+			tmp_key = tmp_index + ".constant";
+			m_Material->SetFloat(tmp_key.c_str(), tmp_constant);
+			tmp_key = tmp_index + ".linear";
+			m_Material->SetFloat(tmp_key.c_str(), tmp_linear);
+			tmp_key = tmp_index + ".quadratic";
+			m_Material->SetFloat(tmp_key.c_str(), tmp_quadratic);
+		}
+
 		m_Material->Use();
 
 		glBindVertexArray(m_VAO);
@@ -98,5 +119,34 @@ namespace Catherine
 	void DemoRenderer::PostRender()
 	{
 
+	}
+
+	void DemoRenderer::CreateLights()
+	{
+		m_DirLight = new Light();
+		m_DirLight->SetLightType(LightType::Directional);
+		m_DirLight->SetLightColor(glm::vec4(0.5f, 0.5f, 0.5f, 1.0f));
+
+		glm::vec3 tmp_pos[4] = {
+			glm::vec3(1.0f, 0.0f, 0.0f),
+			glm::vec3(0.0f, 1.0f, 0.0f),
+			glm::vec3(0.0f, 0.0f, 1.0f),
+			glm::vec3(1.0f, 1.0f, 1.0f)
+		};
+
+		glm::vec4 tmp_color[4] = {
+			glm::vec4(1.0f, 0.0f, 0.0f, 1.0f),
+			glm::vec4(0.0f, 1.0f, 0.0f, 1.0f),
+			glm::vec4(0.0f, 0.0f, 1.0f, 1.0f),
+			glm::vec4(1.0f, 1.0f, 1.0f, 1.0f)
+		};
+
+		for (auto i = 0; i < 4; i++)
+		{
+			m_PointLight[i] = new Light();
+			m_PointLight[i]->SetLightType(LightType::Point);
+			m_PointLight[i]->SetLightColor(tmp_color[i]);
+			m_PointLight[i]->SetPosition(tmp_pos[i]);
+		}
 	}
 }
