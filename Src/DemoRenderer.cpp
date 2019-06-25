@@ -118,8 +118,8 @@ namespace Catherine
 		m_Material->SetVec3("spotLight.lightPos", tmp_spotPos);
 		m_Material->SetVec4("spotLight.lightColor", tmp_spotColor);
 		m_Material->SetVec3("spotLight.lightDir", tmp_spotDir);
-		m_Material->SetFloat("spotLight.innerCutoff", glm::cos(glm::radians(45.0)));
-		m_Material->SetFloat("spotLight.outerCutoff", glm::cos(glm::radians(60.0)));
+		m_Material->SetFloat("spotLight.innerCutoff", glm::cos(glm::radians(45.0f)));
+		m_Material->SetFloat("spotLight.outerCutoff", glm::cos(glm::radians(60.0f)));
 		m_Material->SetFloat("spotLight.constant", tmp_constant);
 		m_Material->SetFloat("spotLight.linear", tmp_linear);
 		m_Material->SetFloat("spotLight.quadratic", tmp_quadratic);
