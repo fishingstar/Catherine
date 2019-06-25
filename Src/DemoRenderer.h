@@ -19,17 +19,21 @@ namespace Catherine
 		virtual void PostRender() override;
 
 	private:
-		// light应该在world里创建，这里为了demo中测试功能
 		void CreateLights();
 
 	private:
+		// camera应该是world里的概念，这里为了demo测试
 		ICamera * m_Camera = nullptr;
 		
+		// light应该在world里创建，这里为了demo中测试功能
 		ILight * m_DirLight = nullptr;
 		ILight * m_PointLight[4] = { nullptr };
+		ILight * m_SpotLight = nullptr;
 
+		// material应该也是附着在world中的对象，这里为了demo测试
 		IMaterial * m_Material = nullptr;
 
+		// VAO应该由mesh管理，这里为了测试
 		unsigned int m_VAO = 0;
 	};
 }

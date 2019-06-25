@@ -15,8 +15,8 @@ namespace Catherine
 		m_Program->Link();
 
 		m_Program->Use();
-		m_Program->SetInt("diffuse1", 0);
-		m_Program->SetInt("diffuse2", 1);
+		m_Program->SetInt("diffuse", 0);
+		m_Program->SetInt("mask", 1);
 
 		m_Texture1 = new GLTexture();
 		m_Texture1->LoadFromFile("./res/texture/wall.jpg");

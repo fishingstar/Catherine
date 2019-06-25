@@ -40,15 +40,18 @@ namespace Catherine
 	private:
 		LightType m_LightType = LightType::Directional;
 
+		// base light color
 		glm::vec4 m_LightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 
+		// intensity for all kinds of light
 		float m_Intensity = 1.0f;
-		// attenuation for point light
+
+		// used for point light and spot light
 		float m_AttenuationConstant = 1.0f;
 		float m_AttenuationLinear = 0.9f;
 		float m_AttenuationQuadratic = 0.032f;
-		// used for point light and spot light
 		float m_Range = 10.0f;
+		
 		// used for spot light
 		float m_SpotAngle = 45.0f;
 

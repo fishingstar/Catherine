@@ -85,7 +85,7 @@ namespace Catherine
 		const glm::vec4 & tmp_lightColor = m_DirLight->GetLightColor();
 		const glm::vec3 & tmp_lightDir = glm::vec3(0.3f, -0.3f, -0.6f);
 		m_Material->SetVec3("dirLight.lightDir", tmp_lightDir);
-		m_Material->SetVec3("dirLight.lightColor", tmp_lightColor);
+		m_Material->SetVec4("dirLight.lightColor", tmp_lightColor);
 
 		for (auto i = 0; i < 4; i++)
 		{
@@ -100,7 +100,7 @@ namespace Catherine
 			tmp_key = tmp_index + ".lightPos";
 			m_Material->SetVec3(tmp_key.c_str(), tmp_pointPos);
 			tmp_key = tmp_index + ".lightColor";
-			m_Material->SetVec3(tmp_key.c_str(), tmp_pointColor);
+			m_Material->SetVec4(tmp_key.c_str(), tmp_pointColor);
 			tmp_key = tmp_index + ".constant";
 			m_Material->SetFloat(tmp_key.c_str(), tmp_constant);
 			tmp_key = tmp_index + ".linear";
@@ -108,6 +108,21 @@ namespace Catherine
 			tmp_key = tmp_index + ".quadratic";
 			m_Material->SetFloat(tmp_key.c_str(), tmp_quadratic);
 		}
+
+		const glm::vec4 tmp_spotColor = m_SpotLight->GetLightColor();
+		const glm::vec3 tmp_spotPos = m_SpotLight->GetPosition();
+		const glm::vec3 tmp_spotDir = glm::vec3(0.0f, 0.0f, -1.0f);
+		float tmp_constant = m_SpotLight->GetAttenuationConstant();
+		float tmp_linear = m_SpotLight->GetAttenuationLinear();
+		float tmp_quadratic = m_SpotLight->GetAttenuationQuadratic();
+		m_Material->SetVec3("spotLight.lightPos", tmp_spotPos);
+		m_Material->SetVec4("spotLight.lightColor", tmp_spotColor);
+		m_Material->SetVec3("spotLight.lightDir", tmp_spotDir);
+		m_Material->SetFloat("spotLight.innerCutoff", glm::cos(glm::radians(45.0)));
+		m_Material->SetFloat("spotLight.outerCutoff", glm::cos(glm::radians(60.0)));
+		m_Material->SetFloat("spotLight.constant", tmp_constant);
+		m_Material->SetFloat("spotLight.linear", tmp_linear);
+		m_Material->SetFloat("spotLight.quadratic", tmp_quadratic);
 
 		m_Material->Use();
 
@@ -125,7 +140,7 @@ namespace Catherine
 	{
 		m_DirLight = new Light();
 		m_DirLight->SetLightType(LightType::Directional);
-		m_DirLight->SetLightColor(glm::vec4(0.5f, 0.5f, 0.5f, 1.0f));
+		m_DirLight->SetLightColor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 
 		glm::vec3 tmp_pos[4] = {
 			glm::vec3(1.0f, 0.0f, 0.0f),
@@ -148,5 +163,11 @@ namespace Catherine
 			m_PointLight[i]->SetLightColor(tmp_color[i]);
 			m_PointLight[i]->SetPosition(tmp_pos[i]);
 		}
+
+		m_SpotLight = new Light();
+		m_SpotLight->SetLightType(LightType::Spot);
+		m_SpotLight->SetLightColor(glm::vec4(1.0f, 0.0f, 1.0f, 1.0f));
+		m_SpotLight->SetPosition(glm::vec3(0.0f, 0.0f, 0.7f));
+		m_SpotLight->SetRotation(glm::vec3(0.0f, 0.0f, 0.0f));
 	}
 }
