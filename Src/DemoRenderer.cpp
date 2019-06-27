@@ -1,8 +1,4 @@
 #include <DemoRenderer.h>
-#include <VertexLayout.h>
-#include <OpenGLProgram.h>
-#include <OpenGLTexture.h>
-#include <Material.h>
 #include <Camera.h>
 #include <Light.h>
 #include <global.h>
@@ -12,6 +8,11 @@
 namespace Catherine
 {
 	extern IDevice * g_Device;
+
+	ICamera * DemoRenderer::m_Camera = nullptr;
+	ILight * DemoRenderer::m_DirLight = nullptr;
+	ILight * DemoRenderer::m_PointLight[4] = { nullptr };
+	ILight * DemoRenderer::m_SpotLight = nullptr;
 
 	bool DemoRenderer::Initialize()
 	{
@@ -25,9 +26,6 @@ namespace Catherine
 
 		m_Model = new Model();
 		m_Model->LoadFromFile("./res/model/nanosuit/nanosuit.obj");
-
-		m_Material = new Material();
-		m_Material->Initialize(nullptr);
 
 		g_Device->SetFrontFace(FrontFaceMode::CounterClockwise);
 
@@ -49,59 +47,6 @@ namespace Catherine
 		const glm::vec3 & tmp_color = m_Camera->GetClearColor();
 		g_Device->ClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);
 		g_Device->Clear();
-
-		const glm::vec3 & tmp_cameraPos = m_Camera->GetPosition();
-		const glm::mat4x4 & tmp_view = m_Camera->GetViewMatrix();
-		const glm::mat4x4 & tmp_projection = m_Camera->GetProjectionMatrix();
-		m_Material->SetMat4x4("model", glm::mat4x4(1));
-		m_Material->SetMat4x4("view", tmp_view);
-		m_Material->SetMat4x4("projection", tmp_projection);
-		m_Material->SetVec3("viewPos", tmp_cameraPos);
-		m_Material->SetFloat("ambient", 0.2f);
-
-		const glm::vec4 & tmp_lightColor = m_DirLight->GetLightColor();
-		const glm::vec3 & tmp_lightDir = glm::vec3(0.3f, -0.3f, -0.6f);
-		m_Material->SetVec3("dirLight.lightDir", tmp_lightDir);
-		m_Material->SetVec4("dirLight.lightColor", tmp_lightColor);
-
-		for (auto i = 0; i < 4; i++)
-		{
-			const glm::vec4 & tmp_pointColor = m_PointLight[i]->GetLightColor();
-			const glm::vec3 & tmp_pointPos = m_PointLight[i]->GetPosition();
-			float tmp_constant = m_PointLight[i]->GetAttenuationConstant();
-			float tmp_linear = m_PointLight[i]->GetAttenuationLinear();
-			float tmp_quadratic = m_PointLight[i]->GetAttenuationQuadratic();
-
-			std::string tmp_key;
-			std::string tmp_index = "pointLight[" + std::to_string(i) + "]";
-			tmp_key = tmp_index + ".lightPos";
-			m_Material->SetVec3(tmp_key.c_str(), tmp_pointPos);
-			tmp_key = tmp_index + ".lightColor";
-			m_Material->SetVec4(tmp_key.c_str(), tmp_pointColor);
-			tmp_key = tmp_index + ".constant";
-			m_Material->SetFloat(tmp_key.c_str(), tmp_constant);
-			tmp_key = tmp_index + ".linear";
-			m_Material->SetFloat(tmp_key.c_str(), tmp_linear);
-			tmp_key = tmp_index + ".quadratic";
-			m_Material->SetFloat(tmp_key.c_str(), tmp_quadratic);
-		}
-
-		const glm::vec4 tmp_spotColor = m_SpotLight->GetLightColor();
-		const glm::vec3 tmp_spotPos = m_SpotLight->GetPosition();
-		const glm::vec3 tmp_spotDir = glm::vec3(0.0f, 0.0f, -1.0f);
-		float tmp_constant = m_SpotLight->GetAttenuationConstant();
-		float tmp_linear = m_SpotLight->GetAttenuationLinear();
-		float tmp_quadratic = m_SpotLight->GetAttenuationQuadratic();
-		m_Material->SetVec3("spotLight.lightPos", tmp_spotPos);
-		m_Material->SetVec4("spotLight.lightColor", tmp_spotColor);
-		m_Material->SetVec3("spotLight.lightDir", tmp_spotDir);
-		m_Material->SetFloat("spotLight.innerCutoff", glm::cos(glm::radians(45.0f)));
-		m_Material->SetFloat("spotLight.outerCutoff", glm::cos(glm::radians(60.0f)));
-		m_Material->SetFloat("spotLight.constant", tmp_constant);
-		m_Material->SetFloat("spotLight.linear", tmp_linear);
-		m_Material->SetFloat("spotLight.quadratic", tmp_quadratic);
-
-		m_Material->Use();
 
 		m_Model->Render();
 	}

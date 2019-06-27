@@ -46,7 +46,7 @@ uniform float ambient;
 uniform vec3 viewPos;
 
 uniform sampler2D diffuse;
-uniform sampler2D mask;
+uniform sampler2D normal;
 
 vec3 calculateDirLight(DirectionalLight param_Light, vec3 param_ViewDir, vec3 param_Normal)
 {
@@ -120,7 +120,7 @@ void main()
 	vec3 tmp_spotColor = calculateSpotLight(spotLight, tmp_viewDir, tmp_normal, WorldPos);
 
 	vec3 tmp_diffuse = texture(diffuse, Texcoord).xyz;
-	vec3 tmp_mask = texture(mask, Texcoord).xyz;
+	//vec3 tmp_normal = texture(normal, Texcoord).xyz;
 
 	vec3 tmp_result = (ambient + tmp_dirColor + tmp_pointColor + tmp_spotColor) * tmp_diffuse;
 

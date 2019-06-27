@@ -2,6 +2,7 @@
 
 #include <IMaterial.h>
 #include <DeviceCommon.h>
+#include <vector>
 
 namespace Catherine
 {
@@ -19,6 +20,9 @@ namespace Catherine
 		virtual void SetVec3(const char * key, const glm::vec3 & value) override;
 		virtual void SetVec4(const char * key, const glm::vec4 & value) override;
 		virtual void SetMat4x4(const char * key, const glm::mat4x4 & value) override;
+		virtual void SetTexture(const char * key, ITexture * value) override;
+
+		virtual void SetCommonUniform() override;
 
 		virtual void Use() override;
 
@@ -31,7 +35,7 @@ namespace Catherine
 
 		IProgram * m_Program = nullptr;
 
-		ITexture * m_Texture1 = nullptr;
-		ITexture * m_Texture2 = nullptr;
+		unsigned int m_Slot = 0;
+		std::vector<std::pair<unsigned int, ITexture *>> m_Textures;
 	};
 }

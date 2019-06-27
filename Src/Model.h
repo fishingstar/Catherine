@@ -2,7 +2,9 @@
 
 #include <IModel.h>
 #include <assimp/scene.h>
+#include <string>
 #include <vector>
+#include <unordered_map>
 
 namespace Catherine
 {
@@ -18,13 +20,15 @@ namespace Catherine
 
 	private:
 		void ProcessNode(aiNode * node, const aiScene * scene);
-		IMesh * ProcessMesh(aiMesh * mesh);
+		IMesh * ProcessMesh(aiMesh * mesh, const aiScene * scene);
 		IMaterial * ProcessMaterial(aiMaterial * material);
-		ITexture * ProcessTexture(aiTexture * texture);
+		ITexture * ProcessTexture(aiMaterial * material, aiTextureType type);
 
 	private:
+		std::string m_Path;
+
 		std::vector<IMesh *> m_Meshes;
 		std::vector<IMaterial *> m_Materials;
-		std::vector<ITexture *> m_Textures;
+		std::unordered_map<std::string, ITexture *> m_Textures;
 	};
 }

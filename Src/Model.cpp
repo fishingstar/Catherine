@@ -3,12 +3,17 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include <LogUtility.h>
+#include <FileUtility.h>
 #include <Mesh.h>
+#include <Material.h>
+#include <OpenGLTexture.h>
 
 namespace Catherine
 {
 	void Model::LoadFromFile(const char * path)
 	{
+		m_Path = FileUtility::GetDictionary(path);
+
 		Assimp::Importer tmp_importer;
 
 		const aiScene * tmp_scene = tmp_importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
@@ -26,8 +31,12 @@ namespace Catherine
 		for (unsigned int i = 0; i < node->mNumMeshes; i++)
 		{
 			aiMesh * tmp_src = scene->mMeshes[node->mMeshes[i]];
-			IMesh * tmp_dst = ProcessMesh(tmp_src);
+			IMesh * tmp_dst = ProcessMesh(tmp_src, scene);
 			m_Meshes.push_back(tmp_dst);
+
+			aiMaterial * tmp_srcMat = scene->mMaterials[tmp_src->mMaterialIndex];
+			IMaterial * tmp_material = ProcessMaterial(tmp_srcMat);
+			m_Materials.push_back(tmp_material);
 		}
 
 		for (unsigned int i = 0; i < node->mNumChildren; i++)
@@ -37,7 +46,7 @@ namespace Catherine
 		}
 	}
 
-	IMesh * Model::ProcessMesh(aiMesh * mesh)
+	IMesh * Model::ProcessMesh(aiMesh * mesh, const aiScene * scene)
 	{
 		std::vector<Vertex> tmp_vertexArray;
 		std::vector<unsigned int> tmp_indexArray;
@@ -86,18 +95,54 @@ namespace Catherine
 
 	IMaterial * Model::ProcessMaterial(aiMaterial * material)
 	{
-		return nullptr;
+		IMaterial * tmp_material = new Material();
+		tmp_material->Initialize(nullptr);
+
+		ITexture * tmp_diffuse = ProcessTexture(material, aiTextureType_DIFFUSE);
+		if (tmp_diffuse)
+		{
+			tmp_material->SetTexture("diffuse", tmp_diffuse);
+		}
+		
+		ITexture * tmp_normal = ProcessTexture(material, aiTextureType_NORMALS);
+		if (tmp_normal)
+		{
+			tmp_material->SetTexture("normal", tmp_normal);
+		}
+
+		return tmp_material;
 	}
 
-	ITexture * Model::ProcessTexture(aiTexture * texture)
+	ITexture * Model::ProcessTexture(aiMaterial * material, aiTextureType type)
 	{
-		return nullptr;
+		if (material->GetTextureCount(type) == 0)
+			return 0;
+
+		aiString tmp_path;
+		material->GetTexture(type, 0, &tmp_path);
+		std::string tmp_cpath = m_Path + "/" + tmp_path.C_Str();
+
+		ITexture * tmp_texture = nullptr;
+		if (m_Textures.find(tmp_cpath) != m_Textures.end())
+		{
+			tmp_texture = m_Textures[tmp_cpath];
+		}
+		else
+		{
+			tmp_texture = new GLTexture();
+			tmp_texture->LoadFromFile(tmp_cpath.c_str());
+			m_Textures[tmp_cpath] = tmp_texture;
+		}
+
+		return tmp_texture;
 	}
 
 	void Model::Render()
 	{
 		for (size_t i = 0; i < m_Meshes.size(); i++)
 		{
+			m_Materials[i]->SetCommonUniform();
+			m_Materials[i]->Use();
 			m_Meshes[i]->Render();
 		}
 	}

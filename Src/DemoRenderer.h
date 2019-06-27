@@ -22,14 +22,14 @@ namespace Catherine
 	private:
 		void CreateLights();
 
-	private:
+	public:
 		// camera应该是world里的概念，这里为了demo测试
-		ICamera * m_Camera = nullptr;
+		static ICamera * m_Camera;
 		
 		// light应该在world里创建，这里为了demo中测试功能
-		ILight * m_DirLight = nullptr;
-		ILight * m_PointLight[4] = { nullptr };
-		ILight * m_SpotLight = nullptr;
+		static ILight * m_DirLight;
+		static ILight * m_PointLight[4];
+		static ILight * m_SpotLight;
 
 		// material应该也是附着在world中的对象，这里为了demo测试
 		IMaterial * m_Material = nullptr;

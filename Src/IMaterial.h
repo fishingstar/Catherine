@@ -4,6 +4,8 @@
 
 namespace Catherine
 {
+	class ITexture;
+
 	class IMaterial
 	{
 	public:
@@ -15,6 +17,9 @@ namespace Catherine
 		virtual void SetVec3(const char * key, const glm::vec3 & value) = 0;
 		virtual void SetVec4(const char * key, const glm::vec4 & value) = 0;
 		virtual void SetMat4x4(const char * key, const glm::mat4x4 & value) = 0;
+		virtual void SetTexture(const char * key, ITexture * value) = 0;
+
+		virtual void SetCommonUniform() = 0;
 
 		virtual void Use() = 0;
 	};

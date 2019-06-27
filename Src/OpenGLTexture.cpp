@@ -20,11 +20,11 @@ namespace Catherine
 		int height = 0;
 		int channels = 0;
 
-		stbi_set_flip_vertically_on_load(true);
 		unsigned char * tmp_data = stbi_load(param_Path, &width, &height, &channels, 0);
 		if (tmp_data)
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, tmp_data);
+			unsigned int tmp_format = channels == 4 ? GL_RGBA : GL_RGB;
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, tmp_format, GL_UNSIGNED_BYTE, tmp_data);
 			glGenerateMipmap(GL_TEXTURE_2D);
 		}
 		else

@@ -2,6 +2,10 @@
 #include <IDevice.h>
 #include <OpenGLProgram.h>
 #include <OpenGLTexture.h>
+#include <string>
+#include <DemoRenderer.h>
+#include <Camera.h>
+#include <Light.h>
 
 namespace Catherine
 {
@@ -13,16 +17,6 @@ namespace Catherine
 		m_Program->AttachShader("./res/shader/simple.vs", "./res/shader/simple.fs");
 		m_Program->Compile();
 		m_Program->Link();
-
-		m_Program->Use();
-		m_Program->SetInt("diffuse", 0);
-		m_Program->SetInt("mask", 1);
-
-		m_Texture1 = new GLTexture();
-		m_Texture1->LoadFromFile("./res/texture/wall.jpg");
-
-		m_Texture2 = new GLTexture();
-		m_Texture2->LoadFromFile("./res/texture/container.jpg");
 
 		return true;
 	}
@@ -57,6 +51,67 @@ namespace Catherine
 		m_Program->SetMat4x4(key, value);
 	}
 
+	void Material::SetTexture(const char * key, ITexture * value)
+	{
+		unsigned int tmp_slot = m_Slot++;
+		m_Program->SetInt(key, tmp_slot);
+		m_Textures.push_back(std::pair<unsigned int, ITexture *>(tmp_slot, value));
+	}
+
+	void Material::SetCommonUniform()
+	{
+		const glm::vec3 & tmp_cameraPos = DemoRenderer::m_Camera->GetPosition();
+		const glm::mat4x4 & tmp_view = DemoRenderer::m_Camera->GetViewMatrix();
+		const glm::mat4x4 & tmp_projection = DemoRenderer::m_Camera->GetProjectionMatrix();
+		SetMat4x4("model", glm::mat4x4(1));
+		SetMat4x4("view", tmp_view);
+		SetMat4x4("projection", tmp_projection);
+		SetVec3("viewPos", tmp_cameraPos);
+		SetFloat("ambient", 0.2f);
+
+		const glm::vec4 & tmp_lightColor = DemoRenderer::m_DirLight->GetLightColor();
+		const glm::vec3 & tmp_lightDir = glm::vec3(0.3f, -0.3f, -0.6f);
+		SetVec3("dirLight.lightDir", tmp_lightDir);
+		SetVec4("dirLight.lightColor", tmp_lightColor);
+
+		for (auto i = 0; i < 4; i++)
+		{
+			const glm::vec4 & tmp_pointColor = DemoRenderer::m_PointLight[i]->GetLightColor();
+			const glm::vec3 & tmp_pointPos = DemoRenderer::m_PointLight[i]->GetPosition();
+			float tmp_constant = DemoRenderer::m_PointLight[i]->GetAttenuationConstant();
+			float tmp_linear = DemoRenderer::m_PointLight[i]->GetAttenuationLinear();
+			float tmp_quadratic = DemoRenderer::m_PointLight[i]->GetAttenuationQuadratic();
+
+			std::string tmp_key;
+			std::string tmp_index = "pointLight[" + std::to_string(i) + "]";
+			tmp_key = tmp_index + ".lightPos";
+			SetVec3(tmp_key.c_str(), tmp_pointPos);
+			tmp_key = tmp_index + ".lightColor";
+			SetVec4(tmp_key.c_str(), tmp_pointColor);
+			tmp_key = tmp_index + ".constant";
+			SetFloat(tmp_key.c_str(), tmp_constant);
+			tmp_key = tmp_index + ".linear";
+			SetFloat(tmp_key.c_str(), tmp_linear);
+			tmp_key = tmp_index + ".quadratic";
+			SetFloat(tmp_key.c_str(), tmp_quadratic);
+		}
+
+		const glm::vec4 tmp_spotColor = DemoRenderer::m_SpotLight->GetLightColor();
+		const glm::vec3 tmp_spotPos = DemoRenderer::m_SpotLight->GetPosition();
+		const glm::vec3 tmp_spotDir = glm::vec3(0.0f, 0.0f, -1.0f);
+		float tmp_constant = DemoRenderer::m_SpotLight->GetAttenuationConstant();
+		float tmp_linear = DemoRenderer::m_SpotLight->GetAttenuationLinear();
+		float tmp_quadratic = DemoRenderer::m_SpotLight->GetAttenuationQuadratic();
+		SetVec3("spotLight.lightPos", tmp_spotPos);
+		SetVec4("spotLight.lightColor", tmp_spotColor);
+		SetVec3("spotLight.lightDir", tmp_spotDir);
+		SetFloat("spotLight.innerCutoff", glm::cos(glm::radians(45.0f)));
+		SetFloat("spotLight.outerCutoff", glm::cos(glm::radians(60.0f)));
+		SetFloat("spotLight.constant", tmp_constant);
+		SetFloat("spotLight.linear", tmp_linear);
+		SetFloat("spotLight.quadratic", tmp_quadratic);
+	}
+
 	void Material::Use()
 	{
 		g_Device->EnableDepthTest(m_DepthTestEnabled);
@@ -65,8 +120,11 @@ namespace Catherine
 		g_Device->EnableCullFace(m_CullFaceEnabled);
 		g_Device->SetCullFaceMode(m_CullFaceMode);
 
-		m_Texture1->Use(0);
-		m_Texture2->Use(1);
+		for (size_t i = 0; i < m_Textures.size(); i++)
+		{
+			std::pair<unsigned int, ITexture *> tmp_pair = m_Textures[i];
+			tmp_pair.second->Use(tmp_pair.first);
+		}
 
 		m_Program->Use();
 	}
