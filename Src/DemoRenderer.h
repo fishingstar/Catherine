@@ -7,6 +7,7 @@ namespace Catherine
 	class ICamera;
 	class ILight;
 	class IMaterial;
+	class IModel;
 
 	class DemoRenderer : public IRenderer
 	{
@@ -33,7 +34,7 @@ namespace Catherine
 		// material应该也是附着在world中的对象，这里为了demo测试
 		IMaterial * m_Material = nullptr;
 
-		// VAO应该由mesh管理，这里为了测试
-		unsigned int m_VAO = 0;
+		// model应该由world管理，这里为了测试
+		IModel * m_Model = nullptr;
 	};
 }

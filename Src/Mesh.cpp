@@ -1,46 +1,53 @@
 #include <Mesh.h>
-#include <VertexLayout.h>
+#include <glad/glad.h>
 
 namespace Catherine
 {
-	Mesh::Mesh()
+	void Mesh::Initialize(const std::vector<Vertex> & vertex, const std::vector<unsigned int> & index)
 	{
-		m_Layout = new VertexLayout();
+		m_VertexCount = vertex.size();
+		m_IndexCount = index.size();
+
+		SetupBuffers(vertex, index);
 	}
 
-	Mesh::~Mesh()
+	void Mesh::Render()
 	{
-		if (m_Layout != nullptr)
-		{
-			delete m_Layout;
-			m_Layout = nullptr;
-		}
+		glBindVertexArray(m_VAO);
+		glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
 	}
 
-	void Mesh::LoadFromFile(const char * param_Path)
+	void Mesh::SetupBuffers(const std::vector<Vertex> & vertex, const std::vector<unsigned int> & index)
 	{
+		glGenVertexArrays(1, &m_VAO);
+		glGenBuffers(1, &m_VBO);
+		glGenBuffers(1, &m_IBO);
 
-	}
+		// vertex array ->
+		glBindVertexArray(m_VAO);
 
-	const void * Mesh::GetVertexBuffer(unsigned int & size) const
-	{
-		size = m_VertexBufferSize;
-		return m_VertexBuffer;
-	}
+		// vertex attribute
+		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertex.size(), &vertex[0], GL_STATIC_DRAW);
 
-	const void * Mesh::GetIndexBuffer(unsigned int & size) const
-	{
-		size = m_ElementIndex ? m_IndexBufferSize : 0;
-		return m_ElementIndex ? m_IndexBuffer : nullptr;
-	}
+		// vertex index
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * index.size(), &index[0], GL_STATIC_DRAW);
 
-	const VertexLayout * Mesh::GetVertexLayout() const
-	{
-		return m_Layout;
-	}
+		// position attribute
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)0);
 
-	bool Mesh::IsElementIndex() const
-	{
-		return m_ElementIndex;
+		// normal attribute
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)(3 * sizeof(float)));
+
+		// texcoord attribute
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)(6 * sizeof(float)));
+
+		// vertex array end <-
+		glBindVertexArray(0);
 	}
 }

@@ -24,4 +24,9 @@ namespace Catherine
 		*param_Ptr = tmp_result;
 		return (unsigned int)tmp_size;
 	}
+
+	std::string FileUtility::GetDictionary(const std::string & path)
+	{
+		return path.substr(0, path.find_last_of('/'));
+	}
 }

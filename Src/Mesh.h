@@ -4,36 +4,22 @@
 
 namespace Catherine
 {
-	class VertexLayout;
-
 	class Mesh : public IMesh
 	{
 	public:
-		Mesh();
-		~Mesh();
-
-		virtual void LoadFromFile(const char * param_Path) override;
-
-		virtual const void * GetVertexBuffer(unsigned int & size) const override;
-		virtual const void * GetIndexBuffer(unsigned int & size) const override;
-		virtual const VertexLayout * GetVertexLayout() const override;
-
-		virtual bool IsElementIndex() const;
-
-	protected:
-		VertexLayout * GetVertexLayout() { return m_Layout; }
-		void SetElementIndex(bool index) { m_ElementIndex = index; }
-		void SetVertexBuffer(void * param_Buffer, int size) { m_VertexBuffer = param_Buffer; m_VertexBufferSize = size; }
-		void SetIndexBuffer(void * param_Buffer, int size) { m_IndexBuffer = param_Buffer; m_IndexBufferSize = size; }
+		virtual void Initialize(const std::vector<Vertex> & vertex, const std::vector<unsigned int> & index) override;
+		virtual void Render() override;
 
 	private:
-		VertexLayout * m_Layout = nullptr;
-		bool m_ElementIndex = false;
+		void SetupBuffers(const std::vector<Vertex> & vertex, const std::vector<unsigned int> & index);
 
-		unsigned int m_VertexBufferSize = 0;
-		void * m_VertexBuffer = nullptr;
+	private:
+		size_t m_VertexCount = 0;
+		size_t m_IndexCount = 0;
 
-		unsigned int m_IndexBufferSize = 0;
-		void * m_IndexBuffer = nullptr;
+		// TODO: 这里用的OpenGL方式，需要封一层Buffer实现跨平台
+		unsigned int m_VAO = 0;
+		unsigned int m_VBO = 0;
+		unsigned int m_IBO = 0;
 	};
 }

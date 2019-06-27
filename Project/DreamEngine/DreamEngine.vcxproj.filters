@@ -38,9 +38,6 @@
     <Filter Include="Device\DirectX">
       <UniqueIdentifier>{03c4afd0-4a40-4454-876a-0687d811098a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Mesh">
-      <UniqueIdentifier>{2e7b0b11-cf5c-4b12-8f4a-8d8b876b1bf0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="World">
       <UniqueIdentifier>{21dda89a-bed2-458b-983c-8cb60df0805c}</UniqueIdentifier>
     </Filter>
@@ -58,6 +55,12 @@
     </Filter>
     <Filter Include="World\Light">
       <UniqueIdentifier>{9af75319-fc71-4ef2-83bf-338b66f61193}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World\Model">
+      <UniqueIdentifier>{344aefee-6c1f-4257-a1da-7d9be8cba4f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World\Mesh">
+      <UniqueIdentifier>{2e7b0b11-cf5c-4b12-8f4a-8d8b876b1bf0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -101,13 +104,10 @@
       <Filter>Device\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\VertexLayout.cpp">
-      <Filter>Mesh</Filter>
+      <Filter>World\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\Mesh.cpp">
-      <Filter>Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\DemoMesh.cpp">
-      <Filter>Mesh</Filter>
+      <Filter>World\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\Camera.cpp">
       <Filter>World\Camera</Filter>
@@ -132,6 +132,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\Light.cpp">
       <Filter>World\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Model.cpp">
+      <Filter>World\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -175,16 +178,13 @@
       <Filter>Device\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\IMesh.h">
-      <Filter>Mesh</Filter>
+      <Filter>World\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\VertexLayout.h">
-      <Filter>Mesh</Filter>
+      <Filter>World\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Mesh.h">
-      <Filter>Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\DemoMesh.h">
-      <Filter>Mesh</Filter>
+      <Filter>World\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\ICamera.h">
       <Filter>World\Camera</Filter>
@@ -236,6 +236,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Light.h">
       <Filter>World\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\IModel.h">
+      <Filter>World\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Model.h">
+      <Filter>World\Model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

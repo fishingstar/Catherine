@@ -134,7 +134,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\Src\Camera.cpp" />
     <ClCompile Include="..\..\Src\Client.cpp" />
-    <ClCompile Include="..\..\Src\DemoMesh.cpp" />
     <ClCompile Include="..\..\Src\DemoRenderer.cpp" />
     <ClCompile Include="..\..\Src\DeviceFactory.cpp" />
     <ClCompile Include="..\..\Src\Light.cpp" />
@@ -148,6 +147,7 @@
     <ClCompile Include="..\..\Src\main.cpp" />
     <ClCompile Include="..\..\Src\Material.cpp" />
     <ClCompile Include="..\..\Src\Mesh.cpp" />
+    <ClCompile Include="..\..\Src\Model.cpp" />
     <ClCompile Include="..\..\Src\OpenGLDevice.cpp" />
     <ClCompile Include="..\..\Src\OpenGLProgram.cpp" />
     <ClCompile Include="..\..\Src\OpenGLTexture.cpp" />
@@ -161,10 +161,10 @@
     <ClInclude Include="..\..\Src\Camera.h" />
     <ClInclude Include="..\..\Src\Client.h" />
     <ClInclude Include="..\..\Src\const.h" />
-    <ClInclude Include="..\..\Src\DemoMesh.h" />
     <ClInclude Include="..\..\Src\DemoRenderer.h" />
     <ClInclude Include="..\..\Src\DeviceCommon.h" />
     <ClInclude Include="..\..\Src\DeviceFactory.h" />
+    <ClInclude Include="..\..\Src\IModel.h" />
     <ClInclude Include="..\..\Src\Light.h" />
     <ClInclude Include="..\..\Src\FileUtility.h" />
     <ClInclude Include="..\..\Src\GameWorld.h" />
@@ -177,6 +177,7 @@
     <ClInclude Include="..\..\Src\JsonParser.h" />
     <ClInclude Include="..\..\Src\Material.h" />
     <ClInclude Include="..\..\Src\Mesh.h" />
+    <ClInclude Include="..\..\Src\Model.h" />
     <ClInclude Include="..\..\Src\OpenGLTexture.h" />
     <ClInclude Include="..\..\Src\IDevice.h" />
     <ClInclude Include="..\..\Src\IProgram.h" />
