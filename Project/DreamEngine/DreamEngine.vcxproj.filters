@@ -103,9 +103,6 @@
     <ClCompile Include="..\..\Src\OpenGLTexture.cpp">
       <Filter>Device\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\VertexLayout.cpp">
-      <Filter>World\Mesh</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\Mesh.cpp">
       <Filter>World\Mesh</Filter>
     </ClCompile>
@@ -135,6 +132,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\Model.cpp">
       <Filter>World\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\VertexLayout.cpp">
+      <Filter>Device\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,9 +178,6 @@
       <Filter>Device\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\IMesh.h">
-      <Filter>World\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\VertexLayout.h">
       <Filter>World\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Mesh.h">
@@ -242,6 +239,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Model.h">
       <Filter>World\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\VertexLayout.h">
+      <Filter>Device\Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
