@@ -62,6 +62,12 @@
     <Filter Include="World\Mesh">
       <UniqueIdentifier>{2e7b0b11-cf5c-4b12-8f4a-8d8b876b1bf0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World\SceneObject">
+      <UniqueIdentifier>{fdb50e56-afa3-47bc-b986-c25ea4b3b7bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World\Level">
+      <UniqueIdentifier>{d4a24ffe-9a04-488e-be36-76a128ba4640}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\main.cpp">
@@ -135,6 +141,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\VertexLayout.cpp">
       <Filter>Device\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Level.cpp">
+      <Filter>World\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\SceneObject.cpp">
+      <Filter>World\SceneObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -242,6 +254,18 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\VertexLayout.h">
       <Filter>Device\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\ILevel.h">
+      <Filter>World\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Level.h">
+      <Filter>World\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\ISceneObject.h">
+      <Filter>World\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\SceneObject.h">
+      <Filter>World\SceneObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

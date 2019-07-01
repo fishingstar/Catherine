@@ -136,6 +136,7 @@
     <ClCompile Include="..\..\Src\Client.cpp" />
     <ClCompile Include="..\..\Src\DemoRenderer.cpp" />
     <ClCompile Include="..\..\Src\DeviceFactory.cpp" />
+    <ClCompile Include="..\..\Src\Level.cpp" />
     <ClCompile Include="..\..\Src\Light.cpp" />
     <ClCompile Include="..\..\Src\FileUtility.cpp" />
     <ClCompile Include="..\..\Src\GameWorld.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="..\..\Src\OpenGLTexture.cpp" />
     <ClCompile Include="..\..\Src\Renderer.cpp" />
     <ClCompile Include="..\..\Src\RendererFactory.cpp" />
+    <ClCompile Include="..\..\Src\SceneObject.cpp" />
     <ClCompile Include="..\..\Src\TimeUtility.cpp" />
     <ClCompile Include="..\..\Src\VertexLayout.cpp" />
     <ClCompile Include="..\..\Src\XMLParser.cpp" />
@@ -164,7 +166,10 @@
     <ClInclude Include="..\..\Src\DemoRenderer.h" />
     <ClInclude Include="..\..\Src\DeviceCommon.h" />
     <ClInclude Include="..\..\Src\DeviceFactory.h" />
+    <ClInclude Include="..\..\Src\ILevel.h" />
     <ClInclude Include="..\..\Src\IModel.h" />
+    <ClInclude Include="..\..\Src\ISceneObject.h" />
+    <ClInclude Include="..\..\Src\Level.h" />
     <ClInclude Include="..\..\Src\Light.h" />
     <ClInclude Include="..\..\Src\FileUtility.h" />
     <ClInclude Include="..\..\Src\GameWorld.h" />
@@ -189,6 +194,7 @@
     <ClInclude Include="..\..\Src\OpenGLProgram.h" />
     <ClInclude Include="..\..\Src\Renderer.h" />
     <ClInclude Include="..\..\Src\RendererFactory.h" />
+    <ClInclude Include="..\..\Src\SceneObject.h" />
     <ClInclude Include="..\..\Src\stb_image.h" />
     <ClInclude Include="..\..\Src\TimeUtility.h" />
     <ClInclude Include="..\..\Src\VertexLayout.h" />
