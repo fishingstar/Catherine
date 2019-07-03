@@ -68,6 +68,9 @@
     <Filter Include="World\Level">
       <UniqueIdentifier>{d4a24ffe-9a04-488e-be36-76a128ba4640}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World\Component">
+      <UniqueIdentifier>{8ecc1888-2f9d-4312-97df-6979b6bf47cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\main.cpp">
@@ -147,6 +150,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\SceneObject.cpp">
       <Filter>World\SceneObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\TransformComponent.cpp">
+      <Filter>World\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -266,6 +272,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\SceneObject.h">
       <Filter>World\SceneObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\IComponent.h">
+      <Filter>World\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\TransformComponent.h">
+      <Filter>World\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\ComponentCommon.h">
+      <Filter>World\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

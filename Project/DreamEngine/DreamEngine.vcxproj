@@ -156,16 +156,19 @@
     <ClCompile Include="..\..\Src\RendererFactory.cpp" />
     <ClCompile Include="..\..\Src\SceneObject.cpp" />
     <ClCompile Include="..\..\Src\TimeUtility.cpp" />
+    <ClCompile Include="..\..\Src\TransformComponent.cpp" />
     <ClCompile Include="..\..\Src\VertexLayout.cpp" />
     <ClCompile Include="..\..\Src\XMLParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Camera.h" />
     <ClInclude Include="..\..\Src\Client.h" />
+    <ClInclude Include="..\..\Src\ComponentCommon.h" />
     <ClInclude Include="..\..\Src\const.h" />
     <ClInclude Include="..\..\Src\DemoRenderer.h" />
     <ClInclude Include="..\..\Src\DeviceCommon.h" />
     <ClInclude Include="..\..\Src\DeviceFactory.h" />
+    <ClInclude Include="..\..\Src\IComponent.h" />
     <ClInclude Include="..\..\Src\ILevel.h" />
     <ClInclude Include="..\..\Src\IModel.h" />
     <ClInclude Include="..\..\Src\ISceneObject.h" />
@@ -197,6 +200,7 @@
     <ClInclude Include="..\..\Src\SceneObject.h" />
     <ClInclude Include="..\..\Src\stb_image.h" />
     <ClInclude Include="..\..\Src\TimeUtility.h" />
+    <ClInclude Include="..\..\Src\TransformComponent.h" />
     <ClInclude Include="..\..\Src\VertexLayout.h" />
     <ClInclude Include="..\..\Src\XMLParser.h" />
   </ItemGroup>
