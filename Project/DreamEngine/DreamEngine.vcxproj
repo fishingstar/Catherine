@@ -174,11 +174,7 @@
     <ClInclude Include="..\..\Src\DemoRenderer.h" />
     <ClInclude Include="..\..\Src\DeviceCommon.h" />
     <ClInclude Include="..\..\Src\DeviceFactory.h" />
-    <ClInclude Include="..\..\Src\ICameraContext.h" />
     <ClInclude Include="..\..\Src\IComponent.h" />
-    <ClInclude Include="..\..\Src\ILightContext.h" />
-    <ClInclude Include="..\..\Src\IRenderContext.h" />
-    <ClInclude Include="..\..\Src\IWorldContext.h" />
     <ClInclude Include="..\..\Src\ILevel.h" />
     <ClInclude Include="..\..\Src\IModel.h" />
     <ClInclude Include="..\..\Src\ISceneObject.h" />

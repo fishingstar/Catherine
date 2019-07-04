@@ -309,18 +309,6 @@
     <ClInclude Include="..\..\Src\RenderContext.h">
       <Filter>Render\Context</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\IWorldContext.h">
-      <Filter>Render\Context</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\IRenderContext.h">
-      <Filter>Render\Context</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\ICameraContext.h">
-      <Filter>Render\Context</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\ILightContext.h">
-      <Filter>Render\Context</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\LightContext.h">
       <Filter>Render\Context</Filter>
     </ClInclude>
