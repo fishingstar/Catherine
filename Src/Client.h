@@ -3,6 +3,7 @@
 namespace Catherine
 {
 	class IDevice;
+	class IWorld;
 	class IRenderer;
 
 	class Client
@@ -18,6 +19,7 @@ namespace Catherine
 		Client() { }
 
 		bool CreateDevice();
+		bool CreateWorld();
 		bool CreateRenderer();
 
 		void OnFrameBegin();
@@ -29,6 +31,7 @@ namespace Catherine
 
 	private:
 		IDevice * m_Device = nullptr;
+		IWorld * m_World = nullptr;
 		IRenderer * m_Renderer = nullptr;
 	};
 }

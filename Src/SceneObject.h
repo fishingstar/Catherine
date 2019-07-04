@@ -14,7 +14,7 @@ namespace Catherine
 		virtual const std::vector<IComponent *> & GetComponents(ComponentKind kind) override;
 
 		virtual void AddComponent(IComponent * component) override;
-		virtual void RemoveComponent(const IComponent * component) override;
+		virtual void RemoveComponent(IComponent * component) override;
 
 	private:
 		std::unordered_map<ComponentKind, std::vector<IComponent *>> m_Components;

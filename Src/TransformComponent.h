@@ -9,11 +9,14 @@ namespace Catherine
 	class TransformComponent : public IComponent
 	{
 	public:
-		virtual void Initialize(ISceneObject * owner) override;
 		virtual void Update(float deltaTime) override;
+
+		virtual ISceneObject * GetOwner() const override;
+		virtual void SetOwner(ISceneObject * owner) override;
+
 		virtual ComponentKind GetComponentKind() const override;
 
-		ISceneObject * GetOwner() const;
+	public:
 		TransformComponent * GetParent() const;
 		TransformComponent * GetChild(unsigned int index) const;
 		unsigned int GetChildCount() const;

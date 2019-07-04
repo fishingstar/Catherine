@@ -10,6 +10,7 @@ namespace Catherine
 		static DeviceFactory * Instance();
 
 		IDevice * CreateDevice();
+		void DeleteDevice(IDevice * device);
 
 	private:
 		DeviceFactory() { }

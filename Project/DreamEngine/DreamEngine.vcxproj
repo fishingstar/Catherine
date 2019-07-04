@@ -133,6 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Camera.cpp" />
+    <ClCompile Include="..\..\Src\CameraContext.cpp" />
     <ClCompile Include="..\..\Src\Client.cpp" />
     <ClCompile Include="..\..\Src\DemoRenderer.cpp" />
     <ClCompile Include="..\..\Src\DeviceFactory.cpp" />
@@ -143,6 +144,7 @@
     <ClCompile Include="..\..\Src\glad\src\glad.c" />
     <ClCompile Include="..\..\Src\global.cpp" />
     <ClCompile Include="..\..\Src\JsonParser.cpp" />
+    <ClCompile Include="..\..\Src\LightContext.cpp" />
     <ClCompile Include="..\..\Src\log.cpp" />
     <ClCompile Include="..\..\Src\LogUtility.cpp" />
     <ClCompile Include="..\..\Src\main.cpp" />
@@ -152,23 +154,31 @@
     <ClCompile Include="..\..\Src\OpenGLDevice.cpp" />
     <ClCompile Include="..\..\Src\OpenGLProgram.cpp" />
     <ClCompile Include="..\..\Src\OpenGLTexture.cpp" />
+    <ClCompile Include="..\..\Src\RenderContext.cpp" />
     <ClCompile Include="..\..\Src\Renderer.cpp" />
     <ClCompile Include="..\..\Src\RendererFactory.cpp" />
     <ClCompile Include="..\..\Src\SceneObject.cpp" />
     <ClCompile Include="..\..\Src\TimeUtility.cpp" />
     <ClCompile Include="..\..\Src\TransformComponent.cpp" />
     <ClCompile Include="..\..\Src\VertexLayout.cpp" />
+    <ClCompile Include="..\..\Src\WorldContext.cpp" />
+    <ClCompile Include="..\..\Src\WorldFactory.cpp" />
     <ClCompile Include="..\..\Src\XMLParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Camera.h" />
+    <ClInclude Include="..\..\Src\CameraContext.h" />
     <ClInclude Include="..\..\Src\Client.h" />
     <ClInclude Include="..\..\Src\ComponentCommon.h" />
     <ClInclude Include="..\..\Src\const.h" />
     <ClInclude Include="..\..\Src\DemoRenderer.h" />
     <ClInclude Include="..\..\Src\DeviceCommon.h" />
     <ClInclude Include="..\..\Src\DeviceFactory.h" />
+    <ClInclude Include="..\..\Src\ICameraContext.h" />
     <ClInclude Include="..\..\Src\IComponent.h" />
+    <ClInclude Include="..\..\Src\ILightContext.h" />
+    <ClInclude Include="..\..\Src\IRenderContext.h" />
+    <ClInclude Include="..\..\Src\IWorldContext.h" />
     <ClInclude Include="..\..\Src\ILevel.h" />
     <ClInclude Include="..\..\Src\IModel.h" />
     <ClInclude Include="..\..\Src\ISceneObject.h" />
@@ -183,6 +193,7 @@
     <ClInclude Include="..\..\Src\IMesh.h" />
     <ClInclude Include="..\..\Src\IWorld.h" />
     <ClInclude Include="..\..\Src\JsonParser.h" />
+    <ClInclude Include="..\..\Src\LightContext.h" />
     <ClInclude Include="..\..\Src\Material.h" />
     <ClInclude Include="..\..\Src\Mesh.h" />
     <ClInclude Include="..\..\Src\Model.h" />
@@ -195,6 +206,7 @@
     <ClInclude Include="..\..\Src\LogUtility.h" />
     <ClInclude Include="..\..\Src\OpenGLDevice.h" />
     <ClInclude Include="..\..\Src\OpenGLProgram.h" />
+    <ClInclude Include="..\..\Src\RenderContext.h" />
     <ClInclude Include="..\..\Src\Renderer.h" />
     <ClInclude Include="..\..\Src\RendererFactory.h" />
     <ClInclude Include="..\..\Src\SceneObject.h" />
@@ -202,6 +214,8 @@
     <ClInclude Include="..\..\Src\TimeUtility.h" />
     <ClInclude Include="..\..\Src\TransformComponent.h" />
     <ClInclude Include="..\..\Src\VertexLayout.h" />
+    <ClInclude Include="..\..\Src\WorldContext.h" />
+    <ClInclude Include="..\..\Src\WorldFactory.h" />
     <ClInclude Include="..\..\Src\XMLParser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

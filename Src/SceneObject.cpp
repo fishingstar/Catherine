@@ -34,12 +34,13 @@ namespace Catherine
 			auto tmp_iter = std::find(tmp_components.begin(), tmp_components.end(), component);
 			if (tmp_iter == tmp_components.end())
 			{
+				component->SetOwner(this);
 				tmp_components.push_back(component);
 			}
 		}
 	}
 
-	void SceneObject::RemoveComponent(const IComponent * component)
+	void SceneObject::RemoveComponent(IComponent * component)
 	{
 		if (component != nullptr)
 		{
@@ -47,6 +48,7 @@ namespace Catherine
 			auto tmp_iter = std::find(tmp_components.begin(), tmp_components.end(), component);
 			if (tmp_iter != tmp_components.end())
 			{
+				component->SetOwner(nullptr);
 				tmp_components.erase(tmp_iter);
 			}
 		}

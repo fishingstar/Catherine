@@ -10,10 +10,18 @@ namespace Catherine
 		return &s_instance;
 	}
 
-	IRenderer * RendererFactory::CreateMainRenderer() const
+	IRenderer * RendererFactory::CreateWorldRenderer()
 	{
 		//IRenderer * tmp_renderer = new Renderer();
 		IRenderer * tmp_renderer = new DemoRenderer();
 		return tmp_renderer;
+	}
+
+	void RendererFactory::DeleteRenderer(IRenderer * renderer)
+	{
+		if (renderer != nullptr)
+		{
+			delete renderer;
+		}
 	}
 }

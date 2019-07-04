@@ -3,24 +3,24 @@
 
 namespace Catherine
 {
-	void TransformComponent::Initialize(ISceneObject * owner)
-	{
-		m_Owner = owner;
-	}
-
 	void TransformComponent::Update(float deltaTime)
 	{
 		// logic
 	}
 
-	ComponentKind TransformComponent::GetComponentKind() const
-	{
-		return ComponentKind::Transform;
-	}
-
 	ISceneObject * TransformComponent::GetOwner() const
 	{
 		return m_Owner;
+	}
+
+	void TransformComponent::SetOwner(ISceneObject * owner)
+	{
+		m_Owner = owner;
+	}
+
+	ComponentKind TransformComponent::GetComponentKind() const
+	{
+		return ComponentKind::Transform;
 	}
 
 	TransformComponent * TransformComponent::GetParent() const

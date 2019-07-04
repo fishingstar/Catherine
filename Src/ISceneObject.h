@@ -16,6 +16,6 @@ namespace Catherine
 		virtual const std::vector<IComponent *> & GetComponents(ComponentKind kind) = 0;
 
 		virtual void AddComponent(IComponent * component) = 0;
-		virtual void RemoveComponent(const IComponent * component) = 0;
+		virtual void RemoveComponent(IComponent * component) = 0;
 	};
 }

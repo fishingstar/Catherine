@@ -1,9 +1,11 @@
 #include <Client.h>
 #include <DeviceFactory.h>
+#include <WorldFactory.h>
 #include <RendererFactory.h>
 #include <IRenderer.h>
 #include <LogUtility.h>
 #include <global.h>
+#include <GameWorld.h>
 
 namespace Catherine
 {
@@ -21,6 +23,13 @@ namespace Catherine
 		if (!tmp_deviceOK)
 		{
 			LogError("Client CreateDevice Failed...");
+			return false;
+		}
+
+		bool tmp_worldOK = CreateWorld();
+		if (!tmp_worldOK)
+		{
+			LogError("Client CreateWorld Failed...");
 			return false;
 		}
 
@@ -78,10 +87,7 @@ namespace Catherine
 
 	void Client::UpdateLogic(float deltaTime)
 	{
-		// manager update
-		// ...
-		// script udpate
-		// ...
+		m_World->Update(deltaTime);
 	}
 
 	void Client::UpdateRender(float deltaTime)
@@ -107,6 +113,7 @@ namespace Catherine
 		if (!tmp_initialized)
 		{
 			LogError("Device Initialize Failed...");
+			DeviceFactory::Instance()->DeleteDevice(m_Device);
 			m_Device = nullptr;
 			return false;
 		}
@@ -115,9 +122,30 @@ namespace Catherine
 		return true;
 	}
 
+	bool Client::CreateWorld()
+	{
+		m_World = WorldFactory::Instance()->CreateGameWorld();
+		if (m_World == nullptr)
+		{
+			LogError("Create World Failed...");
+			return false;
+		}
+
+		bool tmp_initialized = m_World->Initialize();
+		if (!tmp_initialized)
+		{
+			LogError("World Initialize Failed...");
+			WorldFactory::Instance()->DeleteWorld(m_World);
+			m_World = nullptr;
+			return false;
+		}
+
+		return true;
+	}
+
 	bool Client::CreateRenderer()
 	{
-		m_Renderer = RendererFactory::Instance()->CreateMainRenderer();
+		m_Renderer = RendererFactory::Instance()->CreateWorldRenderer();
 		if (m_Renderer == nullptr)
 		{
 			LogError("Create Render Failed...");
@@ -128,6 +156,8 @@ namespace Catherine
 		if (!tmp_initialized)
 		{
 			LogError("Renderer Initialize Failed...");
+			RendererFactory::Instance()->DeleteRenderer(m_Renderer);
+			m_Renderer = nullptr;
 			return false;
 		}
 

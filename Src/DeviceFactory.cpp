@@ -18,4 +18,12 @@ namespace Catherine
 
 		return tmp_result;
 	}
+
+	void DeviceFactory::DeleteDevice(IDevice * device)
+	{
+		if (device != nullptr)
+		{
+			delete device;
+		}
+	}
 }

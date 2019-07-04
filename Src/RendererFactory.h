@@ -9,7 +9,8 @@ namespace Catherine
 	public:
 		static RendererFactory * Instance();
 
-		IRenderer * CreateMainRenderer() const;
+		IRenderer * CreateWorldRenderer();
+		void DeleteRenderer(IRenderer * renderer);
 
 	private:
 		RendererFactory() { }

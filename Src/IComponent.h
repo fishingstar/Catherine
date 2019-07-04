@@ -9,8 +9,11 @@ namespace Catherine
 	class IComponent
 	{
 	public:
-		virtual void Initialize(ISceneObject * owner) = 0;
 		virtual void Update(float deltaTime) = 0;
+		
+		virtual ISceneObject * GetOwner() const = 0;
+		virtual void SetOwner(ISceneObject * owner) = 0;
+
 		virtual ComponentKind GetComponentKind() const = 0;
 	};
 }

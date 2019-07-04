@@ -71,6 +71,9 @@
     <Filter Include="World\Component">
       <UniqueIdentifier>{8ecc1888-2f9d-4312-97df-6979b6bf47cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Render\Context">
+      <UniqueIdentifier>{1d8d50ae-ce4c-45ed-8c66-45b62b7bcdfe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\main.cpp">
@@ -153,6 +156,21 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\TransformComponent.cpp">
       <Filter>World\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\WorldFactory.cpp">
+      <Filter>World\World</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\WorldContext.cpp">
+      <Filter>Render\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\RenderContext.cpp">
+      <Filter>Render\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\LightContext.cpp">
+      <Filter>Render\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\CameraContext.cpp">
+      <Filter>Render\Context</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -281,6 +299,33 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\ComponentCommon.h">
       <Filter>World\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\WorldFactory.h">
+      <Filter>World\World</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\WorldContext.h">
+      <Filter>Render\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\RenderContext.h">
+      <Filter>Render\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\IWorldContext.h">
+      <Filter>Render\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\IRenderContext.h">
+      <Filter>Render\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\ICameraContext.h">
+      <Filter>Render\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\ILightContext.h">
+      <Filter>Render\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\LightContext.h">
+      <Filter>Render\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\CameraContext.h">
+      <Filter>Render\Context</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
