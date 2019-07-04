@@ -40,19 +40,21 @@ namespace Catherine
 
 	void WorldRenderer::PreRender()
 	{
-
+		for (size_t i = 0; i < m_Worlds.size(); i++)
+		{
+			m_Worlds[i]->PreRender();
+		}
 	}
 
 	void WorldRenderer::Render()
 	{
 		for (size_t i = 0; i < m_Worlds.size(); i++)
 		{
-			IWorld * tmp_world = m_Worlds[i];
-			tmp_world->Render();
+			// collect render context
+			m_Worlds[i]->Render();
 
-			const WorldContext * tmp_context = tmp_world->GetWorldContext();
-
-			// render
+			// render command
+			const WorldContext * tmp_context = m_Worlds[i]->GetWorldContext();
 			// ...
 		}
 
@@ -65,7 +67,10 @@ namespace Catherine
 
 	void WorldRenderer::PostRender()
 	{
-
+		for (size_t i = 0; i < m_Worlds.size(); i++)
+		{
+			m_Worlds[i]->PostRender();
+		}
 	}
 
 	void WorldRenderer::RegisterWorld(IWorld * world)

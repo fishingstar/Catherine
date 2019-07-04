@@ -25,11 +25,21 @@ namespace Catherine
 		}
 	}
 
+	void GameWorld::PreRender()
+	{
+
+	}
+
 	void GameWorld::Render()
 	{
 		for (size_t i = 0; i < m_Levels.size(); i++)
 		{
 			m_Levels[i]->Render(m_WorldContext);
 		}
+	}
+
+	void GameWorld::PostRender()
+	{
+		m_WorldContext->Clear();
 	}
 }
