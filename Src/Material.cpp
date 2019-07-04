@@ -3,7 +3,7 @@
 #include <OpenGLProgram.h>
 #include <OpenGLTexture.h>
 #include <string>
-#include <DemoRenderer.h>
+#include <WorldRenderer.h>
 #include <Camera.h>
 #include <Light.h>
 
@@ -60,27 +60,27 @@ namespace Catherine
 
 	void Material::SetCommonUniform()
 	{
-		const glm::vec3 & tmp_cameraPos = DemoRenderer::m_Camera->GetPosition();
-		const glm::mat4x4 & tmp_view = DemoRenderer::m_Camera->GetViewMatrix();
-		const glm::mat4x4 & tmp_projection = DemoRenderer::m_Camera->GetProjectionMatrix();
+		const glm::vec3 & tmp_cameraPos = WorldRenderer::m_Camera->GetPosition();
+		const glm::mat4x4 & tmp_view = WorldRenderer::m_Camera->GetViewMatrix();
+		const glm::mat4x4 & tmp_projection = WorldRenderer::m_Camera->GetProjectionMatrix();
 		SetMat4x4("model", glm::mat4x4(1));
 		SetMat4x4("view", tmp_view);
 		SetMat4x4("projection", tmp_projection);
 		SetVec3("viewPos", tmp_cameraPos);
 		SetFloat("ambient", 0.2f);
 
-		const glm::vec4 & tmp_lightColor = DemoRenderer::m_DirLight->GetLightColor();
+		const glm::vec4 & tmp_lightColor = WorldRenderer::m_DirLight->GetLightColor();
 		const glm::vec3 & tmp_lightDir = glm::vec3(0.3f, -0.3f, -0.6f);
 		SetVec3("dirLight.lightDir", tmp_lightDir);
 		SetVec4("dirLight.lightColor", tmp_lightColor);
 
 		for (auto i = 0; i < 4; i++)
 		{
-			const glm::vec4 & tmp_pointColor = DemoRenderer::m_PointLight[i]->GetLightColor();
-			const glm::vec3 & tmp_pointPos = DemoRenderer::m_PointLight[i]->GetPosition();
-			float tmp_constant = DemoRenderer::m_PointLight[i]->GetAttenuationConstant();
-			float tmp_linear = DemoRenderer::m_PointLight[i]->GetAttenuationLinear();
-			float tmp_quadratic = DemoRenderer::m_PointLight[i]->GetAttenuationQuadratic();
+			const glm::vec4 & tmp_pointColor = WorldRenderer::m_PointLight[i]->GetLightColor();
+			const glm::vec3 & tmp_pointPos = WorldRenderer::m_PointLight[i]->GetPosition();
+			float tmp_constant = WorldRenderer::m_PointLight[i]->GetAttenuationConstant();
+			float tmp_linear = WorldRenderer::m_PointLight[i]->GetAttenuationLinear();
+			float tmp_quadratic = WorldRenderer::m_PointLight[i]->GetAttenuationQuadratic();
 
 			std::string tmp_key;
 			std::string tmp_index = "pointLight[" + std::to_string(i) + "]";
@@ -96,12 +96,12 @@ namespace Catherine
 			SetFloat(tmp_key.c_str(), tmp_quadratic);
 		}
 
-		const glm::vec4 tmp_spotColor = DemoRenderer::m_SpotLight->GetLightColor();
-		const glm::vec3 tmp_spotPos = DemoRenderer::m_SpotLight->GetPosition();
+		const glm::vec4 tmp_spotColor = WorldRenderer::m_SpotLight->GetLightColor();
+		const glm::vec3 tmp_spotPos = WorldRenderer::m_SpotLight->GetPosition();
 		const glm::vec3 tmp_spotDir = glm::vec3(0.0f, 0.0f, -1.0f);
-		float tmp_constant = DemoRenderer::m_SpotLight->GetAttenuationConstant();
-		float tmp_linear = DemoRenderer::m_SpotLight->GetAttenuationLinear();
-		float tmp_quadratic = DemoRenderer::m_SpotLight->GetAttenuationQuadratic();
+		float tmp_constant = WorldRenderer::m_SpotLight->GetAttenuationConstant();
+		float tmp_linear = WorldRenderer::m_SpotLight->GetAttenuationLinear();
+		float tmp_quadratic = WorldRenderer::m_SpotLight->GetAttenuationQuadratic();
 		SetVec3("spotLight.lightPos", tmp_spotPos);
 		SetVec4("spotLight.lightColor", tmp_spotColor);
 		SetVec3("spotLight.lightDir", tmp_spotDir);

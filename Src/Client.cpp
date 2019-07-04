@@ -6,6 +6,7 @@
 #include <LogUtility.h>
 #include <global.h>
 #include <GameWorld.h>
+#include <WorldRenderer.h>
 
 namespace Catherine
 {
@@ -19,6 +20,7 @@ namespace Catherine
 
 	bool Client::Initialize()
 	{
+		// low level API
 		bool tmp_deviceOK = CreateDevice();
 		if (!tmp_deviceOK)
 		{
@@ -26,6 +28,7 @@ namespace Catherine
 			return false;
 		}
 
+		// logic world
 		bool tmp_worldOK = CreateWorld();
 		if (!tmp_worldOK)
 		{
@@ -33,6 +36,7 @@ namespace Catherine
 			return false;
 		}
 
+		// render world
 		bool tmp_renderOK = CreateRenderer();
 		if (!tmp_renderOK)
 		{
@@ -40,8 +44,9 @@ namespace Catherine
 			return false;
 		}
 
-		// other initialize
-		// ...
+		// register world to renderer
+		m_WorldRenderer->RegisterWorld(m_GameWorld);
+		// m_WorldRenderer->RegisterWorld(m_EditorWorld);
 
 		return true;
 	}
@@ -51,7 +56,7 @@ namespace Catherine
 		// other uninitialize
 		// ...
 
-		m_Renderer->Uninitialize();
+		m_WorldRenderer->Uninitialize();
 		m_Device->Uninitialize();
 	}
 
@@ -87,17 +92,17 @@ namespace Catherine
 
 	void Client::UpdateLogic(float deltaTime)
 	{
-		m_World->Update(deltaTime);
+		m_GameWorld->Update(deltaTime);
 	}
 
 	void Client::UpdateRender(float deltaTime)
 	{
 		// before render
-		m_Renderer->PreRender();
+		m_WorldRenderer->PreRender();
 		// render
-		m_Renderer->Render();
+		m_WorldRenderer->Render();
 		// after render
-		m_Renderer->PostRender();
+		m_WorldRenderer->PostRender();
 	}
 
 	bool Client::CreateDevice()
@@ -124,19 +129,19 @@ namespace Catherine
 
 	bool Client::CreateWorld()
 	{
-		m_World = WorldFactory::Instance()->CreateGameWorld();
-		if (m_World == nullptr)
+		m_GameWorld = WorldFactory::Instance()->CreateGameWorld();
+		if (m_GameWorld == nullptr)
 		{
 			LogError("Create World Failed...");
 			return false;
 		}
 
-		bool tmp_initialized = m_World->Initialize();
+		bool tmp_initialized = m_GameWorld->Initialize();
 		if (!tmp_initialized)
 		{
 			LogError("World Initialize Failed...");
-			WorldFactory::Instance()->DeleteWorld(m_World);
-			m_World = nullptr;
+			WorldFactory::Instance()->DeleteWorld(m_GameWorld);
+			m_GameWorld = nullptr;
 			return false;
 		}
 
@@ -145,19 +150,19 @@ namespace Catherine
 
 	bool Client::CreateRenderer()
 	{
-		m_Renderer = RendererFactory::Instance()->CreateWorldRenderer();
-		if (m_Renderer == nullptr)
+		m_WorldRenderer = RendererFactory::Instance()->CreateWorldRenderer();
+		if (m_WorldRenderer == nullptr)
 		{
 			LogError("Create Render Failed...");
 			return false;
 		}
 
-		bool tmp_initialized = m_Renderer->Initialize();
+		bool tmp_initialized = m_WorldRenderer->Initialize();
 		if (!tmp_initialized)
 		{
 			LogError("Renderer Initialize Failed...");
-			RendererFactory::Instance()->DeleteRenderer(m_Renderer);
-			m_Renderer = nullptr;
+			RendererFactory::Instance()->DeleteRenderer(m_WorldRenderer);
+			m_WorldRenderer = nullptr;
 			return false;
 		}
 

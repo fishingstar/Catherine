@@ -1,20 +1,21 @@
-#include <DemoRenderer.h>
+#include <WorldRenderer.h>
 #include <Camera.h>
 #include <Light.h>
 #include <global.h>
 #include <string>
 #include <Model.h>
+#include <IWorld.h>
 
 namespace Catherine
 {
 	extern IDevice * g_Device;
 
-	ICamera * DemoRenderer::m_Camera = nullptr;
-	ILight * DemoRenderer::m_DirLight = nullptr;
-	ILight * DemoRenderer::m_PointLight[4] = { nullptr };
-	ILight * DemoRenderer::m_SpotLight = nullptr;
+	ICamera * WorldRenderer::m_Camera = nullptr;
+	ILight * WorldRenderer::m_DirLight = nullptr;
+	ILight * WorldRenderer::m_PointLight[4] = { nullptr };
+	ILight * WorldRenderer::m_SpotLight = nullptr;
 
-	bool DemoRenderer::Initialize()
+	bool WorldRenderer::Initialize()
 	{
 		m_Camera = new Camera();
 		m_Camera->SetPosition(glm::vec3(6.0f, 15.0f, 6.0f));
@@ -32,18 +33,29 @@ namespace Catherine
 		return true;
 	}
 
-	void DemoRenderer::Uninitialize()
+	void WorldRenderer::Uninitialize()
 	{
 
 	}
 
-	void DemoRenderer::PreRender()
+	void WorldRenderer::PreRender()
 	{
 
 	}
 
-	void DemoRenderer::Render()
+	void WorldRenderer::Render()
 	{
+		for (size_t i = 0; i < m_Worlds.size(); i++)
+		{
+			IWorld * tmp_world = m_Worlds[i];
+			tmp_world->Render();
+
+			const WorldContext * tmp_context = tmp_world->GetWorldContext();
+
+			// render
+			// ...
+		}
+
 		const glm::vec3 & tmp_color = m_Camera->GetClearColor();
 		g_Device->ClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);
 		g_Device->Clear();
@@ -51,12 +63,20 @@ namespace Catherine
 		m_Model->Render();
 	}
 
-	void DemoRenderer::PostRender()
+	void WorldRenderer::PostRender()
 	{
 
 	}
 
-	void DemoRenderer::CreateLights()
+	void WorldRenderer::RegisterWorld(IWorld * world)
+	{
+		if (world != nullptr)
+		{
+			m_Worlds.push_back(world);
+		}
+	}
+
+	void WorldRenderer::CreateLights()
 	{
 		m_DirLight = new Light();
 		m_DirLight->SetLightType(LightType::Directional);

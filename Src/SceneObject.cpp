@@ -10,6 +10,11 @@ namespace Catherine
 
 	}
 
+	void SceneObject::Render(WorldContext * context)
+	{
+
+	}
+
 	IComponent * SceneObject::GetComponent(ComponentKind kind)
 	{
 		IComponent * tmp_result = nullptr;

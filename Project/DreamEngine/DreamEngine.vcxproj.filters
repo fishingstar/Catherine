@@ -97,17 +97,11 @@
     <ClCompile Include="..\..\Src\TimeUtility.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\Renderer.cpp">
-      <Filter>Render\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\RendererFactory.cpp">
       <Filter>Render\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\OpenGLProgram.cpp">
       <Filter>Device\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\DemoRenderer.cpp">
-      <Filter>Render\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\global.cpp">
       <Filter>Global</Filter>
@@ -172,6 +166,9 @@
     <ClCompile Include="..\..\Src\CameraContext.cpp">
       <Filter>Render\Context</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\WorldRenderer.cpp">
+      <Filter>Render\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\const.h">
@@ -198,17 +195,11 @@
     <ClInclude Include="..\..\Src\IRenderer.h">
       <Filter>Render\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\Renderer.h">
-      <Filter>Render\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\RendererFactory.h">
       <Filter>Render\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\OpenGLProgram.h">
       <Filter>Device\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\DemoRenderer.h">
-      <Filter>Render\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\OpenGLTexture.h">
       <Filter>Device\OpenGL</Filter>
@@ -314,6 +305,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\CameraContext.h">
       <Filter>Render\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\WorldRenderer.h">
+      <Filter>Render\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

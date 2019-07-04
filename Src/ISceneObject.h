@@ -6,11 +6,13 @@
 namespace Catherine
 {
 	class IComponent;
+	class WorldContext;
 
 	class ISceneObject
 	{
 	public:
 		virtual void Update(float deltaTime) = 0;
+		virtual void Render(WorldContext * context) = 0;
 
 		virtual IComponent * GetComponent(ComponentKind kind) = 0;
 		virtual const std::vector<IComponent *> & GetComponents(ComponentKind kind) = 0;

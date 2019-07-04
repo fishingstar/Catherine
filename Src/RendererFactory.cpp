@@ -1,6 +1,5 @@
 #include <RendererFactory.h>
-#include <Renderer.h>
-#include <DemoRenderer.h>
+#include <WorldRenderer.h>
 
 namespace Catherine
 {
@@ -10,10 +9,9 @@ namespace Catherine
 		return &s_instance;
 	}
 
-	IRenderer * RendererFactory::CreateWorldRenderer()
+	WorldRenderer * RendererFactory::CreateWorldRenderer()
 	{
-		//IRenderer * tmp_renderer = new Renderer();
-		IRenderer * tmp_renderer = new DemoRenderer();
+		WorldRenderer * tmp_renderer = new WorldRenderer();
 		return tmp_renderer;
 	}
 

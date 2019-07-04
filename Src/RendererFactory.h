@@ -3,13 +3,14 @@
 namespace Catherine
 {
 	class IRenderer;
+	class WorldRenderer;
 
 	class RendererFactory
 	{
 	public:
 		static RendererFactory * Instance();
 
-		IRenderer * CreateWorldRenderer();
+		WorldRenderer * CreateWorldRenderer();
 		void DeleteRenderer(IRenderer * renderer);
 
 	private:

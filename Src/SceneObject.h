@@ -9,6 +9,7 @@ namespace Catherine
 	{
 	public:
 		virtual void Update(float deltaTime) override;
+		virtual void Render(WorldContext * context) override;
 
 		virtual IComponent * GetComponent(ComponentKind kind) override;
 		virtual const std::vector<IComponent *> & GetComponents(ComponentKind kind) override;

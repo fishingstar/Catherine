@@ -4,7 +4,7 @@ namespace Catherine
 {
 	class IDevice;
 	class IWorld;
-	class IRenderer;
+	class WorldRenderer;
 
 	class Client
 	{
@@ -30,8 +30,16 @@ namespace Catherine
 		void UpdateRender(float deltaTime);
 
 	private:
+		// device interface
 		IDevice * m_Device = nullptr;
-		IWorld * m_World = nullptr;
-		IRenderer * m_Renderer = nullptr;
+
+		// editor world
+		// EditorWorld * m_EditorWorld = nullptr;
+		
+		// game world
+		IWorld * m_GameWorld = nullptr;
+
+		// world renderer
+		WorldRenderer * m_WorldRenderer = nullptr;
 	};
 }

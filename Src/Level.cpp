@@ -41,4 +41,9 @@ namespace Catherine
 	{
 
 	}
+
+	void Level::Render(WorldContext * context)
+	{
+
+	}
 }

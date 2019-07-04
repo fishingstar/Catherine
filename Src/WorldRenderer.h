@@ -1,15 +1,18 @@
 #pragma once
 
 #include <IRenderer.h>
+#include <vector>
 
 namespace Catherine
 {
+	class IWorld;
+	// temp
 	class ICamera;
 	class ILight;
 	class IMaterial;
 	class IModel;
 
-	class DemoRenderer : public IRenderer
+	class WorldRenderer : public IRenderer
 	{
 	public:
 		virtual bool Initialize() override;
@@ -19,10 +22,15 @@ namespace Catherine
 		virtual void Render() override;
 		virtual void PostRender() override;
 
+	public:
+		void RegisterWorld(IWorld * world);
+
 	private:
 		void CreateLights();
 
 	public:
+		std::vector<IWorld *> m_Worlds;
+
 		// camera应该是world里的概念，这里为了demo测试
 		static ICamera * m_Camera;
 		
