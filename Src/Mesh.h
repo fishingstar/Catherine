@@ -12,7 +12,7 @@ namespace Catherine
 	{
 	public:
 		virtual void Initialize(const std::vector<Vertex> & vertex, const std::vector<unsigned int> & index) override;
-		virtual void Render() override;
+		virtual void Render(WorldContext * context) override;
 
 	private:
 		void SetupBuffers(const std::vector<Vertex> & vertex, const std::vector<unsigned int> & index);

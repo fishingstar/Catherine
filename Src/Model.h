@@ -16,7 +16,7 @@ namespace Catherine
 	{
 	public:
 		virtual void LoadFromFile(const char * path) override;
-		virtual void Render() override;
+		virtual void Render(WorldContext * context) override;
 
 	private:
 		void ProcessNode(aiNode * node, const aiScene * scene);

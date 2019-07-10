@@ -13,21 +13,6 @@ namespace Catherine
 	void OpenGLVertexBuffer::Bind()
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, m_Resource);
-
-		for (size_t i = 0; i < m_Attributes.size(); i++)
-		{
-			const AttributeLayout & tmp_attribute = m_Attributes[i];
-
-			glEnableVertexAttribArray(tmp_attribute.GetIndex());
-			glVertexAttribPointer(
-				tmp_attribute.GetIndex(),
-				tmp_attribute.GetCount(),
-				OpenGLCommon::GetOpenGLType(tmp_attribute.GetValueType()),
-				tmp_attribute.GetNormalized(),
-				tmp_attribute.GetStride(),
-				(void *)tmp_attribute.GetOffset()
-			);
-		}
 	}
 
 	void OpenGLVertexBuffer::CreateVertexBufferImp(size_t size, unsigned int usage, const void * data, const std::vector<AttributeLayout> & attributes)

@@ -137,13 +137,13 @@ namespace Catherine
 		return tmp_texture;
 	}
 
-	void Model::Render()
+	void Model::Render(WorldContext * context)
 	{
 		for (size_t i = 0; i < m_Meshes.size(); i++)
 		{
 			m_Materials[i]->SetCommonUniform();
 			m_Materials[i]->Use();
-			m_Meshes[i]->Render();
+			m_Meshes[i]->Render(context);
 		}
 	}
 }

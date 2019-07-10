@@ -2,9 +2,11 @@
 #include <Camera.h>
 #include <Light.h>
 #include <global.h>
-#include <string>
-#include <Model.h>
 #include <IWorld.h>
+#include <WorldContext.h>
+#include <RenderContext.h>
+#include <IMaterial.h>
+#include <IVertexArray.h>
 
 namespace Catherine
 {
@@ -24,9 +26,6 @@ namespace Catherine
 		m_Camera->SetClearColor(glm::vec3(0.2f, 0.3f, 0.4f));
 
 		CreateLights();
-
-		m_Model = new Model();
-		m_Model->LoadFromFile("./res/model/nanosuit/nanosuit.obj");
 
 		g_Device->SetFrontFace(FrontFaceMode::CounterClockwise);
 
@@ -48,21 +47,37 @@ namespace Catherine
 
 	void WorldRenderer::Render()
 	{
+		// TODO: pipeline
+		const glm::vec3 & tmp_color = m_Camera->GetClearColor();
+		g_Device->ClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);
+		g_Device->Clear();
+
 		for (size_t i = 0; i < m_Worlds.size(); i++)
 		{
 			// collect render context
 			m_Worlds[i]->Render();
 
-			// render command
+			// render commands
 			const WorldContext * tmp_context = m_Worlds[i]->GetWorldContext();
-			// ...
+			const std::vector<RenderContext *> & tmp_renderContexts = tmp_context->GetRenderContexts();
+			for (size_t i = 0; i < tmp_renderContexts.size(); i++)
+			{
+				RenderContext * tmp_renderContext = tmp_renderContexts[i];
+
+				// material
+				IMaterial * tmp_material = tmp_renderContext->GetMaterial();
+				tmp_material->SetCommonUniform();
+				tmp_material->Use();
+
+				// vertex
+				IVertexArray * tmp_vertexArray = tmp_renderContext->GetVertexArray();
+				tmp_vertexArray->Bind();
+
+				// draw command
+
+				tmp_vertexArray->UnBind();
+			}
 		}
-
-		const glm::vec3 & tmp_color = m_Camera->GetClearColor();
-		g_Device->ClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);
-		g_Device->Clear();
-
-		m_Model->Render();
 	}
 
 	void WorldRenderer::PostRender()

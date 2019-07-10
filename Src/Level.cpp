@@ -1,9 +1,12 @@
 #include <Level.h>
 #include <SceneObject.h>
 #include <TransformComponent.h>
+#include <Model.h>
 
 namespace Catherine
 {
+	Model * m_Model;
+
 	void Level::Initialize()
 	{
 		// camera
@@ -35,6 +38,9 @@ namespace Catherine
 		ISceneObject * tmp_object = new SceneObject();
 		tmp_object->AddComponent(new TransformComponent());
 		m_SceneObjects.push_back(tmp_object);
+
+		m_Model = new Model();
+		m_Model->LoadFromFile("./res/model/nanosuit/nanosuit.obj");
 	}
 
 	void Level::Update(float deltaTime)
@@ -44,6 +50,6 @@ namespace Catherine
 
 	void Level::Render(WorldContext * context)
 	{
-
+		m_Model->Render(context);
 	}
 }

@@ -13,7 +13,7 @@ namespace Catherine
 		SetupBuffers(vertex, index);
 	}
 
-	void Mesh::Render()
+	void Mesh::Render(WorldContext * context)
 	{
 		// TODO: change to command buffer while command function is finished
 		m_VertexArray->Bind();
