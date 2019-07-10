@@ -7,7 +7,6 @@
 #include <RenderContext.h>
 #include <IMaterial.h>
 #include <IVertexArray.h>
-#include <glad/glad.h>
 
 namespace Catherine
 {
@@ -75,7 +74,7 @@ namespace Catherine
 				tmp_vertexArray->Bind();
 
 				// draw command
-				glDrawElements(GL_TRIANGLES, tmp_vertexArray->GetIndexCount(), GL_UNSIGNED_INT, 0);
+				g_Device->DrawElement(DrawMode::TRIANGLES, tmp_vertexArray->GetIndexCount(), ValueType::UInt, 0);
 
 				tmp_vertexArray->UnBind();
 			}

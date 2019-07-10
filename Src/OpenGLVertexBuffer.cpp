@@ -3,7 +3,7 @@
 
 namespace Catherine
 {
-	OpenGLVertexBuffer::OpenGLVertexBuffer(size_t size, unsigned int usage, const void * data, const std::vector<AttributeLayout> & attributes) :
+	OpenGLVertexBuffer::OpenGLVertexBuffer(size_t size, Usage usage, const void * data, const std::vector<AttributeLayout> & attributes) :
 		IVertexBuffer(size, usage),
 		m_Attributes(attributes)
 	{
@@ -15,11 +15,11 @@ namespace Catherine
 		glBindBuffer(GL_ARRAY_BUFFER, m_Resource);
 	}
 
-	void OpenGLVertexBuffer::CreateVertexBufferImp(size_t size, unsigned int usage, const void * data, const std::vector<AttributeLayout> & attributes)
+	void OpenGLVertexBuffer::CreateVertexBufferImp(size_t size, Usage usage, const void * data, const std::vector<AttributeLayout> & attributes)
 	{
 		glGenBuffers(1, &m_Resource);
 		glBindBuffer(GL_ARRAY_BUFFER, m_Resource);
-		glBufferData(GL_ARRAY_BUFFER, size, data, usage);
+		glBufferData(GL_ARRAY_BUFFER, size, data, OpenGLCommon::GetOpenGLUsage(usage));
 
 		for (size_t i = 0; i < attributes.size(); i++)
 		{

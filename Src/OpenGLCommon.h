@@ -12,6 +12,8 @@ namespace Catherine
 		static GLenum GetOpenGLCullFaceMode(CullFaceMode mode);
 		static GLenum GetOpenGLDepthTestMode(DepthTestMode mode);
 		static GLenum GetOpenGLType(ValueType type);
+		static GLenum GetOpenGLDrawMode(DrawMode mode);
+		static GLenum GetOpenGLUsage(Usage mode);
 
 	private:
 		OpenGLCommon() { }

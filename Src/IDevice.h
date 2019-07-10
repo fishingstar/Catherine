@@ -21,9 +21,9 @@ namespace Catherine
 		virtual void OnFrameBegin() = 0;
 		virtual void OnFrameEnd() = 0;
 
+		// state
 		virtual void ClearColor(float red, float green, float blue, float alpha) = 0;
-		virtual void Clear() = 0;
-
+		
 		virtual void SetFrontFace(FrontFaceMode mode) = 0;
 
 		virtual void EnableDepthTest(bool enabled) = 0;
@@ -32,8 +32,14 @@ namespace Catherine
 		virtual void EnableCullFace(bool enabled) = 0;
 		virtual void SetCullFaceMode(CullFaceMode mode) = 0;
 
+		// buffer
 		virtual IVertexArray * CreateVertexArray() = 0;
-		virtual IVertexBuffer * CreateVertexBuffer(size_t size, unsigned int usage, const void * data, const std::vector<AttributeLayout> & attributes) = 0;
-		virtual IIndexBuffer * CreateIndexBuffer(unsigned int stride, size_t size, unsigned int usage, const void * data) = 0;
+		virtual IVertexBuffer * CreateVertexBuffer(size_t size, Usage usage, const void * data, const std::vector<AttributeLayout> & attributes) = 0;
+		virtual IIndexBuffer * CreateIndexBuffer(unsigned int stride, size_t size, Usage usage, const void * data) = 0;
+
+		// draw
+		virtual void Clear() = 0;
+
+		virtual void DrawElement(DrawMode mode, size_t count, ValueType type, size_t offset) = 0;
 	};
 }

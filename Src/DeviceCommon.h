@@ -33,6 +33,7 @@ namespace Catherine
 	{
 		Float,
 		Int,
+		UInt,
 		Vec2f,
 		Vec3f,
 		Vec4f,
@@ -42,5 +43,17 @@ namespace Catherine
 		Mat2,
 		Mat3,
 		Mat4,
+	};
+
+	enum class DrawMode
+	{
+		TRIANGLES,
+	};
+
+	enum class Usage
+	{
+		Static_Draw,
+		Stream_Draw,
+		Dynamic_Draw,
 	};
 }

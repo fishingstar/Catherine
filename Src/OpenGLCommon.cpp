@@ -33,6 +33,7 @@ namespace Catherine
 	{
 		{ ValueType::Float,	GL_FLOAT },
 		{ ValueType::Int,	GL_INT },
+		{ ValueType::UInt,	GL_UNSIGNED_INT },
 		{ ValueType::Vec2f, GL_FLOAT_VEC2 },
 		{ ValueType::Vec3f, GL_FLOAT_VEC3 },
 		{ ValueType::Vec4f, GL_FLOAT_VEC4 },
@@ -42,6 +43,18 @@ namespace Catherine
 		{ ValueType::Mat2,	GL_FLOAT_MAT4 },
 		{ ValueType::Mat3,	GL_FLOAT_MAT3 },
 		{ ValueType::Mat4,	GL_FLOAT_MAT4 },
+	};
+
+	std::vector<std::pair<DrawMode, GLenum>> OpenGLDrawMode =
+	{
+		{ DrawMode::TRIANGLES, GL_TRIANGLES }
+	};
+
+	std::vector<std::pair<Usage, GLenum>> OpenGLUsage =
+	{
+		{ Usage::Static_Draw, GL_STATIC_DRAW},
+		{ Usage::Stream_Draw, GL_STREAM_DRAW },
+		{ Usage::Dynamic_Draw, GL_DYNAMIC_DRAW }
 	};
 
 	template<typename type>
@@ -79,5 +92,15 @@ namespace Catherine
 	GLenum OpenGLCommon::GetOpenGLType(ValueType type)
 	{
 		return GetOpenGLDefines(OpenGLValueType, type);
+	}
+
+	GLenum OpenGLCommon::GetOpenGLDrawMode(DrawMode mode)
+	{
+		return GetOpenGLDefines(OpenGLDrawMode, mode);
+	}
+
+	GLenum OpenGLCommon::GetOpenGLUsage(Usage mode)
+	{
+		return GetOpenGLDefines(OpenGLUsage, mode);
 	}
 }

@@ -60,11 +60,6 @@ namespace Catherine
 		glClearColor(red, green, blue, alpha);
 	}
 
-	void OpenGLDevice::Clear()
-	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	}
-
 	void OpenGLDevice::SetFrontFace(FrontFaceMode mode)
 	{
 		GLenum tmp_mode = OpenGLCommon::GetOpenGLFrontFaceMode(mode);
@@ -105,16 +100,28 @@ namespace Catherine
 		return tmp_array;
 	}
 
-	IVertexBuffer * OpenGLDevice::CreateVertexBuffer(size_t size, unsigned int usage, const void * data, const std::vector<AttributeLayout> & attributes)
+	IVertexBuffer * OpenGLDevice::CreateVertexBuffer(size_t size, Usage usage, const void * data, const std::vector<AttributeLayout> & attributes)
 	{
 		OpenGLVertexBuffer * tmp_buffer = new OpenGLVertexBuffer(size, usage, data, attributes);
 		return tmp_buffer;
 	}
 
-	IIndexBuffer * OpenGLDevice::CreateIndexBuffer(unsigned int stride, size_t size, unsigned int usage, const void * data)
+	IIndexBuffer * OpenGLDevice::CreateIndexBuffer(unsigned int stride, size_t size, Usage usage, const void * data)
 	{
 		OpenGLIndexBuffer * tmp_buffer = new OpenGLIndexBuffer(stride, size, usage, data);
 		return tmp_buffer;
+	}
+
+	void OpenGLDevice::Clear()
+	{
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	}
+
+	void OpenGLDevice::DrawElement(DrawMode mode, size_t count, ValueType type, size_t offset)
+	{
+		GLenum tmp_drawMode = OpenGLCommon::GetOpenGLDrawMode(mode);
+		GLenum tmp_valueType = OpenGLCommon::GetOpenGLType(type);
+		glDrawElements(tmp_drawMode, count, tmp_valueType, (void *)offset);
 	}
 
 	void OpenGLDevice::OnFrameBegin()
