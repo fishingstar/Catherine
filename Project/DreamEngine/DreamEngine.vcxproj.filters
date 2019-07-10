@@ -139,9 +139,6 @@
     <ClCompile Include="..\..\Src\Model.cpp">
       <Filter>World\Model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\VertexLayout.cpp">
-      <Filter>Device\Common</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\Level.cpp">
       <Filter>World\Level</Filter>
     </ClCompile>
@@ -168,6 +165,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\WorldRenderer.cpp">
       <Filter>Render\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\OpenGLIndexBuffer.cpp">
+      <Filter>Device\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\OpenGLVertexBuffer.cpp">
+      <Filter>Device\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -267,9 +270,6 @@
     <ClInclude Include="..\..\Src\Model.h">
       <Filter>World\Model</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\VertexLayout.h">
-      <Filter>Device\Common</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\ILevel.h">
       <Filter>World\Level</Filter>
     </ClInclude>
@@ -308,6 +308,21 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\WorldRenderer.h">
       <Filter>Render\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\IIndexBuffer.h">
+      <Filter>Device\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\IVertexBuffer.h">
+      <Filter>Device\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\OpenGLIndexBuffer.h">
+      <Filter>Device\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\OpenGLVertexBuffer.h">
+      <Filter>Device\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\OpenGLCommon.h">
+      <Filter>Device\OpenGL</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

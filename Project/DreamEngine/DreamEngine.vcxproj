@@ -135,6 +135,8 @@
     <ClCompile Include="..\..\Src\Camera.cpp" />
     <ClCompile Include="..\..\Src\CameraContext.cpp" />
     <ClCompile Include="..\..\Src\Client.cpp" />
+    <ClCompile Include="..\..\Src\OpenGLIndexBuffer.cpp" />
+    <ClCompile Include="..\..\Src\OpenGLVertexBuffer.cpp" />
     <ClCompile Include="..\..\Src\WorldRenderer.cpp" />
     <ClCompile Include="..\..\Src\DeviceFactory.cpp" />
     <ClCompile Include="..\..\Src\Level.cpp" />
@@ -159,7 +161,6 @@
     <ClCompile Include="..\..\Src\SceneObject.cpp" />
     <ClCompile Include="..\..\Src\TimeUtility.cpp" />
     <ClCompile Include="..\..\Src\TransformComponent.cpp" />
-    <ClCompile Include="..\..\Src\VertexLayout.cpp" />
     <ClCompile Include="..\..\Src\WorldContext.cpp" />
     <ClCompile Include="..\..\Src\WorldFactory.cpp" />
     <ClCompile Include="..\..\Src\XMLParser.cpp" />
@@ -170,6 +171,11 @@
     <ClInclude Include="..\..\Src\Client.h" />
     <ClInclude Include="..\..\Src\ComponentCommon.h" />
     <ClInclude Include="..\..\Src\const.h" />
+    <ClInclude Include="..\..\Src\IIndexBuffer.h" />
+    <ClInclude Include="..\..\Src\IVertexBuffer.h" />
+    <ClInclude Include="..\..\Src\OpenGLCommon.h" />
+    <ClInclude Include="..\..\Src\OpenGLIndexBuffer.h" />
+    <ClInclude Include="..\..\Src\OpenGLVertexBuffer.h" />
     <ClInclude Include="..\..\Src\WorldRenderer.h" />
     <ClInclude Include="..\..\Src\DeviceCommon.h" />
     <ClInclude Include="..\..\Src\DeviceFactory.h" />
@@ -207,7 +213,6 @@
     <ClInclude Include="..\..\Src\stb_image.h" />
     <ClInclude Include="..\..\Src\TimeUtility.h" />
     <ClInclude Include="..\..\Src\TransformComponent.h" />
-    <ClInclude Include="..\..\Src\VertexLayout.h" />
     <ClInclude Include="..\..\Src\WorldContext.h" />
     <ClInclude Include="..\..\Src\WorldFactory.h" />
     <ClInclude Include="..\..\Src\XMLParser.h" />

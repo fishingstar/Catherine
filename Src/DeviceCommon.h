@@ -28,4 +28,19 @@ namespace Catherine
 	};
 
 	using DepthTestMode = CompareMode;
+
+	enum class ValueType
+	{
+		Float,
+		Int,
+		Vec2f,
+		Vec3f,
+		Vec4f,
+		Vec2i,
+		Vec3i,
+		Vec4i,
+		Mat2x2,
+		Mat3x3,
+		Mat4x4,
+	};
 }
