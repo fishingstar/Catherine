@@ -172,6 +172,12 @@
     <ClCompile Include="..\..\Src\OpenGLVertexBuffer.cpp">
       <Filter>Device\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\OpenGLCommon.cpp">
+      <Filter>Device\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\OpenGLVertexArray.cpp">
+      <Filter>Device\OpenGL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\const.h">
@@ -322,6 +328,15 @@
       <Filter>Device\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\OpenGLCommon.h">
+      <Filter>Device\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\AttributeLayout.h">
+      <Filter>Device\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\IVertexArray.h">
+      <Filter>Device\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\OpenGLVertexArray.h">
       <Filter>Device\OpenGL</Filter>
     </ClInclude>
   </ItemGroup>

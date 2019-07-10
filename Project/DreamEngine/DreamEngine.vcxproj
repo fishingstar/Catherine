@@ -135,7 +135,9 @@
     <ClCompile Include="..\..\Src\Camera.cpp" />
     <ClCompile Include="..\..\Src\CameraContext.cpp" />
     <ClCompile Include="..\..\Src\Client.cpp" />
+    <ClCompile Include="..\..\Src\OpenGLCommon.cpp" />
     <ClCompile Include="..\..\Src\OpenGLIndexBuffer.cpp" />
+    <ClCompile Include="..\..\Src\OpenGLVertexArray.cpp" />
     <ClCompile Include="..\..\Src\OpenGLVertexBuffer.cpp" />
     <ClCompile Include="..\..\Src\WorldRenderer.cpp" />
     <ClCompile Include="..\..\Src\DeviceFactory.cpp" />
@@ -166,15 +168,18 @@
     <ClCompile Include="..\..\Src\XMLParser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Src\AttributeLayout.h" />
     <ClInclude Include="..\..\Src\Camera.h" />
     <ClInclude Include="..\..\Src\CameraContext.h" />
     <ClInclude Include="..\..\Src\Client.h" />
     <ClInclude Include="..\..\Src\ComponentCommon.h" />
     <ClInclude Include="..\..\Src\const.h" />
     <ClInclude Include="..\..\Src\IIndexBuffer.h" />
+    <ClInclude Include="..\..\Src\IVertexArray.h" />
     <ClInclude Include="..\..\Src\IVertexBuffer.h" />
     <ClInclude Include="..\..\Src\OpenGLCommon.h" />
     <ClInclude Include="..\..\Src\OpenGLIndexBuffer.h" />
+    <ClInclude Include="..\..\Src\OpenGLVertexArray.h" />
     <ClInclude Include="..\..\Src\OpenGLVertexBuffer.h" />
     <ClInclude Include="..\..\Src\WorldRenderer.h" />
     <ClInclude Include="..\..\Src\DeviceCommon.h" />

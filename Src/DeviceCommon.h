@@ -39,8 +39,8 @@ namespace Catherine
 		Vec2i,
 		Vec3i,
 		Vec4i,
-		Mat2x2,
-		Mat3x3,
-		Mat4x4,
+		Mat2,
+		Mat3,
+		Mat4,
 	};
 }

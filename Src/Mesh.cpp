@@ -1,5 +1,7 @@
 #include <Mesh.h>
 #include <glad/glad.h>
+#include <global.h>
+#include <IVertexArray.h>
 
 namespace Catherine
 {
@@ -13,41 +15,24 @@ namespace Catherine
 
 	void Mesh::Render()
 	{
-		glBindVertexArray(m_VAO);
+		m_VertexArray->Bind();
 		glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
+		m_VertexArray->UnBind();
 	}
 
 	void Mesh::SetupBuffers(const std::vector<Vertex> & vertex, const std::vector<unsigned int> & index)
 	{
-		glGenVertexArrays(1, &m_VAO);
-		glGenBuffers(1, &m_VBO);
-		glGenBuffers(1, &m_IBO);
+		m_VertexArray = g_Device->CreateVertexArray();
 
-		// vertex array ->
-		glBindVertexArray(m_VAO);
+		m_VertexArray->Bind();
 
-		// vertex attribute
-		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertex.size(), &vertex[0], GL_STATIC_DRAW);
+		std::vector<AttributeLayout> tmp_attributes;
+		tmp_attributes.emplace_back(0, 3, ValueType::Float, false, sizeof(Vertex), 0);
+		tmp_attributes.emplace_back(1, 3, ValueType::Float, false, sizeof(Vertex), 3 * sizeof(float));
+		tmp_attributes.emplace_back(2, 2, ValueType::Float, false, sizeof(Vertex), 6 * sizeof(float));
+		m_VertexBuffer = g_Device->CreateVertexBuffer(sizeof(Vertex) * vertex.size(), GL_STATIC_DRAW, &vertex[0], tmp_attributes);
+		m_IndexBuffer = g_Device->CreateIndexBuffer(4, sizeof(unsigned int) * index.size(), GL_STATIC_DRAW, &index[0]);
 
-		// vertex index
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * index.size(), &index[0], GL_STATIC_DRAW);
-
-		// position attribute
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)0);
-
-		// normal attribute
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)(3 * sizeof(float)));
-
-		// texcoord attribute
-		glEnableVertexAttribArray(2);
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)(6 * sizeof(float)));
-
-		// vertex array end <-
-		glBindVertexArray(0);
+		m_VertexArray->UnBind();
 	}
 }

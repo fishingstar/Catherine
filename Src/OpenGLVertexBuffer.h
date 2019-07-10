@@ -3,21 +3,24 @@
 #include <IVertexBuffer.h>
 #include <glad/glad.h>
 #include <DeviceCommon.h>
+#include <AttributeLayout.h>
+#include <vector>
 
 namespace Catherine
 {
 	class OpenGLVertexBuffer : public IVertexBuffer
 	{
 	public:
-		OpenGLVertexBuffer(unsigned int size, unsigned int usage, const void * data = nullptr);
+		OpenGLVertexBuffer(unsigned int size, unsigned int usage, const void * data, const std::vector<AttributeLayout> & attributes);
 
 		void Bind();
-		void AddAttribute(unsigned int index, unsigned int count, ValueType type, unsigned int stride, unsigned int offset);
 
 	private:
-		void CreateVertexBufferImp(unsigned int size, unsigned int usage, const void * data);
+		void CreateVertexBufferImp(unsigned int size, unsigned int usage, const void * data, const std::vector<AttributeLayout> & attributes);
 
 	private:
 		GLuint m_Resource;
+
+		std::vector<AttributeLayout> m_Attributes;
 	};
 }

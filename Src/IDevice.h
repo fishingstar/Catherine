@@ -1,9 +1,15 @@
 #pragma once
 
 #include <DeviceCommon.h>
+#include <vector>
+#include <AttributeLayout.h>
 
 namespace Catherine
 {
+	class IVertexArray;
+	class IIndexBuffer;
+	class IVertexBuffer;
+
 	class IDevice
 	{
 	public:
@@ -25,5 +31,9 @@ namespace Catherine
 		
 		virtual void EnableCullFace(bool enabled) = 0;
 		virtual void SetCullFaceMode(CullFaceMode mode) = 0;
+
+		virtual IVertexArray * CreateVertexArray() = 0;
+		virtual IVertexBuffer * CreateVertexBuffer(unsigned int size, unsigned int usage, const void * data, const std::vector<AttributeLayout> & attributes) = 0;
+		virtual IIndexBuffer * CreateIndexBuffer(unsigned int stride, unsigned int size, unsigned int usage, const void * data) = 0;
 	};
 }

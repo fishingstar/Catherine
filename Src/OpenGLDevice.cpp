@@ -2,6 +2,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <const.h>
+#include <OpenGLCommon.h>
+#include <OpenGLVertexArray.h>
+#include <OpenGLVertexBuffer.h>
+#include <OpenGLIndexBuffer.h>
 
 namespace Catherine
 {
@@ -63,19 +67,7 @@ namespace Catherine
 
 	void OpenGLDevice::SetFrontFace(FrontFaceMode mode)
 	{
-		GLenum tmp_mode = GL_CCW;
-		switch (mode)
-		{
-		case FrontFaceMode::Clockwise:
-			tmp_mode = GL_CW;
-			break;
-		case FrontFaceMode::CounterClockwise:
-			tmp_mode = GL_CCW;
-			break;
-		default:
-			tmp_mode = GL_CCW;
-			break;
-		}
+		GLenum tmp_mode = OpenGLCommon::GetOpenGLFrontFaceMode(mode);
 		glFrontFace(tmp_mode);
 	}
 
@@ -89,37 +81,7 @@ namespace Catherine
 
 	void OpenGLDevice::SetDepthTestMode(DepthTestMode mode)
 	{
-		GLenum tmp_mode = GL_LEQUAL;
-		switch (mode)
-		{
-		case DepthTestMode::Always:
-			tmp_mode = GL_ALWAYS;
-			break;
-		case DepthTestMode::Equal:
-			tmp_mode = GL_EQUAL;
-			break;
-		case DepthTestMode::Greater:
-			tmp_mode = GL_GREATER;
-			break;
-		case DepthTestMode::GreaterEqual:
-			tmp_mode = GL_GEQUAL;
-			break;
-		case DepthTestMode::Less:
-			tmp_mode = GL_LESS;
-			break;
-		case DepthTestMode::LessEqual:
-			tmp_mode = GL_LEQUAL;
-			break;
-		case DepthTestMode::Never:
-			tmp_mode = GL_NEVER;
-			break;
-		case DepthTestMode::NotEqual:
-			tmp_mode = GL_NOTEQUAL;
-			break;
-		default:
-			tmp_mode = GL_LEQUAL;
-			break;
-		}
+		GLenum tmp_mode = OpenGLCommon::GetOpenGLDepthTestMode(mode);
 		glDepthFunc(tmp_mode);
 	}
 
@@ -133,23 +95,26 @@ namespace Catherine
 
 	void OpenGLDevice::SetCullFaceMode(CullFaceMode mode)
 	{
-		GLenum tmp_mode = GL_BACK;
-		switch (mode)
-		{
-		case CullFaceMode::Back:
-			tmp_mode = GL_BACK;
-			break;
-		case CullFaceMode::Front:
-			tmp_mode = GL_FRONT;
-			break;
-		case CullFaceMode::Both:
-			tmp_mode = GL_FRONT_AND_BACK;
-			break;
-		default:
-			tmp_mode = GL_BACK;
-			break;
-		}
+		GLenum tmp_mode = OpenGLCommon::GetOpenGLCullFaceMode(mode);
 		glCullFace(tmp_mode);
+	}
+
+	IVertexArray * OpenGLDevice::CreateVertexArray()
+	{
+		OpenGLVertexArray * tmp_array = new OpenGLVertexArray();
+		return tmp_array;
+	}
+
+	IVertexBuffer * OpenGLDevice::CreateVertexBuffer(unsigned int size, unsigned int usage, const void * data, const std::vector<AttributeLayout> & attributes)
+	{
+		OpenGLVertexBuffer * tmp_buffer = new OpenGLVertexBuffer(size, usage, data, attributes);
+		return tmp_buffer;
+	}
+
+	IIndexBuffer * OpenGLDevice::CreateIndexBuffer(unsigned int stride, unsigned int size, unsigned int usage, const void * data)
+	{
+		OpenGLIndexBuffer * tmp_buffer = new OpenGLIndexBuffer(stride, size, usage, data);
+		return tmp_buffer;
 	}
 
 	void OpenGLDevice::OnFrameBegin()
