@@ -7,6 +7,8 @@
 #include <Mesh.h>
 #include <Material.h>
 #include <OpenGLTexture.h>
+#include <RenderContext.h>
+#include <WorldContext.h>
 
 namespace Catherine
 {
@@ -141,9 +143,9 @@ namespace Catherine
 	{
 		for (size_t i = 0; i < m_Meshes.size(); i++)
 		{
-			m_Materials[i]->SetCommonUniform();
-			m_Materials[i]->Use();
-			m_Meshes[i]->Render(context);
+			RenderContext * tmp_context = m_Meshes[i]->GetRenderContext();
+			tmp_context->SetMaterial(m_Materials[i]);
+			context->AddRenderContext(tmp_context);
 		}
 	}
 }

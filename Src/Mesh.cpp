@@ -2,23 +2,16 @@
 #include <glad/glad.h>
 #include <global.h>
 #include <IVertexArray.h>
+#include <RenderContext.h>
 
 namespace Catherine
 {
 	void Mesh::Initialize(const std::vector<Vertex> & vertex, const std::vector<unsigned int> & index)
 	{
-		m_VertexCount = vertex.size();
-		m_IndexCount = index.size();
-
 		SetupBuffers(vertex, index);
-	}
 
-	void Mesh::Render(WorldContext * context)
-	{
-		// TODO: change to command buffer while command function is finished
-		m_VertexArray->Bind();
-		glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_INT, 0);
-		m_VertexArray->UnBind();
+		m_Context = new RenderContext();
+		m_Context->SetVertexArray(m_VertexArray);
 	}
 
 	void Mesh::SetupBuffers(const std::vector<Vertex> & vertex, const std::vector<unsigned int> & index)
@@ -36,5 +29,8 @@ namespace Catherine
 		m_IndexBuffer = g_Device->CreateIndexBuffer(4, sizeof(unsigned int) * index.size(), GL_STATIC_DRAW, &index[0]);
 
 		m_VertexArray->UnBind();
+
+		m_VertexArray->SetVertexCount(vertex.size());
+		m_VertexArray->SetIndexCount(index.size());
 	}
 }

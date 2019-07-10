@@ -6,6 +6,7 @@
 namespace Catherine
 {
 	class WorldContext;
+	class RenderContext;
 
 	struct Vertex
 	{
@@ -18,6 +19,6 @@ namespace Catherine
 	{
 	public:
 		virtual void Initialize(const std::vector<Vertex> & vertex, const std::vector<unsigned int> & index) = 0;
-		virtual void Render(WorldContext * context) = 0;
+		virtual RenderContext * GetRenderContext() const = 0;
 	};
 }
