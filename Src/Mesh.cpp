@@ -15,6 +15,7 @@ namespace Catherine
 
 	void Mesh::Render()
 	{
+		// TODO: change to command buffer while command function is finished
 		m_VertexArray->Bind();
 		glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_INT, 0);
 		m_VertexArray->UnBind();
@@ -31,6 +32,7 @@ namespace Catherine
 		tmp_attributes.emplace_back(1, 3, ValueType::Float, false, sizeof(Vertex), 3 * sizeof(float));
 		tmp_attributes.emplace_back(2, 2, ValueType::Float, false, sizeof(Vertex), 6 * sizeof(float));
 		m_VertexBuffer = g_Device->CreateVertexBuffer(sizeof(Vertex) * vertex.size(), GL_STATIC_DRAW, &vertex[0], tmp_attributes);
+		// only support 4 byte(32bit) stride index for now, 2 byte(16bit) in the future
 		m_IndexBuffer = g_Device->CreateIndexBuffer(4, sizeof(unsigned int) * index.size(), GL_STATIC_DRAW, &index[0]);
 
 		m_VertexArray->UnBind();

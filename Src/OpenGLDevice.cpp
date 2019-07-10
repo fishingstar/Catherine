@@ -105,13 +105,13 @@ namespace Catherine
 		return tmp_array;
 	}
 
-	IVertexBuffer * OpenGLDevice::CreateVertexBuffer(unsigned int size, unsigned int usage, const void * data, const std::vector<AttributeLayout> & attributes)
+	IVertexBuffer * OpenGLDevice::CreateVertexBuffer(size_t size, unsigned int usage, const void * data, const std::vector<AttributeLayout> & attributes)
 	{
 		OpenGLVertexBuffer * tmp_buffer = new OpenGLVertexBuffer(size, usage, data, attributes);
 		return tmp_buffer;
 	}
 
-	IIndexBuffer * OpenGLDevice::CreateIndexBuffer(unsigned int stride, unsigned int size, unsigned int usage, const void * data)
+	IIndexBuffer * OpenGLDevice::CreateIndexBuffer(unsigned int stride, size_t size, unsigned int usage, const void * data)
 	{
 		OpenGLIndexBuffer * tmp_buffer = new OpenGLIndexBuffer(stride, size, usage, data);
 		return tmp_buffer;

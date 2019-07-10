@@ -11,12 +11,12 @@ namespace Catherine
 	class OpenGLVertexBuffer : public IVertexBuffer
 	{
 	public:
-		OpenGLVertexBuffer(unsigned int size, unsigned int usage, const void * data, const std::vector<AttributeLayout> & attributes);
+		OpenGLVertexBuffer(size_t size, unsigned int usage, const void * data, const std::vector<AttributeLayout> & attributes);
 
 		void Bind();
 
 	private:
-		void CreateVertexBufferImp(unsigned int size, unsigned int usage, const void * data, const std::vector<AttributeLayout> & attributes);
+		void CreateVertexBufferImp(size_t size, unsigned int usage, const void * data, const std::vector<AttributeLayout> & attributes);
 
 	private:
 		GLuint m_Resource;

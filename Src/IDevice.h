@@ -33,7 +33,7 @@ namespace Catherine
 		virtual void SetCullFaceMode(CullFaceMode mode) = 0;
 
 		virtual IVertexArray * CreateVertexArray() = 0;
-		virtual IVertexBuffer * CreateVertexBuffer(unsigned int size, unsigned int usage, const void * data, const std::vector<AttributeLayout> & attributes) = 0;
-		virtual IIndexBuffer * CreateIndexBuffer(unsigned int stride, unsigned int size, unsigned int usage, const void * data) = 0;
+		virtual IVertexBuffer * CreateVertexBuffer(size_t size, unsigned int usage, const void * data, const std::vector<AttributeLayout> & attributes) = 0;
+		virtual IIndexBuffer * CreateIndexBuffer(unsigned int stride, size_t size, unsigned int usage, const void * data) = 0;
 	};
 }

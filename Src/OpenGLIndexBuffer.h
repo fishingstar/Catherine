@@ -8,12 +8,12 @@ namespace Catherine
 	class OpenGLIndexBuffer : public IIndexBuffer
 	{
 	public:
-		OpenGLIndexBuffer(unsigned int stride, unsigned int size, unsigned int usage, const void * data = nullptr);
+		OpenGLIndexBuffer(unsigned int stride, size_t size, unsigned int usage, const void * data = nullptr);
 
 		void Bind();
 
 	private:
-		void CreateIndexBufferImp(unsigned int size, unsigned int usage, const void * data = nullptr);
+		void CreateIndexBufferImp(size_t size, unsigned int usage, const void * data = nullptr);
 
 	private:
 		GLuint m_Resource;
