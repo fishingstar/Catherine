@@ -8,6 +8,8 @@ namespace Catherine
 	class SceneObject : public ISceneObject
 	{
 	public:
+		SceneObject(ILevel * level) : ISceneObject(level) { }
+
 		virtual void Update(float deltaTime) override;
 		virtual void Render(WorldContext * context) override;
 

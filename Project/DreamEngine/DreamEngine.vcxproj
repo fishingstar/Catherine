@@ -135,6 +135,7 @@
     <ClCompile Include="..\..\Src\Camera.cpp" />
     <ClCompile Include="..\..\Src\CameraComponent.cpp" />
     <ClCompile Include="..\..\Src\CameraContext.cpp" />
+    <ClCompile Include="..\..\Src\CameraManager.cpp" />
     <ClCompile Include="..\..\Src\Client.cpp" />
     <ClCompile Include="..\..\Src\LightComponent.cpp" />
     <ClCompile Include="..\..\Src\MeshFilter.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="..\..\Src\Camera.h" />
     <ClInclude Include="..\..\Src\CameraComponent.h" />
     <ClInclude Include="..\..\Src\CameraContext.h" />
+    <ClInclude Include="..\..\Src\CameraManager.h" />
     <ClInclude Include="..\..\Src\Client.h" />
     <ClInclude Include="..\..\Src\ComponentCommon.h" />
     <ClInclude Include="..\..\Src\const.h" />

@@ -3,6 +3,7 @@
 namespace Catherine
 {
 	class WorldContext;
+	class CameraManager;
 
 	class IWorld
 	{
@@ -15,5 +16,6 @@ namespace Catherine
 		virtual void PostRender() = 0;
 
 		virtual const WorldContext * GetWorldContext() const = 0;
+		virtual CameraManager * GetCameraManager() const = 0;
 	};
 }

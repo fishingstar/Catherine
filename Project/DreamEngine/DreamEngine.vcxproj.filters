@@ -74,6 +74,9 @@
     <Filter Include="Utility\Time">
       <UniqueIdentifier>{b7270f03-416d-4870-81e2-964a70fe0952}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World\Manager">
+      <UniqueIdentifier>{307e776d-3668-4d32-afb6-0c37ea5dcd55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\main.cpp">
@@ -186,6 +189,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\LightComponent.cpp">
       <Filter>World\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\CameraManager.cpp">
+      <Filter>World\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -353,6 +359,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\LightComponent.h">
       <Filter>World\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\CameraManager.h">
+      <Filter>World\Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

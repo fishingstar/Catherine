@@ -14,7 +14,10 @@ namespace Catherine
 		void AddRenderContext(RenderContext * context);
 		const std::vector<RenderContext *> & GetRenderContexts() const { return m_RenderContexts; }
 
+		const CameraContext * GetCameraContext() const { return m_CameraContext; }
 		void SetCameraContext(CameraContext * context) { m_CameraContext = context; }
+
+		const LightContext * GetLightContext() const { return m_LightContext; }
 		void SetLightContext(LightContext * context) { m_LightContext = context; }
 
 		void Clear();

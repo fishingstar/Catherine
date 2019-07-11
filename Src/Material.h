@@ -22,7 +22,7 @@ namespace Catherine
 		virtual void SetMat4x4(const char * key, const glm::mat4x4 & value) override;
 		virtual void SetTexture(const char * key, ITexture * value) override;
 
-		virtual void SetCommonUniform() override;
+		virtual void SetCommonUniform(const WorldContext * context) override;
 
 		virtual void Use() override;
 

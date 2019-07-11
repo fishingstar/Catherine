@@ -4,9 +4,12 @@
 #include <global.h>
 #include <IWorld.h>
 #include <WorldContext.h>
+#include <CameraContext.h>
+#include <LightContext.h>
 #include <RenderContext.h>
 #include <IMaterial.h>
 #include <IVertexArray.h>
+#include <glm/glm.hpp>
 
 namespace Catherine
 {
@@ -47,18 +50,21 @@ namespace Catherine
 
 	void WorldRenderer::Render()
 	{
-		// TODO: pipeline
-		const glm::vec3 & tmp_color = m_Camera->GetClearColor();
-		g_Device->ClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);
-		g_Device->Clear();
-
 		for (size_t i = 0; i < m_Worlds.size(); i++)
 		{
 			// collect render context
 			m_Worlds[i]->Render();
 
-			// render commands
+			// render world
 			const WorldContext * tmp_context = m_Worlds[i]->GetWorldContext();
+
+			// clear screen
+			const CameraContext * tmp_camera = tmp_context->GetCameraContext();
+			const glm::vec3 & tmp_color = tmp_camera->GetClearColor();
+			g_Device->ClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);
+			g_Device->Clear();
+
+			// render commands
 			const std::vector<RenderContext *> & tmp_renderContexts = tmp_context->GetRenderContexts();
 			for (size_t i = 0; i < tmp_renderContexts.size(); i++)
 			{
@@ -66,7 +72,7 @@ namespace Catherine
 
 				// material
 				IMaterial * tmp_material = tmp_renderContext->GetMaterial();
-				tmp_material->SetCommonUniform();
+				tmp_material->SetCommonUniform(tmp_context);
 				tmp_material->Use();
 
 				// vertex

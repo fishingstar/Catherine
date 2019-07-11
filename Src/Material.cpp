@@ -58,7 +58,7 @@ namespace Catherine
 		m_Textures.push_back(std::pair<unsigned int, ITexture *>(tmp_slot, value));
 	}
 
-	void Material::SetCommonUniform()
+	void Material::SetCommonUniform(const WorldContext * context)
 	{
 		const glm::vec3 & tmp_cameraPos = WorldRenderer::m_Camera->GetPosition();
 		const glm::mat4x4 & tmp_view = WorldRenderer::m_Camera->GetViewMatrix();

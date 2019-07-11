@@ -19,9 +19,11 @@ namespace Catherine
 		virtual void PostRender() override;
 
 		virtual const WorldContext * GetWorldContext() const override { return m_WorldContext; }
+		virtual CameraManager * GetCameraManager() const { return m_CameraManager; }
 
 	private:
 		WorldContext * m_WorldContext;
+		CameraManager * m_CameraManager;
 
 		std::vector<ILevel *> m_Levels;
 	};
