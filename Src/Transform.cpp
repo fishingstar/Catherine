@@ -1,49 +1,39 @@
-#include <TransformComponent.h>
+#include <Transform.h>
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Catherine
 {
-	void TransformComponent::Update(float deltaTime)
+	void Transform::Update(float deltaTime)
 	{
 		// logic
 	}
 
-	ISceneObject * TransformComponent::GetOwner() const
-	{
-		return m_Owner;
-	}
-
-	void TransformComponent::SetOwner(ISceneObject * owner)
-	{
-		m_Owner = owner;
-	}
-
-	ComponentKind TransformComponent::GetComponentKind() const
+	ComponentKind Transform::GetComponentKind() const
 	{
 		return ComponentKind::Transform;
 	}
 
-	TransformComponent * TransformComponent::GetParent() const
+	Transform * Transform::GetParent() const
 	{
 		return m_Parent;
 	}
 
-	TransformComponent * TransformComponent::GetChild(unsigned int index) const
+	Transform * Transform::GetChild(unsigned int index) const
 	{
 		return index < m_Children.size() ? m_Children[index] : nullptr;
 	}
 
-	unsigned int TransformComponent::GetChildCount() const
+	unsigned int Transform::GetChildCount() const
 	{
 		return (unsigned int)m_Children.size();
 	}
 
-	const glm::vec3 & TransformComponent::GetPosition() const
+	const glm::vec3 & Transform::GetPosition() const
 	{
 		return m_Position;
 	}
 
-	void TransformComponent::SetPosition(const glm::vec3 & position)
+	void Transform::SetPosition(const glm::vec3 & position)
 	{
 		if (position != m_Position)
 		{
@@ -52,12 +42,12 @@ namespace Catherine
 		}
 	}
 
-	const glm::vec3 & TransformComponent::GetRotation() const
+	const glm::vec3 & Transform::GetRotation() const
 	{
 		return m_Rotation;
 	}
 
-	void TransformComponent::SetRotation(const glm::vec3 & rotation)
+	void Transform::SetRotation(const glm::vec3 & rotation)
 	{
 		if (rotation != m_Rotation)
 		{
@@ -66,12 +56,12 @@ namespace Catherine
 		}
 	}
 
-	const glm::vec3 & TransformComponent::GetScale() const
+	const glm::vec3 & Transform::GetScale() const
 	{
 		return m_Scale;
 	}
 
-	void TransformComponent::SetScale(const glm::vec3 & scale)
+	void Transform::SetScale(const glm::vec3 & scale)
 	{
 		if (scale != m_Scale)
 		{
@@ -80,7 +70,7 @@ namespace Catherine
 		}
 	}
 
-	const glm::mat4 & TransformComponent::GetWorldMatrix()
+	const glm::mat4 & Transform::GetWorldMatrix()
 	{
 		if (m_WorldMatrixDirty)
 		{

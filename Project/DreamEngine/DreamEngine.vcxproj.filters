@@ -56,9 +56,6 @@
     <Filter Include="World\Light">
       <UniqueIdentifier>{9af75319-fc71-4ef2-83bf-338b66f61193}</UniqueIdentifier>
     </Filter>
-    <Filter Include="World\Model">
-      <UniqueIdentifier>{344aefee-6c1f-4257-a1da-7d9be8cba4f6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="World\Mesh">
       <UniqueIdentifier>{2e7b0b11-cf5c-4b12-8f4a-8d8b876b1bf0}</UniqueIdentifier>
     </Filter>
@@ -136,17 +133,11 @@
     <ClCompile Include="..\..\Src\Light.cpp">
       <Filter>World\Light</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\Model.cpp">
-      <Filter>World\Model</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\Level.cpp">
       <Filter>World\Level</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\SceneObject.cpp">
       <Filter>World\SceneObject</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\TransformComponent.cpp">
-      <Filter>World\Component</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\WorldFactory.cpp">
       <Filter>World\World</Filter>
@@ -177,6 +168,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\OpenGLVertexArray.cpp">
       <Filter>Device\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Transform.cpp">
+      <Filter>World\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\MeshRenderer.cpp">
+      <Filter>World\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\MeshFilter.cpp">
+      <Filter>World\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -270,12 +270,6 @@
     <ClInclude Include="..\..\Src\Light.h">
       <Filter>World\Light</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\IModel.h">
-      <Filter>World\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\Model.h">
-      <Filter>World\Model</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\ILevel.h">
       <Filter>World\Level</Filter>
     </ClInclude>
@@ -289,9 +283,6 @@
       <Filter>World\SceneObject</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\IComponent.h">
-      <Filter>World\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\TransformComponent.h">
       <Filter>World\Component</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\ComponentCommon.h">
@@ -338,6 +329,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\OpenGLVertexArray.h">
       <Filter>Device\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Transform.h">
+      <Filter>World\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\MeshRenderer.h">
+      <Filter>World\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\MeshFilter.h">
+      <Filter>World\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

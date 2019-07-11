@@ -6,19 +6,15 @@
 
 namespace Catherine
 {
-	class TransformComponent : public IComponent
+	class Transform : public IComponent
 	{
 	public:
 		virtual void Update(float deltaTime) override;
-
-		virtual ISceneObject * GetOwner() const override;
-		virtual void SetOwner(ISceneObject * owner) override;
-
 		virtual ComponentKind GetComponentKind() const override;
 
 	public:
-		TransformComponent * GetParent() const;
-		TransformComponent * GetChild(unsigned int index) const;
+		Transform * GetParent() const;
+		Transform * GetChild(unsigned int index) const;
 		unsigned int GetChildCount() const;
 
 		const glm::vec3 & GetPosition() const;
@@ -33,10 +29,8 @@ namespace Catherine
 		const glm::mat4 & GetWorldMatrix();
 
 	private:
-		ISceneObject * m_Owner = nullptr;
-
-		TransformComponent * m_Parent = nullptr;
-		std::vector<TransformComponent *> m_Children;
+		Transform * m_Parent = nullptr;
+		std::vector<Transform *> m_Children;
 
 		glm::vec3 m_Position = glm::vec3(0.0f, 0.0f, 0.0f);
 		glm::vec3 m_Rotation = glm::vec3(0.0f, 0.0f, 0.0f);

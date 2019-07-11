@@ -10,10 +10,13 @@ namespace Catherine
 	{
 	public:
 		virtual void Update(float deltaTime) = 0;
-		
-		virtual ISceneObject * GetOwner() const = 0;
-		virtual void SetOwner(ISceneObject * owner) = 0;
-
 		virtual ComponentKind GetComponentKind() const = 0;
+
+	public:
+		ISceneObject * GetOwner() const { return m_Owner; }
+		void SetOwner(ISceneObject * owner) { m_Owner = owner; }
+
+	private:
+		ISceneObject * m_Owner = nullptr;
 	};
 }

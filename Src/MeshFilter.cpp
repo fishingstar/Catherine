@@ -1,4 +1,4 @@
-#include <Model.h>
+#include <MeshFilter.h>
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
@@ -7,12 +7,20 @@
 #include <Mesh.h>
 #include <Material.h>
 #include <OpenGLTexture.h>
-#include <RenderContext.h>
-#include <WorldContext.h>
 
 namespace Catherine
 {
-	void Model::LoadFromFile(const char * path)
+	void MeshFilter::Update(float deltaTime)
+	{
+		// do some update logic
+	}
+
+	ComponentKind MeshFilter::GetComponentKind() const
+	{
+		return ComponentKind::MeshFilter;
+	}
+
+	void MeshFilter::LoadFromFile(const char * path)
 	{
 		m_Path = FileUtility::GetDictionary(path);
 
@@ -28,7 +36,7 @@ namespace Catherine
 		ProcessNode(tmp_scene->mRootNode, tmp_scene);
 	}
 
-	void Model::ProcessNode(aiNode * node, const aiScene * scene)
+	void MeshFilter::ProcessNode(aiNode * node, const aiScene * scene)
 	{
 		for (unsigned int i = 0; i < node->mNumMeshes; i++)
 		{
@@ -48,7 +56,7 @@ namespace Catherine
 		}
 	}
 
-	IMesh * Model::ProcessMesh(aiMesh * mesh, const aiScene * scene)
+	IMesh * MeshFilter::ProcessMesh(aiMesh * mesh, const aiScene * scene)
 	{
 		std::vector<Vertex> tmp_vertexArray;
 		std::vector<unsigned int> tmp_indexArray;
@@ -63,14 +71,14 @@ namespace Catherine
 				tmp_vertex.Position.y = mesh->mVertices[i].y;
 				tmp_vertex.Position.z = mesh->mVertices[i].z;
 			}
-			
+
 			if (mesh->HasNormals())
 			{
 				tmp_vertex.Normal.x = mesh->mNormals[i].x;
 				tmp_vertex.Normal.y = mesh->mNormals[i].y;
 				tmp_vertex.Normal.z = mesh->mNormals[i].z;
 			}
-			
+
 			if (mesh->HasTextureCoords(0))
 			{
 				tmp_vertex.Texcoord.x = mesh->mTextureCoords[0][i].x;
@@ -95,7 +103,7 @@ namespace Catherine
 		return tmp_mesh;
 	}
 
-	IMaterial * Model::ProcessMaterial(aiMaterial * material)
+	IMaterial * MeshFilter::ProcessMaterial(aiMaterial * material)
 	{
 		IMaterial * tmp_material = new Material();
 		tmp_material->Initialize(nullptr);
@@ -105,7 +113,7 @@ namespace Catherine
 		{
 			tmp_material->SetTexture("diffuse", tmp_diffuse);
 		}
-		
+
 		ITexture * tmp_normal = ProcessTexture(material, aiTextureType_NORMALS);
 		if (tmp_normal)
 		{
@@ -115,7 +123,7 @@ namespace Catherine
 		return tmp_material;
 	}
 
-	ITexture * Model::ProcessTexture(aiMaterial * material, aiTextureType type)
+	ITexture * MeshFilter::ProcessTexture(aiMaterial * material, aiTextureType type)
 	{
 		if (material->GetTextureCount(type) == 0)
 			return 0;
@@ -137,15 +145,5 @@ namespace Catherine
 		}
 
 		return tmp_texture;
-	}
-
-	void Model::Render(WorldContext * context)
-	{
-		for (size_t i = 0; i < m_Meshes.size(); i++)
-		{
-			RenderContext * tmp_context = m_Meshes[i]->GetRenderContext();
-			tmp_context->SetMaterial(m_Materials[i]);
-			context->AddRenderContext(tmp_context);
-		}
 	}
 }

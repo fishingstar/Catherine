@@ -14,6 +14,7 @@ namespace Catherine
 	public:
 		virtual void Initialize(const std::vector<Vertex> & vertex, const std::vector<unsigned int> & index) override;
 		virtual RenderContext * GetRenderContext() const { return m_Context; }
+		virtual IVertexArray * GetVertexArray() const { return m_VertexArray; }
 
 	private:
 		void SetupBuffers(const std::vector<Vertex> & vertex, const std::vector<unsigned int> & index);
