@@ -10,6 +10,8 @@ namespace Catherine
 
 	void Level::Initialize()
 	{
+		// TODO : add objects manually, because of no level config file supported now...
+
 		// camera
 		ISceneObject * tmp_camera = new SceneObject();
 		tmp_camera->AddComponent(new Transform());

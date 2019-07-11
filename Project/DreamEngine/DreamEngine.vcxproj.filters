@@ -11,9 +11,6 @@
     <Filter Include="Device\OpenGL">
       <UniqueIdentifier>{5ed87e3a-f485-4845-bb9b-dccad9cb8c60}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Log">
-      <UniqueIdentifier>{6336bca8-a86a-4b5b-b948-a297626a7837}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Global">
       <UniqueIdentifier>{161c7e26-1658-4275-a9b6-746824c0fab4}</UniqueIdentifier>
     </Filter>
@@ -71,6 +68,12 @@
     <Filter Include="Render\Context">
       <UniqueIdentifier>{1d8d50ae-ce4c-45ed-8c66-45b62b7bcdfe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utility\Log">
+      <UniqueIdentifier>{6336bca8-a86a-4b5b-b948-a297626a7837}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility\Time">
+      <UniqueIdentifier>{b7270f03-416d-4870-81e2-964a70fe0952}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\main.cpp">
@@ -80,19 +83,13 @@
       <Filter>Device\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\log.cpp">
-      <Filter>Log</Filter>
+      <Filter>Utility\Log</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\OpenGLDevice.cpp">
       <Filter>Device\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\Client.cpp">
       <Filter>Client</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\LogUtility.cpp">
-      <Filter>Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\TimeUtility.cpp">
-      <Filter>Utility</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\RendererFactory.cpp">
       <Filter>Render\Renderer</Filter>
@@ -178,13 +175,25 @@
     <ClCompile Include="..\..\Src\MeshFilter.cpp">
       <Filter>World\Component</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\LogUtility.cpp">
+      <Filter>Utility\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\TimeUtility.cpp">
+      <Filter>Utility\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\CameraComponent.cpp">
+      <Filter>World\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\LightComponent.cpp">
+      <Filter>World\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\const.h">
       <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\log.h">
-      <Filter>Log</Filter>
+      <Filter>Utility\Log</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\OpenGLDevice.h">
       <Filter>Device\OpenGL</Filter>
@@ -194,12 +203,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Client.h">
       <Filter>Client</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\LogUtility.h">
-      <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\TimeUtility.h">
-      <Filter>Utility</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\IRenderer.h">
       <Filter>Render\Renderer</Filter>
@@ -337,6 +340,18 @@
       <Filter>World\Component</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\MeshFilter.h">
+      <Filter>World\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\LogUtility.h">
+      <Filter>Utility\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\TimeUtility.h">
+      <Filter>Utility\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\CameraComponent.h">
+      <Filter>World\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\LightComponent.h">
       <Filter>World\Component</Filter>
     </ClInclude>
   </ItemGroup>

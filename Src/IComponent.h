@@ -9,7 +9,11 @@ namespace Catherine
 	class IComponent
 	{
 	public:
+		virtual void OnAddComponent(ISceneObject * owner) = 0;
+		virtual void OnRemoveComponent(ISceneObject * owner) = 0;
+
 		virtual void Update(float deltaTime) = 0;
+
 		virtual ComponentKind GetComponentKind() const = 0;
 
 	public:

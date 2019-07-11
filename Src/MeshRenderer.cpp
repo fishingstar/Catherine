@@ -8,6 +8,16 @@
 
 namespace Catherine
 {
+	void MeshRenderer::OnAddComponent(ISceneObject * owner)
+	{
+
+	}
+
+	void MeshRenderer::OnRemoveComponent(ISceneObject * owner)
+	{
+
+	}
+
 	void MeshRenderer::Update(float deltaTime)
 	{
 		// do some render update logic

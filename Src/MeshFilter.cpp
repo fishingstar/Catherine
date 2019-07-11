@@ -10,6 +10,16 @@
 
 namespace Catherine
 {
+	void MeshFilter::OnAddComponent(ISceneObject * owner)
+	{
+
+	}
+
+	void MeshFilter::OnRemoveComponent(ISceneObject * owner)
+	{
+
+	}
+
 	void MeshFilter::Update(float deltaTime)
 	{
 		// do some update logic

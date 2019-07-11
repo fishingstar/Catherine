@@ -3,6 +3,16 @@
 
 namespace Catherine
 {
+	void Transform::OnAddComponent(ISceneObject * owner)
+	{
+
+	}
+
+	void Transform::OnRemoveComponent(ISceneObject * owner)
+	{
+
+	}
+
 	void Transform::Update(float deltaTime)
 	{
 		// logic
