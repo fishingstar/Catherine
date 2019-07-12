@@ -4,7 +4,6 @@
 #include <RendererFactory.h>
 #include <IRenderer.h>
 #include <LogUtility.h>
-#include <global.h>
 #include <GameWorld.h>
 #include <WorldRenderer.h>
 

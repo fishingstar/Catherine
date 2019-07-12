@@ -198,9 +198,6 @@
     <ClInclude Include="..\..\Src\OpenGLDevice.h">
       <Filter>Device\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\global.h">
-      <Filter>Global</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\Client.h">
       <Filter>Client</Filter>
     </ClInclude>

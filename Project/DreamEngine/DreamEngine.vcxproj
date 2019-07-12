@@ -198,7 +198,6 @@
     <ClInclude Include="..\..\Src\Light.h" />
     <ClInclude Include="..\..\Src\FileUtility.h" />
     <ClInclude Include="..\..\Src\GameWorld.h" />
-    <ClInclude Include="..\..\Src\global.h" />
     <ClInclude Include="..\..\Src\ILight.h" />
     <ClInclude Include="..\..\Src\IMaterial.h" />
     <ClInclude Include="..\..\Src\IMesh.h" />

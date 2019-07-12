@@ -1,6 +1,5 @@
 #include <WorldRenderer.h>
-#include <Light.h>
-#include <global.h>
+#include <IDevice.h>
 #include <IWorld.h>
 #include <WorldContext.h>
 #include <CameraContext.h>
@@ -9,6 +8,8 @@
 #include <IMaterial.h>
 #include <IVertexArray.h>
 #include <glm/glm.hpp>
+
+#include <Light.h>
 
 namespace Catherine
 {

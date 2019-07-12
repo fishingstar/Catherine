@@ -1,10 +1,12 @@
 #include <Mesh.h>
-#include <global.h>
+#include <IDevice.h>
 #include <IVertexArray.h>
 #include <RenderContext.h>
 
 namespace Catherine
 {
+	extern IDevice * g_Device;
+
 	void Mesh::Initialize(const std::vector<Vertex> & vertex, const std::vector<unsigned int> & index)
 	{
 		SetupBuffers(vertex, index);
