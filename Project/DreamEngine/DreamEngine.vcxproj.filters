@@ -32,9 +32,6 @@
     <Filter Include="Render\Pipeline">
       <UniqueIdentifier>{752b1d7d-ecbf-4d9f-acc7-afc2ef243d9b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Device\DirectX">
-      <UniqueIdentifier>{03c4afd0-4a40-4454-876a-0687d811098a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="World">
       <UniqueIdentifier>{21dda89a-bed2-458b-983c-8cb60df0805c}</UniqueIdentifier>
     </Filter>
@@ -73,6 +70,21 @@
     </Filter>
     <Filter Include="World\Manager">
       <UniqueIdentifier>{307e776d-3668-4d32-afb6-0c37ea5dcd55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Device\DirectX9">
+      <UniqueIdentifier>{03c4afd0-4a40-4454-876a-0687d811098a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Device\DirectX12">
+      <UniqueIdentifier>{d524be7c-688d-4790-86fa-f45fa12b634d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Device\OpenGL ES">
+      <UniqueIdentifier>{ac9e068a-80fe-44bc-a3cd-b044199330c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Device\Vulkan">
+      <UniqueIdentifier>{f63a3a20-e8a6-409c-80fa-555221bf57b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Device\Metal">
+      <UniqueIdentifier>{691f3ad1-1a22-4e51-b788-c62cd3a22b79}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
