@@ -1,4 +1,4 @@
-#include <LightComponent.h>
+#include <Light.h>
 #include <ISceneObject.h>
 #include <ILevel.h>
 #include <IWorld.h>
@@ -6,24 +6,24 @@
 
 namespace Catherine
 {
-	void LightComponent::OnAddComponent(ISceneObject * owner)
+	void Light::OnAddComponent(ISceneObject * owner)
 	{
 		LightManager * tmp_manager = owner->GetLevel()->GetWorld()->GetLightManager();
 		tmp_manager->Register(owner);
 	}
 
-	void LightComponent::OnRemoveComponent(ISceneObject * owner)
+	void Light::OnRemoveComponent(ISceneObject * owner)
 	{
 		LightManager * tmp_manager = owner->GetLevel()->GetWorld()->GetLightManager();
 		tmp_manager->Unregister(owner);
 	}
 
-	void LightComponent::Update(float deltaTime)
+	void Light::Update(float deltaTime)
 	{
 
 	}
 
-	ComponentKind LightComponent::GetComponentKind() const
+	ComponentKind Light::GetComponentKind() const
 	{
 		return ComponentKind::Light;
 	}

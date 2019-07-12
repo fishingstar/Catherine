@@ -1,7 +1,7 @@
 #include <Level.h>
 #include <SceneObject.h>
 #include <Transform.h>
-#include <LightComponent.h>
+#include <Light.h>
 #include <Camera.h>
 #include <MeshFilter.h>
 #include <MeshRenderer.h>
@@ -38,8 +38,8 @@ namespace Catherine
 		Transform * tmp_dirTransform = (Transform *)tmp_dirLight->GetComponent(ComponentKind::Transform);
 		tmp_dirTransform->SetRotation(glm::vec3(0.3f, -0.3f, -0.6f));
 
-		tmp_dirLight->AddComponent(new LightComponent());
-		LightComponent * tmp_dirComponent = (LightComponent *)tmp_dirLight->GetComponent(ComponentKind::Light);
+		tmp_dirLight->AddComponent(new Light());
+		Light * tmp_dirComponent = (Light *)tmp_dirLight->GetComponent(ComponentKind::Light);
 		tmp_dirComponent->SetLightType(LightType::Directional);
 		tmp_dirComponent->SetLightColor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 
@@ -53,8 +53,8 @@ namespace Catherine
 		tmp_spotTransform->SetPosition(glm::vec3(0.0f, 10.0f, 2.0f));
 		tmp_spotTransform->SetRotation(glm::vec3(0.0f, 0.0f, -1.0f));
 
-		tmp_spotLight->AddComponent(new LightComponent());
-		LightComponent * tmp_spotComponent = (LightComponent *)tmp_spotLight->GetComponent(ComponentKind::Light);
+		tmp_spotLight->AddComponent(new Light());
+		Light * tmp_spotComponent = (Light *)tmp_spotLight->GetComponent(ComponentKind::Light);
 		tmp_spotComponent->SetLightType(LightType::Spot);
 		tmp_spotComponent->SetLightColor(glm::vec4(1.0f, 0.0f, 1.0f, 1.0f));
 		tmp_dirComponent->SetIntensity(10.0f);
@@ -84,8 +84,8 @@ namespace Catherine
 			Transform * tmp_pointTransform = (Transform *)tmp_pointLight->GetComponent(ComponentKind::Transform);
 			tmp_pointTransform->SetPosition(tmp_pos[i]);
 
-			tmp_pointLight->AddComponent(new LightComponent());
-			LightComponent * tmp_pointComponent = (LightComponent *)tmp_pointLight->GetComponent(ComponentKind::Light);
+			tmp_pointLight->AddComponent(new Light());
+			Light * tmp_pointComponent = (Light *)tmp_pointLight->GetComponent(ComponentKind::Light);
 			tmp_pointComponent->SetLightType(LightType::Point);
 			tmp_pointComponent->SetLightColor(tmp_color[i]);
 		}

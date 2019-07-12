@@ -136,7 +136,7 @@
     <ClCompile Include="..\..\Src\CameraContext.cpp" />
     <ClCompile Include="..\..\Src\CameraManager.cpp" />
     <ClCompile Include="..\..\Src\Client.cpp" />
-    <ClCompile Include="..\..\Src\LightComponent.cpp" />
+    <ClCompile Include="..\..\Src\Light.cpp" />
     <ClCompile Include="..\..\Src\LightManager.cpp" />
     <ClCompile Include="..\..\Src\MeshFilter.cpp" />
     <ClCompile Include="..\..\Src\MeshRenderer.cpp" />
@@ -181,7 +181,7 @@
     <ClInclude Include="..\..\Src\IIndexBuffer.h" />
     <ClInclude Include="..\..\Src\IVertexArray.h" />
     <ClInclude Include="..\..\Src\IVertexBuffer.h" />
-    <ClInclude Include="..\..\Src\LightComponent.h" />
+    <ClInclude Include="..\..\Src\Light.h" />
     <ClInclude Include="..\..\Src\LightManager.h" />
     <ClInclude Include="..\..\Src\MeshFilter.h" />
     <ClInclude Include="..\..\Src\MeshRenderer.h" />

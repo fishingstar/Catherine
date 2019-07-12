@@ -184,9 +184,6 @@
     <ClCompile Include="..\..\Src\TimeUtility.cpp">
       <Filter>Utility\Time</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\LightComponent.cpp">
-      <Filter>World\Component</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\CameraManager.cpp">
       <Filter>World\Manager</Filter>
     </ClCompile>
@@ -195,6 +192,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\LightManager.cpp">
       <Filter>World\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Light.cpp">
+      <Filter>World\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -342,9 +342,6 @@
     <ClInclude Include="..\..\Src\TimeUtility.h">
       <Filter>Utility\Time</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\LightComponent.h">
-      <Filter>World\Component</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\CameraManager.h">
       <Filter>World\Manager</Filter>
     </ClInclude>
@@ -353,6 +350,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\LightManager.h">
       <Filter>World\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Light.h">
+      <Filter>World\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,7 +6,7 @@
 
 namespace Catherine
 {
-	class LightComponent : public IComponent
+	class Light : public IComponent
 	{
 	public:
 		virtual void OnAddComponent(ISceneObject * owner) override;

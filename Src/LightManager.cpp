@@ -2,7 +2,7 @@
 #include <LightContext.h>
 #include <ISceneObject.h>
 #include <Transform.h>
-#include <LightComponent.h>
+#include <Light.h>
 #include <algorithm>
 #include <LogUtility.h>
 
@@ -58,7 +58,7 @@ namespace Catherine
 			Transform * tmp_dirTransform = (Transform *)tmp_dirLight->GetComponent(ComponentKind::Transform);
 			tmp_dirContext->m_Rotation = tmp_dirTransform->GetRotation();
 
-			LightComponent * tmp_dirComponent = (LightComponent *)tmp_dirLight->GetComponent(ComponentKind::Light);
+			Light * tmp_dirComponent = (Light *)tmp_dirLight->GetComponent(ComponentKind::Light);
 			tmp_dirContext->m_Intensity = tmp_dirComponent->GetIntensity();
 			tmp_dirContext->m_LightColor = tmp_dirComponent->GetLightColor();
 
@@ -73,7 +73,7 @@ namespace Catherine
 			tmp_spotContext->m_Position = tmp_spotTransform->GetPosition();
 			tmp_spotContext->m_Rotation = tmp_spotTransform->GetRotation();
 
-			LightComponent * tmp_spotComponent = (LightComponent *)tmp_spotLight->GetComponent(ComponentKind::Light);
+			Light * tmp_spotComponent = (Light *)tmp_spotLight->GetComponent(ComponentKind::Light);
 			tmp_spotContext->m_LightColor = tmp_spotComponent->GetLightColor();
 			tmp_spotContext->m_Intensity = tmp_spotComponent->GetIntensity();
 			tmp_spotContext->m_AttenuationConstant = tmp_spotComponent->GetAttenuationConstant();
@@ -99,7 +99,7 @@ namespace Catherine
 				Transform * tmp_pointTransform = (Transform *)tmp_pointLight->GetComponent(ComponentKind::Transform);
 				tmp_pointContext->m_Position = tmp_pointTransform->GetPosition();
 
-				LightComponent * tmp_pointComponent = (LightComponent *)tmp_pointLight->GetComponent(ComponentKind::Light);
+				Light * tmp_pointComponent = (Light *)tmp_pointLight->GetComponent(ComponentKind::Light);
 				tmp_pointContext->m_LightColor = tmp_pointComponent->GetLightColor();
 				tmp_pointContext->m_Intensity = tmp_pointComponent->GetIntensity();
 				tmp_pointContext->m_AttenuationConstant = tmp_pointComponent->GetAttenuationConstant();
@@ -154,7 +154,7 @@ namespace Catherine
 				continue;
 			}
 
-			LightComponent * tmp_component = (LightComponent *)tmp_light->GetComponent(ComponentKind::Light);
+			Light * tmp_component = (Light *)tmp_light->GetComponent(ComponentKind::Light);
 			if (tmp_component == nullptr)
 			{
 				LogError("light component is not exited...");
