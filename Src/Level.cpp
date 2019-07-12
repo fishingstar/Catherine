@@ -1,7 +1,7 @@
 #include <Level.h>
 #include <SceneObject.h>
 #include <Transform.h>
-#include <CameraComponent.h>
+#include <Camera.h>
 #include <MeshFilter.h>
 #include <MeshRenderer.h>
 #include <glm/glm.hpp>
@@ -17,13 +17,13 @@ namespace Catherine
 		// camera
 		ISceneObject * tmp_camera = new SceneObject(this);
 		tmp_camera->AddComponent(new Transform());
-		tmp_camera->AddComponent(new CameraComponent());
+		tmp_camera->AddComponent(new Camera());
 
 		Transform * tmp_cameraTransform = (Transform *)tmp_camera->GetComponent(ComponentKind::Transform);
 		tmp_cameraTransform->SetPosition(glm::vec3(6.0f, 15.0f, 6.0f));
 		tmp_cameraTransform->SetRotation(glm::vec3(45.0f, -45.0f, 0.0f));
 
-		CameraComponent * tmp_cameraComponent = (CameraComponent *)tmp_camera->GetComponent(ComponentKind::Camera);
+		Camera * tmp_cameraComponent = (Camera *)tmp_camera->GetComponent(ComponentKind::Camera);
 		tmp_cameraComponent->SetProjectionMode(ProjectionMode::Persperctive);
 		tmp_cameraComponent->SetClearColor(glm::vec3(0.2f, 0.3f, 0.4f));
 

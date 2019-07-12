@@ -2,7 +2,7 @@
 #include <CameraContext.h>
 #include <ISceneObject.h>
 #include <Transform.h>
-#include <CameraComponent.h>
+#include <Camera.h>
 #include <algorithm>
 
 namespace Catherine
@@ -47,7 +47,7 @@ namespace Catherine
 			m_CameraContext->SetPosition(tmp_transform->GetPosition());
 			m_CameraContext->SetRotation(tmp_transform->GetRotation());
 
-			CameraComponent * tmp_camera = (CameraComponent *)tmp_object->GetComponent(ComponentKind::Camera);
+			Camera * tmp_camera = (Camera *)tmp_object->GetComponent(ComponentKind::Camera);
 			m_CameraContext->SetProjectionMode(tmp_camera->GetProjectionMode());
 			m_CameraContext->SetNearPlane(tmp_camera->GetNearPlane());
 			m_CameraContext->SetFarPlane(tmp_camera->GetFarPlane());

@@ -1,4 +1,4 @@
-#include <CameraComponent.h>
+#include <Camera.h>
 #include <CameraManager.h>
 #include <ISceneObject.h>
 #include <ILevel.h>
@@ -6,24 +6,24 @@
 
 namespace Catherine
 {
-	void CameraComponent::OnAddComponent(ISceneObject * owner)
+	void Camera::OnAddComponent(ISceneObject * owner)
 	{
 		CameraManager * tmp_manager = owner->GetLevel()->GetWorld()->GetCameraManager();
 		tmp_manager->Register(owner);
 	}
 
-	void CameraComponent::OnRemoveComponent(ISceneObject * owner)
+	void Camera::OnRemoveComponent(ISceneObject * owner)
 	{
 		CameraManager * tmp_manager = owner->GetLevel()->GetWorld()->GetCameraManager();
 		tmp_manager->Unregister(owner);
 	}
 
-	void CameraComponent::Update(float deltaTime)
+	void Camera::Update(float deltaTime)
 	{
 		
 	}
 
-	ComponentKind CameraComponent::GetComponentKind() const
+	ComponentKind Camera::GetComponentKind() const
 	{
 		return ComponentKind::Camera;
 	}

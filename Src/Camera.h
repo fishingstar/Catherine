@@ -5,7 +5,7 @@
 
 namespace Catherine
 {
-	class CameraComponent : public IComponent
+	class Camera : public IComponent
 	{
 	public:
 		virtual void OnAddComponent(ISceneObject * owner) override;

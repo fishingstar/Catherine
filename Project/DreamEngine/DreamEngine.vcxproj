@@ -132,7 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Src\CameraComponent.cpp" />
+    <ClCompile Include="..\..\Src\Camera.cpp" />
     <ClCompile Include="..\..\Src\CameraContext.cpp" />
     <ClCompile Include="..\..\Src\CameraManager.cpp" />
     <ClCompile Include="..\..\Src\Client.cpp" />
@@ -172,7 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AttributeLayout.h" />
-    <ClInclude Include="..\..\Src\CameraComponent.h" />
+    <ClInclude Include="..\..\Src\Camera.h" />
     <ClInclude Include="..\..\Src\CameraContext.h" />
     <ClInclude Include="..\..\Src\CameraManager.h" />
     <ClInclude Include="..\..\Src\Client.h" />
