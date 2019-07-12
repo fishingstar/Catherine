@@ -29,6 +29,8 @@ namespace Catherine
 		// resource
 		virtual IProgram * CreateProgram() override;
 
+		virtual ITexture * CreateTexture() override;
+
 		virtual IVertexArray * CreateVertexArray() override;
 		virtual IVertexBuffer * CreateVertexBuffer(size_t size, Usage usage, const void * data, const std::vector<AttributeLayout> & attributes) override;
 		virtual IIndexBuffer * CreateIndexBuffer(unsigned int stride, size_t size, Usage usage, const void * data) override;

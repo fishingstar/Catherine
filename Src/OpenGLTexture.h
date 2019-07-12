@@ -5,7 +5,7 @@
 
 namespace Catherine
 {
-	class GLTexture : public ITexture
+	class OpenGLTexture : public ITexture
 	{
 	public:
 		virtual void LoadFromFile(const char * param_Path) override;

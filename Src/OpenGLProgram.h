@@ -5,11 +5,11 @@
 
 namespace Catherine
 {
-	class GLProgram : public IProgram
+	class OpenGLProgram : public IProgram
 	{
 	public:
-		GLProgram();
-		~GLProgram();
+		OpenGLProgram();
+		~OpenGLProgram();
 
 		virtual void AttachShader(const char * vertex, const char * fragment) override;
 		virtual bool Compile() override;

@@ -6,7 +6,7 @@
 
 namespace Catherine
 {
-	void GLTexture::LoadFromFile(const char * param_Path)
+	void OpenGLTexture::LoadFromFile(const char * param_Path)
 	{
 		glGenTextures(1, &m_Texture);
 		glBindTexture(GL_TEXTURE_2D, m_Texture);
@@ -35,7 +35,7 @@ namespace Catherine
 		stbi_image_free(tmp_data);
 	}
 
-	void GLTexture::Use(unsigned int slot)
+	void OpenGLTexture::Use(unsigned int slot)
 	{
 		glActiveTexture(GL_TEXTURE0 + slot);
 		glBindTexture(GL_TEXTURE_2D, m_Texture);

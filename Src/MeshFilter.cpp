@@ -6,10 +6,13 @@
 #include <FileUtility.h>
 #include <Mesh.h>
 #include <Material.h>
-#include <OpenGLTexture.h>
+#include <IDevice.h>
+#include <ITexture.h>
 
 namespace Catherine
 {
+	extern IDevice * g_Device;
+
 	void MeshFilter::OnAddComponent(ISceneObject * owner)
 	{
 
@@ -149,7 +152,7 @@ namespace Catherine
 		}
 		else
 		{
-			tmp_texture = new GLTexture();
+			tmp_texture = g_Device->CreateTexture();
 			tmp_texture->LoadFromFile(tmp_cpath.c_str());
 			m_Textures[tmp_cpath] = tmp_texture;
 		}

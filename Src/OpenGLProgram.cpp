@@ -18,23 +18,23 @@ namespace Catherine
 		"   FragColor = vec4(0.1, 0.2, 0.3, 1.0f);\n"
 		"}\n\0";
 
-	GLProgram::GLProgram()
+	OpenGLProgram::OpenGLProgram()
 	{
 		m_Program = glCreateProgram();
 	}
 
-	GLProgram::~GLProgram()
+	OpenGLProgram::~OpenGLProgram()
 	{
 		glDeleteProgram(m_Program);
 	}
 
-	void GLProgram::AttachShader(const char * vertex, const char * fragment)
+	void OpenGLProgram::AttachShader(const char * vertex, const char * fragment)
 	{
 		m_VertexShader = CreateShader(GL_VERTEX_SHADER, vertex, vertexShaderSource);
 		m_FragmentShader = CreateShader(GL_FRAGMENT_SHADER, fragment, fragmentShaderSource);
 	}
 
-	bool GLProgram::Compile()
+	bool OpenGLProgram::Compile()
 	{
 		glCompileShader(m_VertexShader);
 		bool tmp_vertexOK = CheckCompileStatus(m_VertexShader);
@@ -55,7 +55,7 @@ namespace Catherine
 		return true;
 	}
 
-	bool GLProgram::Link()
+	bool OpenGLProgram::Link()
 	{
 		glAttachShader(m_Program, m_VertexShader);
 		glAttachShader(m_Program, m_FragmentShader);
@@ -73,47 +73,47 @@ namespace Catherine
 		return true;
 	}
 
-	void GLProgram::Use()
+	void OpenGLProgram::Use()
 	{
 		glUseProgram(m_Program);
 	}
 
-	void GLProgram::SetBool(const char * key, bool value)
+	void OpenGLProgram::SetBool(const char * key, bool value)
 	{
 		glUniform1i(glGetUniformLocation(m_Program, key), value);
 	}
 
-	void GLProgram::SetInt(const char * key, int value)
+	void OpenGLProgram::SetInt(const char * key, int value)
 	{
 		glUniform1i(glGetUniformLocation(m_Program, key), value);
 	}
 
-	void GLProgram::SetFloat(const char * key, float value)
+	void OpenGLProgram::SetFloat(const char * key, float value)
 	{
 		glUniform1f(glGetUniformLocation(m_Program, key), value);
 	}
 
-	void GLProgram::SetVec2(const char * key, const glm::vec2 & value)
+	void OpenGLProgram::SetVec2(const char * key, const glm::vec2 & value)
 	{
 		glUniform2fv(glGetUniformLocation(m_Program, key), 1, glm::value_ptr(value));
 	}
 
-	void GLProgram::SetVec3(const char * key, const glm::vec3 & value)
+	void OpenGLProgram::SetVec3(const char * key, const glm::vec3 & value)
 	{
 		glUniform3fv(glGetUniformLocation(m_Program, key), 1, glm::value_ptr(value));
 	}
 
-	void GLProgram::SetVec4(const char * key, const glm::vec4 & value)
+	void OpenGLProgram::SetVec4(const char * key, const glm::vec4 & value)
 	{
 		glUniform4fv(glGetUniformLocation(m_Program, key), 1, glm::value_ptr(value));
 	}
 
-	void GLProgram::SetMat4x4(const char * key, const glm::mat4x4 & value)
+	void OpenGLProgram::SetMat4x4(const char * key, const glm::mat4x4 & value)
 	{
 		glUniformMatrix4fv(glGetUniformLocation(m_Program, key), 1, GL_FALSE, glm::value_ptr(value));
 	}
 
-	unsigned int GLProgram::CreateShader(GLenum param_Type, const char * param_FileName, const char * param_Default)
+	unsigned int OpenGLProgram::CreateShader(GLenum param_Type, const char * param_FileName, const char * param_Default)
 	{
 		const char * tmp_source = nullptr;
 
@@ -133,7 +133,7 @@ namespace Catherine
 		return tmp_shader;
 	}
 
-	bool GLProgram::CheckCompileStatus(unsigned int param_Shader)
+	bool OpenGLProgram::CheckCompileStatus(unsigned int param_Shader)
 	{
 		int tmp_result = 0;
 		char tmp_log[1024] = { 0 };
@@ -148,7 +148,7 @@ namespace Catherine
 		return tmp_result;
 	}
 
-	bool GLProgram::CheckLinkStatus(unsigned int param_Program)
+	bool OpenGLProgram::CheckLinkStatus(unsigned int param_Program)
 	{
 		int tmp_result = 0;
 		char tmp_log[1024] = { 0 };

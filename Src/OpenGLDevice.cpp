@@ -4,6 +4,7 @@
 #include <const.h>
 #include <OpenGLCommon.h>
 #include <OpenGLProgram.h>
+#include <OpenGLTexture.h>
 #include <OpenGLVertexArray.h>
 #include <OpenGLVertexBuffer.h>
 #include <OpenGLIndexBuffer.h>
@@ -97,8 +98,14 @@ namespace Catherine
 
 	IProgram * OpenGLDevice::CreateProgram()
 	{
-		GLProgram * tmp_program = new GLProgram();
+		OpenGLProgram * tmp_program = new OpenGLProgram();
 		return tmp_program;
+	}
+
+	ITexture * OpenGLDevice::CreateTexture()
+	{
+		OpenGLTexture * tmp_texture = new OpenGLTexture();
+		return tmp_texture;
 	}
 
 	IVertexArray * OpenGLDevice::CreateVertexArray()
