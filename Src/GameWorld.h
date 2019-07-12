@@ -20,10 +20,12 @@ namespace Catherine
 
 		virtual const WorldContext * GetWorldContext() const override { return m_WorldContext; }
 		virtual CameraManager * GetCameraManager() const { return m_CameraManager; }
+		virtual LightManager * GetLightManager() const { return m_LightManager; }
 
 	private:
 		WorldContext * m_WorldContext;
 		CameraManager * m_CameraManager;
+		LightManager * m_LightManager;
 
 		std::vector<ILevel *> m_Levels;
 	};

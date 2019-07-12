@@ -44,9 +44,6 @@
     <Filter Include="Utility\File">
       <UniqueIdentifier>{0bb030a4-7a7e-450e-b21d-04ba09abb35d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="World\Light">
-      <UniqueIdentifier>{9af75319-fc71-4ef2-83bf-338b66f61193}</UniqueIdentifier>
-    </Filter>
     <Filter Include="World\Mesh">
       <UniqueIdentifier>{2e7b0b11-cf5c-4b12-8f4a-8d8b876b1bf0}</UniqueIdentifier>
     </Filter>
@@ -136,9 +133,6 @@
     <ClCompile Include="..\..\Src\JsonParser.cpp">
       <Filter>Utility\File</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\Light.cpp">
-      <Filter>World\Light</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\Level.cpp">
       <Filter>World\Level</Filter>
     </ClCompile>
@@ -198,6 +192,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\Camera.cpp">
       <Filter>World\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\LightManager.cpp">
+      <Filter>World\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -269,12 +266,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\JsonParser.h">
       <Filter>Utility\File</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\ILight.h">
-      <Filter>World\Light</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\Light.h">
-      <Filter>World\Light</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\ILevel.h">
       <Filter>World\Level</Filter>
@@ -359,6 +350,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Camera.h">
       <Filter>World\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\LightManager.h">
+      <Filter>World\Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

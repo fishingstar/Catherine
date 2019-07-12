@@ -9,20 +9,12 @@
 #include <IVertexArray.h>
 #include <glm/glm.hpp>
 
-#include <Light.h>
-
 namespace Catherine
 {
 	extern IDevice * g_Device;
 
-	ILight * WorldRenderer::m_DirLight = nullptr;
-	ILight * WorldRenderer::m_PointLight[4] = { nullptr };
-	ILight * WorldRenderer::m_SpotLight = nullptr;
-
 	bool WorldRenderer::Initialize()
 	{
-		CreateLights();
-
 		g_Device->SetFrontFace(FrontFaceMode::CounterClockwise);
 
 		return true;
@@ -95,40 +87,5 @@ namespace Catherine
 		{
 			m_Worlds.push_back(world);
 		}
-	}
-
-	void WorldRenderer::CreateLights()
-	{
-		m_DirLight = new Light();
-		m_DirLight->SetLightType(LightType::Directional);
-		m_DirLight->SetLightColor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
-
-		glm::vec3 tmp_pos[4] = {
-			glm::vec3(1.0f, 0.0f, 0.0f),
-			glm::vec3(0.0f, 1.0f, 0.0f),
-			glm::vec3(0.0f, 0.0f, 1.0f),
-			glm::vec3(1.0f, 1.0f, 1.0f)
-		};
-
-		glm::vec4 tmp_color[4] = {
-			glm::vec4(1.0f, 0.0f, 0.0f, 1.0f),
-			glm::vec4(0.0f, 1.0f, 0.0f, 1.0f),
-			glm::vec4(0.0f, 0.0f, 1.0f, 1.0f),
-			glm::vec4(1.0f, 1.0f, 1.0f, 1.0f)
-		};
-
-		for (auto i = 0; i < 4; i++)
-		{
-			m_PointLight[i] = new Light();
-			m_PointLight[i]->SetLightType(LightType::Point);
-			m_PointLight[i]->SetLightColor(tmp_color[i]);
-			m_PointLight[i]->SetPosition(tmp_pos[i]);
-		}
-
-		m_SpotLight = new Light();
-		m_SpotLight->SetLightType(LightType::Spot);
-		m_SpotLight->SetLightColor(glm::vec4(1.0f, 0.0f, 1.0f, 1.0f));
-		m_SpotLight->SetPosition(glm::vec3(0.0f, 0.0f, 0.7f));
-		m_SpotLight->SetRotation(glm::vec3(0.0f, 0.0f, 0.0f));
 	}
 }

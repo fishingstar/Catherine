@@ -21,6 +21,6 @@ namespace Catherine
 	private:
 		CameraContext * m_CameraContext;
 
-		std::vector<ISceneObject *> m_SceneObjects;
+		std::vector<ISceneObject *> m_Cameras;
 	};
 }

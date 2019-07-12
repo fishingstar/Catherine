@@ -22,25 +22,25 @@ namespace Catherine
 
 	void CameraManager::Register(ISceneObject * obj)
 	{
-		auto iter = std::find(m_SceneObjects.begin(), m_SceneObjects.end(), obj);
-		if (iter == m_SceneObjects.end())
+		auto iter = std::find(m_Cameras.begin(), m_Cameras.end(), obj);
+		if (iter == m_Cameras.end())
 		{
-			m_SceneObjects.push_back(obj);
+			m_Cameras.push_back(obj);
 		}
 	}
 
 	void CameraManager::Unregister(ISceneObject * obj)
 	{
-		auto iter = std::find(m_SceneObjects.begin(), m_SceneObjects.end(), obj);
-		if (iter != m_SceneObjects.end())
+		auto iter = std::find(m_Cameras.begin(), m_Cameras.end(), obj);
+		if (iter != m_Cameras.end())
 		{
-			m_SceneObjects.erase(iter);
+			m_Cameras.erase(iter);
 		}
 	}
 
 	CameraContext * CameraManager::GetCameraContext()
 	{
-		ISceneObject * tmp_object = m_SceneObjects.size() > 0 ? m_SceneObjects.front() : nullptr;
+		ISceneObject * tmp_object = m_Cameras.size() > 0 ? m_Cameras.front() : nullptr;
 		if (tmp_object)
 		{
 			Transform * tmp_transform = (Transform *)tmp_object->GetComponent(ComponentKind::Transform);

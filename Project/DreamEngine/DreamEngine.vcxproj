@@ -137,6 +137,7 @@
     <ClCompile Include="..\..\Src\CameraManager.cpp" />
     <ClCompile Include="..\..\Src\Client.cpp" />
     <ClCompile Include="..\..\Src\LightComponent.cpp" />
+    <ClCompile Include="..\..\Src\LightManager.cpp" />
     <ClCompile Include="..\..\Src\MeshFilter.cpp" />
     <ClCompile Include="..\..\Src\MeshRenderer.cpp" />
     <ClCompile Include="..\..\Src\OpenGLCommon.cpp" />
@@ -146,7 +147,6 @@
     <ClCompile Include="..\..\Src\WorldRenderer.cpp" />
     <ClCompile Include="..\..\Src\DeviceFactory.cpp" />
     <ClCompile Include="..\..\Src\Level.cpp" />
-    <ClCompile Include="..\..\Src\Light.cpp" />
     <ClCompile Include="..\..\Src\FileUtility.cpp" />
     <ClCompile Include="..\..\Src\GameWorld.cpp" />
     <ClCompile Include="..\..\Src\glad\src\glad.c" />
@@ -182,6 +182,7 @@
     <ClInclude Include="..\..\Src\IVertexArray.h" />
     <ClInclude Include="..\..\Src\IVertexBuffer.h" />
     <ClInclude Include="..\..\Src\LightComponent.h" />
+    <ClInclude Include="..\..\Src\LightManager.h" />
     <ClInclude Include="..\..\Src\MeshFilter.h" />
     <ClInclude Include="..\..\Src\MeshRenderer.h" />
     <ClInclude Include="..\..\Src\OpenGLCommon.h" />
@@ -195,10 +196,8 @@
     <ClInclude Include="..\..\Src\ILevel.h" />
     <ClInclude Include="..\..\Src\ISceneObject.h" />
     <ClInclude Include="..\..\Src\Level.h" />
-    <ClInclude Include="..\..\Src\Light.h" />
     <ClInclude Include="..\..\Src\FileUtility.h" />
     <ClInclude Include="..\..\Src\GameWorld.h" />
-    <ClInclude Include="..\..\Src\ILight.h" />
     <ClInclude Include="..\..\Src\IMaterial.h" />
     <ClInclude Include="..\..\Src\IMesh.h" />
     <ClInclude Include="..\..\Src\IWorld.h" />

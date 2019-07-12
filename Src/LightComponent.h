@@ -1,17 +1,11 @@
 #pragma once
 
 #include <IComponent.h>
+#include <LightContext.h>
 #include <glm/glm.hpp>
 
 namespace Catherine
 {
-	enum class LightType
-	{
-		Directional,
-		Point,
-		Spot
-	};
-
 	class LightComponent : public IComponent
 	{
 	public:

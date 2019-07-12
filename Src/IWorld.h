@@ -4,6 +4,7 @@ namespace Catherine
 {
 	class WorldContext;
 	class CameraManager;
+	class LightManager;
 
 	class IWorld
 	{
@@ -17,5 +18,6 @@ namespace Catherine
 
 		virtual const WorldContext * GetWorldContext() const = 0;
 		virtual CameraManager * GetCameraManager() const = 0;
+		virtual LightManager * GetLightManager() const = 0;
 	};
 }

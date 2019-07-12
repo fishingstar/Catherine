@@ -7,9 +7,6 @@
 #include <CameraContext.h>
 #include <LightContext.h>
 
-#include <WorldRenderer.h>
-#include <Light.h>
-
 namespace Catherine
 {
 	extern IDevice * g_Device;
@@ -64,6 +61,7 @@ namespace Catherine
 	void Material::SetCommonUniform(const WorldContext * context)
 	{
 		const CameraContext * tmp_cameraContext = context->GetCameraContext();
+		const LightContext * tmp_lightContext = context->GetLightContext();
 
 		const glm::vec3 & tmp_cameraPos = tmp_cameraContext->GetPosition();
 		const glm::mat4x4 & tmp_view = tmp_cameraContext->GetViewMatrix();
@@ -75,48 +73,38 @@ namespace Catherine
 		SetVec3("viewPos", tmp_cameraPos);
 		SetFloat("ambient", 0.2f);
 
-		// TODO: LightContext in the future
-		const glm::vec4 & tmp_lightColor = WorldRenderer::m_DirLight->GetLightColor();
-		const glm::vec3 & tmp_lightDir = glm::vec3(0.3f, -0.3f, -0.6f);
-		SetVec3("dirLight.lightDir", tmp_lightDir);
-		SetVec4("dirLight.lightColor", tmp_lightColor);
 
-		for (auto i = 0; i < 4; i++)
+		const LightContext::DirectionalContext * tmp_dirContext = tmp_lightContext->GetDirectionContext();
+		SetVec3("dirLight.lightDir", tmp_dirContext->m_Rotation);
+		SetVec4("dirLight.lightColor", tmp_dirContext->m_LightColor);
+
+		for (unsigned int i = 0; i < LightContext::POINT_LIGHT_COUNT; i++)
 		{
-			const glm::vec4 & tmp_pointColor = WorldRenderer::m_PointLight[i]->GetLightColor();
-			const glm::vec3 & tmp_pointPos = WorldRenderer::m_PointLight[i]->GetPosition();
-			float tmp_constant = WorldRenderer::m_PointLight[i]->GetAttenuationConstant();
-			float tmp_linear = WorldRenderer::m_PointLight[i]->GetAttenuationLinear();
-			float tmp_quadratic = WorldRenderer::m_PointLight[i]->GetAttenuationQuadratic();
+			const LightContext::PointContext * tmp_pointContext = tmp_lightContext->GetPointConext(i);
 
 			std::string tmp_key;
 			std::string tmp_index = "pointLight[" + std::to_string(i) + "]";
 			tmp_key = tmp_index + ".lightPos";
-			SetVec3(tmp_key.c_str(), tmp_pointPos);
+			SetVec3(tmp_key.c_str(), tmp_pointContext->m_Position);
 			tmp_key = tmp_index + ".lightColor";
-			SetVec4(tmp_key.c_str(), tmp_pointColor);
+			SetVec4(tmp_key.c_str(), tmp_pointContext->m_LightColor);
 			tmp_key = tmp_index + ".constant";
-			SetFloat(tmp_key.c_str(), tmp_constant);
+			SetFloat(tmp_key.c_str(), tmp_pointContext->m_AttenuationConstant);
 			tmp_key = tmp_index + ".linear";
-			SetFloat(tmp_key.c_str(), tmp_linear);
+			SetFloat(tmp_key.c_str(), tmp_pointContext->m_AttenuationLinear);
 			tmp_key = tmp_index + ".quadratic";
-			SetFloat(tmp_key.c_str(), tmp_quadratic);
+			SetFloat(tmp_key.c_str(), tmp_pointContext->m_AttenuationQuadratic);
 		}
 
-		const glm::vec4 tmp_spotColor = WorldRenderer::m_SpotLight->GetLightColor();
-		const glm::vec3 tmp_spotPos = WorldRenderer::m_SpotLight->GetPosition();
-		const glm::vec3 tmp_spotDir = glm::vec3(0.0f, 0.0f, -1.0f);
-		float tmp_constant = WorldRenderer::m_SpotLight->GetAttenuationConstant();
-		float tmp_linear = WorldRenderer::m_SpotLight->GetAttenuationLinear();
-		float tmp_quadratic = WorldRenderer::m_SpotLight->GetAttenuationQuadratic();
-		SetVec3("spotLight.lightPos", tmp_spotPos);
-		SetVec4("spotLight.lightColor", tmp_spotColor);
-		SetVec3("spotLight.lightDir", tmp_spotDir);
+		const LightContext::SpotContext * tmp_spotContext = tmp_lightContext->GetSpotContext();
+		SetVec3("spotLight.lightPos", tmp_spotContext->m_Position);
+		SetVec3("spotLight.lightDir", tmp_spotContext->m_Rotation);
+		SetVec4("spotLight.lightColor", tmp_spotContext->m_LightColor);
 		SetFloat("spotLight.innerCutoff", glm::cos(glm::radians(45.0f)));
 		SetFloat("spotLight.outerCutoff", glm::cos(glm::radians(60.0f)));
-		SetFloat("spotLight.constant", tmp_constant);
-		SetFloat("spotLight.linear", tmp_linear);
-		SetFloat("spotLight.quadratic", tmp_quadratic);
+		SetFloat("spotLight.constant", tmp_spotContext->m_AttenuationConstant);
+		SetFloat("spotLight.linear", tmp_spotContext->m_AttenuationLinear);
+		SetFloat("spotLight.quadratic", tmp_spotContext->m_AttenuationQuadratic);
 	}
 
 	void Material::Use()
