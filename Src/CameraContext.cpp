@@ -8,6 +8,7 @@ namespace Catherine
 		glm::mat4x4 tmp_rotate = glm::mat4x4(1);
 		tmp_rotate = glm::rotate(tmp_rotate, glm::radians(m_Rotation.x), glm::vec3(-1.0f, 0.0f, 0.0f));
 		tmp_rotate = glm::rotate(tmp_rotate, glm::radians(m_Rotation.y), glm::vec3(0.0f, -1.0f, 0.0f));
+		tmp_rotate = glm::rotate(tmp_rotate, glm::radians(m_Rotation.z), glm::vec3(0.0f, 0.0f, -1.0f));
 
 		glm::vec3 tmp_forward = tmp_rotate * glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);
 		glm::vec3 tmp_right = glm::cross(tmp_forward, glm::vec3(0.0f, 1.0f, 0.0f));

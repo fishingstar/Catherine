@@ -48,17 +48,18 @@ namespace Catherine
 			// collect render context
 			m_Worlds[i]->Render();
 
-			// render world
+			// extract context
 			const WorldContext * tmp_context = m_Worlds[i]->GetWorldContext();
+			const CameraContext * tmp_camera = tmp_context->GetCameraContext();
+			const LightContext * tmp_light = tmp_context->GetLightContext();
+			const std::vector<RenderContext *> & tmp_renderContexts = tmp_context->GetRenderContexts();
 
 			// clear screen
-			const CameraContext * tmp_camera = tmp_context->GetCameraContext();
 			const glm::vec3 & tmp_color = tmp_camera->GetClearColor();
 			g_Device->ClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);
 			g_Device->Clear();
 
 			// render commands
-			const std::vector<RenderContext *> & tmp_renderContexts = tmp_context->GetRenderContexts();
 			for (size_t i = 0; i < tmp_renderContexts.size(); i++)
 			{
 				RenderContext * tmp_renderContext = tmp_renderContexts[i];

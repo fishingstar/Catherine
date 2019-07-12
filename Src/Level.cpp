@@ -29,6 +29,7 @@ namespace Catherine
 
 		m_SceneObjects.push_back(tmp_camera);
 
+
 		// directional light
 		ISceneObject * tmp_dirLight = new SceneObject(this);
 		tmp_dirLight->AddComponent(new Transform());
@@ -49,7 +50,8 @@ namespace Catherine
 		tmp_pointLight3->AddComponent(new Transform());
 		m_SceneObjects.push_back(tmp_pointLight3);
 
-		// object
+
+		// visibile object
 		ISceneObject * tmp_warrior = new SceneObject(this);
 		tmp_warrior->AddComponent(new Transform());
 		tmp_warrior->AddComponent(new MeshFilter());
