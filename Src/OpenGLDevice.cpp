@@ -3,6 +3,7 @@
 #include <GLFW/glfw3.h>
 #include <const.h>
 #include <OpenGLCommon.h>
+#include <OpenGLProgram.h>
 #include <OpenGLVertexArray.h>
 #include <OpenGLVertexBuffer.h>
 #include <OpenGLIndexBuffer.h>
@@ -92,6 +93,12 @@ namespace Catherine
 	{
 		GLenum tmp_mode = OpenGLCommon::GetOpenGLCullFaceMode(mode);
 		glCullFace(tmp_mode);
+	}
+
+	IProgram * OpenGLDevice::CreateProgram()
+	{
+		GLProgram * tmp_program = new GLProgram();
+		return tmp_program;
 	}
 
 	IVertexArray * OpenGLDevice::CreateVertexArray()

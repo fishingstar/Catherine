@@ -1,5 +1,4 @@
 #include <WorldRenderer.h>
-#include <Camera.h>
 #include <Light.h>
 #include <global.h>
 #include <IWorld.h>
@@ -15,19 +14,12 @@ namespace Catherine
 {
 	extern IDevice * g_Device;
 
-	ICamera * WorldRenderer::m_Camera = nullptr;
 	ILight * WorldRenderer::m_DirLight = nullptr;
 	ILight * WorldRenderer::m_PointLight[4] = { nullptr };
 	ILight * WorldRenderer::m_SpotLight = nullptr;
 
 	bool WorldRenderer::Initialize()
 	{
-		m_Camera = new Camera();
-		m_Camera->SetPosition(glm::vec3(6.0f, 15.0f, 6.0f));
-		m_Camera->SetRotation(glm::vec3(45.0f, -45.0f, 0.0f));
-		m_Camera->SetProjectionMode(ProjectionMode::Persperctive);
-		m_Camera->SetClearColor(glm::vec3(0.2f, 0.3f, 0.4f));
-
 		CreateLights();
 
 		g_Device->SetFrontFace(FrontFaceMode::CounterClockwise);

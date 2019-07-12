@@ -38,9 +38,6 @@
     <Filter Include="World">
       <UniqueIdentifier>{21dda89a-bed2-458b-983c-8cb60df0805c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="World\Camera">
-      <UniqueIdentifier>{4a996a89-a633-493c-bf93-f14a8e8abd4f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="World\World">
       <UniqueIdentifier>{d87655fb-152b-4c5e-b82c-f5a8b85164df}</UniqueIdentifier>
     </Filter>
@@ -108,9 +105,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\Mesh.cpp">
       <Filter>World\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\Camera.cpp">
-      <Filter>World\Camera</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\GameWorld.cpp">
       <Filter>World\World</Filter>
@@ -227,12 +221,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Mesh.h">
       <Filter>World\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\ICamera.h">
-      <Filter>World\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\Camera.h">
-      <Filter>World\Camera</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\IWorld.h">
       <Filter>World\World</Filter>

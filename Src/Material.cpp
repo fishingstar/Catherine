@@ -1,10 +1,13 @@
 #include <Material.h>
 #include <IDevice.h>
-#include <OpenGLProgram.h>
-#include <OpenGLTexture.h>
+#include <IProgram.h>
+#include <ITexture.h>
 #include <string>
+#include <WorldContext.h>
+#include <CameraContext.h>
+#include <LightContext.h>
+
 #include <WorldRenderer.h>
-#include <Camera.h>
 #include <Light.h>
 
 namespace Catherine
@@ -13,7 +16,7 @@ namespace Catherine
 
 	bool Material::Initialize(const char * param_Config)
 	{
-		m_Program = new GLProgram();
+		m_Program = g_Device->CreateProgram();
 		m_Program->AttachShader("./res/shader/simple.vs", "./res/shader/simple.fs");
 		m_Program->Compile();
 		m_Program->Link();
@@ -60,15 +63,19 @@ namespace Catherine
 
 	void Material::SetCommonUniform(const WorldContext * context)
 	{
-		const glm::vec3 & tmp_cameraPos = WorldRenderer::m_Camera->GetPosition();
-		const glm::mat4x4 & tmp_view = WorldRenderer::m_Camera->GetViewMatrix();
-		const glm::mat4x4 & tmp_projection = WorldRenderer::m_Camera->GetProjectionMatrix();
+		const CameraContext * tmp_cameraContext = context->GetCameraContext();
+
+		const glm::vec3 & tmp_cameraPos = tmp_cameraContext->GetPosition();
+		const glm::mat4x4 & tmp_view = tmp_cameraContext->GetViewMatrix();
+		const glm::mat4x4 & tmp_projection = tmp_cameraContext->GetProjectionMatrix();
+
 		SetMat4x4("model", glm::mat4x4(1));
 		SetMat4x4("view", tmp_view);
 		SetMat4x4("projection", tmp_projection);
 		SetVec3("viewPos", tmp_cameraPos);
 		SetFloat("ambient", 0.2f);
 
+		// TODO: LightContext in the future
 		const glm::vec4 & tmp_lightColor = WorldRenderer::m_DirLight->GetLightColor();
 		const glm::vec3 & tmp_lightDir = glm::vec3(0.3f, -0.3f, -0.6f);
 		SetVec3("dirLight.lightDir", tmp_lightDir);

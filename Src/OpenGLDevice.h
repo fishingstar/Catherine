@@ -26,7 +26,9 @@ namespace Catherine
 		virtual void EnableCullFace(bool enabled) override;
 		virtual void SetCullFaceMode(CullFaceMode mode) override;
 
-		// buffer
+		// resource
+		virtual IProgram * CreateProgram() override;
+
 		virtual IVertexArray * CreateVertexArray() override;
 		virtual IVertexBuffer * CreateVertexBuffer(size_t size, Usage usage, const void * data, const std::vector<AttributeLayout> & attributes) override;
 		virtual IIndexBuffer * CreateIndexBuffer(unsigned int stride, size_t size, Usage usage, const void * data) override;

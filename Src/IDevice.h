@@ -6,6 +6,7 @@
 
 namespace Catherine
 {
+	class IProgram;
 	class IVertexArray;
 	class IIndexBuffer;
 	class IVertexBuffer;
@@ -32,7 +33,9 @@ namespace Catherine
 		virtual void EnableCullFace(bool enabled) = 0;
 		virtual void SetCullFaceMode(CullFaceMode mode) = 0;
 
-		// buffer
+		// resource
+		virtual IProgram * CreateProgram() = 0;
+
 		virtual IVertexArray * CreateVertexArray() = 0;
 		virtual IVertexBuffer * CreateVertexBuffer(size_t size, Usage usage, const void * data, const std::vector<AttributeLayout> & attributes) = 0;
 		virtual IIndexBuffer * CreateIndexBuffer(unsigned int stride, size_t size, Usage usage, const void * data) = 0;

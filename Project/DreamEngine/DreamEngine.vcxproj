@@ -132,7 +132,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Src\Camera.cpp" />
     <ClCompile Include="..\..\Src\CameraComponent.cpp" />
     <ClCompile Include="..\..\Src\CameraContext.cpp" />
     <ClCompile Include="..\..\Src\CameraManager.cpp" />
@@ -173,7 +172,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AttributeLayout.h" />
-    <ClInclude Include="..\..\Src\Camera.h" />
     <ClInclude Include="..\..\Src\CameraComponent.h" />
     <ClInclude Include="..\..\Src\CameraContext.h" />
     <ClInclude Include="..\..\Src\CameraManager.h" />
@@ -201,7 +199,6 @@
     <ClInclude Include="..\..\Src\FileUtility.h" />
     <ClInclude Include="..\..\Src\GameWorld.h" />
     <ClInclude Include="..\..\Src\global.h" />
-    <ClInclude Include="..\..\Src\ICamera.h" />
     <ClInclude Include="..\..\Src\ILight.h" />
     <ClInclude Include="..\..\Src\IMaterial.h" />
     <ClInclude Include="..\..\Src\IMesh.h" />
