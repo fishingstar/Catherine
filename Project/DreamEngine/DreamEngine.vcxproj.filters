@@ -86,6 +86,15 @@
     <Filter Include="Math">
       <UniqueIdentifier>{d78577bb-6501-4f8d-85cd-57810b93918b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utility\Xml">
+      <UniqueIdentifier>{55b99b13-5ef9-4e1c-8835-1a03d17f7943}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility\Image">
+      <UniqueIdentifier>{1f577dec-759d-4cd3-8dfa-9ba2ae0ffed8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility\Json">
+      <UniqueIdentifier>{1fa4ac76-5446-4582-a9d7-bafa21267e9f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\main.cpp">
@@ -128,12 +137,6 @@
       <Filter>Device\Common</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\FileUtility.cpp">
-      <Filter>Utility\File</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\XMLParser.cpp">
-      <Filter>Utility\File</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\JsonParser.cpp">
       <Filter>Utility\File</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\Level.cpp">
@@ -199,6 +202,12 @@
     <ClCompile Include="..\..\Src\Light.cpp">
       <Filter>World\Component</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\JsonParser.cpp">
+      <Filter>Utility\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\tinyxml2.cpp">
+      <Filter>Utility\Xml</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\log.h">
@@ -256,15 +265,6 @@
       <Filter>Device\Common</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\FileUtility.h">
-      <Filter>Utility\File</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\stb_image.h">
-      <Filter>Utility\File</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\XMLParser.h">
-      <Filter>Utility\File</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\JsonParser.h">
       <Filter>Utility\File</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\ILevel.h">
@@ -353,6 +353,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\DeviceConst.h">
       <Filter>Device\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\stb_image.h">
+      <Filter>Utility\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\JsonParser.h">
+      <Filter>Utility\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\tinyxml2.h">
+      <Filter>Utility\Xml</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

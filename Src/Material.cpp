@@ -6,6 +6,7 @@
 #include <WorldContext.h>
 #include <CameraContext.h>
 #include <LightContext.h>
+#include <tinyxml2.h>
 
 namespace Catherine
 {
@@ -13,10 +14,38 @@ namespace Catherine
 
 	bool Material::Initialize(const char * param_Config)
 	{
-		m_Program = g_Device->CreateProgram();
-		m_Program->AttachShader("./res/shader/simple.vs", "./res/shader/simple.fs");
-		m_Program->Compile();
-		m_Program->Link();
+		tinyxml2::XMLDocument doc;
+		if (doc.LoadFile(param_Config) != tinyxml2::XML_SUCCESS)
+		{
+			// TODO : print error log
+			return false;
+		}
+
+		tinyxml2::XMLElement * tmp_root = doc.FirstChildElement();
+
+		// shader
+		tinyxml2::XMLElement * tmp_shader = tmp_root->FirstChildElement("Shader");
+		tinyxml2::XMLElement * tmp_vertex = tmp_shader->FirstChildElement("Vertex");
+		tinyxml2::XMLElement * tmp_fragment = tmp_shader->FirstChildElement("Fragment");
+		CreateProgram(tmp_vertex->GetText(), tmp_fragment->GetText());
+
+		// texture
+		tinyxml2::XMLElement * tmp_texture = tmp_root->FirstChildElement("Texture");
+		tinyxml2::XMLElement * tmp_item = tmp_texture->FirstChildElement();
+		while (tmp_item)
+		{
+			const char * tmp_key = tmp_item->Attribute("Key");
+			const char * tmp_value = tmp_item->Attribute("Value");
+
+			ITexture * tmp_resource = g_Device->CreateTexture();
+			tmp_resource->LoadFromFile(tmp_value);
+
+			SetTexture(tmp_key, tmp_resource);
+
+			tmp_item = tmp_item->NextSiblingElement();
+		}
+
+		// param
 
 		return true;
 	}
@@ -122,5 +151,13 @@ namespace Catherine
 		}
 
 		m_Program->Use();
+	}
+
+	void Material::CreateProgram(const char * vertex, const char * fragment)
+	{
+		m_Program = g_Device->CreateProgram();
+		m_Program->AttachShader(vertex, fragment);
+		m_Program->Compile();
+		m_Program->Link();
 	}
 }

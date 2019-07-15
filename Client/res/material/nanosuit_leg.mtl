@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<Shader>
+		<Vertex>./res/shader/simple.vs</Vertex>
+		<Fragment>./res/shader/simple.fs</Fragment>
+	</Shader>
+	<Texture>
+		<Item Key = "diffuse" Value = "./res/model/nanosuit/leg_dif.png" />
+	</Texture>
+</document>

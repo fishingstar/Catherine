@@ -22,6 +22,8 @@ namespace Catherine
 	public:
 		void Render(WorldContext * context);
 
+		void AddMaterial(IMaterial * material);
+
 	private:
 		void ClearRenderContext();
 

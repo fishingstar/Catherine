@@ -38,17 +38,24 @@ namespace Catherine
 			MeshFilter * tmp_meshFilter = (MeshFilter *)tmp_owner->GetComponent(ComponentKind::MeshFilter);
 			if (tmp_meshFilter != nullptr)
 			{
-				const std::vector<IMaterial *> & tmp_materials = tmp_meshFilter->GetMaterials();
 				const std::vector<IMesh *> & tmp_meshes = tmp_meshFilter->GetMeshes();
 
 				for (size_t i = 0; i < tmp_meshes.size(); i++)
 				{
 					RenderContext * tmp_renderContext = new RenderContext();
-					tmp_renderContext->SetMaterial(tmp_materials[i]);
+					tmp_renderContext->SetMaterial(m_Materials[i]);
 					tmp_renderContext->SetVertexArray(tmp_meshes[i]->GetVertexArray());
 					context->AddRenderContext(tmp_renderContext);
 				}
 			}
+		}
+	}
+
+	void MeshRenderer::AddMaterial(IMaterial * material)
+	{
+		if (material)
+		{
+			m_Materials.push_back(material);
 		}
 	}
 

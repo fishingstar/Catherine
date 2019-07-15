@@ -144,6 +144,7 @@
     <ClCompile Include="..\..\Src\OpenGLIndexBuffer.cpp" />
     <ClCompile Include="..\..\Src\OpenGLVertexArray.cpp" />
     <ClCompile Include="..\..\Src\OpenGLVertexBuffer.cpp" />
+    <ClCompile Include="..\..\Src\tinyxml2.cpp" />
     <ClCompile Include="..\..\Src\WorldRenderer.cpp" />
     <ClCompile Include="..\..\Src\DeviceFactory.cpp" />
     <ClCompile Include="..\..\Src\Level.cpp" />
@@ -168,7 +169,6 @@
     <ClCompile Include="..\..\Src\Transform.cpp" />
     <ClCompile Include="..\..\Src\WorldContext.cpp" />
     <ClCompile Include="..\..\Src\WorldFactory.cpp" />
-    <ClCompile Include="..\..\Src\XMLParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\AttributeLayout.h" />
@@ -189,6 +189,7 @@
     <ClInclude Include="..\..\Src\OpenGLIndexBuffer.h" />
     <ClInclude Include="..\..\Src\OpenGLVertexArray.h" />
     <ClInclude Include="..\..\Src\OpenGLVertexBuffer.h" />
+    <ClInclude Include="..\..\Src\tinyxml2.h" />
     <ClInclude Include="..\..\Src\WorldRenderer.h" />
     <ClInclude Include="..\..\Src\DeviceCommon.h" />
     <ClInclude Include="..\..\Src\DeviceFactory.h" />
@@ -221,7 +222,6 @@
     <ClInclude Include="..\..\Src\Transform.h" />
     <ClInclude Include="..\..\Src\WorldContext.h" />
     <ClInclude Include="..\..\Src\WorldFactory.h" />
-    <ClInclude Include="..\..\Src\XMLParser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

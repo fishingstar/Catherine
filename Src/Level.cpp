@@ -6,6 +6,7 @@
 #include <MeshFilter.h>
 #include <MeshRenderer.h>
 #include <glm/glm.hpp>
+#include <Material.h>
 
 namespace Catherine
 {
@@ -93,9 +94,30 @@ namespace Catherine
 		m_SceneObjects.push_back(tmp_warrior);
 
 		Transform * tmp_meshTransform = (Transform *)tmp_warrior->AddComponent(ComponentKind::Transform);
-		MeshRenderer * tmp_meshRenderer = (MeshRenderer *)tmp_warrior->AddComponent(ComponentKind::MeshRenderer);
 		MeshFilter * tmp_meshFilter = (MeshFilter *)tmp_warrior->AddComponent(ComponentKind::MeshFilter);
 		tmp_meshFilter->LoadFromFile(s_testModel);
+		MeshRenderer * tmp_meshRenderer = (MeshRenderer *)tmp_warrior->AddComponent(ComponentKind::MeshRenderer);
+		IMaterial * tmp_glassMtl = new Material();
+		tmp_glassMtl->Initialize("./res/material/nanosuit_glass.mtl");
+		tmp_meshRenderer->AddMaterial(tmp_glassMtl);
+		IMaterial * tmp_legMtl = new Material();
+		tmp_legMtl->Initialize("./res/material/nanosuit_leg.mtl");
+		tmp_meshRenderer->AddMaterial(tmp_legMtl);
+		IMaterial * tmp_handMtl = new Material();
+		tmp_handMtl->Initialize("./res/material/nanosuit_hand.mtl");
+		tmp_meshRenderer->AddMaterial(tmp_handMtl);
+		IMaterial * tmp_mouseMtl = new Material();
+		tmp_mouseMtl->Initialize("./res/material/nanosuit_mouse.mtl");
+		tmp_meshRenderer->AddMaterial(tmp_mouseMtl);
+		IMaterial * tmp_armMtl = new Material();
+		tmp_armMtl->Initialize("./res/material/nanosuit_arm.mtl");
+		tmp_meshRenderer->AddMaterial(tmp_armMtl);
+		IMaterial * tmp_helmetMtl = new Material();
+		tmp_helmetMtl->Initialize("./res/material/nanosuit_helmet.mtl");
+		tmp_meshRenderer->AddMaterial(tmp_helmetMtl);
+		IMaterial * tmp_bodyMtl = new Material();
+		tmp_bodyMtl->Initialize("./res/material/nanosuit_body.mtl");
+		tmp_meshRenderer->AddMaterial(tmp_bodyMtl);
 
 		return true;
 	}
