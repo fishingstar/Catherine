@@ -21,12 +21,15 @@ namespace Catherine
 		void Update(float deltaTime);
 		void Render(WorldContext * context);
 
-		void AddComponent(IComponent * component);
-		void RemoveComponent(IComponent * component);
+		IComponent * AddComponent(ComponentKind kind);
 		IComponent * GetComponent(ComponentKind kind);
 		const std::vector<IComponent *> & GetComponents(ComponentKind kind);
+		void RemoveComponent(IComponent * component);
 
 		ILevel * GetLevel() const { return m_Level; }
+
+	private:
+		IComponent * CreateComponent(ComponentKind kind);
 
 	private:
 		std::unordered_map<ComponentKind, std::vector<IComponent *>> m_Components;

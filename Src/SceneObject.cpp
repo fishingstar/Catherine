@@ -1,5 +1,10 @@
 #include <SceneObject.h>
 #include <IComponent.h>
+#include <Transform.h>
+#include <Camera.h>
+#include <Light.h>
+#include <MeshFilter.h>
+#include <MeshRenderer.h>
 #include <algorithm>
 
 namespace Catherine
@@ -18,6 +23,8 @@ namespace Catherine
 				IComponent * tmp_component = *iter_component;
 				if (tmp_component)
 				{
+					tmp_component->SetOwner(nullptr);
+					tmp_component->OnRemoveComponent(this);
 					delete tmp_component;
 				}
 			}
@@ -51,19 +58,16 @@ namespace Catherine
 		return m_Components[kind];
 	}
 
-	void SceneObject::AddComponent(IComponent * component)
+	IComponent * SceneObject::AddComponent(ComponentKind kind)
 	{
-		if (component != nullptr)
+		IComponent * tmp_component = CreateComponent(kind);
+		if (tmp_component != nullptr)
 		{
-			std::vector<IComponent *> & tmp_components = m_Components[component->GetComponentKind()];
-			auto tmp_iter = std::find(tmp_components.begin(), tmp_components.end(), component);
-			if (tmp_iter == tmp_components.end())
-			{
-				tmp_components.push_back(component);
-				component->SetOwner(this);
-				component->OnAddComponent(this);
-			}
+			m_Components[kind].push_back(tmp_component);
+			tmp_component->SetOwner(this);
+			tmp_component->OnAddComponent(this);
 		}
+		return tmp_component;
 	}
 
 	void SceneObject::RemoveComponent(IComponent * component)
@@ -77,7 +81,34 @@ namespace Catherine
 				tmp_components.erase(tmp_iter);
 				component->SetOwner(nullptr);
 				component->OnRemoveComponent(this);
+				delete component;
 			}
 		}
+	}
+
+	IComponent * SceneObject::CreateComponent(ComponentKind kind)
+	{
+		IComponent * tmp_result = nullptr;
+		switch (kind)
+		{
+		case Catherine::ComponentKind::Transform:
+			tmp_result = new Transform();
+			break;
+		case Catherine::ComponentKind::Camera:
+			tmp_result = new Camera();
+			break;
+		case Catherine::ComponentKind::Light:
+			tmp_result = new Light();
+			break;
+		case Catherine::ComponentKind::MeshFilter:
+			tmp_result = new MeshFilter();
+			break;
+		case Catherine::ComponentKind::MeshRenderer:
+			tmp_result = new MeshRenderer();
+			break;
+		default:
+			break;
+		}
+		return tmp_result;
 	}
 }
