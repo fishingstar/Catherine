@@ -42,7 +42,7 @@ namespace Catherine
 
 		float m_NearPlane = 0.1f;
 		float m_FarPlane = 1000.0f;
-		float m_Aspect = 1.333f;
+		float m_Aspect = 1.778f;
 		float m_FieldofView = 45.0f;
 		float m_Size = 5.0f;
 

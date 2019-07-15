@@ -1,7 +1,7 @@
 #include <OpenGLDevice.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <const.h>
+#include <DeviceConst.h>
 #include <OpenGLCommon.h>
 #include <OpenGLProgram.h>
 #include <OpenGLTexture.h>
@@ -29,7 +29,7 @@ namespace Catherine
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
 #endif
 
-		window = glfwCreateWindow(SRC_WIDTH, SRC_HEIGHT, WINDOW_TITLE, nullptr, nullptr);
+		window = glfwCreateWindow(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, DEFAULT_WINDOW_TITLE, nullptr, nullptr);
 		if (window == nullptr)
 		{
 			glfwTerminate();

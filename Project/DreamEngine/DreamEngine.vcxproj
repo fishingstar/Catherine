@@ -177,7 +177,7 @@
     <ClInclude Include="..\..\Src\CameraManager.h" />
     <ClInclude Include="..\..\Src\Client.h" />
     <ClInclude Include="..\..\Src\ComponentCommon.h" />
-    <ClInclude Include="..\..\Src\const.h" />
+    <ClInclude Include="..\..\Src\DeviceConst.h" />
     <ClInclude Include="..\..\Src\IIndexBuffer.h" />
     <ClInclude Include="..\..\Src\IVertexArray.h" />
     <ClInclude Include="..\..\Src\IVertexBuffer.h" />

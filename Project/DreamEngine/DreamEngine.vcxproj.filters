@@ -83,6 +83,9 @@
     <Filter Include="Device\Metal">
       <UniqueIdentifier>{691f3ad1-1a22-4e51-b788-c62cd3a22b79}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{d78577bb-6501-4f8d-85cd-57810b93918b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\main.cpp">
@@ -198,9 +201,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Src\const.h">
-      <Filter>Global</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\log.h">
       <Filter>Utility\Log</Filter>
     </ClInclude>
@@ -350,6 +350,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Light.h">
       <Filter>World\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\DeviceConst.h">
+      <Filter>Device\Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
