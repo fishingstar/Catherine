@@ -13,7 +13,7 @@ namespace Catherine
 		virtual void OnFrameBegin() override;
 		virtual void OnFrameEnd() override;
 
-		virtual bool WindowShouldClose() override;
+		virtual bool Close() override;
 
 		// state
 		virtual void ClearColor(float red, float green, float blue, float alpha) override;

@@ -13,12 +13,12 @@ namespace Catherine
 {
 	extern IDevice * g_Device;
 
-	void MeshFilter::OnAddComponent(ISceneObject * owner)
+	void MeshFilter::OnAddComponent(SceneObject * owner)
 	{
 
 	}
 
-	void MeshFilter::OnRemoveComponent(ISceneObject * owner)
+	void MeshFilter::OnRemoveComponent(SceneObject * owner)
 	{
 
 	}

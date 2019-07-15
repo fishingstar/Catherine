@@ -19,9 +19,15 @@ namespace Catherine
 		Client() { }
 
 		bool CreateDevice();
-		bool CreateWorld();
-		bool CreateRenderer();
+		void DeleteDevice();
 
+		bool CreateWorld();
+		void DeleteWorld();
+
+		bool CreateRenderer();
+		void DeleteRenderer();
+
+		// TODO : delete frame begin and end
 		void OnFrameBegin();
 		void OnFrameEnd();
 

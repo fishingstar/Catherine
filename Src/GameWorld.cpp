@@ -15,12 +15,53 @@ namespace Catherine
 		// create light manager for this world
 		m_LightManager = new LightManager();
 
-		ILevel * tmp_level = new Level(this);
-		tmp_level->Initialize();
-
-		m_Levels.push_back(tmp_level);
+		// TODO : delete test level
+		ILevel * tmp_testLevel = new Level(this);
+		bool tmp_levelOK = tmp_testLevel->Initialize();
+		if (tmp_levelOK)
+		{
+			m_Levels.push_back(tmp_testLevel);
+		}
 
 		return true;
+	}
+
+	void GameWorld::Uninitialize()
+	{
+		for (size_t i = 0; i < m_Levels.size(); i++)
+		{
+			if (m_Levels[i])
+			{
+				m_Levels[i]->Uninitialize();
+
+				delete m_Levels[i];
+				m_Levels[i] = nullptr;
+			}
+		}
+		m_Levels.clear();
+
+		if (m_LightManager)
+		{
+			delete m_LightManager;
+			m_LightManager = nullptr;
+		}
+
+		if (m_CameraManager)
+		{
+			delete m_CameraManager;
+			m_CameraManager = nullptr;
+		}
+
+		if (m_WorldContext)
+		{
+			delete m_WorldContext;
+			m_WorldContext = nullptr;
+		}
+	}
+
+	void GameWorld::PreUpdate(float deltaTime)
+	{
+
 	}
 
 	void GameWorld::Update(float deltaTime)
@@ -29,6 +70,11 @@ namespace Catherine
 		{
 			m_Levels[i]->Update(deltaTime);
 		}
+	}
+
+	void GameWorld::PostUpdate(float deltaTime)
+	{
+
 	}
 
 	void GameWorld::PreRender()

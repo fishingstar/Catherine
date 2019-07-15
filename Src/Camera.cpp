@@ -1,18 +1,18 @@
 #include <Camera.h>
 #include <CameraManager.h>
-#include <ISceneObject.h>
+#include <SceneObject.h>
 #include <ILevel.h>
 #include <IWorld.h>
 
 namespace Catherine
 {
-	void Camera::OnAddComponent(ISceneObject * owner)
+	void Camera::OnAddComponent(SceneObject * owner)
 	{
 		CameraManager * tmp_manager = owner->GetLevel()->GetWorld()->GetCameraManager();
 		tmp_manager->Register(owner);
 	}
 
-	void Camera::OnRemoveComponent(ISceneObject * owner)
+	void Camera::OnRemoveComponent(SceneObject * owner)
 	{
 		CameraManager * tmp_manager = owner->GetLevel()->GetWorld()->GetCameraManager();
 		tmp_manager->Unregister(owner);

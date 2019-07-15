@@ -12,7 +12,11 @@ namespace Catherine
 	{
 	public:
 		virtual bool Initialize() override;
+		virtual void Uninitialize() override;
+
+		virtual void PreUpdate(float deltaTime) override;
 		virtual void Update(float deltaTime) override;
+		virtual void PostUpdate(float deltaTime) override;
 
 		virtual void PreRender() override;
 		virtual void Render() override;

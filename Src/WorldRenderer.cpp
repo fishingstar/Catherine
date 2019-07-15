@@ -15,6 +15,7 @@ namespace Catherine
 
 	bool WorldRenderer::Initialize()
 	{
+		// TODO : get device context cache to reduce useless state changes
 		g_Device->SetFrontFace(FrontFaceMode::CounterClockwise);
 
 		return true;
@@ -43,7 +44,6 @@ namespace Catherine
 			// extract context
 			const WorldContext * tmp_context = m_Worlds[i]->GetWorldContext();
 			const CameraContext * tmp_camera = tmp_context->GetCameraContext();
-			const LightContext * tmp_light = tmp_context->GetLightContext();
 			const std::vector<RenderContext *> & tmp_renderContexts = tmp_context->GetRenderContexts();
 
 			// clear screen
@@ -54,14 +54,14 @@ namespace Catherine
 			// render commands
 			for (size_t i = 0; i < tmp_renderContexts.size(); i++)
 			{
-				RenderContext * tmp_renderContext = tmp_renderContexts[i];
+				const RenderContext * tmp_renderContext = tmp_renderContexts[i];
 
 				// material
 				IMaterial * tmp_material = tmp_renderContext->GetMaterial();
 				tmp_material->SetCommonUniform(tmp_context);
 				tmp_material->Use();
 
-				// vertex
+				// vertex buffer
 				IVertexArray * tmp_vertexArray = tmp_renderContext->GetVertexArray();
 				tmp_vertexArray->Bind();
 

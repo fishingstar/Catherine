@@ -1,19 +1,19 @@
 #include <MeshRenderer.h>
 #include <WorldContext.h>
 #include <RenderContext.h>
-#include <ISceneObject.h>
+#include <SceneObject.h>
 #include <MeshFilter.h>
 #include <IMesh.h>
 #include <vector>
 
 namespace Catherine
 {
-	void MeshRenderer::OnAddComponent(ISceneObject * owner)
+	void MeshRenderer::OnAddComponent(SceneObject * owner)
 	{
 
 	}
 
-	void MeshRenderer::OnRemoveComponent(ISceneObject * owner)
+	void MeshRenderer::OnRemoveComponent(SceneObject * owner)
 	{
 
 	}
@@ -32,7 +32,7 @@ namespace Catherine
 	{
 		ClearRenderContext();
 
-		ISceneObject * tmp_owner = GetOwner();
+		SceneObject * tmp_owner = GetOwner();
 		if (tmp_owner)
 		{
 			MeshFilter * tmp_meshFilter = (MeshFilter *)tmp_owner->GetComponent(ComponentKind::MeshFilter);

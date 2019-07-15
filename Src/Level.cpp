@@ -11,12 +11,13 @@ namespace Catherine
 {
 	const char * s_testModel = "./res/model/nanosuit/nanosuit.obj";
 
-	void Level::Initialize()
+	bool Level::Initialize()
 	{
 		// TODO : add objects manually, because of no level config file supported now...
 
 		// camera
-		ISceneObject * tmp_camera = new SceneObject(this);
+		SceneObject * tmp_camera = new SceneObject(this);
+		tmp_camera->Initialize();
 		m_SceneObjects.push_back(tmp_camera);
 
 		tmp_camera->AddComponent(new Transform());
@@ -31,7 +32,8 @@ namespace Catherine
 
 		
 		// directional light
-		ISceneObject * tmp_dirLight = new SceneObject(this);
+		SceneObject * tmp_dirLight = new SceneObject(this);
+		tmp_dirLight->Initialize();
 		m_SceneObjects.push_back(tmp_dirLight);
 
 		tmp_dirLight->AddComponent(new Transform());
@@ -45,7 +47,8 @@ namespace Catherine
 
 		
 		// spot light
-		ISceneObject * tmp_spotLight = new SceneObject(this);
+		SceneObject * tmp_spotLight = new SceneObject(this);
+		tmp_spotLight->Initialize();
 		m_SceneObjects.push_back(tmp_spotLight);
 
 		tmp_spotLight->AddComponent(new Transform());
@@ -77,7 +80,8 @@ namespace Catherine
 		// point light
 		for (unsigned int i = 0; i < 4; i++)
 		{
-			ISceneObject * tmp_pointLight = new SceneObject(this);
+			SceneObject * tmp_pointLight = new SceneObject(this);
+			tmp_pointLight->Initialize();
 			m_SceneObjects.push_back(tmp_pointLight);
 
 			tmp_pointLight->AddComponent(new Transform());
@@ -92,7 +96,10 @@ namespace Catherine
 
 
 		// visibile object
-		ISceneObject * tmp_warrior = new SceneObject(this);
+		SceneObject * tmp_warrior = new SceneObject(this);
+		tmp_warrior->Initialize();
+		m_SceneObjects.push_back(tmp_warrior);
+
 		tmp_warrior->AddComponent(new Transform());
 		tmp_warrior->AddComponent(new MeshFilter());
 		tmp_warrior->AddComponent(new MeshRenderer());
@@ -100,19 +107,38 @@ namespace Catherine
 		MeshFilter * tmp_meshFilter = (MeshFilter *)tmp_warrior->GetComponent(ComponentKind::MeshFilter);
 		tmp_meshFilter->LoadFromFile(s_testModel);
 
-		m_SceneObjects.push_back(tmp_warrior);
+		return true;
+	}
+
+	void Level::Uninitialize()
+	{
+		// TODO : component is not destroyed yet
+		for (size_t i = 0; i < m_SceneObjects.size(); i++)
+		{
+			if (m_SceneObjects[i])
+			{
+				m_SceneObjects[i]->Uninitialize();
+
+				delete m_SceneObjects[i];
+				m_SceneObjects[i] = nullptr;
+			}
+		}
+		m_SceneObjects.clear();
 	}
 
 	void Level::Update(float deltaTime)
 	{
-
+		for (auto i = 0; i < m_SceneObjects.size(); i++)
+		{
+			m_SceneObjects[i]->Update(deltaTime);
+		}
 	}
 
 	void Level::Render(WorldContext * context)
 	{
 		for (size_t i = 0; i < m_SceneObjects.size(); i++)
 		{
-			ISceneObject * tmp_sceneObject = m_SceneObjects[i];
+			SceneObject * tmp_sceneObject = m_SceneObjects[i];
 			MeshRenderer * tmp_renderer = (MeshRenderer *)tmp_sceneObject->GetComponent(ComponentKind::MeshRenderer);
 			if (tmp_renderer != nullptr)
 			{

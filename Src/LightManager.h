@@ -5,7 +5,7 @@
 
 namespace Catherine
 {
-	class ISceneObject;
+	class SceneObject;
 
 	class LightManager
 	{
@@ -13,20 +13,20 @@ namespace Catherine
 		LightManager();
 		~LightManager();
 
-		void Register(ISceneObject * obj);
-		void Unregister(ISceneObject * obj);
+		void Register(SceneObject * obj);
+		void Unregister(SceneObject * obj);
 
 		LightContext * GetLightContext();
 
 	private:
-		std::vector<ISceneObject *> GetDirectionalLights() const;
-		std::vector<ISceneObject *> GetSpotLights() const;
-		std::vector<ISceneObject *> GetPointLights() const;
-		std::vector<ISceneObject *> GetLightsByType(LightType type) const;
+		std::vector<SceneObject *> GetDirectionalLights() const;
+		std::vector<SceneObject *> GetSpotLights() const;
+		std::vector<SceneObject *> GetPointLights() const;
+		std::vector<SceneObject *> GetLightsByType(LightType type) const;
 
 	private:
 		LightContext * m_LightContext;
 
-		std::vector<ISceneObject *> m_Lights;
+		std::vector<SceneObject *> m_Lights;
 	};
 }

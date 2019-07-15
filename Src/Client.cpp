@@ -1,11 +1,10 @@
 #include <Client.h>
+#include <LogUtility.h>
 #include <DeviceFactory.h>
 #include <WorldFactory.h>
 #include <RendererFactory.h>
-#include <IRenderer.h>
-#include <LogUtility.h>
-#include <GameWorld.h>
 #include <WorldRenderer.h>
+#include <IWorld.h>
 
 namespace Catherine
 {
@@ -55,16 +54,18 @@ namespace Catherine
 		// other uninitialize
 		// ...
 
-		m_WorldRenderer->Uninitialize();
-		m_Device->Uninitialize();
+		DeleteRenderer();
+		DeleteWorld();
+		DeleteDevice();
 	}
 
 	void Client::Run()
 	{
-		while (!m_Device->WindowShouldClose())
+		while (!m_Device->Close())
 		{
 			OnFrameBegin();
 
+			// TODO : fill delta Time
 			Update(0.0f);
 
 			OnFrameEnd();
@@ -83,15 +84,22 @@ namespace Catherine
 
 	void Client::Update(float deltaTime)
 	{
+		// TODO : seperate logic and render update rate
+
 		// update gameplay logic
 		UpdateLogic(deltaTime);
-		// update render context
+		// render display
 		UpdateRender(deltaTime);
 	}
 
 	void Client::UpdateLogic(float deltaTime)
 	{
+		// before update
+		m_GameWorld->PreUpdate(deltaTime);
+		// update
 		m_GameWorld->Update(deltaTime);
+		// after update
+		m_GameWorld->PostUpdate(deltaTime);
 	}
 
 	void Client::UpdateRender(float deltaTime)
@@ -126,6 +134,19 @@ namespace Catherine
 		return true;
 	}
 
+	void Client::DeleteDevice()
+	{
+		if (m_Device)
+		{
+			g_Device = nullptr;
+
+			m_Device->Uninitialize();
+
+			DeviceFactory::Instance()->DeleteDevice(m_Device);
+			m_Device = nullptr;
+		}
+	}
+
 	bool Client::CreateWorld()
 	{
 		m_GameWorld = WorldFactory::Instance()->CreateGameWorld();
@@ -147,6 +168,17 @@ namespace Catherine
 		return true;
 	}
 
+	void Client::DeleteWorld()
+	{
+		if (m_GameWorld)
+		{
+			m_GameWorld->Uninitialize();
+
+			WorldFactory::Instance()->DeleteWorld(m_GameWorld);
+			m_GameWorld = nullptr;
+		}
+	}
+
 	bool Client::CreateRenderer()
 	{
 		m_WorldRenderer = RendererFactory::Instance()->CreateWorldRenderer();
@@ -166,5 +198,16 @@ namespace Catherine
 		}
 
 		return true;
+	}
+
+	void Client::DeleteRenderer()
+	{
+		if (m_WorldRenderer)
+		{
+			m_WorldRenderer->Uninitialize();
+
+			RendererFactory::Instance()->DeleteRenderer(m_WorldRenderer);
+			m_WorldRenderer = nullptr;
+		}
 	}
 }

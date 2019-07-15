@@ -1,6 +1,6 @@
 #include <LightManager.h>
 #include <LightContext.h>
-#include <ISceneObject.h>
+#include <SceneObject.h>
 #include <Transform.h>
 #include <Light.h>
 #include <algorithm>
@@ -21,7 +21,7 @@ namespace Catherine
 		}
 	}
 
-	void LightManager::Register(ISceneObject * obj)
+	void LightManager::Register(SceneObject * obj)
 	{
 		auto iter = std::find(m_Lights.begin(), m_Lights.end(), obj);
 		if (iter == m_Lights.end())
@@ -30,7 +30,7 @@ namespace Catherine
 		}
 	}
 
-	void LightManager::Unregister(ISceneObject * obj)
+	void LightManager::Unregister(SceneObject * obj)
 	{
 		auto iter = std::find(m_Lights.begin(), m_Lights.end(), obj);
 		if (iter != m_Lights.end())
@@ -51,8 +51,8 @@ namespace Catherine
 			tmp_pointContext->enabled = false;
 		}
 
-		std::vector<ISceneObject *> tmp_dirLights = GetDirectionalLights();
-		ISceneObject * tmp_dirLight = tmp_dirLights.empty() ? nullptr : tmp_dirLights.front();
+		std::vector<SceneObject *> tmp_dirLights = GetDirectionalLights();
+		SceneObject * tmp_dirLight = tmp_dirLights.empty() ? nullptr : tmp_dirLights.front();
 		if (tmp_dirLight)
 		{
 			Transform * tmp_dirTransform = (Transform *)tmp_dirLight->GetComponent(ComponentKind::Transform);
@@ -65,8 +65,8 @@ namespace Catherine
 			tmp_dirContext->enabled = true;
 		}
 
-		std::vector<ISceneObject *> tmp_spotLights = GetSpotLights();
-		ISceneObject * tmp_spotLight = tmp_spotLights.empty() ? nullptr : tmp_spotLights.front();
+		std::vector<SceneObject *> tmp_spotLights = GetSpotLights();
+		SceneObject * tmp_spotLight = tmp_spotLights.empty() ? nullptr : tmp_spotLights.front();
 		if (tmp_spotLight)
 		{
 			Transform * tmp_spotTransform = (Transform *)tmp_spotLight->GetComponent(ComponentKind::Transform);
@@ -85,13 +85,13 @@ namespace Catherine
 			tmp_spotContext->enabled = true;
 		}
 
-		std::vector<ISceneObject *> tmp_pointLights = GetPointLights();
+		std::vector<SceneObject *> tmp_pointLights = GetPointLights();
 		for (unsigned int i = 0; i < LightContext::POINT_LIGHT_COUNT; i++)
 		{
 			if (i >= tmp_pointLights.size())
 				break;
 
-			ISceneObject * tmp_pointLight = tmp_pointLights[i];
+			SceneObject * tmp_pointLight = tmp_pointLights[i];
 			if (tmp_pointLight)
 			{
 				LightContext::PointContext * tmp_pointContext = m_LightContext->GetPointConext(i);
@@ -114,40 +114,40 @@ namespace Catherine
 		return m_LightContext;
 	}
 
-	std::vector<ISceneObject *> LightManager::GetDirectionalLights() const
+	std::vector<SceneObject *> LightManager::GetDirectionalLights() const
 	{
-		std::vector<ISceneObject *> tmp_lights = GetLightsByType(LightType::Directional);
+		std::vector<SceneObject *> tmp_lights = GetLightsByType(LightType::Directional);
 
 		// sort by intensity
 
 		return tmp_lights;
 	}
 
-	std::vector<ISceneObject *> LightManager::GetSpotLights() const
+	std::vector<SceneObject *> LightManager::GetSpotLights() const
 	{
-		std::vector<ISceneObject *> tmp_lights = GetLightsByType(LightType::Spot);
+		std::vector<SceneObject *> tmp_lights = GetLightsByType(LightType::Spot);
 
 		// sort by intensity
 
 		return tmp_lights;
 	}
 
-	std::vector<ISceneObject *> LightManager::GetPointLights() const
+	std::vector<SceneObject *> LightManager::GetPointLights() const
 	{
-		std::vector<ISceneObject *> tmp_lights = GetLightsByType(LightType::Point);
+		std::vector<SceneObject *> tmp_lights = GetLightsByType(LightType::Point);
 
 		// sort by intensity
 
 		return tmp_lights;
 	}
 
-	std::vector<ISceneObject *> LightManager::GetLightsByType(LightType type) const
+	std::vector<SceneObject *> LightManager::GetLightsByType(LightType type) const
 	{
-		std::vector<ISceneObject *> tmp_lights;
+		std::vector<SceneObject *> tmp_lights;
 
 		for (size_t i = 0; i < m_Lights.size(); i++)
 		{
-			ISceneObject * tmp_light = m_Lights[i];
+			SceneObject * tmp_light = m_Lights[i];
 			if (tmp_light == nullptr)
 			{
 				LogError("light sceneobject is null...");

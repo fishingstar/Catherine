@@ -52,7 +52,7 @@ namespace Catherine
 		glfwTerminate();
 	}
 
-	bool OpenGLDevice::WindowShouldClose()
+	bool OpenGLDevice::Close()
 	{
 		return glfwWindowShouldClose(window);
 	}

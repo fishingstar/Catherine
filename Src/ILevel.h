@@ -2,7 +2,6 @@
 
 namespace Catherine
 {
-	class ISceneObject;
 	class WorldContext;
 	class IWorld;
 
@@ -11,7 +10,8 @@ namespace Catherine
 	public:
 		ILevel(IWorld * world) : m_World(world) { }
 
-		virtual void Initialize() = 0;
+		virtual bool Initialize() = 0;
+		virtual void Uninitialize() = 0;
 		virtual void Update(float deltaTime) = 0;
 		virtual void Render(WorldContext * context) = 0;
 

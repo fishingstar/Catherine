@@ -1,25 +1,36 @@
 #pragma once
 
-#include <ISceneObject.h>
+#include <ComponentCommon.h>
 #include <unordered_map>
+#include <vector>
 
 namespace Catherine
 {
-	class SceneObject : public ISceneObject
+	class IComponent;
+	class WorldContext;
+	class ILevel;
+
+	class SceneObject
 	{
 	public:
-		SceneObject(ILevel * level) : ISceneObject(level) { }
+		SceneObject(ILevel * level) : m_Level(level) { }
 
-		virtual void Update(float deltaTime) override;
-		virtual void Render(WorldContext * context) override;
+		bool Initialize();
+		void Uninitialize();
 
-		virtual IComponent * GetComponent(ComponentKind kind) override;
-		virtual const std::vector<IComponent *> & GetComponents(ComponentKind kind) override;
+		void Update(float deltaTime);
+		void Render(WorldContext * context);
 
-		virtual void AddComponent(IComponent * component) override;
-		virtual void RemoveComponent(IComponent * component) override;
+		void AddComponent(IComponent * component);
+		void RemoveComponent(IComponent * component);
+		IComponent * GetComponent(ComponentKind kind);
+		const std::vector<IComponent *> & GetComponents(ComponentKind kind);
+
+		ILevel * GetLevel() const { return m_Level; }
 
 	private:
 		std::unordered_map<ComponentKind, std::vector<IComponent *>> m_Components;
+
+		ILevel * m_Level;
 	};
 }

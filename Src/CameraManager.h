@@ -4,7 +4,7 @@
 
 namespace Catherine
 {
-	class ISceneObject;
+	class SceneObject;
 	class CameraContext;
 
 	class CameraManager
@@ -13,14 +13,14 @@ namespace Catherine
 		CameraManager();
 		~CameraManager();
 
-		void Register(ISceneObject * obj);
-		void Unregister(ISceneObject * obj);
+		void Register(SceneObject * obj);
+		void Unregister(SceneObject * obj);
 
 		CameraContext * GetCameraContext();
 
 	private:
 		CameraContext * m_CameraContext;
 
-		std::vector<ISceneObject *> m_Cameras;
+		std::vector<SceneObject *> m_Cameras;
 	};
 }

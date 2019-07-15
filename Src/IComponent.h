@@ -4,23 +4,23 @@
 
 namespace Catherine
 {
-	class ISceneObject;
+	class SceneObject;
 
 	class IComponent
 	{
 	public:
-		virtual void OnAddComponent(ISceneObject * owner) = 0;
-		virtual void OnRemoveComponent(ISceneObject * owner) = 0;
+		virtual void OnAddComponent(SceneObject * owner) = 0;
+		virtual void OnRemoveComponent(SceneObject * owner) = 0;
 
 		virtual void Update(float deltaTime) = 0;
 
 		virtual ComponentKind GetComponentKind() const = 0;
 
 	public:
-		ISceneObject * GetOwner() const { return m_Owner; }
-		void SetOwner(ISceneObject * owner) { m_Owner = owner; }
+		SceneObject * GetOwner() const { return m_Owner; }
+		void SetOwner(SceneObject * owner) { m_Owner = owner; }
 
 	private:
-		ISceneObject * m_Owner = nullptr;
+		SceneObject * m_Owner = nullptr;
 	};
 }

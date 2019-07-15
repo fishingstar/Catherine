@@ -1,6 +1,6 @@
 #include <CameraManager.h>
 #include <CameraContext.h>
-#include <ISceneObject.h>
+#include <SceneObject.h>
 #include <Transform.h>
 #include <Camera.h>
 #include <algorithm>
@@ -20,7 +20,7 @@ namespace Catherine
 		}
 	}
 
-	void CameraManager::Register(ISceneObject * obj)
+	void CameraManager::Register(SceneObject * obj)
 	{
 		auto iter = std::find(m_Cameras.begin(), m_Cameras.end(), obj);
 		if (iter == m_Cameras.end())
@@ -29,7 +29,7 @@ namespace Catherine
 		}
 	}
 
-	void CameraManager::Unregister(ISceneObject * obj)
+	void CameraManager::Unregister(SceneObject * obj)
 	{
 		auto iter = std::find(m_Cameras.begin(), m_Cameras.end(), obj);
 		if (iter != m_Cameras.end())
@@ -40,7 +40,7 @@ namespace Catherine
 
 	CameraContext * CameraManager::GetCameraContext()
 	{
-		ISceneObject * tmp_object = m_Cameras.size() > 0 ? m_Cameras.front() : nullptr;
+		SceneObject * tmp_object = m_Cameras.size() > 0 ? m_Cameras.front() : nullptr;
 		if (tmp_object)
 		{
 			Transform * tmp_transform = (Transform *)tmp_object->GetComponent(ComponentKind::Transform);

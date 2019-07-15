@@ -10,7 +10,11 @@ namespace Catherine
 	{
 	public:
 		virtual bool Initialize() = 0;
+		virtual void Uninitialize() = 0;
+
+		virtual void PreUpdate(float deltaTime) = 0;
 		virtual void Update(float deltaTime) = 0;
+		virtual void PostUpdate(float deltaTime) = 0;
 
 		virtual void PreRender() = 0;
 		virtual void Render() = 0;

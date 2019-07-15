@@ -3,12 +3,12 @@
 
 namespace Catherine
 {
-	void Transform::OnAddComponent(ISceneObject * owner)
+	void Transform::OnAddComponent(SceneObject * owner)
 	{
 
 	}
 
-	void Transform::OnRemoveComponent(ISceneObject * owner)
+	void Transform::OnRemoveComponent(SceneObject * owner)
 	{
 
 	}

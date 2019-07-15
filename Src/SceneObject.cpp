@@ -1,10 +1,30 @@
 #include <SceneObject.h>
-
 #include <IComponent.h>
 #include <algorithm>
 
 namespace Catherine
 {
+	bool SceneObject::Initialize()
+	{
+		return true;
+	}
+
+	void SceneObject::Uninitialize()
+	{
+		for (auto iter_kind = m_Components.begin(); iter_kind != m_Components.end(); iter_kind++)
+		{
+			for (auto iter_component = iter_kind->second.begin(); iter_component != iter_kind->second.end(); iter_component++)
+			{
+				IComponent * tmp_component = *iter_component;
+				if (tmp_component)
+				{
+					delete tmp_component;
+				}
+			}
+		}
+		m_Components.clear();
+	}
+
 	void SceneObject::Update(float deltaTime)
 	{
 

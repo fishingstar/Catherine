@@ -194,7 +194,6 @@
     <ClInclude Include="..\..\Src\DeviceFactory.h" />
     <ClInclude Include="..\..\Src\IComponent.h" />
     <ClInclude Include="..\..\Src\ILevel.h" />
-    <ClInclude Include="..\..\Src\ISceneObject.h" />
     <ClInclude Include="..\..\Src\Level.h" />
     <ClInclude Include="..\..\Src\FileUtility.h" />
     <ClInclude Include="..\..\Src\GameWorld.h" />
