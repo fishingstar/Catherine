@@ -8,10 +8,11 @@ namespace Catherine
 	class OpenGLTexture : public ITexture
 	{
 	public:
-		virtual void LoadFromFile(const char * param_Path) override;
+		virtual bool Initialize(int width, int height, int channel, void * data = nullptr) override;
+		virtual void Uninitialize() override;
 		virtual void Use(unsigned int slot) override;
 
 	private:
-		unsigned int m_Texture = 0;
+		GLuint m_Texture = 0;
 	};
 }

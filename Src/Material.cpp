@@ -6,7 +6,9 @@
 #include <WorldContext.h>
 #include <CameraContext.h>
 #include <LightContext.h>
+#include <TextureManager.h>
 #include <tinyxml2.h>
+#include <LogUtility.h>
 
 namespace Catherine
 {
@@ -17,7 +19,7 @@ namespace Catherine
 		tinyxml2::XMLDocument doc;
 		if (doc.LoadFile(param_Config) != tinyxml2::XML_SUCCESS)
 		{
-			// TODO : print error log
+			LogError("Material::Initialize : LoadFile Failed...");
 			return false;
 		}
 
@@ -38,10 +40,9 @@ namespace Catherine
 			const char * tmp_key = tmp_item->Attribute("Key");
 			const char * tmp_value = tmp_item->Attribute("Value");
 
-			ITexture * tmp_resource = g_Device->CreateTexture();
+			ITexture * tmp_resource = TextureManager::Instance()->GetTexture(tmp_value);
 			if (tmp_resource)
 			{
-				tmp_resource->LoadFromFile(tmp_value);
 				SetTexture(tmp_key, tmp_resource);
 			}
 

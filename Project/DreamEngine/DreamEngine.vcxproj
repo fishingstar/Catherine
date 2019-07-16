@@ -144,6 +144,7 @@
     <ClCompile Include="..\..\Src\OpenGLIndexBuffer.cpp" />
     <ClCompile Include="..\..\Src\OpenGLVertexArray.cpp" />
     <ClCompile Include="..\..\Src\OpenGLVertexBuffer.cpp" />
+    <ClCompile Include="..\..\Src\TextureManager.cpp" />
     <ClCompile Include="..\..\Src\tinyxml2.cpp" />
     <ClCompile Include="..\..\Src\WorldRenderer.cpp" />
     <ClCompile Include="..\..\Src\DeviceFactory.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="..\..\Src\OpenGLIndexBuffer.h" />
     <ClInclude Include="..\..\Src\OpenGLVertexArray.h" />
     <ClInclude Include="..\..\Src\OpenGLVertexBuffer.h" />
+    <ClInclude Include="..\..\Src\TextureManager.h" />
     <ClInclude Include="..\..\Src\tinyxml2.h" />
     <ClInclude Include="..\..\Src\WorldRenderer.h" />
     <ClInclude Include="..\..\Src\DeviceCommon.h" />

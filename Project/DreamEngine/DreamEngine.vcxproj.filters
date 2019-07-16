@@ -95,6 +95,9 @@
     <Filter Include="Utility\Json">
       <UniqueIdentifier>{1fa4ac76-5446-4582-a9d7-bafa21267e9f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{71585631-d01c-4a04-9ee1-2370208a8972}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\main.cpp">
@@ -207,6 +210,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\tinyxml2.cpp">
       <Filter>Utility\Xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\TextureManager.cpp">
+      <Filter>Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -362,6 +368,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\tinyxml2.h">
       <Filter>Utility\Xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\TextureManager.h">
+      <Filter>Resource</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
