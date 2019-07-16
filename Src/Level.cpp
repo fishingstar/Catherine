@@ -11,6 +11,13 @@
 namespace Catherine
 {
 	const char * s_testModel = "./res/model/nanosuit/nanosuit.obj";
+	const char * s_glassMaterial = "./res/model/nanosuit/material/nanosuit_glass.mtl";
+	const char * s_legMaterial = "./res/model/nanosuit/material/nanosuit_leg.mtl";
+	const char * s_handMaterial = "./res/model/nanosuit/material/nanosuit_hand.mtl";
+	const char * s_mouseMaterial = "./res/model/nanosuit/material/nanosuit_mouse.mtl";
+	const char * s_armMaterial = "./res/model/nanosuit/material/nanosuit_arm.mtl";
+	const char * s_helmetMaterial = "./res/model/nanosuit/material/nanosuit_helmet.mtl";
+	const char * s_bodyMaterial = "./res/model/nanosuit/material/nanosuit_body.mtl";
 
 	bool Level::Initialize()
 	{
@@ -98,25 +105,25 @@ namespace Catherine
 		tmp_meshFilter->LoadFromFile(s_testModel);
 		MeshRenderer * tmp_meshRenderer = (MeshRenderer *)tmp_warrior->AddComponent(ComponentKind::MeshRenderer);
 		IMaterial * tmp_glassMtl = new Material();
-		tmp_glassMtl->Initialize("./res/material/nanosuit_glass.mtl");
+		tmp_glassMtl->Initialize(s_glassMaterial);
 		tmp_meshRenderer->AddMaterial(tmp_glassMtl);
 		IMaterial * tmp_legMtl = new Material();
-		tmp_legMtl->Initialize("./res/material/nanosuit_leg.mtl");
+		tmp_legMtl->Initialize(s_legMaterial);
 		tmp_meshRenderer->AddMaterial(tmp_legMtl);
 		IMaterial * tmp_handMtl = new Material();
-		tmp_handMtl->Initialize("./res/material/nanosuit_hand.mtl");
+		tmp_handMtl->Initialize(s_handMaterial);
 		tmp_meshRenderer->AddMaterial(tmp_handMtl);
 		IMaterial * tmp_mouseMtl = new Material();
-		tmp_mouseMtl->Initialize("./res/material/nanosuit_mouse.mtl");
+		tmp_mouseMtl->Initialize(s_mouseMaterial);
 		tmp_meshRenderer->AddMaterial(tmp_mouseMtl);
 		IMaterial * tmp_armMtl = new Material();
-		tmp_armMtl->Initialize("./res/material/nanosuit_arm.mtl");
+		tmp_armMtl->Initialize(s_armMaterial);
 		tmp_meshRenderer->AddMaterial(tmp_armMtl);
 		IMaterial * tmp_helmetMtl = new Material();
-		tmp_helmetMtl->Initialize("./res/material/nanosuit_helmet.mtl");
+		tmp_helmetMtl->Initialize(s_helmetMaterial);
 		tmp_meshRenderer->AddMaterial(tmp_helmetMtl);
 		IMaterial * tmp_bodyMtl = new Material();
-		tmp_bodyMtl->Initialize("./res/material/nanosuit_body.mtl");
+		tmp_bodyMtl->Initialize(s_bodyMaterial);
 		tmp_meshRenderer->AddMaterial(tmp_bodyMtl);
 
 		return true;

@@ -27,6 +27,7 @@ namespace Catherine
 		tinyxml2::XMLElement * tmp_shader = tmp_root->FirstChildElement("Shader");
 		tinyxml2::XMLElement * tmp_vertex = tmp_shader->FirstChildElement("Vertex");
 		tinyxml2::XMLElement * tmp_fragment = tmp_shader->FirstChildElement("Fragment");
+
 		CreateProgram(tmp_vertex->GetText(), tmp_fragment->GetText());
 
 		// texture
@@ -38,9 +39,11 @@ namespace Catherine
 			const char * tmp_value = tmp_item->Attribute("Value");
 
 			ITexture * tmp_resource = g_Device->CreateTexture();
-			tmp_resource->LoadFromFile(tmp_value);
-
-			SetTexture(tmp_key, tmp_resource);
+			if (tmp_resource)
+			{
+				tmp_resource->LoadFromFile(tmp_value);
+				SetTexture(tmp_key, tmp_resource);
+			}
 
 			tmp_item = tmp_item->NextSiblingElement();
 		}

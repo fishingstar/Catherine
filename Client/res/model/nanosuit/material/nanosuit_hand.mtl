@@ -5,6 +5,6 @@
 		<Fragment>./res/shader/simple.fs</Fragment>
 	</Shader>
 	<Texture>
-		<Item Key = "diffuse" Value = "./res/model/nanosuit/leg_dif.png" />
+		<Item Key = "diffuse" Value = "./res/model/nanosuit/texture/hand_dif.png" />
 	</Texture>
 </document>
