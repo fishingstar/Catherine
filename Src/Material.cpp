@@ -1,19 +1,17 @@
 #include <Material.h>
-#include <IDevice.h>
 #include <IProgram.h>
 #include <ITexture.h>
-#include <string>
 #include <WorldContext.h>
 #include <CameraContext.h>
 #include <LightContext.h>
 #include <TextureManager.h>
+#include <StateManager.h>
+#include <ProgramManager.h>
 #include <tinyxml2.h>
 #include <LogUtility.h>
 
 namespace Catherine
 {
-	extern IDevice * g_Device;
-
 	bool Material::Initialize(const char * param_Config)
 	{
 		tinyxml2::XMLDocument doc;
@@ -30,7 +28,7 @@ namespace Catherine
 		tinyxml2::XMLElement * tmp_vertex = tmp_shader->FirstChildElement("Vertex");
 		tinyxml2::XMLElement * tmp_fragment = tmp_shader->FirstChildElement("Fragment");
 
-		CreateProgram(tmp_vertex->GetText(), tmp_fragment->GetText());
+		m_Program = ProgramManager::Instance()->GetProgram(tmp_vertex->GetText(), tmp_fragment->GetText());
 
 		// texture
 		tinyxml2::XMLElement * tmp_texture = tmp_root->FirstChildElement("Texture");
@@ -142,11 +140,11 @@ namespace Catherine
 
 	void Material::Use()
 	{
-		g_Device->EnableDepthTest(m_DepthTestEnabled);
-		g_Device->SetDepthTestMode(m_DepthTestMode);
+		StateManager::Instance()->EnableDepthTest(m_DepthTestEnabled);
+		StateManager::Instance()->SetDepthTestMode(m_DepthTestMode);
 
-		g_Device->EnableCullFace(m_CullFaceEnabled);
-		g_Device->SetCullFaceMode(m_CullFaceMode);
+		StateManager::Instance()->EnableCullFace(m_CullFaceEnabled);
+		StateManager::Instance()->SetCullFaceMode(m_CullFaceMode);
 
 		for (size_t i = 0; i < m_Textures.size(); i++)
 		{
@@ -155,13 +153,5 @@ namespace Catherine
 		}
 
 		m_Program->Use();
-	}
-
-	void Material::CreateProgram(const char * vertex, const char * fragment)
-	{
-		m_Program = g_Device->CreateProgram();
-		m_Program->AttachShader(vertex, fragment);
-		m_Program->Compile();
-		m_Program->Link();
 	}
 }

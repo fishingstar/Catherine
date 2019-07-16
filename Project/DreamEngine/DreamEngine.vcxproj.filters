@@ -95,7 +95,10 @@
     <Filter Include="Utility\Json">
       <UniqueIdentifier>{1fa4ac76-5446-4582-a9d7-bafa21267e9f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource">
+    <Filter Include="Render\State">
+      <UniqueIdentifier>{41e097a5-21ae-44ca-bc2f-75a6eba89227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\Resource">
       <UniqueIdentifier>{71585631-d01c-4a04-9ee1-2370208a8972}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -212,7 +215,16 @@
       <Filter>Utility\Xml</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\TextureManager.cpp">
-      <Filter>Resource</Filter>
+      <Filter>Render\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\MaterialManager.cpp">
+      <Filter>Render\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\StateManager.cpp">
+      <Filter>Render\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\ProgramManager.cpp">
+      <Filter>Render\Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -370,7 +382,16 @@
       <Filter>Utility\Xml</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\TextureManager.h">
-      <Filter>Resource</Filter>
+      <Filter>Render\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\MaterialManager.h">
+      <Filter>Render\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\StateManager.h">
+      <Filter>Render\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\ProgramManager.h">
+      <Filter>Render\Resource</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

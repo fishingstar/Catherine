@@ -135,7 +135,7 @@ namespace Catherine
 	{
 		GLenum tmp_drawMode = OpenGLCommon::GetOpenGLDrawMode(mode);
 		GLenum tmp_valueType = OpenGLCommon::GetOpenGLType(type);
-		glDrawElements(tmp_drawMode, count, tmp_valueType, (void *)offset);
+		glDrawElements(tmp_drawMode, (GLsizei)count, tmp_valueType, (void *)offset);
 	}
 
 	void OpenGLDevice::OnFrameBegin()

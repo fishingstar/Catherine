@@ -14,6 +14,7 @@ namespace Catherine
 		static GLenum GetOpenGLType(ValueType type);
 		static GLenum GetOpenGLDrawMode(DrawMode mode);
 		static GLenum GetOpenGLUsage(Usage mode);
+		static GLenum GetOpenGLPixelFormat(PixelFormat format);
 
 	private:
 		OpenGLCommon() { }

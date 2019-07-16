@@ -32,7 +32,7 @@ namespace Catherine
 				OpenGLCommon::GetOpenGLType(tmp_attribute.GetValueType()),
 				tmp_attribute.GetNormalized(),
 				tmp_attribute.GetStride(),
-				(void *)tmp_attribute.GetOffset()
+				(const void *)tmp_attribute.GetOffset()
 			);
 		}
 	}

@@ -52,9 +52,15 @@ namespace Catherine
 
 	std::vector<std::pair<Usage, GLenum>> OpenGLUsage =
 	{
-		{ Usage::Static_Draw, GL_STATIC_DRAW},
-		{ Usage::Stream_Draw, GL_STREAM_DRAW },
-		{ Usage::Dynamic_Draw, GL_DYNAMIC_DRAW }
+		{ Usage::Static_Draw,	GL_STATIC_DRAW },
+		{ Usage::Stream_Draw,	GL_STREAM_DRAW },
+		{ Usage::Dynamic_Draw,	GL_DYNAMIC_DRAW }
+	};
+
+	std::vector<std::pair<PixelFormat, GLenum>> OpenGLPixelFormat =
+	{
+		{ PixelFormat::A8R8G8B8,	GL_RGBA },
+		{ PixelFormat::R8G8B8,		GL_RGB }
 	};
 
 	template<typename type>
@@ -102,5 +108,10 @@ namespace Catherine
 	GLenum OpenGLCommon::GetOpenGLUsage(Usage mode)
 	{
 		return GetOpenGLDefines(OpenGLUsage, mode);
+	}
+
+	GLenum OpenGLCommon::GetOpenGLPixelFormat(PixelFormat format)
+	{
+		return GetOpenGLDefines(OpenGLPixelFormat, format);
 	}
 }

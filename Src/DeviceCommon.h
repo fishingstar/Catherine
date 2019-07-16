@@ -56,4 +56,11 @@ namespace Catherine
 		Stream_Draw,
 		Dynamic_Draw,
 	};
+
+	// TODO : fill enum...
+	enum class PixelFormat
+	{
+		A8R8G8B8,
+		R8G8B8,
+	};
 }

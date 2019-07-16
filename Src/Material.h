@@ -27,9 +27,6 @@ namespace Catherine
 		virtual void Use() override;
 
 	private:
-		void CreateProgram(const char * vertex, const char * fragment);
-
-	private:
 		bool m_DepthTestEnabled = true;
 		DepthTestMode m_DepthTestMode = DepthTestMode::LessEqual;
 

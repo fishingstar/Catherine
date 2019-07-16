@@ -55,8 +55,11 @@ namespace Catherine
 		unsigned char * tmp_data = stbi_load(filename.c_str(), &width, &height, &channels, 0);
 		if (tmp_data)
 		{
+			// TODO : remove test code
+			PixelFormat tmp_format = channels == 3 ? PixelFormat::R8G8B8 : PixelFormat::A8R8G8B8;
+
 			tmp_result = g_Device->CreateTexture();
-			tmp_result->Initialize(width, height, channels, tmp_data);
+			tmp_result->Initialize(width, height, tmp_format, tmp_data);
 			m_Textures.insert(std::make_pair(filename, tmp_result));
 		}
 		stbi_image_free(tmp_data);
