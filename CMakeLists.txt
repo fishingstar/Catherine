@@ -27,12 +27,12 @@ include_directories(
 	"${PROJECT_SOURCE_DIR}/Src/glad/include"
 	"${PROJECT_SOURCE_DIR}/Src/thirdparty/assimp/include"
 	"${PROJECT_SOURCE_DIR}/Src/thirdparty/glm"
-	"${PROJECT_SOURCE_DIR}/Src/thirdparty/glfw-3.3.bin.WIN64/include"
+	"${PROJECT_SOURCE_DIR}/Src/thirdparty/glfw/include"
 )
 
 # lib file directories
 link_directories(
-	"${PROJECT_SOURCE_DIR}/Src/thirdparty/glfw-3.3.bin.WIN64/lib-vc2017"
+	"${PROJECT_SOURCE_DIR}/Src/thirdparty/glfw/lib"
 	"${PROJECT_SOURCE_DIR}/Src/thirdparty/assimp/lib"
 )
 
