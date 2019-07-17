@@ -208,9 +208,6 @@
     <ClCompile Include="..\..\Src\Light.cpp">
       <Filter>World\Component</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\JsonParser.cpp">
-      <Filter>Utility\Json</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\tinyxml2.cpp">
       <Filter>Utility\Xml</Filter>
     </ClCompile>
@@ -374,9 +371,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\stb_image.h">
       <Filter>Utility\Image</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\JsonParser.h">
-      <Filter>Utility\Json</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\tinyxml2.h">
       <Filter>Utility\Xml</Filter>

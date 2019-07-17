@@ -156,7 +156,6 @@
     <ClCompile Include="..\..\Src\GameWorld.cpp" />
     <ClCompile Include="..\..\Src\glad\src\glad.c" />
     <ClCompile Include="..\..\Src\global.cpp" />
-    <ClCompile Include="..\..\Src\JsonParser.cpp" />
     <ClCompile Include="..\..\Src\LightContext.cpp" />
     <ClCompile Include="..\..\Src\log.cpp" />
     <ClCompile Include="..\..\Src\LogUtility.cpp" />
@@ -209,7 +208,6 @@
     <ClInclude Include="..\..\Src\IMaterial.h" />
     <ClInclude Include="..\..\Src\IMesh.h" />
     <ClInclude Include="..\..\Src\IWorld.h" />
-    <ClInclude Include="..\..\Src\JsonParser.h" />
     <ClInclude Include="..\..\Src\LightContext.h" />
     <ClInclude Include="..\..\Src\Material.h" />
     <ClInclude Include="..\..\Src\Mesh.h" />
