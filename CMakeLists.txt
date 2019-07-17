@@ -28,6 +28,7 @@ include_directories(
 	"${PROJECT_SOURCE_DIR}/Src/thirdparty/assimp/include"
 	"${PROJECT_SOURCE_DIR}/Src/thirdparty/glm"
 	"${PROJECT_SOURCE_DIR}/Src/thirdparty/glfw/include"
+	"${PROJECT_SOURCE_DIR}/Src/thirdparty/stb_image/include"
 )
 
 # lib file directories
