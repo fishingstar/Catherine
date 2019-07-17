@@ -1,7 +1,7 @@
-#include <OpenGLProgram.h>
-#include <LogUtility.h>
-#include <FileUtility.h>
-#include <glm/gtc/type_ptr.hpp>
+#include "OpenGLProgram.h"
+#include "LogUtility.h"
+#include "FileUtility.h"
+#include "glm/gtc/type_ptr.hpp"
 
 namespace Catherine
 {

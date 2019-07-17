@@ -1,7 +1,7 @@
 #pragma once
 
-#include <IIndexBuffer.h>
-#include <glad/glad.h>
+#include "IIndexBuffer.h"
+#include "glad/glad.h"
 
 namespace Catherine
 {

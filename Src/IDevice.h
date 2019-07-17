@@ -1,8 +1,8 @@
 #pragma once
 
-#include <DeviceCommon.h>
+#include "DeviceCommon.h"
 #include <vector>
-#include <AttributeLayout.h>
+#include "AttributeLayout.h"
 
 namespace Catherine
 {

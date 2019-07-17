@@ -1,5 +1,5 @@
-#include <OpenGLVertexBuffer.h>
-#include <OpenGLCommon.h>
+#include "OpenGLVertexBuffer.h"
+#include "OpenGLCommon.h"
 
 namespace Catherine
 {

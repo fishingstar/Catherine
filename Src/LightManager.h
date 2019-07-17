@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include <LightContext.h>
+#include "LightContext.h"
 
 namespace Catherine
 {

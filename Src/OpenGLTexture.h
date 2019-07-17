@@ -1,7 +1,7 @@
 #pragma once
 
-#include <ITexture.h>
-#include <glad/glad.h>
+#include "ITexture.h"
+#include "glad/glad.h"
 
 namespace Catherine
 {

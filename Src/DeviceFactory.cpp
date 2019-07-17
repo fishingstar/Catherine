@@ -1,5 +1,5 @@
-#include <DeviceFactory.h>
-#include <OpenGLDevice.h>
+#include "DeviceFactory.h"
+#include "OpenGLDevice.h"
 
 namespace Catherine
 {

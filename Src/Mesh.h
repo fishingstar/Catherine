@@ -1,6 +1,6 @@
 #pragma once
 
-#include <IMesh.h>
+#include "IMesh.h"
 
 namespace Catherine
 {

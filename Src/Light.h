@@ -1,8 +1,8 @@
 #pragma once
 
-#include <IComponent.h>
-#include <LightContext.h>
-#include <glm/glm.hpp>
+#include "IComponent.h"
+#include "LightContext.h"
+#include "glm/glm.hpp"
 
 namespace Catherine
 {

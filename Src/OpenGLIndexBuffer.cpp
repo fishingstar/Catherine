@@ -1,5 +1,5 @@
-#include <OpenGLIndexBuffer.h>
-#include <OpenGLCommon.h>
+#include "OpenGLIndexBuffer.h"
+#include "OpenGLCommon.h"
 
 namespace Catherine
 {

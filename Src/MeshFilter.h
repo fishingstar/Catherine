@@ -1,8 +1,8 @@
 #pragma once
 
-#include <IComponent.h>
+#include "IComponent.h"
 #include <vector>
-#include <assimp/scene.h>
+#include "assimp/scene.h"
 
 namespace Catherine
 {

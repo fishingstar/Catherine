@@ -1,6 +1,6 @@
 #pragma once
 
-#include <OpenGLCommon.h>
+#include "OpenGLCommon.h"
 
 namespace Catherine
 {

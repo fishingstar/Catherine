@@ -1,7 +1,7 @@
 #pragma once
 
-#include <IComponent.h>
-#include <CameraContext.h>
+#include "IComponent.h"
+#include "CameraContext.h"
 
 namespace Catherine
 {

@@ -1,13 +1,13 @@
-#include <MeshFilter.h>
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
-#include <LogUtility.h>
-#include <FileUtility.h>
-#include <Mesh.h>
-#include <Material.h>
-#include <IDevice.h>
-#include <ITexture.h>
+#include "MeshFilter.h"
+#include "assimp/Importer.hpp"
+#include "assimp/scene.h"
+#include "assimp/postprocess.h"
+#include "LogUtility.h"
+#include "FileUtility.h"
+#include "Mesh.h"
+#include "Material.h"
+#include "IDevice.h"
+#include "ITexture.h"
 
 namespace Catherine
 {

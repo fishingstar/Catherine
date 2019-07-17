@@ -1,10 +1,10 @@
-#include <LightManager.h>
-#include <LightContext.h>
-#include <SceneObject.h>
-#include <Transform.h>
-#include <Light.h>
+#include "LightManager.h"
+#include "LightContext.h"
+#include "SceneObject.h"
+#include "Transform.h"
+#include "Light.h"
 #include <algorithm>
-#include <LogUtility.h>
+#include "LogUtility.h"
 
 namespace Catherine
 {

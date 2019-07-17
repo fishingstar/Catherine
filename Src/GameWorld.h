@@ -1,6 +1,6 @@
 #pragma once
 
-#include <IWorld.h>
+#include "IWorld.h"
 #include <vector>
 
 namespace Catherine

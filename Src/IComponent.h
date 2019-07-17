@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ComponentCommon.h>
+#include "ComponentCommon.h"
 
 namespace Catherine
 {

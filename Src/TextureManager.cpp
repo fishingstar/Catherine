@@ -1,10 +1,10 @@
-#include <TextureManager.h>
-#include <IDevice.h>
-#include <ITexture.h>
-#include <LogUtility.h>
+#include "TextureManager.h"
+#include "IDevice.h"
+#include "ITexture.h"
+#include "LogUtility.h"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
+#include "stb_image.h"
 
 namespace Catherine
 {

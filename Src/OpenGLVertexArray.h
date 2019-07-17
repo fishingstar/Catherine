@@ -1,7 +1,7 @@
 #pragma once
 
-#include <IVertexArray.h>
-#include <glad/glad.h>
+#include "IVertexArray.h"
+#include "glad/glad.h"
 
 namespace Catherine
 {

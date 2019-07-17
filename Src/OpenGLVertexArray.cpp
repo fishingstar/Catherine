@@ -1,4 +1,4 @@
-#include <OpenGLVertexArray.h>
+#include "OpenGLVertexArray.h"
 
 namespace Catherine
 {

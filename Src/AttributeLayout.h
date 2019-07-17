@@ -1,6 +1,6 @@
 #pragma once
 
-#include <DeviceCommon.h>
+#include "DeviceCommon.h"
 
 namespace Catherine
 {

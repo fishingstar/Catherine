@@ -1,7 +1,7 @@
 #pragma once
 
-#include <IProgram.h>
-#include <glad/glad.h>
+#include "IProgram.h"
+#include "glad/glad.h"
 
 namespace Catherine
 {

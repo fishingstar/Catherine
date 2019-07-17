@@ -1,7 +1,7 @@
 #pragma once
 
-#include <IMaterial.h>
-#include <DeviceCommon.h>
+#include "IMaterial.h"
+#include "DeviceCommon.h"
 #include <vector>
 
 namespace Catherine

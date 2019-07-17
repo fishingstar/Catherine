@@ -1,6 +1,6 @@
-#include <ProgramManager.h>
-#include <IDevice.h>
-#include <IProgram.h>
+#include "ProgramManager.h"
+#include "IDevice.h"
+#include "IProgram.h"
 
 namespace Catherine
 {

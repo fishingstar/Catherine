@@ -1,6 +1,6 @@
 #pragma once
 
-#include <IRenderer.h>
+#include "IRenderer.h"
 #include <vector>
 
 namespace Catherine

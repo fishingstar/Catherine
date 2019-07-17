@@ -1,7 +1,7 @@
 #pragma once
 
-#include <IComponent.h>
-#include <glm/glm.hpp>
+#include "IComponent.h"
+#include "glm/glm.hpp"
 #include <vector>
 
 namespace Catherine

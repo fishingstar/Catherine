@@ -1,9 +1,9 @@
 #pragma once
 
-#include <IVertexBuffer.h>
-#include <glad/glad.h>
-#include <DeviceCommon.h>
-#include <AttributeLayout.h>
+#include "IVertexBuffer.h"
+#include "glad/glad.h"
+#include "DeviceCommon.h"
+#include "AttributeLayout.h"
 #include <vector>
 
 namespace Catherine
