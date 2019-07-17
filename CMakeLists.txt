@@ -44,4 +44,4 @@ aux_source_directory(./Src/glad/src GLAD_SRC_DIR)
 add_executable(Catherine ${SRC_DIR} ${GLAD_SRC_DIR})
 
 # lib
-target_link_libraries(Catherine glfw3.lib assimp-vc140-mt.lib)
+target_link_libraries(Catherine glfw3.lib assimp.lib)
