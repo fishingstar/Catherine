@@ -36,12 +36,231 @@ link_directories(
 	"${PROJECT_SOURCE_DIR}/Src/thirdparty/assimp/lib"
 )
 
-# source path
-aux_source_directory(./Src SRC_DIR)
-aux_source_directory(./Src/glad/src GLAD_SRC_DIR)
+#################Souce Files#################
+
+# Client
+SET(Src_Client
+	"${PROJECT_SOURCE_DIR}/Src/Client.h"
+	"${PROJECT_SOURCE_DIR}/Src/Client.cpp"
+)
+source_group(Client FILES ${Src_Client})
+
+# Device\\Common
+SET(Src_Device_Common
+	"${PROJECT_SOURCE_DIR}/Src/AttributeLayout.h"
+	"${PROJECT_SOURCE_DIR}/Src/DeviceCommon.h"
+	"${PROJECT_SOURCE_DIR}/Src/DeviceConst.h"
+	"${PROJECT_SOURCE_DIR}/Src/DeviceFactory.h"
+	"${PROJECT_SOURCE_DIR}/Src/DeviceFactory.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/IDevice.h"
+	"${PROJECT_SOURCE_DIR}/Src/ITexture.h"
+	"${PROJECT_SOURCE_DIR}/Src/IProgram.h"
+	"${PROJECT_SOURCE_DIR}/Src/IIndexBuffer.h"
+	"${PROJECT_SOURCE_DIR}/Src/IVertexBuffer.h"
+	"${PROJECT_SOURCE_DIR}/Src/IVertexArray.h"
+)
+source_group(Device\\Common FILES ${Src_Device_Common})
+
+# Device\\OpenGL
+SET(Src_Device_OpenGL
+	"${PROJECT_SOURCE_DIR}/Src/glad/src/glad.c"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLCommon.h"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLCommon.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLDevice.h"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLDevice.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLIndexBuffer.h"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLIndexBuffer.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLVertexBuffer.h"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLVertexBuffer.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLVertexArray.h"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLVertexArray.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLTexture.h"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLTexture.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLProgram.h"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLProgram.cpp"
+)
+source_group(Device\\OpenGL FILES ${Src_Device_OpenGL})
+
+# Global
+SET(Src_Global
+	"${PROJECT_SOURCE_DIR}/Src/global.cpp"
+)
+source_group(Global FILES ${Src_Global})
+
+# Render\\Context
+SET(Src_Render_Context
+	"${PROJECT_SOURCE_DIR}/Src/CameraContext.h"
+	"${PROJECT_SOURCE_DIR}/Src/CameraContext.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/LightContext.h"
+	"${PROJECT_SOURCE_DIR}/Src/LightContext.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/RenderContext.h"
+	"${PROJECT_SOURCE_DIR}/Src/RenderContext.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/WorldContext.h"
+	"${PROJECT_SOURCE_DIR}/Src/WorldContext.cpp"
+)
+source_group(Render\\Context FILES ${Src_Render_Context})
+
+# Render\\Material
+SET(Src_Render_Material
+	"${PROJECT_SOURCE_DIR}/Src/IMaterial.h"
+	"${PROJECT_SOURCE_DIR}/Src/Material.h"
+	"${PROJECT_SOURCE_DIR}/Src/Material.cpp"
+)
+source_group(Render\\Material FILES ${Src_Render_Material})
+
+# Render\\Renderer
+SET(Src_Render_Renderer
+	"${PROJECT_SOURCE_DIR}/Src/IRenderer.h"
+	"${PROJECT_SOURCE_DIR}/Src/RendererFactory.h"
+	"${PROJECT_SOURCE_DIR}/Src/RendererFactory.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/WorldRenderer.h"
+	"${PROJECT_SOURCE_DIR}/Src/WorldRenderer.cpp"
+)
+source_group(Render\\Renderer FILES ${Src_Render_Renderer})
+
+# Render\\Resource
+SET(Src_Render_Resource
+	"${PROJECT_SOURCE_DIR}/Src/MaterialManager.h"
+	"${PROJECT_SOURCE_DIR}/Src/MaterialManager.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/ProgramManager.h"
+	"${PROJECT_SOURCE_DIR}/Src/ProgramManager.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/TextureManager.h"
+	"${PROJECT_SOURCE_DIR}/Src/TextureManager.cpp"
+)
+source_group(Render\\Resource FILES ${Src_Render_Resource})
+
+# Render\\State
+SET(Src_Render_State
+	"${PROJECT_SOURCE_DIR}/Src/StateManager.h"
+	"${PROJECT_SOURCE_DIR}/Src/StateManager.cpp"
+)
+source_group(Render\\State FILES ${Src_Render_State})
+
+# Entry
+SET(Src_Entry
+	"${PROJECT_SOURCE_DIR}/Src/main.cpp"
+)
+source_group(Entry FILES ${Src_Entry})
+
+# Utility\\File
+SET(Src_Utility_File
+	"${PROJECT_SOURCE_DIR}/Src/FileUtility.h"
+	"${PROJECT_SOURCE_DIR}/Src/FileUtility.cpp"
+)
+source_group(Utility\\File FILES ${Src_Utility_File})
+
+# Utility\\Log
+SET(Src_Utility_Log
+	"${PROJECT_SOURCE_DIR}/Src/log.h"
+	"${PROJECT_SOURCE_DIR}/Src/log.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/LogUtility.h"
+	"${PROJECT_SOURCE_DIR}/Src/LogUtility.cpp"
+)
+source_group(Utility\\Log FILES ${Src_Utility_Log})
+
+# Utility\\Time
+SET(Src_Utility_Time
+	"${PROJECT_SOURCE_DIR}/Src/TimeUtility.h"
+	"${PROJECT_SOURCE_DIR}/Src/TimeUtility.cpp"
+)
+source_group(Utility\\Time FILES ${Src_Utility_Time})
+
+# Utility\\Xml
+SET(Src_Utility_Xml
+	"${PROJECT_SOURCE_DIR}/Src/tinyxml2.h"
+	"${PROJECT_SOURCE_DIR}/Src/tinyxml2.cpp"
+)
+source_group(Utility\\Xml FILES ${Src_Utility_Xml})
+
+# World\\Component
+SET(Src_World_Component
+	"${PROJECT_SOURCE_DIR}/Src/ComponentCommon.h"
+	"${PROJECT_SOURCE_DIR}/Src/IComponent.h"
+	"${PROJECT_SOURCE_DIR}/Src/Transform.h"
+	"${PROJECT_SOURCE_DIR}/Src/Transform.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/Camera.h"
+	"${PROJECT_SOURCE_DIR}/Src/Camera.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/Light.h"
+	"${PROJECT_SOURCE_DIR}/Src/Light.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/MeshFilter.h"
+	"${PROJECT_SOURCE_DIR}/Src/MeshFilter.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/MeshRenderer.h"
+	"${PROJECT_SOURCE_DIR}/Src/MeshRenderer.cpp"
+)
+source_group(World\\Component FILES ${Src_World_Component})
+
+# World\\Level
+SET(Src_World_Level
+	"${PROJECT_SOURCE_DIR}/Src/ILevel.h"
+	"${PROJECT_SOURCE_DIR}/Src/Level.h"
+	"${PROJECT_SOURCE_DIR}/Src/Level.cpp"
+)
+source_group(World\\Level FILES ${Src_World_Level})
+
+# World\\Manager
+SET(Src_World_Manager
+	"${PROJECT_SOURCE_DIR}/Src/CameraManager.h"
+	"${PROJECT_SOURCE_DIR}/Src/CameraManager.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/LightManager.h"
+	"${PROJECT_SOURCE_DIR}/Src/LightManager.cpp"
+)
+source_group(World\\Manager FILES ${Src_World_Manager})
+
+# World\\Mesh
+SET(Src_World_Mesh
+	"${PROJECT_SOURCE_DIR}/Src/IMesh.h"
+	"${PROJECT_SOURCE_DIR}/Src/Mesh.h"
+	"${PROJECT_SOURCE_DIR}/Src/Mesh.cpp"
+)
+source_group(World\\Mesh FILES ${Src_World_Mesh})
+
+# World\\SceneObject
+SET(Src_World_SceneObject
+	"${PROJECT_SOURCE_DIR}/Src/SceneObject.h"
+	"${PROJECT_SOURCE_DIR}/Src/SceneObject.cpp"
+)
+source_group(World\\SceneObject FILES ${Src_World_SceneObject})
+
+# World\\World
+SET(Src_World_World
+	"${PROJECT_SOURCE_DIR}/Src/IWorld.h"
+	"${PROJECT_SOURCE_DIR}/Src/GameWorld.h"
+	"${PROJECT_SOURCE_DIR}/Src/GameWorld.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/WorldFactory.h"
+	"${PROJECT_SOURCE_DIR}/Src/WorldFactory.cpp"
+)
+source_group(World\\World FILES ${Src_World_World})
+
+# Others
+aux_source_directory(./Src Src_Others)
+
+#################Souce Files#################
+
 
 # executable file
-add_executable(Catherine ${SRC_DIR} ${GLAD_SRC_DIR})
+add_executable(Catherine
+	${Src_Client}
+	${Src_Device_Common}
+	${Src_Device_OpenGL}
+	${Src_Global}
+	${Src_Render_Context}
+	${Src_Render_Material}
+	${Src_Render_Renderer}
+	${Src_Render_Resource}
+	${Src_Render_State}
+	${Src_Entry}
+	${Src_Utility_File}
+	${Src_Utility_Log}
+	${Src_Utility_Time}
+	${Src_Utility_Xml}
+	${Src_World_Component}
+	${Src_World_Level}
+	${Src_World_Manager}
+	${Src_World_Mesh}
+	${Src_World_SceneObject}
+	${Src_World_World}
+	${Src_Others}
+)
 
 # lib
 target_link_libraries(Catherine glfw3.lib assimp.lib)
