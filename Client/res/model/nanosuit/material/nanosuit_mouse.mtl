@@ -6,6 +6,6 @@
 	</Shader>
 	<Texture>
 		<Item Key = "diffuse" Value = "./res/model/nanosuit/texture/glass_dif.png" />
-		<Item Key = "normal" Value = "./res/model/nanosuit/texture/glass_ddn.png" />
+		<Item Key = "normalmap" Value = "./res/model/nanosuit/texture/glass_ddn.png" />
 	</Texture>
 </document>

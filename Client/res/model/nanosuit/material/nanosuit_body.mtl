@@ -6,6 +6,7 @@
 	</Shader>
 	<Texture>
 		<Item Key = "diffuse" Value = "./res/model/nanosuit/texture/body_dif.png" />
-		<Item Key = "normal" Value = "./res/model/nanosuit/texture/body_showroom_ddn.png" />
+		<Item Key = "normalmap" Value = "./res/model/nanosuit/texture/body_showroom_ddn.png" />
+		<Item Key = "specularmap" Value = "./res/model/nanosuit/texture/body_showroom_spec.png" />
 	</Texture>
 </document>
