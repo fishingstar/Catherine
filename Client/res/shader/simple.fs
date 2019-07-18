@@ -4,6 +4,7 @@
 
 in vec2 Texcoord;
 in vec3 WorldNormal;
+in vec3 WorldTangent;
 in vec3 WorldPos;
 
 out vec4 FragColor;
@@ -104,23 +105,27 @@ vec3 calculateSpotLight(SpotLight param_Light, vec3 param_ViewDir, vec3 param_No
 void main()
 {
 	vec3 tmp_normal = normalize(WorldNormal);
+	vec3 tmp_tangent = normalize(WorldTangent);
+	vec3 tmp_binormal = normalize(cross(tmp_normal, tmp_tangent));
 	vec3 tmp_viewDir = normalize(viewPos.xyz - WorldPos);
 
+	vec3 tmp_diffuse = texture(diffuse, Texcoord).xyz;
+	vec3 tmp_normalMap = texture(normal, Texcoord).xyz;
+	tmp_normalMap = normalize(tmp_normalMap * 2.0 - 1.0);
+	tmp_normalMap = normalize(mat3(tmp_tangent, tmp_binormal, tmp_normal) * tmp_normalMap);
+
 	// caculate directional light color
-	vec3 tmp_dirColor = calculateDirLight(dirLight, tmp_viewDir, tmp_normal);
+	vec3 tmp_dirColor = calculateDirLight(dirLight, tmp_viewDir, tmp_normalMap);
 
 	// calculate point lights color
 	vec3 tmp_pointColor = vec3(0.0, 0.0, 0.0);
 	for (int i = 0; i < POINT_LIGHT_COUNT; ++i)
 	{
-		tmp_pointColor += calculatePointLight(pointLight[i], tmp_viewDir, tmp_normal, WorldPos);
+		tmp_pointColor += calculatePointLight(pointLight[i], tmp_viewDir, tmp_normalMap, WorldPos);
 	}
 
 	// calculate spot light color
-	vec3 tmp_spotColor = calculateSpotLight(spotLight, tmp_viewDir, tmp_normal, WorldPos);
-
-	vec3 tmp_diffuse = texture(diffuse, Texcoord).xyz;
-	//vec3 tmp_normal = texture(normal, Texcoord).xyz;
+	vec3 tmp_spotColor = calculateSpotLight(spotLight, tmp_viewDir, tmp_normalMap, WorldPos);
 
 	vec3 tmp_result = (ambient + tmp_dirColor + tmp_pointColor + tmp_spotColor) * tmp_diffuse;
 

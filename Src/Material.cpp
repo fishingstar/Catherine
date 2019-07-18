@@ -85,6 +85,7 @@ namespace Catherine
 	void Material::SetTexture(const char * key, ITexture * value)
 	{
 		unsigned int tmp_slot = m_Slot++;
+		m_Program->Use();
 		m_Program->SetInt(key, tmp_slot);
 		m_Textures.push_back(std::pair<unsigned int, ITexture *>(tmp_slot, value));
 	}
