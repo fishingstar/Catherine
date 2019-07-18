@@ -37,7 +37,7 @@ namespace Catherine
 	{
 		Assimp::Importer tmp_importer;
 
-		const aiScene * tmp_scene = tmp_importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
+		const aiScene * tmp_scene = tmp_importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals | aiProcess_CalcTangentSpace);
 		if (tmp_scene == nullptr)
 		{
 			LogError("Model LoadFromFile Failed");
@@ -84,6 +84,13 @@ namespace Catherine
 				tmp_vertex.Normal.x = mesh->mNormals[i].x;
 				tmp_vertex.Normal.y = mesh->mNormals[i].y;
 				tmp_vertex.Normal.z = mesh->mNormals[i].z;
+			}
+
+			if (mesh->HasTangentsAndBitangents())
+			{
+				tmp_vertex.Tangent.x = mesh->mTangents[i].x;
+				tmp_vertex.Tangent.y = mesh->mTangents[i].y;
+				tmp_vertex.Tangent.z = mesh->mTangents[i].z;
 			}
 
 			if (mesh->HasTextureCoords(0))
