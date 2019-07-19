@@ -29,7 +29,7 @@ namespace Catherine
 		m_SceneObjects.push_back(tmp_camera);
 
 		Transform * tmp_cameraTransform = (Transform *)tmp_camera->AddComponent(ComponentKind::Transform);
-		tmp_cameraTransform->SetPosition(glm::vec3(2.0f, 15.0f, 6.0f));
+		tmp_cameraTransform->SetPosition(glm::vec3(2.0f, 15.0f, 10.0f));
 		tmp_cameraTransform->SetRotation(glm::vec3(30.0f, -15.0f, 0.0f));
 
 		Camera * tmp_cameraComponent = (Camera *)tmp_camera->AddComponent(ComponentKind::Camera);
@@ -62,7 +62,7 @@ namespace Catherine
 		Light * tmp_spotComponent = (Light *)tmp_spotLight->AddComponent(ComponentKind::Light);
 		tmp_spotComponent->SetLightType(LightType::Spot);
 		tmp_spotComponent->SetLightColor(glm::vec4(1.0f, 0.0f, 1.0f, 1.0f));
-		tmp_dirComponent->SetIntensity(10.0f);
+		tmp_spotComponent->SetIntensity(10.0f);
 
 		
 		glm::vec3 tmp_pos[4] = {
