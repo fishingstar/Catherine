@@ -29,6 +29,7 @@ namespace Catherine
 		tinyxml2::XMLElement * tmp_fragment = tmp_shader->FirstChildElement("Fragment");
 
 		m_Program = ProgramManager::Instance()->GetProgram(tmp_vertex->GetText(), tmp_fragment->GetText());
+		m_Program->Use();
 
 		// texture
 		tinyxml2::XMLElement * tmp_texture = tmp_root->FirstChildElement("Texture");
@@ -85,7 +86,6 @@ namespace Catherine
 	void Material::SetTexture(const char * key, ITexture * value)
 	{
 		unsigned int tmp_slot = m_Slot++;
-		m_Program->Use();
 		m_Program->SetInt(key, tmp_slot);
 		m_Textures.push_back(std::pair<unsigned int, ITexture *>(tmp_slot, value));
 	}
