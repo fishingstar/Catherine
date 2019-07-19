@@ -10,7 +10,7 @@
 
 namespace Catherine
 {
-	const char * s_testModel = "./res/model/nanosuit/nanosuit.obj";
+	const char * s_testModel = "./res/model/nanosuit/nanosuit.fbx";
 	const char * s_glassMaterial = "./res/model/nanosuit/material/nanosuit_glass.mtl";
 	const char * s_legMaterial = "./res/model/nanosuit/material/nanosuit_leg.mtl";
 	const char * s_handMaterial = "./res/model/nanosuit/material/nanosuit_hand.mtl";
@@ -29,8 +29,8 @@ namespace Catherine
 		m_SceneObjects.push_back(tmp_camera);
 
 		Transform * tmp_cameraTransform = (Transform *)tmp_camera->AddComponent(ComponentKind::Transform);
-		tmp_cameraTransform->SetPosition(glm::vec3(6.0f, 15.0f, 6.0f));
-		tmp_cameraTransform->SetRotation(glm::vec3(45.0f, -45.0f, 0.0f));
+		tmp_cameraTransform->SetPosition(glm::vec3(2.0f, 15.0f, 6.0f));
+		tmp_cameraTransform->SetRotation(glm::vec3(30.0f, -15.0f, 0.0f));
 
 		Camera * tmp_cameraComponent = (Camera *)tmp_camera->AddComponent(ComponentKind::Camera);
 		tmp_cameraComponent->SetProjectionMode(ProjectionMode::Persperctive);
@@ -104,27 +104,24 @@ namespace Catherine
 		MeshFilter * tmp_meshFilter = (MeshFilter *)tmp_warrior->AddComponent(ComponentKind::MeshFilter);
 		tmp_meshFilter->LoadFromFile(s_testModel);
 		MeshRenderer * tmp_meshRenderer = (MeshRenderer *)tmp_warrior->AddComponent(ComponentKind::MeshRenderer);
-		IMaterial * tmp_glassMtl = new Material();
-		tmp_glassMtl->Initialize(s_glassMaterial);
-		tmp_meshRenderer->AddMaterial(tmp_glassMtl);
-		IMaterial * tmp_legMtl = new Material();
-		tmp_legMtl->Initialize(s_legMaterial);
-		tmp_meshRenderer->AddMaterial(tmp_legMtl);
-		IMaterial * tmp_handMtl = new Material();
-		tmp_handMtl->Initialize(s_handMaterial);
-		tmp_meshRenderer->AddMaterial(tmp_handMtl);
-		IMaterial * tmp_mouseMtl = new Material();
-		tmp_mouseMtl->Initialize(s_mouseMaterial);
-		tmp_meshRenderer->AddMaterial(tmp_mouseMtl);
-		IMaterial * tmp_armMtl = new Material();
-		tmp_armMtl->Initialize(s_armMaterial);
-		tmp_meshRenderer->AddMaterial(tmp_armMtl);
 		IMaterial * tmp_helmetMtl = new Material();
 		tmp_helmetMtl->Initialize(s_helmetMaterial);
 		tmp_meshRenderer->AddMaterial(tmp_helmetMtl);
+		IMaterial * tmp_glassMtl = new Material();
+		tmp_glassMtl->Initialize(s_glassMaterial);
+		tmp_meshRenderer->AddMaterial(tmp_glassMtl);
 		IMaterial * tmp_bodyMtl = new Material();
 		tmp_bodyMtl->Initialize(s_bodyMaterial);
 		tmp_meshRenderer->AddMaterial(tmp_bodyMtl);
+		IMaterial * tmp_armMtl = new Material();
+		tmp_armMtl->Initialize(s_armMaterial);
+		tmp_meshRenderer->AddMaterial(tmp_armMtl);
+		IMaterial * tmp_handMtl = new Material();
+		tmp_handMtl->Initialize(s_handMaterial);
+		tmp_meshRenderer->AddMaterial(tmp_handMtl);
+		IMaterial * tmp_legMtl = new Material();
+		tmp_legMtl->Initialize(s_legMaterial);
+		tmp_meshRenderer->AddMaterial(tmp_legMtl);
 
 		return true;
 	}

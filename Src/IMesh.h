@@ -13,7 +13,7 @@ namespace Catherine
 	{
 		glm::vec3 Position;
 		glm::vec3 Normal;
-		glm::vec3 Tangent;
+		glm::vec4 Tangent;
 		glm::vec2 Texcoord;
 	};
 

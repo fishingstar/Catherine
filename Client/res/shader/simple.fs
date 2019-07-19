@@ -5,6 +5,7 @@
 in vec2 Texcoord;
 in vec3 WorldNormal;
 in vec3 WorldTangent;
+in vec3 WorldBinormal;
 in vec3 WorldPos;
 
 out vec4 FragColor;
@@ -107,7 +108,7 @@ void main()
 {
 	vec3 tmp_normal = normalize(WorldNormal);
 	vec3 tmp_tangent = normalize(WorldTangent);
-	vec3 tmp_binormal = normalize(cross(tmp_normal, tmp_tangent));
+	vec3 tmp_binormal = normalize(WorldBinormal);
 	vec3 tmp_viewDir = normalize(viewPos.xyz - WorldPos);
 
 	vec3 tmp_diffuse = texture(diffuse, Texcoord).xyz;
