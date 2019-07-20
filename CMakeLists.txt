@@ -77,6 +77,8 @@ SET(Src_Device_OpenGL
 	"${PROJECT_SOURCE_DIR}/Src/OpenGLVertexArray.cpp"
 	"${PROJECT_SOURCE_DIR}/Src/OpenGLTexture.h"
 	"${PROJECT_SOURCE_DIR}/Src/OpenGLTexture.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLCubeTexture.h"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLCubeTexture.cpp"
 	"${PROJECT_SOURCE_DIR}/Src/OpenGLProgram.h"
 	"${PROJECT_SOURCE_DIR}/Src/OpenGLProgram.cpp"
 )
@@ -232,6 +234,13 @@ SET(Src_World_World
 )
 source_group(World\\World FILES ${Src_World_World})
 
+# World\\Skybox
+SET(Src_World_Skybox
+	"${PROJECT_SOURCE_DIR}/Src/Skybox.h"
+	"${PROJECT_SOURCE_DIR}/Src/Skybox.cpp"
+)
+source_group(World\\Skybox FILES ${Src_World_Skybox})
+
 # Others
 aux_source_directory(./Src Src_Others)
 
@@ -260,6 +269,7 @@ add_executable(Catherine
 	${Src_World_Mesh}
 	${Src_World_SceneObject}
 	${Src_World_World}
+	${Src_World_Skybox}
 	${Src_Others}
 )
 
