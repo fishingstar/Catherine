@@ -5,6 +5,7 @@
 #include "OpenGLCommon.h"
 #include "OpenGLProgram.h"
 #include "OpenGLTexture.h"
+#include "OpenGLCubeTexture.h"
 #include "OpenGLVertexArray.h"
 #include "OpenGLVertexBuffer.h"
 #include "OpenGLIndexBuffer.h"
@@ -105,6 +106,12 @@ namespace Catherine
 	ITexture * OpenGLDevice::CreateTexture()
 	{
 		OpenGLTexture * tmp_texture = new OpenGLTexture();
+		return tmp_texture;
+	}
+
+	ITexture * OpenGLDevice::CreateCubeTexture()
+	{
+		OpenGLCubeTexture * tmp_texture = new OpenGLCubeTexture();
 		return tmp_texture;
 	}
 

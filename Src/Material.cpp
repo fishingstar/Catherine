@@ -29,23 +29,51 @@ namespace Catherine
 		tinyxml2::XMLElement * tmp_fragment = tmp_shader->FirstChildElement("Fragment");
 
 		m_Program = ProgramManager::Instance()->GetProgram(tmp_vertex->GetText(), tmp_fragment->GetText());
-		m_Program->Use();
 
 		// texture
 		tinyxml2::XMLElement * tmp_texture = tmp_root->FirstChildElement("Texture");
-		tinyxml2::XMLElement * tmp_item = tmp_texture->FirstChildElement();
-		while (tmp_item)
+		if (tmp_texture)
 		{
-			const char * tmp_key = tmp_item->Attribute("Key");
-			const char * tmp_value = tmp_item->Attribute("Value");
-
-			ITexture * tmp_resource = TextureManager::Instance()->GetTexture(tmp_value);
-			if (tmp_resource)
+			tinyxml2::XMLElement * tmp_item = tmp_texture->FirstChildElement();
+			while (tmp_item)
 			{
-				SetTexture(tmp_key, tmp_resource);
-			}
+				const char * tmp_key = tmp_item->Attribute("Key");
+				const char * tmp_value = tmp_item->Attribute("Value");
 
-			tmp_item = tmp_item->NextSiblingElement();
+				ITexture * tmp_resource = TextureManager::Instance()->GetTexture(tmp_value);
+				if (tmp_resource)
+				{
+					SetTexture(tmp_key, tmp_resource);
+				}
+
+				tmp_item = tmp_item->NextSiblingElement();
+			}
+		}
+
+		// cube texture
+		tinyxml2::XMLElement * tmp_cubeTexture = tmp_root->FirstChildElement("CubeTexture");
+		if (tmp_cubeTexture)
+		{
+			tinyxml2::XMLElement * tmp_cubeItem = tmp_cubeTexture->FirstChildElement();
+			while (tmp_cubeItem)
+			{
+				std::vector<std::string> tmp_cubeTextures;
+				const char * tmp_key = tmp_cubeItem->Attribute("Key");
+				tmp_cubeTextures.push_back(tmp_cubeItem->Attribute("Right"));
+				tmp_cubeTextures.push_back(tmp_cubeItem->Attribute("Left"));
+				tmp_cubeTextures.push_back(tmp_cubeItem->Attribute("Top"));
+				tmp_cubeTextures.push_back(tmp_cubeItem->Attribute("Bottom"));
+				tmp_cubeTextures.push_back(tmp_cubeItem->Attribute("Front"));
+				tmp_cubeTextures.push_back(tmp_cubeItem->Attribute("Back"));
+
+				ITexture * tmp_resource = TextureManager::Instance()->GetCubeTexture(tmp_cubeTextures);
+				if (tmp_resource)
+				{
+					SetTexture(tmp_key, tmp_resource);
+				}
+
+				tmp_cubeItem = tmp_cubeItem->NextSiblingElement();
+			}
 		}
 
 		// param
@@ -55,36 +83,43 @@ namespace Catherine
 
 	void Material::SetInt(const char * key, int value)
 	{
+		m_Program->Use();
 		m_Program->SetInt(key, value);
 	}
 
 	void Material::SetFloat(const char * key, float value)
 	{
+		m_Program->Use();
 		m_Program->SetFloat(key, value);
 	}
 
 	void Material::SetVec2(const char * key, const glm::vec2 & value)
 	{
+		m_Program->Use();
 		m_Program->SetVec2(key, value);
 	}
 
 	void Material::SetVec3(const char * key, const glm::vec3 & value)
 	{
+		m_Program->Use();
 		m_Program->SetVec3(key, value);
 	}
 
 	void Material::SetVec4(const char * key, const glm::vec4 & value)
 	{
+		m_Program->Use();
 		m_Program->SetVec4(key, value);
 	}
 
 	void Material::SetMat4x4(const char * key, const glm::mat4x4 & value)
 	{
+		m_Program->Use();
 		m_Program->SetMat4x4(key, value);
 	}
 
 	void Material::SetTexture(const char * key, ITexture * value)
 	{
+		m_Program->Use();
 		unsigned int tmp_slot = m_Slot++;
 		m_Program->SetInt(key, tmp_slot);
 		m_Textures.push_back(std::pair<unsigned int, ITexture *>(tmp_slot, value));

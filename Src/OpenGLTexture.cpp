@@ -2,7 +2,7 @@
 
 namespace Catherine
 {
-	bool OpenGLTexture::Initialize(int width, int height, PixelFormat format, void * data)
+	bool OpenGLTexture::Initialize(int width, int height, PixelFormat format, void ** data)
 	{
 		glGenTextures(1, &m_Texture);
 		glBindTexture(GL_TEXTURE_2D, m_Texture);
@@ -13,7 +13,7 @@ namespace Catherine
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		GLenum tmp_format = OpenGLCommon::GetOpenGLPixelFormat(format);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, tmp_format, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, tmp_format, GL_UNSIGNED_BYTE, data[0]);
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 		return true;

@@ -1,11 +1,10 @@
 #pragma once
 
 #include "ITexture.h"
-#include "glad/glad.h"
 
 namespace Catherine
 {
-	class OpenGLTexture : public ITexture
+	class OpenGLCubeTexture : public ITexture
 	{
 	public:
 		virtual bool Initialize(int width, int height, PixelFormat format, void ** data = nullptr) override;

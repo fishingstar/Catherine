@@ -38,6 +38,7 @@ namespace Catherine
 		virtual IProgram * CreateProgram() = 0;
 
 		virtual ITexture * CreateTexture() = 0;
+		virtual ITexture * CreateCubeTexture() = 0;
 
 		virtual IVertexArray * CreateVertexArray() = 0;
 		virtual IVertexBuffer * CreateVertexBuffer(size_t size, Usage usage, const void * data, const std::vector<AttributeLayout> & attributes) = 0;
