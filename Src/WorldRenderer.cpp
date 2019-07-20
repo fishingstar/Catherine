@@ -74,7 +74,7 @@ namespace Catherine
 
 			// render skybox
 			IMaterial * tmp_material = tmp_skybox->GetMaterial();
-			tmp_material->SetMat4x4("view", glm::mat4x4(glm::mat3x3(tmp_camera->GetViewMatrix())));
+			tmp_material->SetMat4x4("view", tmp_camera->GetViewMatrix());
 			tmp_material->SetMat4x4("projection", tmp_camera->GetProjectionMatrix());
 			tmp_material->Use();
 
