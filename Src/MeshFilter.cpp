@@ -91,14 +91,16 @@ namespace Catherine
 				tmp_vertex.Tangent.x = mesh->mTangents[i].x;
 				tmp_vertex.Tangent.y = mesh->mTangents[i].y;
 				tmp_vertex.Tangent.z = mesh->mTangents[i].z;
-				glm::vec3 tmp_binormal(mesh->mBitangents[i].x, mesh->mBitangents[i].y, mesh->mBitangents[i].z);
+				tmp_vertex.Tangent.w = 1.0f;
 
-				float tmp_flip = 1.0f;
+				glm::vec3 tmp_binormal;
+				tmp_binormal.x = mesh->mBitangents[i].x;
+				tmp_binormal.y = mesh->mBitangents[i].y;
+				tmp_binormal.z = mesh->mBitangents[i].z;
 				if (glm::dot(glm::cross(tmp_vertex.Normal, glm::vec3(tmp_vertex.Tangent)), tmp_binormal) < 0.0f)
 				{
-					tmp_flip = -1.0f;
+					tmp_vertex.Tangent.w = -1.0f;
 				}
-				tmp_vertex.Tangent.w = tmp_flip;
 			}
 
 			if (mesh->HasTextureCoords(0))
