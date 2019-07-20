@@ -7,6 +7,7 @@ namespace Catherine
 {
 	class ILevel;
 	class WorldContext;
+	class Skybox;
 
 	class GameWorld : public IWorld
 	{
@@ -30,6 +31,8 @@ namespace Catherine
 		WorldContext * m_WorldContext;
 		CameraManager * m_CameraManager;
 		LightManager * m_LightManager;
+
+		Skybox * m_Skybox;
 
 		std::vector<ILevel *> m_Levels;
 	};

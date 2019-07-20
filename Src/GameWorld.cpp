@@ -3,6 +3,7 @@
 #include "WorldContext.h"
 #include "CameraManager.h"
 #include "LightManager.h"
+#include "Skybox.h"
 
 namespace Catherine
 {
@@ -23,11 +24,16 @@ namespace Catherine
 			m_Levels.push_back(tmp_testLevel);
 		}
 
+		m_Skybox = new Skybox();
+		m_Skybox->Initialize();
+
 		return true;
 	}
 
 	void GameWorld::Uninitialize()
 	{
+		m_Skybox->Uninitialize();
+
 		for (size_t i = 0; i < m_Levels.size(); i++)
 		{
 			if (m_Levels[i])
@@ -94,6 +100,8 @@ namespace Catherine
 		{
 			m_Levels[i]->Render(m_WorldContext);
 		}
+
+		m_Skybox->Render(m_WorldContext);
 	}
 
 	void GameWorld::PostRender()
