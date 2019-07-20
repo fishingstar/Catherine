@@ -44,7 +44,6 @@ namespace Catherine
 			// extract context
 			const WorldContext * tmp_context = m_Worlds[i]->GetWorldContext();
 			const CameraContext * tmp_camera = tmp_context->GetCameraContext();
-			const RenderContext * tmp_skybox = tmp_context->GetSkyboxRenderContext();
 			const std::vector<RenderContext *> & tmp_renderContexts = tmp_context->GetRenderContexts();
 
 			// clear screen
@@ -71,18 +70,6 @@ namespace Catherine
 
 				tmp_vertexArray->UnBind();
 			}
-
-			// render skybox
-			IMaterial * tmp_material = tmp_skybox->GetMaterial();
-			tmp_material->SetMat4x4("view", tmp_camera->GetViewMatrix());
-			tmp_material->SetMat4x4("projection", tmp_camera->GetProjectionMatrix());
-			tmp_material->Use();
-
-			IVertexArray * tmp_vertexArray = tmp_skybox->GetVertexArray();
-			
-			tmp_vertexArray->Bind();
-			g_Device->DrawElement(DrawMode::TRIANGLES, tmp_vertexArray->GetIndexCount(), ValueType::UInt, 0);
-			tmp_vertexArray->UnBind();
 		}
 	}
 

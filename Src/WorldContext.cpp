@@ -14,7 +14,6 @@ namespace Catherine
 	{
 		m_CameraContext = nullptr;
 		m_LightContext = nullptr;
-		m_SkyboxRenderContext = nullptr;
 		m_RenderContexts.clear();
 	}
 }

@@ -86,6 +86,6 @@ namespace Catherine
 
 	void Skybox::Render(WorldContext * context)
 	{
-		context->SetSkyboxRenderContext(m_Context);
+		context->AddRenderContext(m_Context);
 	}
 }
