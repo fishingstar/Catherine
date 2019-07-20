@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<Shader>
+		<Vertex>./res/shader/skybox.vs</Vertex>
+		<Fragment>./res/shader/skybox.fs</Fragment>
+	</Shader>
+	<CubeTexture>
+		<Item Key ="environment"
+			Right = "./res/skybox/day/right.jpg"
+			Left = "./res/skybox/day/left.jpg"
+			Top = "./res/skybox/day/top.jpg"
+			Bottom = "./res/skybox/day/bottom.jpg"
+			Front = "./res/skybox/day/front.jpg"
+			Back = "./res/skybox/day/back.jpg"
+		/>
+	</CubeTexture>
+</document>
