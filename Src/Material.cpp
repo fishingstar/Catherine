@@ -77,6 +77,27 @@ namespace Catherine
 		}
 
 		// param
+
+
+		// state
+		tinyxml2::XMLElement * tmp_stateRoot = tmp_root->FirstChildElement("RenderState");
+		if (tmp_stateRoot)
+		{
+			tinyxml2::XMLElement * tmp_cullMode = tmp_stateRoot->FirstChildElement("CullFaceMode");
+			if (tmp_cullMode)
+			{
+				m_CullFaceEnabled = tmp_cullMode->BoolAttribute("Enabled", true);
+				m_CullFaceMode = (CullFaceMode)tmp_cullMode->IntAttribute("Value", 0);
+			}
+
+			tinyxml2::XMLElement * tmp_depthMode = tmp_stateRoot->FirstChildElement("DepthTestMode");
+			if (tmp_depthMode)
+			{
+				m_DepthTestEnabled = tmp_depthMode->BoolAttribute("Enabled", true);
+				m_DepthTestMode = (DepthTestMode)tmp_depthMode->IntAttribute("Value", 0);
+			}
+		}
+
 		tinyxml2::XMLElement * tmp_priorityElement = tmp_root->FirstChildElement("RenderPriority");
 		if (tmp_priorityElement)
 		{

@@ -14,5 +14,9 @@
 			Back = "./res/skybox/day/back.jpg"
 		/>
 	</CubeTexture>
+	<RenderState>
+		<CullFaceMode Enabled = "True" Value = "1" />
+		<DepthTestMode Enabled = "True" Value = "0" />
+	</RenderState>
 	<RenderPriority>2999.5</RenderPriority>
 </Catherine>

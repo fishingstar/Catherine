@@ -8,5 +8,9 @@
 		<Item Key = "diffuse" Value = "./res/model/nanosuit/texture/glass_dif.png" />
 		<Item Key = "normalmap" Value = "./res/model/nanosuit/texture/glass_ddn.png" />
 	</Texture>
+	<RenderState>
+		<CullFaceMode Enabled = "True" Value = "0" />
+		<DepthTestMode Enabled = "True" Value = "0" />
+	</RenderState>
 	<RenderPriority>2000</RenderPriority>
 </Catherine>
