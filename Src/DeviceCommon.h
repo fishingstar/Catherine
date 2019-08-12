@@ -29,6 +29,33 @@ namespace Catherine
 
 	using DepthTestMode = CompareMode;
 
+	enum class BlendFunc
+	{
+		Zero,
+		One,
+		Src_Color,
+		One_Minus_Src_Color,
+		Dst_Color,
+		One_Minus_Dst_Color,
+		Src_Alpha,
+		One_Minus_Src_Alpha,
+		Dst_Alpha,
+		One_Minus_Dst_Alpha,
+		Constant_Color,
+		One_Minus_Constant_Color,
+		Constant_Alpha,
+		One_Minus_Constant_Alpha
+	};
+
+	enum class Equation
+	{
+		Add,
+		Subtract,
+		Reverse_Subtract
+	};
+
+	using BlendEquation = Equation;
+
 	enum class ValueType
 	{
 		Float,

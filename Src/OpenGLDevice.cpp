@@ -97,6 +97,29 @@ namespace Catherine
 		glCullFace(tmp_mode);
 	}
 
+	void OpenGLDevice::EnableBlend(bool enabled)
+	{
+		if (enabled)
+			glEnable(GL_BLEND);
+		else
+			glDisable(GL_BLEND);
+	}
+
+	void OpenGLDevice::SetBlendEquation(BlendEquation equation)
+	{
+		GLenum tmp_equation = OpenGLCommon::GetOpenGLBlendEquation(equation);
+		glBlendEquation(tmp_equation);
+	}
+
+	void OpenGLDevice::SetBlendFunc(BlendFunc src, BlendFunc dst, BlendFunc src_alpha, BlendFunc dst_alpha)
+	{
+		GLenum tmp_src = OpenGLCommon::GetOpenGLBlendFunc(src);
+		GLenum tmp_dst = OpenGLCommon::GetOpenGLBlendFunc(dst);
+		GLenum tmp_src_alpha = OpenGLCommon::GetOpenGLBlendFunc(src_alpha);
+		GLenum tmp_dst_alpha = OpenGLCommon::GetOpenGLBlendFunc(dst_alpha);
+		glBlendFuncSeparate(tmp_src, tmp_dst, tmp_src_alpha, tmp_dst_alpha);
+	}
+
 	IProgram * OpenGLDevice::CreateProgram()
 	{
 		OpenGLProgram * tmp_program = new OpenGLProgram();

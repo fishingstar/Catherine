@@ -26,6 +26,10 @@ namespace Catherine
 		virtual void EnableCullFace(bool enabled) override;
 		virtual void SetCullFaceMode(CullFaceMode mode) override;
 
+		virtual void EnableBlend(bool enabled) override;
+		virtual void SetBlendEquation(BlendEquation equation) override;
+		virtual void SetBlendFunc(BlendFunc src, BlendFunc dst, BlendFunc src_alpha, BlendFunc dst_alpha) override;
+
 		// resource
 		virtual IProgram * CreateProgram() override;
 

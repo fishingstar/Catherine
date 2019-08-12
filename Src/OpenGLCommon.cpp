@@ -29,6 +29,31 @@ namespace Catherine
 		{ CompareMode::Never,			GL_NEVER },
 	};
 
+	std::vector<std::pair<BlendFunc, GLenum>> OpenGLBlendMode =
+	{
+		{ BlendFunc::Zero,						GL_ZERO },
+		{ BlendFunc::One,						GL_ONE },
+		{ BlendFunc::Src_Color,					GL_SRC_COLOR },
+		{ BlendFunc::One_Minus_Src_Color,		GL_ONE_MINUS_SRC_COLOR },
+		{ BlendFunc::Dst_Color,					GL_DST_COLOR },
+		{ BlendFunc::One_Minus_Dst_Color,		GL_ONE_MINUS_DST_COLOR },
+		{ BlendFunc::Src_Alpha,					GL_SRC_ALPHA },
+		{ BlendFunc::One_Minus_Src_Alpha,		GL_ONE_MINUS_SRC_ALPHA },
+		{ BlendFunc::Dst_Alpha,					GL_DST_ALPHA },
+		{ BlendFunc::One_Minus_Dst_Alpha,		GL_ONE_MINUS_DST_ALPHA },
+		{ BlendFunc::Constant_Color,			GL_CONSTANT_COLOR },
+		{ BlendFunc::One_Minus_Constant_Color,	GL_ONE_MINUS_CONSTANT_COLOR },
+		{ BlendFunc::Constant_Alpha,			GL_CONSTANT_ALPHA },
+		{ BlendFunc::One_Minus_Constant_Alpha,	GL_ONE_MINUS_CONSTANT_ALPHA },
+	};
+
+	std::vector<std::pair<Equation, GLenum>> OpenGLEquation =
+	{
+		{ Equation::Add,				GL_FUNC_ADD },
+		{ Equation::Subtract,			GL_FUNC_SUBTRACT },
+		{ Equation::Reverse_Subtract,	GL_FUNC_REVERSE_SUBTRACT }
+	};
+
 	std::vector<std::pair<ValueType, GLenum>> OpenGLValueType =
 	{
 		{ ValueType::Float,	GL_FLOAT },
@@ -93,6 +118,16 @@ namespace Catherine
 	GLenum OpenGLCommon::GetOpenGLDepthTestMode(DepthTestMode mode)
 	{
 		return GetOpenGLDefines(OpenGLCompareMode, mode);
+	}
+
+	GLenum OpenGLCommon::GetOpenGLBlendFunc(BlendFunc func)
+	{
+		return GetOpenGLDefines(OpenGLBlendMode, func);
+	}
+
+	GLenum OpenGLCommon::GetOpenGLBlendEquation(BlendEquation equation)
+	{
+		return GetOpenGLDefines(OpenGLEquation, equation);
 	}
 
 	GLenum OpenGLCommon::GetOpenGLType(ValueType type)

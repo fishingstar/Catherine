@@ -30,4 +30,19 @@ namespace Catherine
 	{
 		g_Device->SetCullFaceMode(mode);
 	}
+
+	void StateManager::EnableBlend(bool enabled)
+	{
+		g_Device->EnableBlend(enabled);
+	}
+
+	void StateManager::SetBlendEquation(BlendEquation equation)
+	{
+		g_Device->SetBlendEquation(equation);
+	}
+
+	void StateManager::SetBlendFunc(BlendFunc src, BlendFunc dst, BlendFunc src_alpha, BlendFunc dst_alpha)
+	{
+		g_Device->SetBlendFunc(src, dst, src_alpha, dst_alpha);
+	}
 }

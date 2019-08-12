@@ -15,8 +15,9 @@
 		/>
 	</CubeTexture>
 	<RenderState>
-		<CullFaceMode Enabled = "True" Value = "1" />
-		<DepthTestMode Enabled = "True" Value = "0" />
+		<CullFaceMode Enabled = "true" Value = "1" />
+		<DepthTestMode Enabled = "true" Value = "0" />
+		<BlendMode Enabled = "true" Src = "6" Dst = "7" SrcAlpha = "6" DstAlpha = "7" BlendEquation = "0" />
 	</RenderState>
 	<RenderPriority>2999.5</RenderPriority>
 </Catherine>

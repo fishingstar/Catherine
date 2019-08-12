@@ -34,6 +34,10 @@ namespace Catherine
 		virtual void EnableCullFace(bool enabled) = 0;
 		virtual void SetCullFaceMode(CullFaceMode mode) = 0;
 
+		virtual void EnableBlend(bool enabled) = 0;
+		virtual void SetBlendEquation(BlendEquation equation) = 0;
+		virtual void SetBlendFunc(BlendFunc src, BlendFunc dst, BlendFunc src_alpha, BlendFunc dst_alpha) = 0;
+
 		// resource
 		virtual IProgram * CreateProgram() = 0;
 

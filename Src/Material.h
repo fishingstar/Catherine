@@ -40,6 +40,15 @@ namespace Catherine
 		bool m_CullFaceEnabled = true;
 		CullFaceMode m_CullFaceMode = CullFaceMode::Back;
 
+		bool m_BlendEnabled = false;
+		BlendFunc m_SrcFunc = BlendFunc::Src_Alpha;
+		BlendFunc m_DstFunc = BlendFunc::One_Minus_Src_Alpha;
+		BlendFunc m_SrcAlphaFunc = BlendFunc::Src_Alpha;
+		BlendFunc m_DstAlphaFunc = BlendFunc::One_Minus_Src_Alpha;
+		BlendEquation m_BlendEquation = BlendEquation::Add;
+		// TODO : blend constant color
+		// glm::vec4 m_BlendColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+
 		float m_RenderPriority = 2000.0f;
 	};
 }

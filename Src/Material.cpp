@@ -96,6 +96,17 @@ namespace Catherine
 				m_DepthTestEnabled = tmp_depthMode->BoolAttribute("Enabled", true);
 				m_DepthTestMode = (DepthTestMode)tmp_depthMode->IntAttribute("Value", 0);
 			}
+
+			tinyxml2::XMLElement * tmp_blendMode = tmp_stateRoot->FirstChildElement("BlendMode");
+			if (tmp_blendMode)
+			{
+				m_BlendEnabled = tmp_blendMode->BoolAttribute("Enabled", true);
+				m_SrcFunc = (BlendFunc)tmp_blendMode->IntAttribute("Src", 5);
+				m_DstFunc = (BlendFunc)tmp_blendMode->IntAttribute("Dst", 5);
+				m_SrcAlphaFunc = (BlendFunc)tmp_blendMode->IntAttribute("SrcAlpha", 5);
+				m_DstAlphaFunc = (BlendFunc)tmp_blendMode->IntAttribute("DstAlpha", 5);
+				m_BlendEquation = (BlendEquation)tmp_blendMode->IntAttribute("BlendEquation", 0);
+			}
 		}
 
 		tinyxml2::XMLElement * tmp_priorityElement = tmp_root->FirstChildElement("RenderPriority");
@@ -212,6 +223,10 @@ namespace Catherine
 
 		StateManager::Instance()->EnableCullFace(m_CullFaceEnabled);
 		StateManager::Instance()->SetCullFaceMode(m_CullFaceMode);
+
+		StateManager::Instance()->EnableBlend(m_BlendEnabled);
+		StateManager::Instance()->SetBlendEquation(m_BlendEquation);
+		StateManager::Instance()->SetBlendFunc(m_SrcFunc, m_DstFunc, m_SrcAlphaFunc, m_DstAlphaFunc);
 
 		for (size_t i = 0; i < m_Textures.size(); i++)
 		{

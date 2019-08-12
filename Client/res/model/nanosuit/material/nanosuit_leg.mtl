@@ -10,8 +10,9 @@
 		<Item Key = "specularmap" Value = "./res/model/nanosuit/texture/leg_showroom_spec.png" />
 	</Texture>
 	<RenderState>
-		<CullFaceMode Enabled = "True" Value = "0" />
-		<DepthTestMode Enabled = "True" Value = "0" />
+		<CullFaceMode Enabled = "true" Value = "0" />
+		<DepthTestMode Enabled = "true" Value = "0" />
+		<BlendMode Enabled = "false" Src = "6" Dst = "7" SrcAlpha = "6" DstAlpha = "7" BlendEquation = "0" />
 	</RenderState>
 	<RenderPriority>2000</RenderPriority>
 </Catherine>
