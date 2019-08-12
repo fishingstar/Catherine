@@ -1,30 +1,30 @@
 #include "WorldRenderer.h"
-#include "IDevice.h"
 #include "IWorld.h"
-#include "WorldContext.h"
-#include "CameraContext.h"
-#include "LightContext.h"
-#include "RenderContext.h"
-#include "IMaterial.h"
-#include "IVertexArray.h"
-#include "glm/glm.hpp"
-#include <algorithm>
+#include "ForwardPipeline.h"
+#include "LogUtility.h"
 
 namespace Catherine
 {
-	extern IDevice * g_Device;
-
 	bool WorldRenderer::Initialize()
 	{
-		// TODO : get device context cache to reduce useless state changes
-		g_Device->SetFrontFace(FrontFaceMode::CounterClockwise);
+		m_ForwardPipeline = new ForwardPipeline();
+		bool tmp_forwardInited = m_ForwardPipeline->Initialize();
+		if (!tmp_forwardInited)
+		{
+			LogError("forward pipeline initialize failed...");
+			return false;
+		}
 
 		return true;
 	}
 
 	void WorldRenderer::Uninitialize()
 	{
-
+		if (m_ForwardPipeline)
+		{
+			delete m_ForwardPipeline;
+			m_ForwardPipeline = nullptr;
+		}
 	}
 
 	void WorldRenderer::PreRender()
@@ -42,55 +42,9 @@ namespace Catherine
 			// collect render context
 			m_Worlds[i]->Render();
 
-			// extract context
-			const WorldContext * tmp_context = m_Worlds[i]->GetWorldContext();
-			const CameraContext * tmp_camera = tmp_context->GetCameraContext();
-			std::vector<RenderContext *> tmp_renderContexts = tmp_context->GetRenderContexts();
-
-			// clear screen
-			const glm::vec3 & tmp_color = tmp_camera->GetClearColor();
-			g_Device->ClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);
-			g_Device->Clear();
-
-			// sort commands
-			std::stable_sort(tmp_renderContexts.begin(), tmp_renderContexts.end(),
-				[](const RenderContext * left, const RenderContext * right) -> bool
-				{
-					bool tmp_reuslt = false;
-
-					IMaterial * leftMaterial = left->GetMaterial();
-					IMaterial * rightMaterial = right->GetMaterial();
-					if (leftMaterial && rightMaterial)
-					{
-						if (leftMaterial->GetRenderPriority() < rightMaterial->GetRenderPriority())
-						{
-							tmp_reuslt = true;
-						}
-					}
-
-					return tmp_reuslt;
-				}
-			);
-
-			// render commands
-			for (size_t i = 0; i < tmp_renderContexts.size(); i++)
-			{
-				const RenderContext * tmp_renderContext = tmp_renderContexts[i];
-
-				// material
-				IMaterial * tmp_material = tmp_renderContext->GetMaterial();
-				tmp_material->SetCommonUniform(tmp_context);
-				tmp_material->Use();
-
-				// vertex buffer
-				IVertexArray * tmp_vertexArray = tmp_renderContext->GetVertexArray();
-				tmp_vertexArray->Bind();
-
-				// draw command
-				g_Device->DrawElement(DrawMode::TRIANGLES, tmp_vertexArray->GetIndexCount(), ValueType::UInt, 0);
-
-				tmp_vertexArray->UnBind();
-			}
+			// send context to pipeline
+			const WorldContext * worldContext = m_Worlds[i]->GetWorldContext();
+			m_ForwardPipeline->Render(worldContext);
 		}
 	}
 

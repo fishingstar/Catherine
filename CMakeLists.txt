@@ -111,6 +111,20 @@ SET(Src_Render_Material
 )
 source_group(Render\\Material FILES ${Src_Render_Material})
 
+# Render\\Pipeline
+SET(Src_Render_Pipeline
+	"${PROJECT_SOURCE_DIR}/Src/IPipeline.h"
+	"${PROJECT_SOURCE_DIR}/Src/ForwardPipeline.h"
+	"${PROJECT_SOURCE_DIR}/Src/ForwardPipeline.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/DeferredPipeline.h"
+	"${PROJECT_SOURCE_DIR}/Src/DeferredPipeline.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/TileBasedDeferredPipeline.h"
+	"${PROJECT_SOURCE_DIR}/Src/TileBasedDeferredPipeline.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/ForwardPlusPipeline.h"
+	"${PROJECT_SOURCE_DIR}/Src/ForwardPlusPipeline.cpp"
+)
+source_group(Render\\Pipeline FILES ${Src_Render_Pipeline})
+
 # Render\\Renderer
 SET(Src_Render_Renderer
 	"${PROJECT_SOURCE_DIR}/Src/IRenderer.h"
@@ -248,6 +262,7 @@ add_executable(Catherine
 	${Src_Global}
 	${Src_Render_Context}
 	${Src_Render_Material}
+	${Src_Render_Pipeline}
 	${Src_Render_Renderer}
 	${Src_Render_Resource}
 	${Src_Render_State}

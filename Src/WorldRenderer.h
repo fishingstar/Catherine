@@ -6,6 +6,7 @@
 namespace Catherine
 {
 	class IWorld;
+	class IPipeline;
 
 	class WorldRenderer : public IRenderer
 	{
@@ -22,5 +23,10 @@ namespace Catherine
 
 	public:
 		std::vector<IWorld *> m_Worlds;
+
+		IPipeline * m_ForwardPipeline = nullptr;
+		IPipeline * m_DeferredPipeline = nullptr;
+		IPipeline * m_TileBasedDeferredPipeline = nullptr;
+		IPipeline * m_ForwardPlusPipeline = nullptr;
 	};
 }
