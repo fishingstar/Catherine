@@ -19,6 +19,9 @@ namespace Catherine
 	const char * s_helmetMaterial = "./res/model/nanosuit/material/nanosuit_helmet.mtl";
 	const char * s_bodyMaterial = "./res/model/nanosuit/material/nanosuit_body.mtl";
 
+	const char * s_skyboxModel = "./res/model/buildin/box.fbx";
+	const char * s_skyboxMaterial = "./res/material/skybox.mtl";
+
 	bool Level::Initialize()
 	{
 		// TODO : add objects manually, because of no level config file supported now...
@@ -122,6 +125,20 @@ namespace Catherine
 		IMaterial * tmp_legMtl = new Material();
 		tmp_legMtl->Initialize(s_legMaterial);
 		tmp_meshRenderer->AddMaterial(tmp_legMtl);
+
+
+		// skybox
+		SceneObject * tmp_skybox = new SceneObject(this);
+		tmp_skybox->Initialize();
+		m_SceneObjects.push_back(tmp_skybox);
+
+		Transform * tmp_skyboxTransform = (Transform *)tmp_skybox->AddComponent(ComponentKind::Transform);
+		MeshFilter * tmp_skyboxMeshFilter = (MeshFilter *)tmp_skybox->AddComponent(ComponentKind::MeshFilter);
+		tmp_skyboxMeshFilter->LoadFromFile(s_skyboxModel);
+		MeshRenderer * tmp_skyboxRenderer = (MeshRenderer *)tmp_skybox->AddComponent(ComponentKind::MeshRenderer);
+		IMaterial * tmp_skyboxMtl = new Material();
+		tmp_skyboxMtl->Initialize(s_skyboxMaterial);
+		tmp_skyboxRenderer->AddMaterial(tmp_skyboxMtl);
 
 		return true;
 	}
