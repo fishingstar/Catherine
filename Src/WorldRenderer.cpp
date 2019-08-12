@@ -8,6 +8,7 @@
 #include "IMaterial.h"
 #include "IVertexArray.h"
 #include "glm/glm.hpp"
+#include <algorithm>
 
 namespace Catherine
 {
@@ -44,12 +45,32 @@ namespace Catherine
 			// extract context
 			const WorldContext * tmp_context = m_Worlds[i]->GetWorldContext();
 			const CameraContext * tmp_camera = tmp_context->GetCameraContext();
-			const std::vector<RenderContext *> & tmp_renderContexts = tmp_context->GetRenderContexts();
+			std::vector<RenderContext *> tmp_renderContexts = tmp_context->GetRenderContexts();
 
 			// clear screen
 			const glm::vec3 & tmp_color = tmp_camera->GetClearColor();
 			g_Device->ClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);
 			g_Device->Clear();
+
+			// sort commands
+			std::stable_sort(tmp_renderContexts.begin(), tmp_renderContexts.end(),
+				[](const RenderContext * left, const RenderContext * right) -> bool
+				{
+					bool tmp_reuslt = false;
+
+					IMaterial * leftMaterial = left->GetMaterial();
+					IMaterial * rightMaterial = right->GetMaterial();
+					if (leftMaterial && rightMaterial)
+					{
+						if (leftMaterial->GetRenderPriority() < rightMaterial->GetRenderPriority())
+						{
+							tmp_reuslt = true;
+						}
+					}
+
+					return tmp_reuslt;
+				}
+			);
 
 			// render commands
 			for (size_t i = 0; i < tmp_renderContexts.size(); i++)

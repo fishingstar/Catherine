@@ -22,6 +22,8 @@ namespace Catherine
 
 		virtual void SetCommonUniform(const WorldContext * context) = 0;
 
+		virtual float GetRenderPriority() const = 0;
+
 		virtual void Use() = 0;
 	};
 }

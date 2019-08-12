@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document>
+<Catherine>
 	<Shader>
 		<Vertex>./res/shader/simple.vs</Vertex>
 		<Fragment>./res/shader/simple.fs</Fragment>
@@ -9,4 +9,5 @@
 		<Item Key = "normalmap" Value = "./res/model/nanosuit/texture/hand_showroom_ddn.png" />
 		<Item Key = "specularmap" Value = "./res/model/nanosuit/texture/hand_showroom_spec.png" />
 	</Texture>
-</document>
+	<RenderPriority>2000</RenderPriority>
+</Catherine>

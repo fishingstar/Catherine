@@ -12,4 +12,4 @@ void main()
     TexCoords = Pos;
     gl_Position = projection * mat4(mat3(view)) * vec4(Pos, 1.0);
     gl_Position = gl_Position.xyww;
-}  
+}

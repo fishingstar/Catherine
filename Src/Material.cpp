@@ -77,6 +77,11 @@ namespace Catherine
 		}
 
 		// param
+		tinyxml2::XMLElement * tmp_priorityElement = tmp_root->FirstChildElement("RenderPriority");
+		if (tmp_priorityElement)
+		{
+			m_RenderPriority = tmp_priorityElement->FloatText(2000.0f);
+		}
 
 		return true;
 	}
@@ -172,6 +177,11 @@ namespace Catherine
 		SetFloat("spotLight.constant", tmp_spotContext->m_AttenuationConstant);
 		SetFloat("spotLight.linear", tmp_spotContext->m_AttenuationLinear);
 		SetFloat("spotLight.quadratic", tmp_spotContext->m_AttenuationQuadratic);
+	}
+
+	float Material::GetRenderPriority() const
+	{
+		return m_RenderPriority;
 	}
 
 	void Material::Use()

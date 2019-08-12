@@ -24,18 +24,22 @@ namespace Catherine
 
 		virtual void SetCommonUniform(const WorldContext * context) override;
 
+		virtual float GetRenderPriority() const override;
+
 		virtual void Use() override;
 
 	private:
+		IProgram * m_Program = nullptr;
+
+		unsigned int m_Slot = 0;
+		std::vector<std::pair<unsigned int, ITexture *>> m_Textures;
+
 		bool m_DepthTestEnabled = true;
 		DepthTestMode m_DepthTestMode = DepthTestMode::LessEqual;
 
 		bool m_CullFaceEnabled = true;
 		CullFaceMode m_CullFaceMode = CullFaceMode::Back;
 
-		IProgram * m_Program = nullptr;
-
-		unsigned int m_Slot = 0;
-		std::vector<std::pair<unsigned int, ITexture *>> m_Textures;
+		float m_RenderPriority = 2000.0f;
 	};
 }
