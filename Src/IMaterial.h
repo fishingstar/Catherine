@@ -5,7 +5,8 @@
 namespace Catherine
 {
 	class ITexture;
-	class WorldContext;
+	class CameraContext;
+	class LightContext;
 
 	class IMaterial
 	{
@@ -20,7 +21,8 @@ namespace Catherine
 		virtual void SetMat4x4(const char * key, const glm::mat4x4 & value) = 0;
 		virtual void SetTexture(const char * key, ITexture * value) = 0;
 
-		virtual void SetCommonUniform(const WorldContext * context) = 0;
+		virtual void SetCameraUniform(const CameraContext * context) = 0;
+		virtual void SetLightUniform(const LightContext * context) = 0;
 
 		virtual float GetRenderPriority() const = 0;
 

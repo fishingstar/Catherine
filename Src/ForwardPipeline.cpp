@@ -1,6 +1,7 @@
 #include "ForwardPipeline.h"
 #include "WorldContext.h"
 #include "CameraContext.h"
+#include "LightContext.h"
 #include "RenderContext.h"
 #include "IMaterial.h"
 #include "IDevice.h"
@@ -29,6 +30,7 @@ namespace Catherine
 	void ForwardPipeline::RenderOpaque(const WorldContext * context)
 	{
 		const CameraContext * tmp_camera = context->GetCameraContext();
+		const LightContext * tmp_light = context->GetLightContext();
 		std::vector<RenderContext *> tmp_renderContexts = context->GetRenderContexts();
 
 		// clear screen
@@ -63,7 +65,8 @@ namespace Catherine
 
 			// material
 			IMaterial * tmp_material = tmp_renderContext->GetMaterial();
-			tmp_material->SetCommonUniform(context);
+			tmp_material->SetCameraUniform(tmp_camera);
+			tmp_material->SetLightUniform(tmp_light);
 			tmp_material->Use();
 
 			// vertex buffer

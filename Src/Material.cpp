@@ -1,7 +1,6 @@
 #include "Material.h"
 #include "IProgram.h"
 #include "ITexture.h"
-#include "WorldContext.h"
 #include "CameraContext.h"
 #include "LightContext.h"
 #include "TextureManager.h"
@@ -162,29 +161,28 @@ namespace Catherine
 		m_Textures.push_back(std::pair<unsigned int, ITexture *>(tmp_slot, value));
 	}
 
-	void Material::SetCommonUniform(const WorldContext * context)
+	void Material::SetCameraUniform(const CameraContext * context)
 	{
-		const CameraContext * tmp_cameraContext = context->GetCameraContext();
-		const LightContext * tmp_lightContext = context->GetLightContext();
-
-		const glm::vec3 & tmp_cameraPos = tmp_cameraContext->GetPosition();
-		const glm::mat4x4 & tmp_view = tmp_cameraContext->GetViewMatrix();
-		const glm::mat4x4 & tmp_projection = tmp_cameraContext->GetProjectionMatrix();
+		const glm::vec3 & tmp_cameraPos = context->GetPosition();
+		const glm::mat4x4 & tmp_view = context->GetViewMatrix();
+		const glm::mat4x4 & tmp_projection = context->GetProjectionMatrix();
 
 		SetMat4x4("model", glm::mat4x4(1));
 		SetMat4x4("view", tmp_view);
 		SetMat4x4("projection", tmp_projection);
 		SetVec3("viewPos", tmp_cameraPos);
 		SetFloat("ambient", 0.2f);
+	}
 
-
-		const LightContext::DirectionalContext * tmp_dirContext = tmp_lightContext->GetDirectionContext();
+	void Material::SetLightUniform(const LightContext * context)
+	{
+		const LightContext::DirectionalContext * tmp_dirContext = context->GetDirectionContext();
 		SetVec3("dirLight.lightDir", tmp_dirContext->m_Rotation);
 		SetVec4("dirLight.lightColor", tmp_dirContext->m_LightColor);
 
 		for (unsigned int i = 0; i < LightContext::POINT_LIGHT_COUNT; i++)
 		{
-			const LightContext::PointContext * tmp_pointContext = tmp_lightContext->GetPointConext(i);
+			const LightContext::PointContext * tmp_pointContext = context->GetPointConext(i);
 
 			std::string tmp_key;
 			std::string tmp_index = "pointLight[" + std::to_string(i) + "]";
@@ -200,7 +198,7 @@ namespace Catherine
 			SetFloat(tmp_key.c_str(), tmp_pointContext->m_AttenuationQuadratic);
 		}
 
-		const LightContext::SpotContext * tmp_spotContext = tmp_lightContext->GetSpotContext();
+		const LightContext::SpotContext * tmp_spotContext = context->GetSpotContext();
 		SetVec3("spotLight.lightPos", tmp_spotContext->m_Position);
 		SetVec3("spotLight.lightDir", tmp_spotContext->m_Rotation);
 		SetVec4("spotLight.lightColor", tmp_spotContext->m_LightColor);
