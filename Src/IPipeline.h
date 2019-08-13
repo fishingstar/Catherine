@@ -12,6 +12,6 @@ namespace Catherine
 		virtual bool Initialize() = 0;
 		virtual void Uninitialize() = 0;
 
-		virtual void Render(const WorldContext * context) { }
+		virtual void Render(const WorldContext * context) = 0;
 	};
 }

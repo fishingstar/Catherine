@@ -61,6 +61,9 @@ namespace Catherine
 		Float,
 		Int,
 		UInt,
+		UInt_24_8,
+		Byte,
+		UByte,
 		Vec2f,
 		Vec3f,
 		Vec4f,
@@ -89,5 +92,13 @@ namespace Catherine
 	{
 		A8R8G8B8,
 		R8G8B8,
+		Depth_Component,
+		Depth_Component16,
+		Depth_Component24,
+		Depth_Component32,
+		Stencil_Index,
+		Stencil_Index8,
+		Depth_Stencil,
+		Depth24_Stencil8,
 	};
 }

@@ -77,7 +77,7 @@ namespace Catherine
 			PixelFormat tmp_format = channels == 3 ? PixelFormat::R8G8B8 : PixelFormat::A8R8G8B8;
 
 			tmp_result = g_Device->CreateTexture();
-			tmp_result->Initialize(width, height, tmp_format, (void **)&tmp_data);
+			tmp_result->Initialize(width, height, tmp_format, tmp_format, ValueType::UByte, (void **)&tmp_data);
 			m_Textures.insert(std::make_pair(filename, tmp_result));
 		}
 		stbi_image_free(tmp_data);
@@ -101,7 +101,7 @@ namespace Catherine
 
 		PixelFormat tmp_format = channels == 3 ? PixelFormat::R8G8B8 : PixelFormat::A8R8G8B8;
 		tmp_result = g_Device->CreateCubeTexture();
-		tmp_result->Initialize(width, height, tmp_format, (void **)tmp_data);
+		tmp_result->Initialize(width, height, tmp_format, tmp_format, ValueType::UByte, (void **)tmp_data);
 		m_Textures.insert(std::make_pair(GetCubeTextureKey(filename), tmp_result));
 
 		for (size_t i = 0; i < 6; i++)

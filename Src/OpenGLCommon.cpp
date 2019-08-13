@@ -59,6 +59,9 @@ namespace Catherine
 		{ ValueType::Float,	GL_FLOAT },
 		{ ValueType::Int,	GL_INT },
 		{ ValueType::UInt,	GL_UNSIGNED_INT },
+		{ ValueType::UInt_24_8, GL_UNSIGNED_INT_24_8 },
+		{ ValueType::Byte,	GL_BYTE },
+		{ ValueType::UByte,	GL_UNSIGNED_BYTE },
 		{ ValueType::Vec2f, GL_FLOAT_VEC2 },
 		{ ValueType::Vec3f, GL_FLOAT_VEC3 },
 		{ ValueType::Vec4f, GL_FLOAT_VEC4 },
@@ -84,8 +87,16 @@ namespace Catherine
 
 	std::vector<std::pair<PixelFormat, GLenum>> OpenGLPixelFormat =
 	{
-		{ PixelFormat::A8R8G8B8,	GL_RGBA },
-		{ PixelFormat::R8G8B8,		GL_RGB }
+		{ PixelFormat::A8R8G8B8,			GL_RGBA },
+		{ PixelFormat::R8G8B8,				GL_RGB },
+		{ PixelFormat::Depth_Component,		GL_DEPTH_COMPONENT },
+		{ PixelFormat::Depth_Component16,	GL_DEPTH_COMPONENT16 },
+		{ PixelFormat::Depth_Component24,	GL_DEPTH_COMPONENT24 },
+		{ PixelFormat::Depth_Component32,	GL_DEPTH_COMPONENT32 },
+		{ PixelFormat::Stencil_Index,		GL_STENCIL_INDEX },
+		{ PixelFormat::Stencil_Index8,		GL_STENCIL_INDEX8 },
+		{ PixelFormat::Depth_Stencil,		GL_DEPTH_STENCIL },
+		{ PixelFormat::Depth24_Stencil8,	GL_DEPTH24_STENCIL8 },
 	};
 
 	template<typename type>

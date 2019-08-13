@@ -6,11 +6,27 @@
 #include "IMaterial.h"
 #include "IDevice.h"
 #include "IVertexArray.h"
+#include "RenderTarget.h"
 #include <algorithm>
 
 namespace Catherine
 {
 	extern IDevice * g_Device;
+
+	bool ForwardPipeline::Initialize()
+	{
+		m_RenderTarget_Back = new RenderTarget();
+		m_RenderTarget_Back->Initialize(1280, 720, 0, false, false);
+		m_RenderTarget_Shadow = new RenderTarget();
+		m_RenderTarget_Shadow->Initialize(1280, 720, 1, true, true);
+
+		return true;
+	}
+
+	void ForwardPipeline::Uninitialize()
+	{
+
+	}
 
 	void ForwardPipeline::Render(const WorldContext * context)
 	{
@@ -24,7 +40,11 @@ namespace Catherine
 
 	void ForwardPipeline::RenderShadow(const WorldContext * context)
 	{
+		m_RenderTarget_Shadow->Use();
 
+		// render shadow map
+
+		m_RenderTarget_Back->Use();
 	}
 
 	void ForwardPipeline::RenderOpaque(const WorldContext * context)
@@ -32,7 +52,7 @@ namespace Catherine
 		const CameraContext * tmp_camera = context->GetCameraContext();
 		const LightContext * tmp_light = context->GetLightContext();
 		std::vector<RenderContext *> tmp_renderContexts = context->GetRenderContexts();
-
+		
 		// clear screen
 		const glm::vec3 & tmp_color = tmp_camera->GetClearColor();
 		g_Device->ClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);

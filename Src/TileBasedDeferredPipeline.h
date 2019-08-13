@@ -11,5 +11,7 @@ namespace Catherine
 
 		virtual bool Initialize() override { }
 		virtual void Uninitialize() override { }
+
+		virtual void Render(const WorldContext * context) override { }
 	};
 }
