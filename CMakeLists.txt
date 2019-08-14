@@ -146,6 +146,8 @@ SET(Src_Render_Resource
 	"${PROJECT_SOURCE_DIR}/Src/ProgramManager.cpp"
 	"${PROJECT_SOURCE_DIR}/Src/TextureManager.h"
 	"${PROJECT_SOURCE_DIR}/Src/TextureManager.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/RenderTargetManager.h"
+	"${PROJECT_SOURCE_DIR}/Src/RenderTargetManager.cpp"
 )
 source_group(Render\\Resource FILES ${Src_Render_Resource})
 
@@ -191,6 +193,13 @@ SET(Src_Utility_Xml
 	"${PROJECT_SOURCE_DIR}/Src/tinyxml2.cpp"
 )
 source_group(Utility\\Xml FILES ${Src_Utility_Xml})
+
+# Utility\\Math3D
+SET(Src_Utility_Math3D
+	"${PROJECT_SOURCE_DIR}/Src/Math3DUtility.h"
+	"${PROJECT_SOURCE_DIR}/Src/Math3DUtility.cpp"
+)
+source_group(Utility\\Math3D FILES ${Src_Utility_Math3D})
 
 # World\\Component
 SET(Src_World_Component
@@ -274,6 +283,7 @@ add_executable(Catherine
 	${Src_Utility_Log}
 	${Src_Utility_Time}
 	${Src_Utility_Xml}
+	${Src_Utility_Math3D}
 	${Src_World_Component}
 	${Src_World_Level}
 	${Src_World_Manager}

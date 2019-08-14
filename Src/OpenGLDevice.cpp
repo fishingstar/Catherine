@@ -9,6 +9,7 @@
 #include "OpenGLVertexArray.h"
 #include "OpenGLVertexBuffer.h"
 #include "OpenGLIndexBuffer.h"
+#include "OpenGLRenderTarget.h"
 
 namespace Catherine
 {
@@ -136,6 +137,12 @@ namespace Catherine
 	{
 		OpenGLCubeTexture * tmp_texture = new OpenGLCubeTexture();
 		return tmp_texture;
+	}
+
+	IRenderTarget * OpenGLDevice::CreateRenderTarget()
+	{
+		OpenGLRenderTarget * tmp_rt = new OpenGLRenderTarget();
+		return tmp_rt;
 	}
 
 	IVertexArray * OpenGLDevice::CreateVertexArray()

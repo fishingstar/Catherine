@@ -35,6 +35,7 @@ namespace Catherine
 
 		virtual ITexture * CreateTexture() override;
 		virtual ITexture * CreateCubeTexture() override;
+		virtual IRenderTarget * CreateRenderTarget() override;
 
 		virtual IVertexArray * CreateVertexArray() override;
 		virtual IVertexBuffer * CreateVertexBuffer(size_t size, Usage usage, const void * data, const std::vector<AttributeLayout> & attributes) override;

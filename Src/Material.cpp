@@ -177,7 +177,7 @@ namespace Catherine
 	void Material::SetLightUniform(const LightContext * context)
 	{
 		const LightContext::DirectionalContext * tmp_dirContext = context->GetDirectionContext();
-		SetVec3("dirLight.lightDir", tmp_dirContext->m_Rotation);
+		SetVec3("dirLight.lightDir", tmp_dirContext->m_Direction);
 		SetVec4("dirLight.lightColor", tmp_dirContext->m_LightColor);
 
 		for (unsigned int i = 0; i < LightContext::POINT_LIGHT_COUNT; i++)
@@ -200,7 +200,7 @@ namespace Catherine
 
 		const LightContext::SpotContext * tmp_spotContext = context->GetSpotContext();
 		SetVec3("spotLight.lightPos", tmp_spotContext->m_Position);
-		SetVec3("spotLight.lightDir", tmp_spotContext->m_Rotation);
+		SetVec3("spotLight.lightDir", tmp_spotContext->m_Direction);
 		SetVec4("spotLight.lightColor", tmp_spotContext->m_LightColor);
 		SetFloat("spotLight.innerCutoff", glm::cos(glm::radians(45.0f)));
 		SetFloat("spotLight.outerCutoff", glm::cos(glm::radians(60.0f)));

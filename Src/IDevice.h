@@ -11,6 +11,7 @@ namespace Catherine
 	class IVertexArray;
 	class IIndexBuffer;
 	class IVertexBuffer;
+	class IRenderTarget;
 
 	class IDevice
 	{
@@ -43,6 +44,7 @@ namespace Catherine
 
 		virtual ITexture * CreateTexture() = 0;
 		virtual ITexture * CreateCubeTexture() = 0;
+		virtual IRenderTarget * CreateRenderTarget() = 0;
 
 		virtual IVertexArray * CreateVertexArray() = 0;
 		virtual IVertexBuffer * CreateVertexBuffer(size_t size, Usage usage, const void * data, const std::vector<AttributeLayout> & attributes) = 0;

@@ -46,7 +46,7 @@ namespace Catherine
 		m_SceneObjects.push_back(tmp_dirLight);
 
 		Transform * tmp_dirTransform = (Transform *)tmp_dirLight->AddComponent(ComponentKind::Transform);
-		tmp_dirTransform->SetRotation(glm::vec3(0.3f, -0.3f, -0.6f));
+		tmp_dirTransform->SetRotation(glm::vec3(15.0f, 15.0f, 0.0f));
 
 		Light * tmp_dirComponent = (Light *)tmp_dirLight->AddComponent(ComponentKind::Light);
 		tmp_dirComponent->SetLightType(LightType::Directional);

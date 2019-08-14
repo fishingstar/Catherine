@@ -3,8 +3,9 @@
 #include "SceneObject.h"
 #include "Transform.h"
 #include "Light.h"
-#include <algorithm>
 #include "LogUtility.h"
+#include "Math3DUtility.h"
+#include <algorithm>
 
 namespace Catherine
 {
@@ -56,7 +57,7 @@ namespace Catherine
 		if (tmp_dirLight)
 		{
 			Transform * tmp_dirTransform = (Transform *)tmp_dirLight->GetComponent(ComponentKind::Transform);
-			tmp_dirContext->m_Rotation = tmp_dirTransform->GetRotation();
+			tmp_dirContext->m_Direction = Math3DUtility::RotationDirection(tmp_dirTransform->GetRotation());
 
 			Light * tmp_dirComponent = (Light *)tmp_dirLight->GetComponent(ComponentKind::Light);
 			tmp_dirContext->m_Intensity = tmp_dirComponent->GetIntensity();
@@ -71,7 +72,7 @@ namespace Catherine
 		{
 			Transform * tmp_spotTransform = (Transform *)tmp_spotLight->GetComponent(ComponentKind::Transform);
 			tmp_spotContext->m_Position = tmp_spotTransform->GetPosition();
-			tmp_spotContext->m_Rotation = tmp_spotTransform->GetRotation();
+			tmp_spotContext->m_Direction = Math3DUtility::RotationDirection(tmp_spotTransform->GetRotation());
 
 			Light * tmp_spotComponent = (Light *)tmp_spotLight->GetComponent(ComponentKind::Light);
 			tmp_spotContext->m_LightColor = tmp_spotComponent->GetLightColor();
