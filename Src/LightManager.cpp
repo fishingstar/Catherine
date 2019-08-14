@@ -4,7 +4,6 @@
 #include "Transform.h"
 #include "Light.h"
 #include "LogUtility.h"
-#include "Math3DUtility.h"
 #include <algorithm>
 
 namespace Catherine
@@ -57,13 +56,14 @@ namespace Catherine
 		if (tmp_dirLight)
 		{
 			Transform * tmp_dirTransform = (Transform *)tmp_dirLight->GetComponent(ComponentKind::Transform);
-			tmp_dirContext->m_Direction = Math3DUtility::RotationDirection(tmp_dirTransform->GetRotation());
+			tmp_dirContext->m_Rotation = tmp_dirTransform->GetRotation();
 
 			Light * tmp_dirComponent = (Light *)tmp_dirLight->GetComponent(ComponentKind::Light);
 			tmp_dirContext->m_Intensity = tmp_dirComponent->GetIntensity();
 			tmp_dirContext->m_LightColor = tmp_dirComponent->GetLightColor();
 
 			tmp_dirContext->enabled = true;
+			tmp_dirContext->Apply();
 		}
 
 		std::vector<SceneObject *> tmp_spotLights = GetSpotLights();
@@ -72,7 +72,7 @@ namespace Catherine
 		{
 			Transform * tmp_spotTransform = (Transform *)tmp_spotLight->GetComponent(ComponentKind::Transform);
 			tmp_spotContext->m_Position = tmp_spotTransform->GetPosition();
-			tmp_spotContext->m_Direction = Math3DUtility::RotationDirection(tmp_spotTransform->GetRotation());
+			tmp_spotContext->m_Rotation = tmp_spotTransform->GetRotation();
 
 			Light * tmp_spotComponent = (Light *)tmp_spotLight->GetComponent(ComponentKind::Light);
 			tmp_spotContext->m_LightColor = tmp_spotComponent->GetLightColor();
@@ -84,6 +84,7 @@ namespace Catherine
 			tmp_spotContext->m_SpotAngle = tmp_spotComponent->GetSpotAngle();
 
 			tmp_spotContext->enabled = true;
+			tmp_spotContext->Apply();
 		}
 
 		std::vector<SceneObject *> tmp_pointLights = GetPointLights();
@@ -109,6 +110,7 @@ namespace Catherine
 				tmp_pointContext->m_Range = tmp_pointComponent->GetRange();
 
 				tmp_pointContext->enabled = true;
+				tmp_pointContext->Apply();
 			}
 		}
 

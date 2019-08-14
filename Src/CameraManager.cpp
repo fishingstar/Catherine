@@ -55,6 +55,8 @@ namespace Catherine
 			m_CameraContext->SetFOV(tmp_camera->GetFOV());
 			m_CameraContext->SetSize(tmp_camera->GetSize());
 			m_CameraContext->SetClearColor(tmp_camera->GetClearColor());
+
+			m_CameraContext->Apply();
 		}
 
 		return m_CameraContext;

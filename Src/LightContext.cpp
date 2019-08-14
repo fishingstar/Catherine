@@ -1,4 +1,5 @@
 #include "LightContext.h"
+#include "Math3DUtility.h"
 
 namespace Catherine
 {
@@ -37,5 +38,20 @@ namespace Catherine
 				m_PointContext[i] = nullptr;
 			}
 		}
+	}
+
+	void LightContext::DirectionalContext::Apply()
+	{
+		m_Direction = Math3DUtility::RotationDirection(m_Rotation);
+	}
+
+	void LightContext::SpotContext::Apply()
+	{
+		m_Direction = Math3DUtility::RotationDirection(m_Rotation);
+	}
+
+	void LightContext::PointContext::Apply()
+	{
+
 	}
 }

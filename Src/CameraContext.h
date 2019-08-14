@@ -40,8 +40,14 @@ namespace Catherine
 		const glm::vec3 & GetRotation() const { return m_Rotation; }
 		void SetRotation(const glm::vec3 & rotation) { m_Rotation = rotation; }
 
-		const glm::mat4x4 & GetViewMatrix() const;
-		const glm::mat4x4 & GetProjectionMatrix() const;
+		const glm::mat4x4 & GetViewMatrix() const { return m_ViewMatrix; }
+		const glm::mat4x4 & GetProjectionMatrix() const { return m_ProjectionMatrix; }
+
+		void Apply();
+
+	private:
+		void CalculateViewMatrix();
+		void CalculateProjectionMatrix();
 
 	private:
 		ProjectionMode m_ProjectionMode = ProjectionMode::Persperctive;
@@ -57,7 +63,7 @@ namespace Catherine
 		glm::vec3 m_Position = glm::vec3(0.0f, 0.0f, 0.0f);
 		glm::vec3 m_Rotation = glm::vec3(0.0f, 0.0f, 0.0f);
 
-		mutable glm::mat4x4 m_ViewMatrix;
-		mutable glm::mat4x4 m_ProjectionMatrix;
+		glm::mat4x4 m_ViewMatrix;
+		glm::mat4x4 m_ProjectionMatrix;
 	};
 }

@@ -24,8 +24,12 @@ namespace Catherine
 			// base light color
 			glm::vec4 m_LightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 
-			// directional light direction
-			glm::vec3 m_Direction = glm::vec3(0.0f, 0.0f, 0.0f);
+			// rotation in degrees and direction
+			glm::vec3 m_Rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+			glm::vec3 m_Direction = glm::vec3(0.0f, 0.0f, -1.0f);
+
+		public:
+			void Apply();
 		};
 
 		struct SpotContext
@@ -47,9 +51,13 @@ namespace Catherine
 			// base light color
 			glm::vec4 m_LightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 
-			// spot light position and direction
+			// spot light position, rotation and direction
 			glm::vec3 m_Position = glm::vec3(0.0f, 0.0f, 0.0f);
-			glm::vec3 m_Direction = glm::vec3(0.0f, 0.0f, 0.0f);
+			glm::vec3 m_Rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+			glm::vec3 m_Direction = glm::vec3(0.0f, 0.0f, -1.0f);
+
+		public:
+			void Apply();
 		};
 
 		struct PointContext
@@ -70,6 +78,9 @@ namespace Catherine
 
 			// point light position
 			glm::vec3 m_Position = glm::vec3(0.0f, 0.0f, 0.0f);
+
+		public:
+			void Apply();
 		};
 
 		const static unsigned int POINT_LIGHT_COUNT = 4;
