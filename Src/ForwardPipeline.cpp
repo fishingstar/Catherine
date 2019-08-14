@@ -6,7 +6,7 @@
 #include "IMaterial.h"
 #include "IDevice.h"
 #include "IVertexArray.h"
-#include "RenderTarget.h"
+#include "OpenGLRenderTarget.h"
 #include <algorithm>
 
 namespace Catherine
@@ -15,10 +15,10 @@ namespace Catherine
 
 	bool ForwardPipeline::Initialize()
 	{
-		m_RenderTarget_Back = new RenderTarget();
+		m_RenderTarget_Back = new OpenGLRenderTarget();
 		m_RenderTarget_Back->Initialize(1280, 720, 0, false, false);
-		m_RenderTarget_Shadow = new RenderTarget();
-		m_RenderTarget_Shadow->Initialize(1280, 720, 1, true, true);
+		m_RenderTarget_Shadow = new OpenGLRenderTarget();
+		m_RenderTarget_Shadow->Initialize(1280, 720, 0, true, false);
 
 		return true;
 	}

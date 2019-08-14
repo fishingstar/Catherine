@@ -8,11 +8,11 @@ namespace Catherine
 {
 	class ITexture;
 
-	class RenderTarget : public IRenderTarget
+	class OpenGLRenderTarget : public IRenderTarget
 	{
 	public:
-		RenderTarget();
-		virtual ~RenderTarget() override;
+		OpenGLRenderTarget();
+		virtual ~OpenGLRenderTarget() override;
 
 		virtual bool Initialize(uint32_t width, uint32_t height, uint8_t color_count, bool depth, bool stencil) override;
 		virtual void Uninitialize() override;

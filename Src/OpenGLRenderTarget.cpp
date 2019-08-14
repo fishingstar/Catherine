@@ -1,19 +1,19 @@
-#include "RenderTarget.h"
+#include "OpenGLRenderTarget.h"
 #include "OpenGLTexture.h"
 
 namespace Catherine
 {
-	RenderTarget::RenderTarget()
+	OpenGLRenderTarget::OpenGLRenderTarget()
 	{
 
 	}
 
-	RenderTarget::~RenderTarget()
+	OpenGLRenderTarget::~OpenGLRenderTarget()
 	{
 
 	}
 
-	bool RenderTarget::Initialize(uint32_t width, uint32_t height, uint8_t color_count, bool depth, bool stencil)
+	bool OpenGLRenderTarget::Initialize(uint32_t width, uint32_t height, uint8_t color_count, bool depth, bool stencil)
 	{
 		for (size_t i = 0; i < color_count; ++i)
 		{
@@ -93,12 +93,12 @@ namespace Catherine
 		return true;
 	}
 
-	void RenderTarget::Uninitialize()
+	void OpenGLRenderTarget::Uninitialize()
 	{
 
 	}
 
-	void RenderTarget::Use()
+	void OpenGLRenderTarget::Use()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBuffer);
 	}
