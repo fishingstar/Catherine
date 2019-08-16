@@ -28,5 +28,7 @@ namespace Catherine
 	private:
 		IRenderTarget * m_RenderTarget_Back = nullptr;
 		IRenderTarget * m_RenderTarget_Shadow = nullptr;
+
+		CameraContext m_ShadowCameraContext;
 	};
 }

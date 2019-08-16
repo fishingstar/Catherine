@@ -2,8 +2,10 @@
 #include "WorldContext.h"
 #include "RenderContext.h"
 #include "SceneObject.h"
+#include "Transform.h"
 #include "MeshFilter.h"
 #include "IMesh.h"
+#include "LogUtility.h"
 #include <vector>
 
 namespace Catherine
@@ -35,6 +37,13 @@ namespace Catherine
 		SceneObject * tmp_owner = GetOwner();
 		if (tmp_owner)
 		{
+			Transform * tmp_transform = (Transform *)tmp_owner->GetComponent(ComponentKind::Transform);
+			if (!tmp_transform)
+			{
+				LogError("Any thing in the scene must have a Transform Component...");
+				return;
+			}
+
 			MeshFilter * tmp_meshFilter = (MeshFilter *)tmp_owner->GetComponent(ComponentKind::MeshFilter);
 			if (tmp_meshFilter != nullptr)
 			{
@@ -47,6 +56,11 @@ namespace Catherine
 					tmp_renderContext->SetVertexArray(tmp_meshes[i]->GetVertexArray());
 					tmp_renderContext->SetCastShadow(m_CastShadow);
 					tmp_renderContext->SetReceiveShadow(m_ReceiveShadow);
+					tmp_renderContext->SetPosition(tmp_transform->GetPosition());
+					tmp_renderContext->SetRotation(tmp_transform->GetRotation());
+					tmp_renderContext->SetScale(tmp_transform->GetScale());
+					tmp_renderContext->Apply();
+
 					context->AddRenderContext(tmp_renderContext);
 				}
 			}

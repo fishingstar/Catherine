@@ -19,6 +19,9 @@ namespace Catherine
 	const char * s_helmetMaterial = "./res/model/nanosuit/material/nanosuit_helmet.mtl";
 	const char * s_bodyMaterial = "./res/model/nanosuit/material/nanosuit_body.mtl";
 
+	const char * s_planeModel = "./res/model/buildin/plane.fbx";
+	const char * s_planeMaterial = "./res/model/nanosuit/material/nanosuit_glass.mtl";
+
 	const char * s_skyboxModel = "./res/model/buildin/box.fbx";
 	const char * s_skyboxMaterial = "./res/material/skybox.mtl";
 
@@ -32,8 +35,8 @@ namespace Catherine
 		m_SceneObjects.push_back(tmp_camera);
 
 		Transform * tmp_cameraTransform = (Transform *)tmp_camera->AddComponent(ComponentKind::Transform);
-		tmp_cameraTransform->SetPosition(glm::vec3(6.0f, 15.0f, 6.0f));
-		tmp_cameraTransform->SetRotation(glm::vec3(30.0f, -45.0f, 0.0f));
+		tmp_cameraTransform->SetPosition(glm::vec3(6.0f, 12.0f, 12.0f));
+		tmp_cameraTransform->SetRotation(glm::vec3(15.0f, -15.0f, 0.0f));
 
 		Camera * tmp_cameraComponent = (Camera *)tmp_camera->AddComponent(ComponentKind::Camera);
 		tmp_cameraComponent->SetProjectionMode(ProjectionMode::Persperctive);
@@ -46,7 +49,7 @@ namespace Catherine
 		m_SceneObjects.push_back(tmp_dirLight);
 
 		Transform * tmp_dirTransform = (Transform *)tmp_dirLight->AddComponent(ComponentKind::Transform);
-		tmp_dirTransform->SetRotation(glm::vec3(15.0f, 15.0f, 0.0f));
+		tmp_dirTransform->SetRotation(glm::vec3(45.0f, 45.0f, 0.0f));
 
 		Light * tmp_dirComponent = (Light *)tmp_dirLight->AddComponent(ComponentKind::Light);
 		tmp_dirComponent->SetLightType(LightType::Directional);
@@ -127,6 +130,24 @@ namespace Catherine
 		IMaterial * tmp_legMtl = new Material();
 		tmp_legMtl->Initialize(s_legMaterial);
 		tmp_meshRenderer->AddMaterial(tmp_legMtl);
+
+
+		// plane
+		SceneObject * tmp_plane = new SceneObject(this);
+		tmp_plane->Initialize();
+		m_SceneObjects.push_back(tmp_plane);
+
+		Transform * tmp_planeTransform = (Transform *)tmp_plane->AddComponent(ComponentKind::Transform);
+		tmp_planeTransform->SetRotation(glm::vec3(90.0f, 0.0f, 0.0f));
+		tmp_planeTransform->SetScale(glm::vec3(80.0f, 80.0f, 80.0f));
+		MeshFilter * tmp_planeMeshFilter = (MeshFilter *)tmp_plane->AddComponent(ComponentKind::MeshFilter);
+		tmp_planeMeshFilter->LoadFromFile(s_planeModel);
+		MeshRenderer * tmp_planeRenderer = (MeshRenderer *)tmp_plane->AddComponent(ComponentKind::MeshRenderer);
+		tmp_planeRenderer->SetCastShadow(true);
+		tmp_planeRenderer->SetReceiveShadow(true);
+		IMaterial * tmp_planeMtl = new Material();
+		tmp_planeMtl->Initialize(s_planeMaterial);
+		tmp_planeRenderer->AddMaterial(tmp_planeMtl);
 
 
 		// skybox

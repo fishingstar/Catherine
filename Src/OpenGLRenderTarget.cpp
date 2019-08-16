@@ -98,6 +98,21 @@ namespace Catherine
 
 	}
 
+	ITexture * OpenGLRenderTarget::GetColorAttachment(uint8_t index) const
+	{
+		return index < m_ColorAttachments.size() ? m_ColorAttachments[index] : nullptr;
+	}
+
+	ITexture * OpenGLRenderTarget::GetDepthAttachment() const
+	{
+		return m_DepthStencilAttachment ? m_DepthStencilAttachment : m_DepthAttachment;
+	}
+
+	ITexture * OpenGLRenderTarget::GetStencilAttachment() const
+	{
+		return m_DepthStencilAttachment ? m_DepthStencilAttachment : m_StencilAttachment;
+	}
+
 	void OpenGLRenderTarget::Use()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBuffer);

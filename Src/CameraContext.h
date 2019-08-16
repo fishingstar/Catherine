@@ -45,6 +45,7 @@ namespace Catherine
 		const glm::mat4x4 & GetProjectionMatrix() const { return m_ProjectionMatrix; }
 
 		void Apply();
+
 		std::vector<glm::vec4> GetFrustumPoints(float near, float far) const;
 
 	private:

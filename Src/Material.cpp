@@ -1,6 +1,7 @@
 #include "Material.h"
 #include "IProgram.h"
 #include "ITexture.h"
+#include "RenderContext.h"
 #include "CameraContext.h"
 #include "LightContext.h"
 #include "TextureManager.h"
@@ -155,10 +156,25 @@ namespace Catherine
 
 	void Material::SetTexture(const char * key, ITexture * value)
 	{
-		m_Program->Use();
-		unsigned int tmp_slot = m_Slot++;
-		m_Program->SetInt(key, tmp_slot);
-		m_Textures.push_back(std::pair<unsigned int, ITexture *>(tmp_slot, value));
+		auto tmp_sampler = m_Samplers.find(key);
+		if (tmp_sampler == m_Samplers.end())
+		{
+			m_Program->Use();
+
+			uint8_t tmp_slot = m_Slot++;
+			m_Program->SetInt(key, tmp_slot);
+			m_Samplers[key] = tmp_slot;
+		}
+
+		uint8_t tmp_slot = m_Samplers[key];
+		m_Bindings[tmp_slot] = value;
+	}
+
+	void Material::SetModelUniform(const RenderContext * context)
+	{
+		const glm::mat4x4 & tmp_model = context->GetModelMatrix();
+
+		SetMat4x4("model", tmp_model);
 	}
 
 	void Material::SetCameraUniform(const CameraContext * context)
@@ -167,7 +183,6 @@ namespace Catherine
 		const glm::mat4x4 & tmp_view = context->GetViewMatrix();
 		const glm::mat4x4 & tmp_projection = context->GetProjectionMatrix();
 
-		SetMat4x4("model", glm::mat4x4(1));
 		SetMat4x4("view", tmp_view);
 		SetMat4x4("projection", tmp_projection);
 		SetVec3("viewPos", tmp_cameraPos);
@@ -210,6 +225,14 @@ namespace Catherine
 		SetFloat("spotLight.quadratic", tmp_spotContext->m_AttenuationQuadratic);
 	}
 
+	void Material::SetShadowUniform(const CameraContext * context)
+	{
+		const glm::mat4x4 & tmp_view = context->GetViewMatrix();
+		const glm::mat4x4 & tmp_projection = context->GetProjectionMatrix();
+		SetMat4x4("lightview", tmp_view);
+		SetMat4x4("lightprojection", tmp_projection);
+	}
+
 	float Material::GetRenderPriority() const
 	{
 		return m_RenderPriority;
@@ -227,10 +250,12 @@ namespace Catherine
 		StateManager::Instance()->SetBlendEquation(m_BlendEquation);
 		StateManager::Instance()->SetBlendFunc(m_SrcFunc, m_DstFunc, m_SrcAlphaFunc, m_DstAlphaFunc);
 
-		for (size_t i = 0; i < m_Textures.size(); i++)
+		for (auto iter = m_Bindings.cbegin(); iter != m_Bindings.cend(); ++iter)
 		{
-			std::pair<unsigned int, ITexture *> tmp_pair = m_Textures[i];
-			tmp_pair.second->Use(tmp_pair.first);
+			if (iter->second)
+			{
+				iter->second->Use(iter->first);
+			}
 		}
 
 		m_Program->Use();

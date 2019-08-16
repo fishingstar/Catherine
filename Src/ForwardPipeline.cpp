@@ -45,7 +45,7 @@ namespace Catherine
 			const LightContext * tmp_light = context->GetLightContext();
 			std::vector<RenderContext *> tmp_renderContexts = context->GetRenderContexts();
 
-			const CameraContext & tmp_shadow = GenerateShadowCameraContext(tmp_light, tmp_camera);
+			m_ShadowCameraContext = GenerateShadowCameraContext(tmp_light, tmp_camera);
 
 			// clear screen
 			g_Device->Clear();
@@ -81,7 +81,8 @@ namespace Catherine
 
 				// material
 				IMaterial * tmp_material = tmp_renderContext->GetMaterial();
-				tmp_material->SetCameraUniform(&tmp_shadow);
+				tmp_material->SetModelUniform(tmp_renderContext);
+				tmp_material->SetCameraUniform(&m_ShadowCameraContext);
 				tmp_material->SetLightUniform(tmp_light);
 				tmp_material->Use();
 
@@ -136,8 +137,11 @@ namespace Catherine
 
 			// material
 			IMaterial * tmp_material = tmp_renderContext->GetMaterial();
+			tmp_material->SetModelUniform(tmp_renderContext);
 			tmp_material->SetCameraUniform(tmp_camera);
 			tmp_material->SetLightUniform(tmp_light);
+			tmp_material->SetShadowUniform(&m_ShadowCameraContext);
+			tmp_material->SetTexture("shadowmap", m_RenderTarget_Shadow->GetDepthAttachment());
 			tmp_material->Use();
 
 			// vertex buffer
@@ -163,7 +167,7 @@ namespace Catherine
 		glm::mat4x4 tmp_view = tmp_dirContext->GetDynamicViewMatrix(glm::vec3(0.0f, 0.0f, 0.0f));
 
 		// transform to light space
-		std::vector<glm::vec4> tmp_points = camera->GetFrustumPoints(0.0f, 10.0f);
+		std::vector<glm::vec4> tmp_points = camera->GetFrustumPoints(0.0f, 50.0f);
 		for (size_t i = 0; i < tmp_points.size(); ++i)
 		{
 			tmp_points[i] = tmp_view * tmp_points[i];

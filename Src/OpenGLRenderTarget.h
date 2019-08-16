@@ -17,6 +17,10 @@ namespace Catherine
 		virtual bool Initialize(uint32_t width, uint32_t height, uint8_t color_count, bool depth, bool stencil) override;
 		virtual void Uninitialize() override;
 
+		virtual ITexture * GetColorAttachment(uint8_t index) const override;
+		virtual ITexture * GetDepthAttachment() const override;
+		virtual ITexture * GetStencilAttachment() const override;
+
 		virtual void Use() override;
 
 	private:

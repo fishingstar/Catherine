@@ -2,7 +2,8 @@
 
 #include "IMaterial.h"
 #include "DeviceCommon.h"
-#include <vector>
+#include <unordered_map>
+#include <string>
 
 namespace Catherine
 {
@@ -22,8 +23,10 @@ namespace Catherine
 		virtual void SetMat4x4(const char * key, const glm::mat4x4 & value) override;
 		virtual void SetTexture(const char * key, ITexture * value) override;
 
+		virtual void SetModelUniform(const RenderContext * context) override;
 		virtual void SetCameraUniform(const CameraContext * context) override;
 		virtual void SetLightUniform(const LightContext * context) override;
+		virtual void SetShadowUniform(const CameraContext * context) override;
 
 		virtual float GetRenderPriority() const override;
 
@@ -33,7 +36,8 @@ namespace Catherine
 		IProgram * m_Program = nullptr;
 
 		unsigned int m_Slot = 0;
-		std::vector<std::pair<unsigned int, ITexture *>> m_Textures;
+		std::unordered_map<std::string, uint8_t> m_Samplers;
+		std::unordered_map<uint8_t, ITexture *> m_Bindings;
 
 		bool m_DepthTestEnabled = true;
 		DepthTestMode m_DepthTestMode = DepthTestMode::LessEqual;

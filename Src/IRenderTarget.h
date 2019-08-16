@@ -4,6 +4,8 @@
 
 namespace Catherine
 {
+	class ITexture;
+
 	class IRenderTarget
 	{
 	public:
@@ -11,6 +13,10 @@ namespace Catherine
 
 		virtual bool Initialize(uint32_t width, uint32_t height, uint8_t color_count, bool depth, bool stencil) = 0;
 		virtual void Uninitialize() = 0;
+
+		virtual ITexture * GetColorAttachment(uint8_t index) const = 0;
+		virtual ITexture * GetDepthAttachment() const = 0;
+		virtual ITexture * GetStencilAttachment() const = 0;
 
 		virtual void Use() = 0;
 	};
