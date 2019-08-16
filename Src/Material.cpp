@@ -171,11 +171,12 @@ namespace Catherine
 		SetMat4x4("view", tmp_view);
 		SetMat4x4("projection", tmp_projection);
 		SetVec3("viewPos", tmp_cameraPos);
-		SetFloat("ambient", 0.2f);
 	}
 
 	void Material::SetLightUniform(const LightContext * context)
 	{
+		SetFloat("ambient", 0.2f);
+
 		const LightContext::DirectionalContext * tmp_dirContext = context->GetDirectionContext();
 		SetVec3("dirLight.lightDir", tmp_dirContext->m_Direction);
 		SetVec4("dirLight.lightColor", tmp_dirContext->m_LightColor);

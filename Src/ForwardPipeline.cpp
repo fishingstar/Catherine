@@ -45,9 +45,9 @@ namespace Catherine
 			const LightContext * tmp_light = context->GetLightContext();
 			std::vector<RenderContext *> tmp_renderContexts = context->GetRenderContexts();
 
+			const CameraContext & tmp_shadow = GenerateShadowCameraContext(tmp_light, tmp_camera);
+
 			// clear screen
-			const glm::vec3 & tmp_color = tmp_camera->GetClearColor();
-			g_Device->ClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);
 			g_Device->Clear();
 
 			// sort commands
@@ -75,9 +75,13 @@ namespace Catherine
 			{
 				const RenderContext * tmp_renderContext = tmp_renderContexts[i];
 
+				// skip no shadow objects
+				if (!tmp_renderContext->GetCastShadow())
+					continue;
+
 				// material
 				IMaterial * tmp_material = tmp_renderContext->GetMaterial();
-				tmp_material->SetCameraUniform(tmp_camera);
+				tmp_material->SetCameraUniform(&tmp_shadow);
 				tmp_material->SetLightUniform(tmp_light);
 				tmp_material->Use();
 
@@ -150,5 +154,44 @@ namespace Catherine
 	void ForwardPipeline::RenderTransparent(const WorldContext * context)
 	{
 
+	}
+
+	CameraContext ForwardPipeline::GenerateShadowCameraContext(const LightContext * light, const CameraContext * camera)
+	{
+		// get any view matrix of light
+		auto tmp_dirContext = light->GetDirectionContext();
+		glm::mat4x4 tmp_view = tmp_dirContext->GetDynamicViewMatrix(glm::vec3(0.0f, 0.0f, 0.0f));
+
+		// transform to light space
+		std::vector<glm::vec4> tmp_points = camera->GetFrustumPoints(0.0f, 10.0f);
+		for (size_t i = 0; i < tmp_points.size(); ++i)
+		{
+			tmp_points[i] = tmp_view * tmp_points[i];
+		}
+
+		// calculate AABB box
+		glm::vec4 tmp_minPoint = tmp_points[0];
+		glm::vec4 tmp_maxPoint = tmp_points[0];
+		for (size_t i = 1; i < tmp_points.size(); ++i)
+		{
+			tmp_minPoint = glm::min(tmp_minPoint, tmp_points[i]);
+			tmp_maxPoint = glm::max(tmp_maxPoint, tmp_points[i]);
+		}
+		glm::vec3 tmp_center = (tmp_minPoint + tmp_maxPoint) / 2.0f;
+		tmp_center.z = tmp_maxPoint.z;
+		tmp_center = glm::inverse(tmp_view) * glm::vec4(tmp_center, 1.0f);
+
+		// build new camera context
+		CameraContext tmp_newContext;
+		tmp_newContext.SetProjectionMode(ProjectionMode::Ortho);
+		tmp_newContext.SetSize(tmp_maxPoint.y - tmp_minPoint.y);
+		tmp_newContext.SetAspect(camera->GetAspect());// ((tmp_maxPoint.x - tmp_minPoint.x) / (tmp_maxPoint.y - tmp_minPoint.y));
+		tmp_newContext.SetNearPlane(0.0f);
+		tmp_newContext.SetFarPlane(tmp_maxPoint.z - tmp_minPoint.z);
+		tmp_newContext.SetRotation(tmp_dirContext->m_Rotation);
+		tmp_newContext.SetPosition(tmp_center);
+		tmp_newContext.Apply();
+		
+		return tmp_newContext;
 	}
 }

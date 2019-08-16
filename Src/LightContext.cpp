@@ -45,6 +45,11 @@ namespace Catherine
 		m_Direction = Math3DUtility::RotationDirection(m_Rotation);
 	}
 
+	glm::mat4x4 LightContext::DirectionalContext::GetDynamicViewMatrix(const glm::vec3 & position)
+	{
+		return Math3DUtility::GenViewMatrixFromDirection(position, m_Direction);
+	}
+
 	void LightContext::SpotContext::Apply()
 	{
 		m_Direction = Math3DUtility::RotationDirection(m_Rotation);

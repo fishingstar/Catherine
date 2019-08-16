@@ -45,6 +45,8 @@ namespace Catherine
 					RenderContext * tmp_renderContext = new RenderContext();
 					tmp_renderContext->SetMaterial(m_Materials[i]);
 					tmp_renderContext->SetVertexArray(tmp_meshes[i]->GetVertexArray());
+					tmp_renderContext->SetCastShadow(m_CastShadow);
+					tmp_renderContext->SetReceiveShadow(m_ReceiveShadow);
 					context->AddRenderContext(tmp_renderContext);
 				}
 			}

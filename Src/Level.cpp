@@ -107,6 +107,8 @@ namespace Catherine
 		MeshFilter * tmp_meshFilter = (MeshFilter *)tmp_warrior->AddComponent(ComponentKind::MeshFilter);
 		tmp_meshFilter->LoadFromFile(s_testModel);
 		MeshRenderer * tmp_meshRenderer = (MeshRenderer *)tmp_warrior->AddComponent(ComponentKind::MeshRenderer);
+		tmp_meshRenderer->SetCastShadow(true);
+		tmp_meshRenderer->SetReceiveShadow(true);
 		IMaterial * tmp_helmetMtl = new Material();
 		tmp_helmetMtl->Initialize(s_helmetMaterial);
 		tmp_meshRenderer->AddMaterial(tmp_helmetMtl);
@@ -136,6 +138,8 @@ namespace Catherine
 		MeshFilter * tmp_skyboxMeshFilter = (MeshFilter *)tmp_skybox->AddComponent(ComponentKind::MeshFilter);
 		tmp_skyboxMeshFilter->LoadFromFile(s_skyboxModel);
 		MeshRenderer * tmp_skyboxRenderer = (MeshRenderer *)tmp_skybox->AddComponent(ComponentKind::MeshRenderer);
+		tmp_skyboxRenderer->SetCastShadow(false);
+		tmp_skyboxRenderer->SetReceiveShadow(false);
 		IMaterial * tmp_skyboxMtl = new Material();
 		tmp_skyboxMtl->Initialize(s_skyboxMaterial);
 		tmp_skyboxRenderer->AddMaterial(tmp_skyboxMtl);

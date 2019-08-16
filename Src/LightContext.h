@@ -30,6 +30,7 @@ namespace Catherine
 
 		public:
 			void Apply();
+			glm::mat4x4 GetDynamicViewMatrix(const glm::vec3 & position);
 		};
 
 		struct SpotContext
