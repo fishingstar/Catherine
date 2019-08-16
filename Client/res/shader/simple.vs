@@ -10,6 +10,7 @@ out vec3 WorldNormal;
 out vec3 WorldTangent;
 out vec3 WorldBinormal;
 out vec3 WorldPos;
+out vec4 ClipPos;
 
 uniform mat4 model;
 uniform mat4 view;
@@ -23,5 +24,6 @@ void main()
 	WorldTangent = normalize(WorldTangent - dot(WorldTangent, WorldNormal) * WorldNormal);
 	WorldBinormal = cross(WorldNormal, WorldTangent) * Tangent.w;
 	WorldPos = vec4(model * vec4(Pos.xyz, 1.0)).xyz;
-	gl_Position = projection * view * model * vec4(Pos.xyz, 1.0);
+	ClipPos = projection * view * model * vec4(Pos.xyz, 1.0);
+	gl_Position = ClipPos;
 }

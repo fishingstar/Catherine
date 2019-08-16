@@ -7,6 +7,7 @@ in vec3 WorldNormal;
 in vec3 WorldTangent;
 in vec3 WorldBinormal;
 in vec3 WorldPos;
+in vec4 ClipPos;
 
 out vec4 FragColor;
 
@@ -46,10 +47,13 @@ uniform SpotLight spotLight;
 
 uniform float ambient;
 uniform vec3 viewPos;
+uniform mat4 lightview;
+uniform mat4 lightprojection;
 
 uniform sampler2D diffuse;
 uniform sampler2D normalmap;
 uniform sampler2D specularmap;
+uniform sampler2D shadowmap;
 
 vec3 calculateDirLight(DirectionalLight param_Light, vec3 param_ViewDir, vec3 param_Normal, vec3 param_Diffuse, vec4 param_Specular)
 {
@@ -132,7 +136,13 @@ void main()
 	// calculate spot light color
 	vec3 tmp_spotColor = calculateSpotLight(spotLight, tmp_viewDir, tmp_normalMap, WorldPos, tmp_diffuse, tmp_specularmap);
 
-	vec3 tmp_result = ambient * tmp_diffuse + tmp_dirColor + tmp_pointColor + tmp_spotColor;
+	// shadow
+	vec4 tmp_lightClipPos = lightprojection * lightview * vec4(WorldPos, 1.0);
+	vec4 tmp_lightScreenPos = (tmp_lightClipPos.xyzw / tmp_lightClipPos.w + 1.0) / 2.0;
+	float tmp_depth = texture(shadowmap, tmp_lightScreenPos.xy).x + 0.01;
+	float tmp_shadow = step(tmp_lightScreenPos.z, tmp_depth);
+
+	vec3 tmp_result = ambient * tmp_diffuse + tmp_dirColor * tmp_shadow + tmp_pointColor + tmp_spotColor;
 
 	FragColor = vec4(tmp_result, 1.0f);
 }
