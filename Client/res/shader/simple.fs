@@ -7,7 +7,6 @@ in vec3 WorldNormal;
 in vec3 WorldTangent;
 in vec3 WorldBinormal;
 in vec3 WorldPos;
-in vec4 ClipPos;
 
 out vec4 FragColor;
 

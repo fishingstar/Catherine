@@ -20,7 +20,7 @@ namespace Catherine
 	const char * s_bodyMaterial = "./res/model/nanosuit/material/nanosuit_body.mtl";
 
 	const char * s_planeModel = "./res/model/buildin/plane.fbx";
-	const char * s_planeMaterial = "./res/model/nanosuit/material/nanosuit_glass.mtl";
+	const char * s_planeMaterial = "./res/material/default.mtl";
 
 	const char * s_skyboxModel = "./res/model/buildin/box.fbx";
 	const char * s_skyboxMaterial = "./res/material/skybox.mtl";

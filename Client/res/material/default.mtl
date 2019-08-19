@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Catherine>
+	<Shader>
+		<Vertex>./res/shader/default.vs</Vertex>
+		<Fragment>./res/shader/default.fs</Fragment>
+	</Shader>
+	<RenderState>
+		<CullFaceMode Enabled = "true" Value = "0" />
+		<DepthTestMode Enabled = "true" Value = "0" />
+		<BlendMode Enabled = "false" Src = "6" Dst = "7" SrcAlpha = "6" DstAlpha = "7" BlendEquation = "0" />
+	</RenderState>
+	<RenderPriority>2000</RenderPriority>
+</Catherine>
