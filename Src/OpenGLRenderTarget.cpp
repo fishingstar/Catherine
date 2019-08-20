@@ -15,6 +15,9 @@ namespace Catherine
 
 	bool OpenGLRenderTarget::Initialize(uint32_t width, uint32_t height, uint8_t color_count, bool depth, bool stencil)
 	{
+		m_Width = width;
+		m_Height = height;
+
 		for (size_t i = 0; i < color_count; ++i)
 		{
 			ITexture * tmp_colorAttachment = new OpenGLTexture();
@@ -116,5 +119,6 @@ namespace Catherine
 	void OpenGLRenderTarget::Use()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBuffer);
+		glViewport(0, 0, GetWidth(), GetHeight());
 	}
 }

@@ -23,8 +23,14 @@ namespace Catherine
 
 		virtual void Use() override;
 
+		virtual uint32_t GetWidth() const override { return m_Width; }
+		virtual uint32_t GetHeight() const override { return m_Height; }
+
 	private:
 		GLuint m_FrameBuffer = 0;
+
+		uint32_t m_Width = 0;
+		uint32_t m_Height = 0;
 
 		std::vector<ITexture *> m_ColorAttachments;
 		ITexture * m_DepthAttachment = nullptr;

@@ -20,6 +20,7 @@ namespace Catherine
 
 	public:
 		void RegisterWorld(IWorld * world);
+		void UnRegisterWorld(IWorld * world);
 
 	public:
 		std::vector<IWorld *> m_Worlds;

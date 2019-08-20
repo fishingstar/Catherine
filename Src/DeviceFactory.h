@@ -1,9 +1,9 @@
 #pragma once
 
-#include "IDevice.h"
-
 namespace Catherine
 {
+	class IDevice;
+
 	class DeviceFactory
 	{
 	public:

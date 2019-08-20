@@ -17,7 +17,7 @@ namespace Catherine
 	bool ForwardPipeline::Initialize()
 	{
 		m_RenderTarget_Back = RenderTargetManager::Instance()->GetDefaultRenderTarget();
-		m_RenderTarget_Shadow = RenderTargetManager::Instance()->CreateRenderTarget(1280, 720, 0, true, false);
+		m_RenderTarget_Shadow = RenderTargetManager::Instance()->CreateRenderTarget(1024, 1024, 0, true, false);
 
 		return true;
 	}
@@ -107,7 +107,7 @@ namespace Catherine
 		
 		// clear screen
 		const glm::vec3 & tmp_color = tmp_camera->GetClearColor();
-		g_Device->ClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);
+		g_Device->SetClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);
 		g_Device->Clear();
 
 		// sort commands

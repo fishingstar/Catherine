@@ -63,4 +63,16 @@ namespace Catherine
 			m_Worlds.push_back(world);
 		}
 	}
+
+	void WorldRenderer::UnRegisterWorld(IWorld * world)
+	{
+		if (world != nullptr)
+		{
+			auto tmp_iter = std::find(m_Worlds.begin(), m_Worlds.end(), world);
+			if (tmp_iter != m_Worlds.end())
+			{
+				m_Worlds.erase(tmp_iter);
+			}
+		}
+	}
 }

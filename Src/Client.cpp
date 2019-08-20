@@ -1,5 +1,6 @@
 #include "Client.h"
 #include "LogUtility.h"
+#include "IDevice.h"
 #include "DeviceFactory.h"
 #include "WorldFactory.h"
 #include "RendererFactory.h"
@@ -53,6 +54,8 @@ namespace Catherine
 	{
 		// other uninitialize
 		// ...
+
+		m_WorldRenderer->UnRegisterWorld(m_GameWorld);
 
 		DeleteRenderer();
 		DeleteWorld();
@@ -138,12 +141,11 @@ namespace Catherine
 	{
 		if (m_Device)
 		{
-			g_Device = nullptr;
-
 			m_Device->Uninitialize();
 
 			DeviceFactory::Instance()->DeleteDevice(m_Device);
 			m_Device = nullptr;
+			g_Device = nullptr;
 		}
 	}
 

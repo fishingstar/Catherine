@@ -13,8 +13,6 @@
 
 namespace Catherine
 {
-	GLFWwindow * window = nullptr;
-
 	void framebuffer_size_callback(GLFWwindow * param_Window, int param_width, int param_height)
 	{
 		glViewport(0, 0, param_width, param_height);
@@ -31,14 +29,14 @@ namespace Catherine
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
 #endif
 
-		window = glfwCreateWindow(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, DEFAULT_WINDOW_TITLE, nullptr, nullptr);
-		if (window == nullptr)
+		m_Window = glfwCreateWindow(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, DEFAULT_WINDOW_TITLE, nullptr, nullptr);
+		if (m_Window == nullptr)
 		{
 			glfwTerminate();
 			return false;
 		}
-		glfwMakeContextCurrent(window);
-		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+		glfwMakeContextCurrent(m_Window);
+		glfwSetFramebufferSizeCallback(m_Window, framebuffer_size_callback);
 
 		// load procedure address
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -56,10 +54,15 @@ namespace Catherine
 
 	bool OpenGLDevice::Close()
 	{
-		return glfwWindowShouldClose(window);
+		return glfwWindowShouldClose(m_Window);
 	}
 
-	void OpenGLDevice::ClearColor(float red, float green, float blue, float alpha)
+	void OpenGLDevice::SetViewPort(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
+	{
+		glViewport(x, y, width, height);
+	}
+
+	void OpenGLDevice::SetClearColor(float red, float green, float blue, float alpha)
 	{
 		glClearColor(red, green, blue, alpha);
 	}
@@ -177,20 +180,23 @@ namespace Catherine
 
 	void OpenGLDevice::OnFrameBegin()
 	{
+		// dispatch input event
 		ProcessInput();
 	}
 
 	void OpenGLDevice::OnFrameEnd()
 	{
-		glfwSwapBuffers(window);
+		// swap double buffer
+		glfwSwapBuffers(m_Window);
+		// input event
 		glfwPollEvents();
 	}
 
 	void OpenGLDevice::ProcessInput()
 	{
-		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		{
-			glfwSetWindowShouldClose(window, true);
+			glfwSetWindowShouldClose(m_Window, true);
 		}
 	}
 }

@@ -2,6 +2,8 @@
 
 #include "IDevice.h"
 
+class GLFWwindow;
+
 namespace Catherine
 {
 	class OpenGLDevice : public IDevice
@@ -16,7 +18,9 @@ namespace Catherine
 		virtual bool Close() override;
 
 		// state
-		virtual void ClearColor(float red, float green, float blue, float alpha) override;
+		virtual void SetViewPort(uint32_t x, uint32_t y, uint32_t width, uint32_t height) override;
+
+		virtual void SetClearColor(float red, float green, float blue, float alpha) override;
 		
 		virtual void SetFrontFace(FrontFaceMode mode) override;
 
@@ -48,5 +52,8 @@ namespace Catherine
 
 	private:
 		void ProcessInput();
+
+	private:
+		GLFWwindow * m_Window = nullptr;
 	};
 }

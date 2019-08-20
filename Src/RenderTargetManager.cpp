@@ -17,7 +17,7 @@ namespace Catherine
 	{
 		if (m_DefaultRenderTarget == nullptr)
 		{
-			m_DefaultRenderTarget = CreateRenderTarget(0, 0, 0, false, false);
+			m_DefaultRenderTarget = CreateRenderTarget(1280, 720, 0, false, false);
 		}
 		return m_DefaultRenderTarget;
 	}
