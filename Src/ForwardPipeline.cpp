@@ -189,7 +189,7 @@ namespace Catherine
 		CameraContext tmp_newContext;
 		tmp_newContext.SetProjectionMode(ProjectionMode::Ortho);
 		tmp_newContext.SetSize(tmp_maxPoint.y - tmp_minPoint.y);
-		tmp_newContext.SetAspect(camera->GetAspect());// ((tmp_maxPoint.x - tmp_minPoint.x) / (tmp_maxPoint.y - tmp_minPoint.y));
+		tmp_newContext.SetAspect((tmp_maxPoint.x - tmp_minPoint.x) / (tmp_maxPoint.y - tmp_minPoint.y)); // (camera->GetAspect());
 		tmp_newContext.SetNearPlane(0.0f);
 		tmp_newContext.SetFarPlane(tmp_maxPoint.z - tmp_minPoint.z);
 		tmp_newContext.SetRotation(tmp_dirContext->m_Rotation);
