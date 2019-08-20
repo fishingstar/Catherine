@@ -51,6 +51,7 @@ SET(Src_Device_Common
 	"${PROJECT_SOURCE_DIR}/Src/AttributeLayout.h"
 	"${PROJECT_SOURCE_DIR}/Src/DeviceCommon.h"
 	"${PROJECT_SOURCE_DIR}/Src/DeviceConst.h"
+	"${PROJECT_SOURCE_DIR}/Src/DeviceConst.cpp"
 	"${PROJECT_SOURCE_DIR}/Src/DeviceFactory.h"
 	"${PROJECT_SOURCE_DIR}/Src/DeviceFactory.cpp"
 	"${PROJECT_SOURCE_DIR}/Src/IDevice.h"

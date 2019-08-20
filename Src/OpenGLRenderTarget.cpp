@@ -1,8 +1,11 @@
 #include "OpenGLRenderTarget.h"
 #include "OpenGLTexture.h"
+#include "IDevice.h"
 
 namespace Catherine
 {
+	extern IDevice * g_Device;
+
 	OpenGLRenderTarget::OpenGLRenderTarget()
 	{
 
@@ -119,6 +122,6 @@ namespace Catherine
 	void OpenGLRenderTarget::Use()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBuffer);
-		glViewport(0, 0, GetWidth(), GetHeight());
+		g_Device->SetViewPort(0, 0, GetWidth(), GetHeight());
 	}
 }

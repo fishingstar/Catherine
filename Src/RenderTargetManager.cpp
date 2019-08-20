@@ -1,6 +1,7 @@
 #include "RenderTargetManager.h"
 #include "IDevice.h"
 #include "IRenderTarget.h"
+#include "DeviceConst.h"
 #include <algorithm>
 
 namespace Catherine
@@ -17,7 +18,7 @@ namespace Catherine
 	{
 		if (m_DefaultRenderTarget == nullptr)
 		{
-			m_DefaultRenderTarget = CreateRenderTarget(1280, 720, 0, false, false);
+			m_DefaultRenderTarget = CreateRenderTarget(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, 0, false, false);
 		}
 		return m_DefaultRenderTarget;
 	}
