@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdint.h>
 #include "DeviceCommon.h"
 
 namespace Catherine
@@ -7,18 +8,18 @@ namespace Catherine
 	class IIndexBuffer
 	{
 	public:
-		IIndexBuffer(unsigned int stride, size_t size, Usage usage) :
+		IIndexBuffer(uint8_t stride, size_t size, Usage usage) :
 			m_Stride(stride),
 			m_Size(size),
 			m_Usage(usage)
 		{ }
 
-		unsigned int GetStride() const { return m_Stride; }
+		uint8_t GetStride() const { return m_Stride; }
 		size_t GetSize() const { return m_Size; }
 		Usage GetUsage() const { return m_Usage; }
 
 	private:
-		unsigned int m_Stride;
+		uint8_t m_Stride;
 		size_t m_Size;
 		Usage m_Usage;
 	};

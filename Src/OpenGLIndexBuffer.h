@@ -2,20 +2,21 @@
 
 #include "IIndexBuffer.h"
 #include "glad/glad.h"
+#include "OpenGLBuffer.h"
 
 namespace Catherine
 {
 	class OpenGLIndexBuffer : public IIndexBuffer
 	{
 	public:
-		OpenGLIndexBuffer(unsigned int stride, size_t size, Usage usage, const void * data = nullptr);
+		OpenGLIndexBuffer(uint8_t stride, size_t size, Usage usage);
+
+		bool Initialize(const void * data);
+		void Uninitialize();
 
 		void Bind();
 
 	private:
-		void CreateIndexBufferImp(size_t size, Usage usage, const void * data = nullptr);
-
-	private:
-		GLuint m_Resource;
+		OpenGLBuffer m_Buffer;
 	};
 }

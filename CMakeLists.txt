@@ -67,6 +67,8 @@ source_group(Device\\Common FILES ${Src_Device_Common})
 # Device\\OpenGL
 SET(Src_Device_OpenGL
 	"${PROJECT_SOURCE_DIR}/Src/glad/src/glad.c"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLBuffer.h"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLBuffer.cpp"
 	"${PROJECT_SOURCE_DIR}/Src/OpenGLCommon.h"
 	"${PROJECT_SOURCE_DIR}/Src/OpenGLCommon.cpp"
 	"${PROJECT_SOURCE_DIR}/Src/OpenGLDevice.h"

@@ -50,7 +50,7 @@ namespace Catherine
 
 		virtual IVertexArray * CreateVertexArray() = 0;
 		virtual IVertexBuffer * CreateVertexBuffer(size_t size, Usage usage, const void * data, const std::vector<AttributeLayout> & attributes) = 0;
-		virtual IIndexBuffer * CreateIndexBuffer(unsigned int stride, size_t size, Usage usage, const void * data) = 0;
+		virtual IIndexBuffer * CreateIndexBuffer(uint8_t stride, size_t size, Usage usage, const void * data) = 0;
 
 		// draw
 		virtual void Clear() = 0;

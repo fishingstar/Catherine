@@ -3,23 +3,25 @@
 
 namespace Catherine
 {
-	OpenGLVertexBuffer::OpenGLVertexBuffer(size_t size, Usage usage, const void * data, const std::vector<AttributeLayout> & attributes) :
-		IVertexBuffer(size, usage),
-		m_Attributes(attributes)
+	OpenGLVertexBuffer::OpenGLVertexBuffer(size_t size, Usage usage) :
+		IVertexBuffer(size, usage)
 	{
-		CreateVertexBufferImp(size, usage, data, attributes);
+		
 	}
 
-	void OpenGLVertexBuffer::Bind()
+	bool OpenGLVertexBuffer::Initialize(const void * data)
 	{
-		glBindBuffer(GL_ARRAY_BUFFER, m_Resource);
+		return m_Buffer.Initialize(GL_ARRAY_BUFFER, GetUsage(), GetSize(), data);
 	}
 
-	void OpenGLVertexBuffer::CreateVertexBufferImp(size_t size, Usage usage, const void * data, const std::vector<AttributeLayout> & attributes)
+	void OpenGLVertexBuffer::Uninitialize()
 	{
-		glGenBuffers(1, &m_Resource);
-		glBindBuffer(GL_ARRAY_BUFFER, m_Resource);
-		glBufferData(GL_ARRAY_BUFFER, size, data, OpenGLCommon::GetOpenGLUsage(usage));
+		m_Buffer.Uninitialize();
+	}
+
+	void OpenGLVertexBuffer::SetAttributeLayout(const std::vector<AttributeLayout> & attributes)
+	{
+		m_Buffer.Bind();
 
 		for (size_t i = 0; i < attributes.size(); i++)
 		{
@@ -35,5 +37,10 @@ namespace Catherine
 				(const void *)tmp_attribute.GetOffset()
 			);
 		}
+	}
+
+	void OpenGLVertexBuffer::Bind()
+	{
+		m_Buffer.Bind();
 	}
 }

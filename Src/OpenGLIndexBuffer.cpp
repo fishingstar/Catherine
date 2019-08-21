@@ -3,21 +3,24 @@
 
 namespace Catherine
 {
-	OpenGLIndexBuffer::OpenGLIndexBuffer(unsigned int stride, size_t size, Usage usage, const void * data) :
+	OpenGLIndexBuffer::OpenGLIndexBuffer(uint8_t stride, size_t size, Usage usage) :
 		IIndexBuffer(stride, size, usage)
 	{
-		CreateIndexBufferImp(size, usage, data);
+		
+	}
+
+	bool OpenGLIndexBuffer::Initialize(const void * data)
+	{
+		return m_Buffer.Initialize(GL_ELEMENT_ARRAY_BUFFER, GetUsage(), GetSize(), data);
+	}
+
+	void OpenGLIndexBuffer::Uninitialize()
+	{
+		m_Buffer.Uninitialize();
 	}
 
 	void OpenGLIndexBuffer::Bind()
 	{
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Resource);
-	}
-
-	void OpenGLIndexBuffer::CreateIndexBufferImp(size_t size, Usage usage, const void * data)
-	{
-		glGenBuffers(1, &m_Resource);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Resource);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, OpenGLCommon::GetOpenGLUsage(usage));
+		m_Buffer.Bind();
 	}
 }

@@ -2,7 +2,7 @@
 
 #include "IDevice.h"
 
-class GLFWwindow;
+struct GLFWwindow;
 
 namespace Catherine
 {
@@ -43,7 +43,7 @@ namespace Catherine
 
 		virtual IVertexArray * CreateVertexArray() override;
 		virtual IVertexBuffer * CreateVertexBuffer(size_t size, Usage usage, const void * data, const std::vector<AttributeLayout> & attributes) override;
-		virtual IIndexBuffer * CreateIndexBuffer(unsigned int stride, size_t size, Usage usage, const void * data) override;
+		virtual IIndexBuffer * CreateIndexBuffer(uint8_t stride, size_t size, Usage usage, const void * data) override;
 
 		// draw
 		virtual void Clear() override;
