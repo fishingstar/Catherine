@@ -1,6 +1,7 @@
 #include "WorldRenderer.h"
 #include "IWorld.h"
 #include "ForwardPipeline.h"
+#include "DeferredPipeline.h"
 #include "LogUtility.h"
 
 namespace Catherine
@@ -15,6 +16,16 @@ namespace Catherine
 			return false;
 		}
 
+		m_DeferredPipeline = new DeferredPipeline();
+		bool tmp_deferredInited = m_DeferredPipeline->Initialize();
+		if (!tmp_deferredInited)
+		{
+			LogError("deferred pipeline initialize failed...");
+			return false;
+		}
+
+		m_CurrentPipeline = m_ForwardPipeline;
+
 		return true;
 	}
 
@@ -24,6 +35,12 @@ namespace Catherine
 		{
 			delete m_ForwardPipeline;
 			m_ForwardPipeline = nullptr;
+		}
+
+		if (m_DeferredPipeline)
+		{
+			delete m_DeferredPipeline;
+			m_DeferredPipeline = nullptr;
 		}
 	}
 
@@ -44,7 +61,7 @@ namespace Catherine
 
 			// send context to pipeline
 			const WorldContext * worldContext = m_Worlds[i]->GetWorldContext();
-			m_ForwardPipeline->Render(worldContext);
+			m_CurrentPipeline->Render(worldContext);
 		}
 	}
 

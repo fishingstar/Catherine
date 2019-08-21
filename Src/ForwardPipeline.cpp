@@ -24,7 +24,8 @@ namespace Catherine
 
 	void ForwardPipeline::Uninitialize()
 	{
-
+		RenderTargetManager::Instance()->DeleteRenderTarget(m_RenderTarget_Shadow);
+		m_RenderTarget_Shadow = nullptr;
 	}
 
 	void ForwardPipeline::Render(const WorldContext * context)

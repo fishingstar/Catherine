@@ -25,6 +25,8 @@ namespace Catherine
 	public:
 		std::vector<IWorld *> m_Worlds;
 
+		IPipeline * m_CurrentPipeline = nullptr;
+
 		IPipeline * m_ForwardPipeline = nullptr;
 		IPipeline * m_DeferredPipeline = nullptr;
 		IPipeline * m_TileBasedDeferredPipeline = nullptr;

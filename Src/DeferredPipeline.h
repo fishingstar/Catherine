@@ -4,14 +4,31 @@
 
 namespace Catherine
 {
+	class WorldContext;
+	class IRenderTarget;
+	class IMaterial;
+
 	class DeferredPipeline : public IPipeline
 	{
 	public:
-		virtual ~DeferredPipeline() override { }
+		virtual ~DeferredPipeline() override;
 
-		virtual bool Initialize() override { }
-		virtual void Uninitialize() override { }
+		virtual bool Initialize() override;
+		virtual void Uninitialize() override;
 
-		virtual void Render(const WorldContext * context) override { }
+		virtual void Render(const WorldContext * context) override;
+
+	private:
+		void RenderShadow(const WorldContext * context);
+		void RenderGeometry(const WorldContext * context);
+		void RenderLighting(const WorldContext * context);
+		void RenderTransparent(const WorldContext * context);
+
+	private:
+		IRenderTarget * m_RenderTarget_Back = nullptr;
+		IRenderTarget * m_RenderTarget_Geometry = nullptr;
+		IRenderTarget * m_RenderTarget_Shadow = nullptr;
+
+		IMaterial * m_GeometryMaterial = nullptr;
 	};
 }
