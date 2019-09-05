@@ -101,4 +101,18 @@ namespace Catherine
 		Depth_Stencil,
 		Depth24_Stencil8,
 	};
+
+	enum class SamplerState
+	{
+		MinFilter,
+		MagFilter,
+		MipFilter,
+		LODBias,
+		AddressU,
+		AddressV,
+		AddressW,
+		Anisotropy,
+		BorderColor,
+		Count
+	};
 }

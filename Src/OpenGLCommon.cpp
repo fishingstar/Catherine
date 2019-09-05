@@ -99,6 +99,18 @@ namespace Catherine
 		{ PixelFormat::Depth24_Stencil8,	GL_DEPTH24_STENCIL8 },
 	};
 
+	std::vector<std::pair<SamplerState, GLenum>> OpenGLSamplerState =
+	{
+		{ SamplerState::MinFilter, GL_TEXTURE_MIN_FILTER },
+		{ SamplerState::MagFilter, GL_TEXTURE_MAG_FILTER },
+		{ SamplerState::LODBias, GL_TEXTURE_LOD_BIAS },
+		{ SamplerState::AddressU, GL_TEXTURE_WRAP_S },
+		{ SamplerState::AddressV, GL_TEXTURE_WRAP_T },
+		{ SamplerState::AddressW, GL_TEXTURE_WRAP_R },
+		{ SamplerState::Anisotropy, GL_TEXTURE_MAX_ANISOTROPY },
+		{ SamplerState::BorderColor, GL_TEXTURE_BORDER_COLOR },
+	};
+
 	template<typename type>
 	static GLenum GetOpenGLDefines(std::vector<std::pair<type, GLenum>> defines, type key)
 	{
@@ -159,5 +171,10 @@ namespace Catherine
 	GLenum OpenGLCommon::GetOpenGLPixelFormat(PixelFormat format)
 	{
 		return GetOpenGLDefines(OpenGLPixelFormat, format);
+	}
+
+	GLenum OpenGLCommon::GetOpenGLSamplerState(SamplerState state)
+	{
+		return GetOpenGLDefines(OpenGLSamplerState, state);
 	}
 }
