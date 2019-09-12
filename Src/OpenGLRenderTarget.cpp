@@ -62,11 +62,6 @@ namespace Catherine
 				glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, tmp_texture->GetResource(), 0);
 			}
 
-			if (m_ColorAttachments.size() == 0)
-			{
-				glDrawBuffer(GL_NONE);
-			}
-
 			if (m_DepthStencilAttachment)
 			{
 				OpenGLTexture * tmp_texture = (OpenGLTexture *)m_DepthStencilAttachment;
@@ -119,9 +114,29 @@ namespace Catherine
 		return m_DepthStencilAttachment ? m_DepthStencilAttachment : m_StencilAttachment;
 	}
 
-	void OpenGLRenderTarget::Use()
+	void OpenGLRenderTarget::Use(uint8_t mode)
 	{
+		GLenum tmp_access = GL_FRAMEBUFFER;
+		if (mode == 1)
+		{
+			tmp_access = GL_READ_FRAMEBUFFER;
+		}
 		glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBuffer);
 		g_Device->SetViewPort(0, 0, GetWidth(), GetHeight());
+
+		GLenum tmp_buffers[GL_MAX_DRAW_BUFFERS] = { GL_NONE };
+		if (m_ColorAttachments.size() == 0 && !m_DepthAttachment && !m_StencilAttachment && !m_DepthStencilAttachment)
+		{
+			tmp_buffers[0] = GL_BACK_LEFT;
+			glDrawBuffers(1, tmp_buffers);
+		}
+		else
+		{
+			for (size_t i = 0; i < m_ColorAttachments.size(); i++)
+			{
+				tmp_buffers[i] = GL_COLOR_ATTACHMENT0 + i;
+			}
+			glDrawBuffers(m_ColorAttachments.size(), tmp_buffers);
+		}
 	}
 }

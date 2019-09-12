@@ -3,28 +3,34 @@
 #include "ForwardPipeline.h"
 #include "DeferredPipeline.h"
 #include "LogUtility.h"
+#include "Setting.h"
 
 namespace Catherine
 {
 	bool WorldRenderer::Initialize()
 	{
-		m_ForwardPipeline = new ForwardPipeline();
-		bool tmp_forwardInited = m_ForwardPipeline->Initialize();
-		if (!tmp_forwardInited)
+		if (g_RenderPipeline == 0)
 		{
-			LogError("forward pipeline initialize failed...");
-			return false;
+			m_ForwardPipeline = new ForwardPipeline();
+			bool tmp_forwardInited = m_ForwardPipeline->Initialize();
+			if (!tmp_forwardInited)
+			{
+				LogError("forward pipeline initialize failed...");
+				return false;
+			}
+			m_CurrentPipeline = m_ForwardPipeline;
 		}
-
-		m_DeferredPipeline = new DeferredPipeline();
-		bool tmp_deferredInited = m_DeferredPipeline->Initialize();
-		if (!tmp_deferredInited)
+		else if (g_RenderPipeline == 1)
 		{
-			LogError("deferred pipeline initialize failed...");
-			return false;
+			m_DeferredPipeline = new DeferredPipeline();
+			bool tmp_deferredInited = m_DeferredPipeline->Initialize();
+			if (!tmp_deferredInited)
+			{
+				LogError("deferred pipeline initialize failed...");
+				return false;
+			}
+			m_CurrentPipeline = m_DeferredPipeline;
 		}
-
-		m_CurrentPipeline = m_ForwardPipeline;
 
 		return true;
 	}

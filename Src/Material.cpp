@@ -9,6 +9,7 @@
 #include "ProgramManager.h"
 #include "tinyxml2.h"
 #include "LogUtility.h"
+#include "Setting.h"
 
 namespace Catherine
 {
@@ -24,12 +25,35 @@ namespace Catherine
 		tinyxml2::XMLElement * tmp_root = doc.FirstChildElement();
 
 		// shader
-		tinyxml2::XMLElement * tmp_shader = tmp_root->FirstChildElement("Shader");
-		tinyxml2::XMLElement * tmp_vertex = tmp_shader->FirstChildElement("Vertex");
-		tinyxml2::XMLElement * tmp_fragment = tmp_shader->FirstChildElement("Fragment");
+		tinyxml2::XMLElement * tmp_shader = nullptr;
+		if (g_RenderPipeline == 0)
+		{
+			tmp_shader = tmp_root->FirstChildElement("ForwardShader");
+		}
+		else if (g_RenderPipeline == 1)
+		{
+			tmp_shader = tmp_root->FirstChildElement("DeferredShader");
+			if (tmp_shader == nullptr)
+			{
+				tmp_shader = tmp_root->FirstChildElement("ForwardShader");
+				m_IsForwardInDeferredPath = true;
+			}
+		}
 
-		m_Program = ProgramManager::Instance()->GetProgram(tmp_vertex->GetText(), tmp_fragment->GetText());
+		if (tmp_shader != nullptr)
+		{
+			tinyxml2::XMLElement * tmp_vertex = tmp_shader->FirstChildElement("Vertex");
+			tinyxml2::XMLElement * tmp_fragment = tmp_shader->FirstChildElement("Fragment");
 
+			m_Program = ProgramManager::Instance()->GetProgram(tmp_vertex->GetText(), tmp_fragment->GetText());
+		}
+		else
+		{
+			LogError("Shader not found...");
+			// TODO : Fallback
+			return true;
+		}
+		
 		// texture
 		tinyxml2::XMLElement * tmp_texture = tmp_root->FirstChildElement("Texture");
 		if (tmp_texture)
@@ -186,11 +210,14 @@ namespace Catherine
 		SetMat4x4("view", tmp_view);
 		SetMat4x4("projection", tmp_projection);
 		SetVec3("viewPos", tmp_cameraPos);
+
+		SetMat4x4("invProjection", glm::inverse(tmp_projection));
+		SetMat4x4("invView", glm::inverse(tmp_view));
 	}
 
 	void Material::SetLightUniform(const LightContext * context)
 	{
-		SetFloat("ambient", 0.2f);
+		SetFloat("ambient", 0.5f);
 
 		const LightContext::DirectionalContext * tmp_dirContext = context->GetDirectionContext();
 		SetVec3("dirLight.lightDir", tmp_dirContext->m_Direction);
@@ -236,6 +263,11 @@ namespace Catherine
 	float Material::GetRenderPriority() const
 	{
 		return m_RenderPriority;
+	}
+
+	bool Material::IsForwardInDerferredPath() const
+	{
+		return m_IsForwardInDeferredPath;
 	}
 
 	void Material::Use()

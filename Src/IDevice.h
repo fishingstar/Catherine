@@ -56,5 +56,8 @@ namespace Catherine
 		virtual void Clear() = 0;
 
 		virtual void DrawElement(DrawMode mode, size_t count, ValueType type, size_t offset) = 0;
+
+		// other
+		virtual void BlitFrameBuffer() = 0;
 	};
 }

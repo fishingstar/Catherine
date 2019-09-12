@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Catherine>
-	<Shader>
+	<ForwardShader>
 		<Vertex>./res/shader/simple.vs</Vertex>
 		<Fragment>./res/shader/simple.fs</Fragment>
-	</Shader>
+	</ForwardShader>
+	<DeferredShader>
+		<Vertex>./res/shader/simple_deferred.vs</Vertex>
+		<Fragment>./res/shader/simple_deferred.fs</Fragment>
+	</DeferredShader>
 	<Texture>
 		<Item Key = "diffuse" Value = "./res/model/nanosuit/texture/body_dif.png" />
 		<Item Key = "normalmap" Value = "./res/model/nanosuit/texture/body_showroom_ddn.png" />

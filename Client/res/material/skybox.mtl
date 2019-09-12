@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Catherine>
-	<Shader>
+	<ForwardShader>
 		<Vertex>./res/shader/skybox.vs</Vertex>
 		<Fragment>./res/shader/skybox.fs</Fragment>
-	</Shader>
+	</ForwardShader>
 	<CubeTexture>
 		<Item Key ="environment"
 			Right = "./res/skybox/day/right.jpg"

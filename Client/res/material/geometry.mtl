@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Catherine>
-	<Shader>
+	<ForwardShader>
 		<Vertex>./res/shader/geometry.vs</Vertex>
 		<Fragment>./res/shader/geometry.fs</Fragment>
-	</Shader>
+	</ForwardShader>
+	<DeferredShader>
+		<Vertex>./res/shader/geometry.vs</Vertex>
+		<Fragment>./res/shader/geometry.fs</Fragment>
+	</DeferredShader>
 	<RenderState>
 		<CullFaceMode Enabled = "true" Value = "0" />
-		<DepthTestMode Enabled = "true" Value = "0" />
+		<DepthTestMode Enabled = "false" Value = "0" />
 		<BlendMode Enabled = "false" Src = "6" Dst = "7" SrcAlpha = "6" DstAlpha = "7" BlendEquation = "0" />
 	</RenderState>
 	<RenderPriority>2000</RenderPriority>

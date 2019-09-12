@@ -21,7 +21,7 @@ namespace Catherine
 		virtual ITexture * GetDepthAttachment() const override;
 		virtual ITexture * GetStencilAttachment() const override;
 
-		virtual void Use() override;
+		virtual void Use(uint8_t mode = 0) override;
 
 		virtual uint32_t GetWidth() const override { return m_Width; }
 		virtual uint32_t GetHeight() const override { return m_Height; }

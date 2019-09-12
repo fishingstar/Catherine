@@ -18,7 +18,7 @@ namespace Catherine
 		virtual ITexture * GetDepthAttachment() const = 0;
 		virtual ITexture * GetStencilAttachment() const = 0;
 
-		virtual void Use() = 0;
+		virtual void Use(uint8_t mode = 0) = 0;
 
 		virtual uint32_t GetWidth() const = 0;
 		virtual uint32_t GetHeight() const = 0;

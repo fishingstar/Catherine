@@ -1,32 +1,65 @@
 #version 330 core
 
 in vec2 Texcoord;
-in vec3 WorldNormal;
-in vec3 WorldTangent;
-in vec3 WorldBinormal;
-in vec3 WorldPos;
 
-out vec4 out_Position;
-out vec4 out_Albedo;
-out vec4 out_Normal;
+out vec4 FragColor;
 
-uniform sampler2D diffuse;
-uniform sampler2D normalmap;
+struct DirectionalLight
+{
+	vec3 lightDir;
+	vec4 lightColor;
+};
+
+uniform DirectionalLight dirLight;
+
+uniform float ambient;
+uniform vec3 viewPos;
+
+uniform sampler2D GColor;
+uniform sampler2D GNormal;
+uniform sampler2D GMask;
+uniform sampler2D GDepth;
+
+uniform mat4 invProjection;
+uniform mat4 invView;
+
+vec4 GetWorldPosFromDepth(float depth)
+{
+	float tmp_depth = depth * 2.0f - 1.0f;
+	vec4 tmp_clipPosition = vec4(Texcoord.xy * 2.0f - 1.0f, tmp_depth, 1.0f);
+	vec4 tmp_viewPosition = invProjection * tmp_clipPosition;
+	tmp_viewPosition /= tmp_viewPosition.w;
+	vec4 tmp_worldPosition = invView * tmp_viewPosition;
+	return tmp_worldPosition;
+}
+
+vec3 calculateDirLight(DirectionalLight param_Light, vec3 param_ViewDir, vec3 param_Normal, vec3 param_Diffuse, vec4 param_Specular)
+{
+	vec3 tmp_lightDir = normalize(-param_Light.lightDir.xyz);
+	vec3 tmp_half = normalize(tmp_lightDir + param_ViewDir);
+
+	float tmp_diffuse = max(0.0, dot(param_Normal, tmp_lightDir));
+	float tmp_specular = pow(max(0.0, dot(tmp_half, param_Normal)), 32);
+
+	vec3 tmp_color = (tmp_diffuse * param_Diffuse.rgb + tmp_specular * param_Specular.rgb * param_Specular.w) * param_Light.lightColor.rgb;
+
+	return tmp_color;
+}
 
 void main()
 {
-	vec3 tmp_normal = normalize(WorldNormal);
-	vec3 tmp_tangent = normalize(WorldTangent);
-	vec3 tmp_binormal = normalize(WorldBinormal);
+	vec4 tmp_diffuse = texture(GColor, Texcoord);
+	vec4 tmp_normal = texture(GNormal, Texcoord);
+	vec4 tmp_mask = texture(GMask, Texcoord);
+	float tmp_depth = texture(GDepth, Texcoord).r;
 
-	vec3 tmp_diffuse = texture(diffuse, Texcoord).xyz;
-	vec3 tmp_normalMap = texture(normalmap, Texcoord).xyz;
-	tmp_normalMap = normalize(tmp_normalMap * 2.0 - 1.0);
-	tmp_normalMap = normalize(mat3(tmp_tangent, tmp_binormal, tmp_normal) * tmp_normalMap);
-	// nanosuit's normal is wrong, turn off
-	tmp_normalMap = tmp_normal;
+	// get world position from depth buffer
+	vec4 tmp_worldPosition = GetWorldPosFromDepth(tmp_depth);
+	vec3 tmp_viewDir = normalize(viewPos.xyz - tmp_worldPosition.xyz);
 
-	out_Position.xyz = WorldPos.xyz;
-	out_Albedo.rgb = tmp_diffuse.rgb;
-	out_Normal.xyz = tmp_normal.xyz;
+	vec3 tmp_dirColor = calculateDirLight(dirLight, tmp_viewDir, tmp_normal.xyz, tmp_diffuse.rgb, tmp_mask);
+
+	vec3 tmp_result = ambient * tmp_diffuse.rgb + tmp_dirColor;
+
+	FragColor = vec4(tmp_result, 1.0f);
 }

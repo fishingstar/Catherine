@@ -9,5 +9,7 @@ namespace Catherine
 		Light,
 		MeshFilter,
 		MeshRenderer,
+
+		CameraController,
 	};
 }

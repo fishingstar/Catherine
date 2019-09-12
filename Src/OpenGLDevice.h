@@ -50,6 +50,9 @@ namespace Catherine
 
 		virtual void DrawElement(DrawMode mode, size_t count, ValueType type, size_t offset) override;
 
+		// other
+		virtual void BlitFrameBuffer() override;
+
 	private:
 		void ProcessInput();
 

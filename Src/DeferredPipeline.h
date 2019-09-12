@@ -8,6 +8,9 @@ namespace Catherine
 	class IRenderTarget;
 	class IMaterial;
 
+	// TODO : remove vertexarray
+	class IVertexArray;
+
 	class DeferredPipeline : public IPipeline
 	{
 	public:
@@ -22,13 +25,14 @@ namespace Catherine
 		void RenderShadow(const WorldContext * context);
 		void RenderGeometry(const WorldContext * context);
 		void RenderLighting(const WorldContext * context);
+		void RenderForward(const WorldContext * context);
 		void RenderTransparent(const WorldContext * context);
 
 	private:
 		IRenderTarget * m_RenderTarget_Back = nullptr;
 		IRenderTarget * m_RenderTarget_Geometry = nullptr;
-		IRenderTarget * m_RenderTarget_Shadow = nullptr;
 
 		IMaterial * m_GeometryMaterial = nullptr;
+		IVertexArray * m_ScreenVertexArray = nullptr;
 	};
 }

@@ -181,6 +181,11 @@ namespace Catherine
 		glDrawElements(tmp_drawMode, (GLsizei)count, tmp_valueType, (void *)offset);
 	}
 
+	void OpenGLDevice::BlitFrameBuffer()
+	{
+		glBlitFramebuffer(0, 0, 1, 1, 0, 0, 1, 1, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+	}
+
 	void OpenGLDevice::OnFrameBegin()
 	{
 		// dispatch input event

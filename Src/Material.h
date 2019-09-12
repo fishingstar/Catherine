@@ -30,10 +30,15 @@ namespace Catherine
 
 		virtual float GetRenderPriority() const override;
 
+		virtual bool IsForwardInDerferredPath() const override;
+
 		virtual void Use() override;
 
 	private:
 		IProgram * m_Program = nullptr;
+
+		/** this is used when deferred pipeline is enabled and this material has no deferred shader */
+		bool m_IsForwardInDeferredPath = false;
 
 		unsigned int m_Slot = 0;
 		std::unordered_map<std::string, uint8_t> m_Samplers;
