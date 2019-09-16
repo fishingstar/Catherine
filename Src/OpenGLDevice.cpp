@@ -169,9 +169,10 @@ namespace Catherine
 		return tmp_buffer;
 	}
 
-	void OpenGLDevice::Clear()
+	void OpenGLDevice::Clear(BitField bits)
 	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		GLbitfield tmp_bits = OpenGLCommon::GetOpenGLBufferBits(bits);
+		glClear(tmp_bits);
 	}
 
 	void OpenGLDevice::DrawElement(DrawMode mode, size_t count, ValueType type, size_t offset)

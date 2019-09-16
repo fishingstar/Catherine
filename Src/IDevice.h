@@ -53,7 +53,7 @@ namespace Catherine
 		virtual IIndexBuffer * CreateIndexBuffer(uint8_t stride, size_t size, Usage usage, const void * data) = 0;
 
 		// draw
-		virtual void Clear() = 0;
+		virtual void Clear(BitField bits) = 0;
 
 		virtual void DrawElement(DrawMode mode, size_t count, ValueType type, size_t offset) = 0;
 

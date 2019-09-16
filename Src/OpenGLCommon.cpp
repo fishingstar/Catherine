@@ -121,7 +121,11 @@ namespace Catherine
 	{
 		{ BufferBit::Color, GL_COLOR_BUFFER_BIT },
 		{ BufferBit::Depth, GL_DEPTH_BUFFER_BIT },
-		{ BufferBit::Stencil, GL_STENCIL_BUFFER_BIT }
+		{ BufferBit::Stencil, GL_STENCIL_BUFFER_BIT },
+		{ BufferBit::Color_Depth, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT },
+		{ BufferBit::Color_Stencil, GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT },
+		{ BufferBit::Depth_Stencil, GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT },
+		{ BufferBit::All, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT }
 	};
 
 	template<typename type>

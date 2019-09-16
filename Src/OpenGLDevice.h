@@ -46,7 +46,7 @@ namespace Catherine
 		virtual IIndexBuffer * CreateIndexBuffer(uint8_t stride, size_t size, Usage usage, const void * data) override;
 
 		// draw
-		virtual void Clear() override;
+		virtual void Clear(BitField bits) override;
 
 		virtual void DrawElement(DrawMode mode, size_t count, ValueType type, size_t offset) override;
 

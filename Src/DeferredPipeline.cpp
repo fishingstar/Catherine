@@ -105,7 +105,7 @@ namespace Catherine
 			// clear screen
 			const glm::vec3 & tmp_color = tmp_camera->GetClearColor();
 			g_Device->SetClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);
-			g_Device->Clear();
+			g_Device->Clear((BitField)BufferBit::All);
 
 			// sort commands
 			std::stable_sort(tmp_renderContexts.begin(), tmp_renderContexts.end(),
@@ -164,7 +164,7 @@ namespace Catherine
 			// clear screen
 			const glm::vec3 & tmp_color = tmp_camera->GetClearColor();
 			g_Device->SetClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);
-			g_Device->Clear();
+			g_Device->Clear((BitField)BufferBit::All);
 
 			ITexture * tmp_diffuse = m_RenderTarget_Geometry->GetColorAttachment(0);
 			ITexture * tmp_normal = m_RenderTarget_Geometry->GetColorAttachment(1);

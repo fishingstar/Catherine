@@ -49,7 +49,7 @@ namespace Catherine
 			m_ShadowCameraContext = GenerateShadowCameraContext(tmp_light, tmp_camera);
 
 			// clear screen
-			g_Device->Clear();
+			g_Device->Clear((BitField)BufferBit::Depth);
 
 			// sort commands
 			std::stable_sort(tmp_renderContexts.begin(), tmp_renderContexts.end(),
@@ -109,7 +109,7 @@ namespace Catherine
 		// clear screen
 		const glm::vec3 & tmp_color = tmp_camera->GetClearColor();
 		g_Device->SetClearColor(tmp_color.r, tmp_color.g, tmp_color.b, 1.0f);
-		g_Device->Clear();
+		g_Device->Clear((BitField)BufferBit::All);
 
 		// sort commands
 		std::stable_sort(tmp_renderContexts.begin(), tmp_renderContexts.end(),

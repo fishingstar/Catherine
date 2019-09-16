@@ -128,7 +128,11 @@ namespace Catherine
 	{
 		Color = 1,
 		Depth = 2,
-		Stencil = 4
+		Stencil = 4,
+		Color_Depth = 3,
+		Color_Stencil = 5,
+		Depth_Stencil = 6,
+		All = 7,
 	};
 
 	typedef uint32_t BitField;
