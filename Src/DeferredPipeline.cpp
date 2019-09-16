@@ -84,7 +84,7 @@ namespace Catherine
 		// 3rd render opaque
 		RenderLighting(context);
 		// 4th render forward
-		//RenderForward(context);
+		RenderForward(context);
 		// 5th render transparent
 		RenderTransparent(context);
 	}
@@ -192,6 +192,8 @@ namespace Catherine
 	void DeferredPipeline::RenderForward(const WorldContext * context)
 	{
 		m_RenderTarget_Back->Use();
+		m_RenderTarget_Geometry->Use(1);
+		g_Device->BlitFrameBuffer();
 		{
 			const CameraContext * tmp_camera = context->GetCameraContext();
 			const LightContext * tmp_light = context->GetLightContext();

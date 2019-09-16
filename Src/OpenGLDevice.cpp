@@ -183,7 +183,7 @@ namespace Catherine
 
 	void OpenGLDevice::BlitFrameBuffer()
 	{
-		glBlitFramebuffer(0, 0, 1, 1, 0, 0, 1, 1, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+		glBlitFramebuffer(0, 0, 1280, 720, 0, 0, 1280, 720, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
 	}
 
 	void OpenGLDevice::OnFrameBegin()

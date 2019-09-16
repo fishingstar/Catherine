@@ -121,7 +121,7 @@ namespace Catherine
 		{
 			tmp_access = GL_READ_FRAMEBUFFER;
 		}
-		glBindFramebuffer(GL_FRAMEBUFFER, m_FrameBuffer);
+		glBindFramebuffer(tmp_access, m_FrameBuffer);
 		g_Device->SetViewPort(0, 0, GetWidth(), GetHeight());
 
 		GLenum tmp_buffers[GL_MAX_DRAW_BUFFERS] = { GL_NONE };
