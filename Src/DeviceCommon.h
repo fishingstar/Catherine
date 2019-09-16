@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdint.h>
+
 namespace Catherine
 {
 	enum class FrontFaceMode
@@ -115,4 +117,19 @@ namespace Catherine
 		BorderColor,
 		Count
 	};
+
+	enum class Filter
+	{
+		Nearest,
+		Linear,
+	};
+
+	enum class BufferBit
+	{
+		Color = 1,
+		Depth = 2,
+		Stencil = 4
+	};
+
+	typedef uint32_t BitField;
 }

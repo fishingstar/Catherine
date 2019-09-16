@@ -181,9 +181,11 @@ namespace Catherine
 		glDrawElements(tmp_drawMode, (GLsizei)count, tmp_valueType, (void *)offset);
 	}
 
-	void OpenGLDevice::BlitFrameBuffer()
+	void OpenGLDevice::BlitFrameBuffer(uint32_t src_x0, uint32_t src_y0, uint32_t src_x1, uint32_t src_y1, uint32_t dst_x0, uint32_t dst_y0, uint32_t dst_x1, uint32_t dst_y1, BitField bufferbits, Filter filter)
 	{
-		glBlitFramebuffer(0, 0, 1280, 720, 0, 0, 1280, 720, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+		GLbitfield tmp_bits = OpenGLCommon::GetOpenGLBufferBits(bufferbits);
+		GLenum tmp_filter = OpenGLCommon::GetOpenGLFilter(filter);
+		glBlitFramebuffer(src_x0, src_y0, src_x1, src_y1, dst_x0, dst_y0, dst_x1, dst_y1, tmp_bits, tmp_filter);
 	}
 
 	void OpenGLDevice::OnFrameBegin()

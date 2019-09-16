@@ -111,6 +111,19 @@ namespace Catherine
 		{ SamplerState::BorderColor, GL_TEXTURE_BORDER_COLOR },
 	};
 
+	std::vector<std::pair<Filter, GLenum>> OpenGLFilter = 
+	{
+		{ Filter::Nearest, GL_NEAREST },
+		{ Filter::Linear, GL_LINEAR },
+	};
+
+	std::vector<std::pair<BufferBit, GLenum>> OpenGLBufferBit = 
+	{
+		{ BufferBit::Color, GL_COLOR_BUFFER_BIT },
+		{ BufferBit::Depth, GL_DEPTH_BUFFER_BIT },
+		{ BufferBit::Stencil, GL_STENCIL_BUFFER_BIT }
+	};
+
 	template<typename type>
 	static GLenum GetOpenGLDefines(std::vector<std::pair<type, GLenum>> defines, type key)
 	{
@@ -176,5 +189,24 @@ namespace Catherine
 	GLenum OpenGLCommon::GetOpenGLSamplerState(SamplerState state)
 	{
 		return GetOpenGLDefines(OpenGLSamplerState, state);
+	}
+
+	GLenum OpenGLCommon::GetOpenGLFilter(Filter filter)
+	{
+		return GetOpenGLDefines(OpenGLFilter, filter);
+	}
+
+	GLenum OpenGLCommon::GetOpenGLBufferBit(BufferBit bit)
+	{
+		return GetOpenGLDefines(OpenGLBufferBit, bit);
+	}
+
+	GLbitfield OpenGLCommon::GetOpenGLBufferBits(BitField bits)
+	{
+		GLbitfield tmp_bits = GL_NONE;
+		tmp_bits |= bits & (BitField)BufferBit::Color ? GetOpenGLBufferBit(BufferBit::Color) : GL_NONE;
+		tmp_bits |= bits & (BitField)BufferBit::Depth ? GetOpenGLBufferBit(BufferBit::Depth) : GL_NONE;
+		tmp_bits |= bits & (BitField)BufferBit::Stencil ? GetOpenGLBufferBit(BufferBit::Depth) : GL_NONE;
+		return tmp_bits;
 	}
 }

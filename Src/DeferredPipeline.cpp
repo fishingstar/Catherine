@@ -193,7 +193,7 @@ namespace Catherine
 	{
 		m_RenderTarget_Back->Use();
 		m_RenderTarget_Geometry->Use(1);
-		g_Device->BlitFrameBuffer();
+		g_Device->BlitFrameBuffer(0, 0, 1280, 720, 0, 0, 1280, 720, (BitField)BufferBit::Depth, Filter::Nearest);
 		{
 			const CameraContext * tmp_camera = context->GetCameraContext();
 			const LightContext * tmp_light = context->GetLightContext();
