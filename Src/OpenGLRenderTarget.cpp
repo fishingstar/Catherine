@@ -114,14 +114,10 @@ namespace Catherine
 		return m_DepthStencilAttachment ? m_DepthStencilAttachment : m_StencilAttachment;
 	}
 
-	void OpenGLRenderTarget::Use(uint8_t mode)
+	void OpenGLRenderTarget::Bind(RenderTargetUsage usage)
 	{
-		GLenum tmp_access = GL_FRAMEBUFFER;
-		if (mode == 1)
-		{
-			tmp_access = GL_READ_FRAMEBUFFER;
-		}
-		glBindFramebuffer(tmp_access, m_FrameBuffer);
+		GLenum tmp_target = OpenGLCommon::GetOpenGLRenderTargetUsage(usage);
+		glBindFramebuffer(tmp_target, m_FrameBuffer);
 		g_Device->SetViewPort(0, 0, GetWidth(), GetHeight());
 
 		GLenum tmp_buffers[GL_MAX_DRAW_BUFFERS] = { GL_NONE };

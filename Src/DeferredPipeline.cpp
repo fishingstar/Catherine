@@ -85,7 +85,7 @@ namespace Catherine
 		RenderLighting(context);
 		// 4th render forward
 		RenderForward(context);
-		// 5th render transparent
+		// 5th render transparent(forward)
 		RenderTransparent(context);
 	}
 
@@ -96,7 +96,7 @@ namespace Catherine
 
 	void DeferredPipeline::RenderGeometry(const WorldContext * context)
 	{
-		m_RenderTarget_Geometry->Use();
+		m_RenderTarget_Geometry->Bind();
 		{
 			const CameraContext * tmp_camera = context->GetCameraContext();
 			const LightContext * tmp_light = context->GetLightContext();
@@ -156,7 +156,7 @@ namespace Catherine
 
 	void DeferredPipeline::RenderLighting(const WorldContext * context)
 	{
-		m_RenderTarget_Back->Use();
+		m_RenderTarget_Back->Bind();
 		{
 			const CameraContext * tmp_camera = context->GetCameraContext();
 			const LightContext * tmp_light = context->GetLightContext();
@@ -191,8 +191,8 @@ namespace Catherine
 
 	void DeferredPipeline::RenderForward(const WorldContext * context)
 	{
-		m_RenderTarget_Back->Use();
-		m_RenderTarget_Geometry->Use(1);
+		m_RenderTarget_Back->Bind();
+		m_RenderTarget_Geometry->Bind(RenderTargetUsage::Read);
 		g_Device->BlitFrameBuffer(0, 0, 1280, 720, 0, 0, 1280, 720, (BitField)BufferBit::Depth, Filter::Nearest);
 		{
 			const CameraContext * tmp_camera = context->GetCameraContext();

@@ -128,6 +128,13 @@ namespace Catherine
 		{ BufferBit::All, GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT }
 	};
 
+	std::vector<std::pair<RenderTargetUsage, GLenum>> OpenGLRenderTargetUsage = 
+	{
+		{ RenderTargetUsage::Default, GL_FRAMEBUFFER },
+		{ RenderTargetUsage::Read, GL_READ_FRAMEBUFFER },
+		{ RenderTargetUsage::Draw, GL_DRAW_FRAMEBUFFER }
+	};
+
 	template<typename type>
 	static GLenum GetOpenGLDefines(std::vector<std::pair<type, GLenum>> defines, type key)
 	{
@@ -212,5 +219,10 @@ namespace Catherine
 		tmp_bits |= bits & (BitField)BufferBit::Depth ? GetOpenGLBufferBit(BufferBit::Depth) : GL_NONE;
 		tmp_bits |= bits & (BitField)BufferBit::Stencil ? GetOpenGLBufferBit(BufferBit::Depth) : GL_NONE;
 		return tmp_bits;
+	}
+
+	GLenum OpenGLCommon::GetOpenGLRenderTargetUsage(RenderTargetUsage usage)
+	{
+		return GetOpenGLDefines(OpenGLRenderTargetUsage, usage);
 	}
 }

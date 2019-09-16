@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include "DeviceCommon.h"
 
 namespace Catherine
 {
@@ -18,7 +19,7 @@ namespace Catherine
 		virtual ITexture * GetDepthAttachment() const = 0;
 		virtual ITexture * GetStencilAttachment() const = 0;
 
-		virtual void Use(uint8_t mode = 0) = 0;
+		virtual void Bind(RenderTargetUsage usage = RenderTargetUsage::Default) = 0;
 
 		virtual uint32_t GetWidth() const = 0;
 		virtual uint32_t GetHeight() const = 0;

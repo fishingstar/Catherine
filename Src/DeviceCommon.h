@@ -136,4 +136,11 @@ namespace Catherine
 	};
 
 	typedef uint32_t BitField;
+
+	enum class RenderTargetUsage
+	{
+		Default,
+		Read,
+		Draw
+	};
 }
