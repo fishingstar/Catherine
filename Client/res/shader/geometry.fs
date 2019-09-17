@@ -52,6 +52,7 @@ void main()
 	vec4 tmp_normal = texture(GNormal, Texcoord);
 	vec4 tmp_mask = texture(GMask, Texcoord);
 	float tmp_depth = texture(GDepth, Texcoord).r;
+	float tmp_shadow = tmp_diffuse.a;
 
 	// get world position from depth buffer
 	vec4 tmp_worldPosition = GetWorldPosFromDepth(tmp_depth);
@@ -59,7 +60,7 @@ void main()
 
 	vec3 tmp_dirColor = calculateDirLight(dirLight, tmp_viewDir, tmp_normal.xyz, tmp_diffuse.rgb, tmp_mask);
 
-	vec3 tmp_result = ambient * tmp_diffuse.rgb + tmp_dirColor;
+	vec3 tmp_result = ambient * tmp_diffuse.rgb + tmp_dirColor * tmp_shadow * 2.0f;
 
 	FragColor = vec4(tmp_result, 1.0f);
 }

@@ -30,11 +30,13 @@ namespace Catherine
 
 		virtual float GetRenderPriority() const override;
 
+		virtual bool HasPass(ShaderPass pass) const override;
 		virtual bool IsForwardInDerferredPath() const override;
 
-		virtual void Use() override;
+		virtual void Use(ShaderPass pass) override;
 
 	private:
+		IProgram * m_ShadowProgram = nullptr;
 		IProgram * m_Program = nullptr;
 
 		/** this is used when deferred pipeline is enabled and this material has no deferred shader */

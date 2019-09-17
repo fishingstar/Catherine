@@ -75,17 +75,17 @@ namespace Catherine
 			for (size_t i = 0; i < tmp_renderContexts.size(); i++)
 			{
 				const RenderContext * tmp_renderContext = tmp_renderContexts[i];
+				IMaterial * tmp_material = tmp_renderContext->GetMaterial();
 
-				// skip no shadow objects
-				if (!tmp_renderContext->GetCastShadow())
+				// skip no shadow objects or material with no shadow pass
+				if (!tmp_renderContext->GetCastShadow() || !tmp_material->HasPass(ShaderPass::Shadow))
 					continue;
 
 				// material
-				IMaterial * tmp_material = tmp_renderContext->GetMaterial();
 				tmp_material->SetModelUniform(tmp_renderContext);
 				tmp_material->SetCameraUniform(&m_ShadowCameraContext);
 				tmp_material->SetLightUniform(tmp_light);
-				tmp_material->Use();
+				tmp_material->Use(ShaderPass::Shadow);
 
 				// vertex buffer
 				IVertexArray * tmp_vertexArray = tmp_renderContext->GetVertexArray();
@@ -144,7 +144,7 @@ namespace Catherine
 				tmp_material->SetLightUniform(tmp_light);
 				tmp_material->SetShadowUniform(&m_ShadowCameraContext);
 				tmp_material->SetTexture("shadowmap", m_RenderTarget_Shadow->GetDepthAttachment());
-				tmp_material->Use();
+				tmp_material->Use(ShaderPass::Forward);
 
 				// vertex buffer
 				IVertexArray * tmp_vertexArray = tmp_renderContext->GetVertexArray();

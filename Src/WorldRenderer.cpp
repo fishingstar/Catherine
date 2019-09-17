@@ -9,7 +9,7 @@ namespace Catherine
 {
 	bool WorldRenderer::Initialize()
 	{
-		if (g_RenderPipeline == 0)
+		if (g_RenderPipeline == RenderPipeline::Forward)
 		{
 			m_ForwardPipeline = new ForwardPipeline();
 			bool tmp_forwardInited = m_ForwardPipeline->Initialize();
@@ -20,7 +20,7 @@ namespace Catherine
 			}
 			m_CurrentPipeline = m_ForwardPipeline;
 		}
-		else if (g_RenderPipeline == 1)
+		else if (g_RenderPipeline == RenderPipeline::Deferred)
 		{
 			m_DeferredPipeline = new DeferredPipeline();
 			bool tmp_deferredInited = m_DeferredPipeline->Initialize();

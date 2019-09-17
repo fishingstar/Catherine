@@ -24,13 +24,23 @@ namespace Catherine
 
 		tinyxml2::XMLElement * tmp_root = doc.FirstChildElement();
 
+		// shadow shader
+		tinyxml2::XMLElement * tmp_shadow = tmp_root->FirstChildElement("ShadowShader");
+		if (tmp_shadow != nullptr)
+		{
+			tinyxml2::XMLElement * tmp_vertex = tmp_shadow->FirstChildElement("Vertex");
+			tinyxml2::XMLElement * tmp_fragment = tmp_shadow->FirstChildElement("Fragment");
+
+			m_ShadowProgram = ProgramManager::Instance()->GetProgram(tmp_vertex->GetText(), tmp_fragment->GetText());
+		}
+
 		// shader
 		tinyxml2::XMLElement * tmp_shader = nullptr;
-		if (g_RenderPipeline == 0)
+		if (g_RenderPipeline == RenderPipeline::Forward)
 		{
 			tmp_shader = tmp_root->FirstChildElement("ForwardShader");
 		}
-		else if (g_RenderPipeline == 1)
+		else if (g_RenderPipeline == RenderPipeline::Deferred)
 		{
 			tmp_shader = tmp_root->FirstChildElement("DeferredShader");
 			if (tmp_shader == nullptr)
@@ -146,36 +156,72 @@ namespace Catherine
 	{
 		m_Program->Use();
 		m_Program->SetInt(key, value);
+
+		if (m_ShadowProgram)
+		{
+			m_ShadowProgram->Use();
+			m_ShadowProgram->SetInt(key, value);
+		}
 	}
 
 	void Material::SetFloat(const char * key, float value)
 	{
 		m_Program->Use();
 		m_Program->SetFloat(key, value);
+
+		if (m_ShadowProgram)
+		{
+			m_ShadowProgram->Use();
+			m_ShadowProgram->SetFloat(key, value);
+		}
 	}
 
 	void Material::SetVec2(const char * key, const glm::vec2 & value)
 	{
 		m_Program->Use();
 		m_Program->SetVec2(key, value);
+
+		if (m_ShadowProgram)
+		{
+			m_ShadowProgram->Use();
+			m_ShadowProgram->SetVec2(key, value);
+		}
 	}
 
 	void Material::SetVec3(const char * key, const glm::vec3 & value)
 	{
 		m_Program->Use();
 		m_Program->SetVec3(key, value);
+
+		if (m_ShadowProgram)
+		{
+			m_ShadowProgram->Use();
+			m_ShadowProgram->SetVec3(key, value);
+		}
 	}
 
 	void Material::SetVec4(const char * key, const glm::vec4 & value)
 	{
 		m_Program->Use();
 		m_Program->SetVec4(key, value);
+
+		if (m_ShadowProgram)
+		{
+			m_ShadowProgram->Use();
+			m_ShadowProgram->SetVec4(key, value);
+		}
 	}
 
 	void Material::SetMat4x4(const char * key, const glm::mat4x4 & value)
 	{
 		m_Program->Use();
 		m_Program->SetMat4x4(key, value);
+
+		if (m_ShadowProgram)
+		{
+			m_ShadowProgram->Use();
+			m_ShadowProgram->SetMat4x4(key, value);
+		}
 	}
 
 	void Material::SetTexture(const char * key, ITexture * value)
@@ -183,11 +229,17 @@ namespace Catherine
 		auto tmp_sampler = m_Samplers.find(key);
 		if (tmp_sampler == m_Samplers.end())
 		{
-			m_Program->Use();
-
 			uint8_t tmp_slot = m_Slot++;
-			m_Program->SetInt(key, tmp_slot);
 			m_Samplers[key] = tmp_slot;
+
+			m_Program->Use();
+			m_Program->SetInt(key, tmp_slot);
+
+			if (m_ShadowProgram)
+			{
+				m_ShadowProgram->Use();
+				m_ShadowProgram->SetInt(key, tmp_slot);
+			}
 		}
 
 		uint8_t tmp_slot = m_Samplers[key];
@@ -265,12 +317,32 @@ namespace Catherine
 		return m_RenderPriority;
 	}
 
+	bool Material::HasPass(ShaderPass pass) const
+	{
+		bool tmp_result = false;
+		switch (pass)
+		{
+		case Catherine::ShaderPass::Shadow:
+			tmp_result = m_ShadowProgram != nullptr;
+			break;
+		case Catherine::ShaderPass::Forward:
+			tmp_result = m_Program != nullptr;
+			break;
+		case Catherine::ShaderPass::Deferred:
+			tmp_result = m_Program != nullptr;
+			break;
+		default:
+			break;
+		}
+		return tmp_result;
+	}
+
 	bool Material::IsForwardInDerferredPath() const
 	{
 		return m_IsForwardInDeferredPath;
 	}
 
-	void Material::Use()
+	void Material::Use(ShaderPass pass)
 	{
 		StateManager::Instance()->EnableDepthTest(m_DepthTestEnabled);
 		StateManager::Instance()->SetDepthTestMode(m_DepthTestMode);
@@ -290,6 +362,9 @@ namespace Catherine
 			}
 		}
 
-		m_Program->Use();
+		if (pass == ShaderPass::Shadow)
+			m_ShadowProgram->Use();
+		else
+			m_Program->Use();
 	}
 }

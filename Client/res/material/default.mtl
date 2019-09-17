@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Catherine>
+	<ShadowShader>
+		<Vertex>./res/shader/default.vs</Vertex>
+		<Fragment>./res/shader/default.fs</Fragment>
+	</ShadowShader>
 	<ForwardShader>
 		<Vertex>./res/shader/default.vs</Vertex>
 		<Fragment>./res/shader/default.fs</Fragment>

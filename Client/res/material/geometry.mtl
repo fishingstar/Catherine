@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Catherine>
-	<ForwardShader>
-		<Vertex>./res/shader/geometry.vs</Vertex>
-		<Fragment>./res/shader/geometry.fs</Fragment>
-	</ForwardShader>
 	<DeferredShader>
 		<Vertex>./res/shader/geometry.vs</Vertex>
 		<Fragment>./res/shader/geometry.fs</Fragment>

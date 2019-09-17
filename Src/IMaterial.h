@@ -1,6 +1,7 @@
 #pragma once
 
 #include "glm/glm.hpp"
+#include "RenderCommon.h"
 
 namespace Catherine
 {
@@ -29,8 +30,9 @@ namespace Catherine
 
 		virtual float GetRenderPriority() const = 0;
 
+		virtual bool HasPass(ShaderPass pass) const = 0;
 		virtual bool IsForwardInDerferredPath() const = 0;
 
-		virtual void Use() = 0;
+		virtual void Use(ShaderPass pass) = 0;
 	};
 }

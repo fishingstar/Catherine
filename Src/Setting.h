@@ -1,3 +1,11 @@
 #pragma once
 
-const bool g_RenderPipeline = 1;
+enum class RenderPipeline
+{
+	Forward,
+	Deferred,
+	TiledBasedDeferred,
+	ForwardPlus
+};
+
+const RenderPipeline g_RenderPipeline = RenderPipeline::Deferred;

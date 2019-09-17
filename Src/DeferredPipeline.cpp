@@ -20,13 +20,14 @@ namespace Catherine
 
 	DeferredPipeline::~DeferredPipeline()
 	{
-
+		// assert : all resources are released
 	}
 
 	bool DeferredPipeline::Initialize()
 	{
 		m_RenderTarget_Back = RenderTargetManager::Instance()->GetDefaultRenderTarget();
 		m_RenderTarget_Geometry = RenderTargetManager::Instance()->CreateRenderTarget(m_RenderTarget_Back->GetWidth(), m_RenderTarget_Back->GetHeight(), 3, true, false);
+		m_RenderTarget_Shadow = RenderTargetManager::Instance()->CreateRenderTarget(1024, 1024, 0, true, false);
 
 		m_GeometryMaterial = new Material();
 		m_GeometryMaterial->Initialize(s_GeometryMaterial);
@@ -72,7 +73,7 @@ namespace Catherine
 
 	void DeferredPipeline::Uninitialize()
 	{
-
+		// TODO : destroy or release resource...
 	}
 
 	void DeferredPipeline::Render(const WorldContext * context)
@@ -85,13 +86,67 @@ namespace Catherine
 		RenderLighting(context);
 		// 4th render forward
 		RenderForward(context);
-		// 5th render transparent(forward)
-		RenderTransparent(context);
 	}
 
 	void DeferredPipeline::RenderShadow(const WorldContext * context)
 	{
+		m_RenderTarget_Shadow->Bind();
+		{
+			const CameraContext * tmp_camera = context->GetCameraContext();
+			const LightContext * tmp_light = context->GetLightContext();
+			std::vector<RenderContext *> tmp_renderContexts = context->GetRenderContexts();
 
+			m_ShadowCameraContext = GenerateShadowCameraContext(tmp_light, tmp_camera);
+
+			// clear screen
+			g_Device->Clear((BitField)BufferBit::Depth);
+
+			// sort commands
+			std::stable_sort(tmp_renderContexts.begin(), tmp_renderContexts.end(),
+				[](const RenderContext * left, const RenderContext * right) -> bool
+				{
+					bool tmp_reuslt = false;
+
+					IMaterial * leftMaterial = left->GetMaterial();
+					IMaterial * rightMaterial = right->GetMaterial();
+					if (leftMaterial && rightMaterial)
+					{
+						if (leftMaterial->GetRenderPriority() < rightMaterial->GetRenderPriority())
+						{
+							tmp_reuslt = true;
+						}
+					}
+
+					return tmp_reuslt;
+				}
+			);
+
+			// render commands
+			for (size_t i = 0; i < tmp_renderContexts.size(); i++)
+			{
+				const RenderContext * tmp_renderContext = tmp_renderContexts[i];
+				IMaterial * tmp_material = tmp_renderContext->GetMaterial();
+
+				// skip no shadow objects or material with no shadow pass
+				if (!tmp_renderContext->GetCastShadow() || !tmp_material->HasPass(ShaderPass::Shadow))
+					continue;
+
+				// material
+				tmp_material->SetModelUniform(tmp_renderContext);
+				tmp_material->SetCameraUniform(&m_ShadowCameraContext);
+				tmp_material->SetLightUniform(tmp_light);
+				tmp_material->Use(ShaderPass::Shadow);
+
+				// vertex buffer
+				IVertexArray * tmp_vertexArray = tmp_renderContext->GetVertexArray();
+				tmp_vertexArray->Bind();
+
+				// draw command
+				g_Device->DrawElement(DrawMode::TRIANGLES, tmp_vertexArray->GetIndexCount(), ValueType::UInt, 0);
+
+				tmp_vertexArray->UnBind();
+			}
+		}
 	}
 
 	void DeferredPipeline::RenderGeometry(const WorldContext * context)
@@ -140,7 +195,9 @@ namespace Catherine
 				tmp_material->SetModelUniform(tmp_renderContext);
 				tmp_material->SetCameraUniform(tmp_camera);
 				tmp_material->SetLightUniform(tmp_light);
-				tmp_material->Use();
+				tmp_material->SetShadowUniform(&m_ShadowCameraContext);
+				tmp_material->SetTexture("shadowmap", m_RenderTarget_Shadow->GetDepthAttachment());
+				tmp_material->Use(ShaderPass::Deferred);
 
 				// vertex buffer
 				IVertexArray * tmp_vertexArray = tmp_renderContext->GetVertexArray();
@@ -178,7 +235,7 @@ namespace Catherine
 
 			m_GeometryMaterial->SetCameraUniform(tmp_camera);
 			m_GeometryMaterial->SetLightUniform(tmp_light);
-			m_GeometryMaterial->Use();
+			m_GeometryMaterial->Use(ShaderPass::Deferred);
 
 			m_ScreenVertexArray->Bind();
 
@@ -191,9 +248,29 @@ namespace Catherine
 
 	void DeferredPipeline::RenderForward(const WorldContext * context)
 	{
-		m_RenderTarget_Back->Bind();
+		// 1st blit depth buffer
+		// TODO : no need to blit depth buffer if nothing need to be rendered in the following forward task
+		BlitDepthBuffer();
+		// 2nd render opaque
+		RenderOpaque(context);
+		// 3rd render transparent
+		RenderTransparent(context);
+	}
+
+	void DeferredPipeline::BlitDepthBuffer()
+	{
 		m_RenderTarget_Geometry->Bind(RenderTargetUsage::Read);
-		g_Device->BlitFrameBuffer(0, 0, 1280, 720, 0, 0, 1280, 720, (BitField)BufferBit::Depth, Filter::Nearest);
+		m_RenderTarget_Back->Bind(RenderTargetUsage::Draw);
+		g_Device->BlitFrameBuffer(
+			0, 0, m_RenderTarget_Geometry->GetWidth(), m_RenderTarget_Geometry->GetHeight(),
+			0, 0, m_RenderTarget_Back->GetWidth(), m_RenderTarget_Back->GetHeight(),
+			(BitField)BufferBit::Depth, Filter::Nearest
+		);
+	}
+
+	void DeferredPipeline::RenderOpaque(const WorldContext * context)
+	{
+		m_RenderTarget_Back->Bind();
 		{
 			const CameraContext * tmp_camera = context->GetCameraContext();
 			const LightContext * tmp_light = context->GetLightContext();
@@ -231,7 +308,7 @@ namespace Catherine
 					tmp_material->SetModelUniform(tmp_renderContext);
 					tmp_material->SetCameraUniform(tmp_camera);
 					tmp_material->SetLightUniform(tmp_light);
-					tmp_material->Use();
+					tmp_material->Use(ShaderPass::Deferred);
 
 					// vertex buffer
 					IVertexArray * tmp_vertexArray = tmp_renderContext->GetVertexArray();
@@ -249,5 +326,44 @@ namespace Catherine
 	void DeferredPipeline::RenderTransparent(const WorldContext * context)
 	{
 
+	}
+
+	CameraContext DeferredPipeline::GenerateShadowCameraContext(const LightContext * light, const CameraContext * camera)
+	{
+		// get any view matrix of light
+		auto tmp_dirContext = light->GetDirectionContext();
+		glm::mat4x4 tmp_view = tmp_dirContext->GetDynamicViewMatrix(glm::vec3(0.0f, 0.0f, 0.0f));
+
+		// transform to light space
+		std::vector<glm::vec4> tmp_points = camera->GetFrustumPoints(0.0f, 50.0f);
+		for (size_t i = 0; i < tmp_points.size(); ++i)
+		{
+			tmp_points[i] = tmp_view * tmp_points[i];
+		}
+
+		// calculate AABB box
+		glm::vec4 tmp_minPoint = tmp_points[0];
+		glm::vec4 tmp_maxPoint = tmp_points[0];
+		for (size_t i = 1; i < tmp_points.size(); ++i)
+		{
+			tmp_minPoint = glm::min(tmp_minPoint, tmp_points[i]);
+			tmp_maxPoint = glm::max(tmp_maxPoint, tmp_points[i]);
+		}
+		glm::vec3 tmp_center = (tmp_minPoint + tmp_maxPoint) / 2.0f;
+		tmp_center.z = tmp_maxPoint.z;
+		tmp_center = glm::inverse(tmp_view) * glm::vec4(tmp_center, 1.0f);
+
+		// build new camera context
+		CameraContext tmp_newContext;
+		tmp_newContext.SetProjectionMode(ProjectionMode::Ortho);
+		tmp_newContext.SetSize(tmp_maxPoint.y - tmp_minPoint.y);
+		tmp_newContext.SetAspect((tmp_maxPoint.x - tmp_minPoint.x) / (tmp_maxPoint.y - tmp_minPoint.y)); // (camera->GetAspect());
+		tmp_newContext.SetNearPlane(0.0f);
+		tmp_newContext.SetFarPlane(tmp_maxPoint.z - tmp_minPoint.z);
+		tmp_newContext.SetRotation(tmp_dirContext->m_Rotation);
+		tmp_newContext.SetPosition(tmp_center);
+		tmp_newContext.Apply();
+
+		return tmp_newContext;
 	}
 }
