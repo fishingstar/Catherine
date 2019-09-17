@@ -117,6 +117,13 @@ SET(Src_Render_Material
 )
 source_group(Render\\Material FILES ${Src_Render_Material})
 
+# Render\\Common
+SET(Src_Render_Common
+	"${PROJECT_SOURCE_DIR}/Src/RenderCommon.h"
+	"${PROJECT_SOURCE_DIR}/Src/RenderCommon.cpp"
+)
+source_group(Render\\Common FILES ${Src_Render_Common})
+
 # Render\\Pipeline
 SET(Src_Render_Pipeline
 	"${PROJECT_SOURCE_DIR}/Src/IPipeline.h"
@@ -277,6 +284,7 @@ add_executable(Catherine
 	${Src_Global}
 	${Src_Render_Context}
 	${Src_Render_Material}
+	${Src_Render_Common}
 	${Src_Render_Pipeline}
 	${Src_Render_Renderer}
 	${Src_Render_Resource}

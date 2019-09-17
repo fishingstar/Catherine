@@ -40,6 +40,6 @@ void main()
 	float tmp_shadow = step(tmp_lightScreenPos.z, tmp_depth);
 
 	GColor = vec4(tmp_diffuse, tmp_shadow);
-	GNormal = vec4(tmp_normalMap, 1.0f);
+	GNormal = vec4(tmp_normalMap, 0.0f);
 	GMask = vec4(tmp_specularmap);
 }

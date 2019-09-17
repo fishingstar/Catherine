@@ -49,7 +49,7 @@ vec3 calculateDirLight(DirectionalLight param_Light, vec3 param_ViewDir, vec3 pa
 void main()
 {
 	vec4 tmp_diffuse = texture(GColor, Texcoord);
-	vec4 tmp_normal = texture(GNormal, Texcoord);
+	vec3 tmp_normal = normalize(texture(GNormal, Texcoord).xyz);
 	vec4 tmp_mask = texture(GMask, Texcoord);
 	float tmp_depth = texture(GDepth, Texcoord).r;
 	float tmp_shadow = tmp_diffuse.a;
