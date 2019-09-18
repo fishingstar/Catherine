@@ -26,10 +26,12 @@ namespace Catherine
 
 	private:
 		void RenderShadow(const WorldContext * context);
+
+		void RenderDeferred(const WorldContext * context);
 		void RenderGeometry(const WorldContext * context);
 		void RenderLighting(const WorldContext * context);
-		void RenderForward(const WorldContext * context);
 
+		void RenderForward(const WorldContext * context);
 		void BlitDepthBuffer();
 		void RenderOpaque(const WorldContext * context);
 		void RenderTransparent(const WorldContext * context);

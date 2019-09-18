@@ -89,6 +89,7 @@ namespace Catherine
 	{
 		{ PixelFormat::A8R8G8B8,			GL_RGBA },
 		{ PixelFormat::R8G8B8,				GL_RGB },
+		{ PixelFormat::RGBA32F,				GL_RGBA32F},
 		{ PixelFormat::Depth_Component,		GL_DEPTH_COMPONENT },
 		{ PixelFormat::Depth_Component16,	GL_DEPTH_COMPONENT16 },
 		{ PixelFormat::Depth_Component24,	GL_DEPTH_COMPONENT24 },

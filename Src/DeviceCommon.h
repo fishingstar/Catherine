@@ -94,6 +94,7 @@ namespace Catherine
 	{
 		A8R8G8B8,
 		R8G8B8,
+		RGBA32F,
 		Depth_Component,
 		Depth_Component16,
 		Depth_Component24,

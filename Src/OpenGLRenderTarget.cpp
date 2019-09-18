@@ -25,7 +25,7 @@ namespace Catherine
 		{
 			ITexture * tmp_colorAttachment = new OpenGLTexture();
 			void * tmp_data = nullptr;
-			tmp_colorAttachment->Initialize(width, height, PixelFormat::A8R8G8B8, PixelFormat::A8R8G8B8, ValueType::UByte, &tmp_data);
+			tmp_colorAttachment->Initialize(width, height, PixelFormat::RGBA32F, PixelFormat::A8R8G8B8, ValueType::UByte, &tmp_data);
 			m_ColorAttachments.push_back(tmp_colorAttachment);
 		}
 
@@ -40,7 +40,7 @@ namespace Catherine
 		{
 			ITexture * tmp_depth = new OpenGLTexture();
 			void * tmp_data = nullptr;
-			tmp_depth->Initialize(width, height, PixelFormat::Depth_Component, PixelFormat::Depth_Component, ValueType::Float, &tmp_data);
+			tmp_depth->Initialize(width, height, PixelFormat::Depth_Component32, PixelFormat::Depth_Component, ValueType::Float, &tmp_data);
 			m_DepthAttachment = tmp_depth;
 		}
 		else if (stencil)

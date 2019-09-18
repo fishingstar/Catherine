@@ -3,7 +3,7 @@
 
 namespace Catherine
 {
-	unsigned int FileUtility::LoadFileContent(const char * param_Path, void ** param_Ptr)
+	size_t FileUtility::LoadFileContent(const char * param_Path, void ** param_Ptr)
 	{
 		std::ifstream tmp_stream(param_Path);
 
@@ -22,7 +22,7 @@ namespace Catherine
 		tmp_stream.close();
 
 		*param_Ptr = tmp_result;
-		return (unsigned int)tmp_size;
+		return static_cast<size_t>(tmp_size);
 	}
 
 	std::string FileUtility::GetDictionary(const std::string & path)

@@ -81,10 +81,8 @@ namespace Catherine
 		// 1st render shadowmap
 		RenderShadow(context);
 		// 2nd render geometry
-		RenderGeometry(context);
-		// 3rd render opaque
-		RenderLighting(context);
-		// 4th render forward
+		RenderDeferred(context);
+		// 3th render forward
 		RenderForward(context);
 	}
 
@@ -147,6 +145,14 @@ namespace Catherine
 				tmp_vertexArray->UnBind();
 			}
 		}
+	}
+
+	void DeferredPipeline::RenderDeferred(const WorldContext * context)
+	{
+		// 1st render geometry
+		RenderGeometry(context);
+		// 2st render shading
+		RenderLighting(context);
 	}
 
 	void DeferredPipeline::RenderGeometry(const WorldContext * context)
