@@ -6,6 +6,7 @@
 namespace Catherine
 {
 	class ITexture;
+	class ISampler;
 	class RenderContext;
 	class CameraContext;
 	class LightContext;
@@ -22,6 +23,7 @@ namespace Catherine
 		virtual void SetVec4(const char * key, const glm::vec4 & value) = 0;
 		virtual void SetMat4x4(const char * key, const glm::mat4x4 & value) = 0;
 		virtual void SetTexture(const char * key, ITexture * value) = 0;
+		virtual void SetSampler(const char * key, ISampler * value) = 0;
 
 		virtual void SetModelUniform(const RenderContext * context) = 0;
 		virtual void SetCameraUniform(const CameraContext * context) = 0;

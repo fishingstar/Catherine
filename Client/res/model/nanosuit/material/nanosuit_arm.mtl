@@ -17,6 +17,11 @@
 		<Item Key = "normalmap" Value = "./res/model/nanosuit/texture/arm_showroom_ddn.png" />
 		<Item Key = "specularmap" Value = "./res/model/nanosuit/texture/arm_showroom_spec.png" />
 	</Texture>
+	<Sampler>
+		<Item Key = "diffuse" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "normalmap" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "specularmap" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
+	</Sampler>
 	<RenderState>
 		<CullFaceMode Enabled = "true" Value = "0" />
 		<DepthTestMode Enabled = "true" Value = "0" />

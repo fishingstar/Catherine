@@ -10,6 +10,8 @@
 #include "IMaterial.h"
 #include "IVertexArray.h"
 #include "Material.h"
+#include "ISampler.h"
+#include "glm/gtc/type_ptr.hpp"
 #include <algorithm>
 
 namespace Catherine
@@ -32,6 +34,12 @@ namespace Catherine
 		m_GeometryMaterial = new Material();
 		m_GeometryMaterial->Initialize(s_GeometryMaterial);
 
+		m_ShadowSampler = g_Device->CreateSampler();
+		m_ShadowSampler->SetMinFilter(Filter::Linear);
+		m_ShadowSampler->SetMagFilter(Filter::Linear);
+		m_ShadowSampler->SetWrapS(WrapMode::Clamp_To_Border);
+		m_ShadowSampler->SetWrapT(WrapMode::Clamp_To_Border);
+		m_ShadowSampler->SetBorderColor(glm::value_ptr(glm::vec4(1.0f)));
 
 
 		struct ScreenVertex
@@ -203,6 +211,7 @@ namespace Catherine
 				tmp_material->SetLightUniform(tmp_light);
 				tmp_material->SetShadowUniform(&m_ShadowCameraContext);
 				tmp_material->SetTexture("shadowmap", m_RenderTarget_Shadow->GetDepthAttachment());
+				tmp_material->SetSampler("shadowmap", m_ShadowSampler);
 				tmp_material->Use(ShaderPass::Deferred);
 
 				// vertex buffer

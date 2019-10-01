@@ -7,6 +7,7 @@
 namespace Catherine
 {
 	class IProgram;
+	class ISampler;
 	class ITexture;
 	class IVertexArray;
 	class IIndexBuffer;
@@ -43,6 +44,8 @@ namespace Catherine
 
 		// resource
 		virtual IProgram * CreateProgram() = 0;
+
+		virtual ISampler * CreateSampler() = 0;
 
 		virtual ITexture * CreateTexture() = 0;
 		virtual ITexture * CreateCubeTexture() = 0;

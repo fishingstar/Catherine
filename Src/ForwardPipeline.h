@@ -6,6 +6,7 @@
 namespace Catherine
 {
 	class IRenderTarget;
+	class ISampler;
 	class LightContext;
 
 	class ForwardPipeline : public IPipeline
@@ -29,6 +30,7 @@ namespace Catherine
 		IRenderTarget * m_RenderTarget_Back = nullptr;
 		IRenderTarget * m_RenderTarget_Shadow = nullptr;
 
+		ISampler * m_ShadowSampler = nullptr;
 		CameraContext m_ShadowCameraContext;
 	};
 }

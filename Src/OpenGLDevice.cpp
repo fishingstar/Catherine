@@ -4,6 +4,7 @@
 #include "DeviceConst.h"
 #include "OpenGLCommon.h"
 #include "OpenGLProgram.h"
+#include "OpenGLSampler.h"
 #include "OpenGLTexture.h"
 #include "OpenGLCubeTexture.h"
 #include "OpenGLVertexArray.h"
@@ -128,6 +129,13 @@ namespace Catherine
 	{
 		OpenGLProgram * tmp_program = new OpenGLProgram();
 		return tmp_program;
+	}
+
+	ISampler * OpenGLDevice::CreateSampler()
+	{
+		OpenGLSampler * tmp_sampler = new OpenGLSampler();
+		bool tmp_result = tmp_sampler->Initialize();
+		return tmp_sampler;
 	}
 
 	ITexture * OpenGLDevice::CreateTexture()

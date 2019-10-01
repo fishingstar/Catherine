@@ -19,6 +19,7 @@ namespace Catherine
 		static GLenum GetOpenGLPixelFormat(PixelFormat format);
 		static GLenum GetOpenGLSamplerState(SamplerState state);
 		static GLenum GetOpenGLFilter(Filter filter);
+		static GLenum GetOpenGLWrapMode(WrapMode mode);
 		static GLenum GetOpenGLBufferBit(BufferBit bit);
 		static GLenum GetOpenGLBufferBits(BitField bits);
 		static GLenum GetOpenGLRenderTargetUsage(RenderTargetUsage usage);

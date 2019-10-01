@@ -9,6 +9,7 @@ namespace Catherine
 {
 	class IProgram;
 	class ITexture;
+	class ISampler;
 
 	class Material : public IMaterial
 	{
@@ -22,6 +23,7 @@ namespace Catherine
 		virtual void SetVec4(const char * key, const glm::vec4 & value) override;
 		virtual void SetMat4x4(const char * key, const glm::mat4x4 & value) override;
 		virtual void SetTexture(const char * key, ITexture * value) override;
+		virtual void SetSampler(const char * key, ISampler * value) override;
 
 		virtual void SetModelUniform(const RenderContext * context) override;
 		virtual void SetCameraUniform(const CameraContext * context) override;
@@ -36,15 +38,19 @@ namespace Catherine
 		virtual void Use(ShaderPass pass) override;
 
 	private:
+		uint8_t GetTextureSlot(const std::string & name);
+
+	private:
 		IProgram * m_ShadowProgram = nullptr;
 		IProgram * m_Program = nullptr;
 
 		/** this is used when deferred pipeline is enabled and this material has no deferred shader */
 		bool m_IsForwardInDeferredPath = false;
 
-		unsigned int m_Slot = 0;
-		std::unordered_map<std::string, uint8_t> m_Samplers;
-		std::unordered_map<uint8_t, ITexture *> m_Bindings;
+		uint8_t m_Slot = 0;
+		std::unordered_map<std::string, uint8_t> m_Slots;
+		std::unordered_map<uint8_t, ITexture *> m_BindingTextures;
+		std::unordered_map<uint8_t, ISampler*> m_BindingSamplers;
 
 		bool m_DepthTestEnabled = true;
 		DepthTestMode m_DepthTestMode = DepthTestMode::LessEqual;

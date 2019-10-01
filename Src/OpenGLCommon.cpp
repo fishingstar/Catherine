@@ -116,6 +116,19 @@ namespace Catherine
 	{
 		{ Filter::Nearest, GL_NEAREST },
 		{ Filter::Linear, GL_LINEAR },
+		{ Filter::Nearest_Mipmap_Nearest, GL_NEAREST_MIPMAP_NEAREST },
+		{ Filter::Linear_Mipmap_Nearest, GL_LINEAR_MIPMAP_NEAREST },
+		{ Filter::Nearest_Mipmap_Linear, GL_NEAREST_MIPMAP_LINEAR },
+		{ Filter::Linear_Mipmap_Linear, GL_LINEAR_MIPMAP_LINEAR }
+	};
+
+	std::vector<std::pair<WrapMode, GLenum>> OpenGLWrapMode =
+	{
+		{ WrapMode::Clamp_To_Border, GL_CLAMP_TO_BORDER },
+		{ WrapMode::Clamp_To_Edge, GL_CLAMP_TO_EDGE },
+		{ WrapMode::Mirrored_Repeat, GL_MIRRORED_REPEAT },
+		{ WrapMode::Mirror_Clamp_To_Edge, GL_MIRROR_CLAMP_TO_EDGE },
+		{ WrapMode::Repeat, GL_REPEAT }
 	};
 
 	std::vector<std::pair<BufferBit, GLenum>> OpenGLBufferBit = 
@@ -206,6 +219,11 @@ namespace Catherine
 	GLenum OpenGLCommon::GetOpenGLFilter(Filter filter)
 	{
 		return GetOpenGLDefines(OpenGLFilter, filter);
+	}
+
+	GLenum OpenGLCommon::GetOpenGLWrapMode(WrapMode mode)
+	{
+		return GetOpenGLDefines(OpenGLWrapMode, mode);
 	}
 
 	GLenum OpenGLCommon::GetOpenGLBufferBit(BufferBit bit)

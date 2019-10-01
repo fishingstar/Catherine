@@ -8,6 +8,7 @@
 #include "IVertexArray.h"
 #include "IRenderTarget.h"
 #include "RenderTargetManager.h"
+#include "ISampler.h"
 #include <algorithm>
 
 namespace Catherine
@@ -18,6 +19,12 @@ namespace Catherine
 	{
 		m_RenderTarget_Back = RenderTargetManager::Instance()->GetDefaultRenderTarget();
 		m_RenderTarget_Shadow = RenderTargetManager::Instance()->CreateRenderTarget(1024, 1024, 0, true, false);
+
+		m_ShadowSampler = g_Device->CreateSampler();
+		m_ShadowSampler->SetMinFilter(Filter::Linear);
+		m_ShadowSampler->SetMagFilter(Filter::Linear);
+		m_ShadowSampler->SetWrapS(WrapMode::Clamp_To_Edge);
+		m_ShadowSampler->SetWrapT(WrapMode::Clamp_To_Edge);
 
 		return true;
 	}
@@ -144,6 +151,7 @@ namespace Catherine
 				tmp_material->SetLightUniform(tmp_light);
 				tmp_material->SetShadowUniform(&m_ShadowCameraContext);
 				tmp_material->SetTexture("shadowmap", m_RenderTarget_Shadow->GetDepthAttachment());
+				tmp_material->SetSampler("shadowmap", m_ShadowSampler);
 				tmp_material->Use(ShaderPass::Forward);
 
 				// vertex buffer

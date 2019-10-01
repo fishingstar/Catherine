@@ -10,9 +10,13 @@
 #include "tinyxml2.h"
 #include "LogUtility.h"
 #include "Setting.h"
+#include "ISampler.h"
+#include "IDevice.h"
 
 namespace Catherine
 {
+	extern IDevice* g_Device;
+
 	bool Material::Initialize(const char * param_Config)
 	{
 		tinyxml2::XMLDocument doc;
@@ -107,6 +111,41 @@ namespace Catherine
 				}
 
 				tmp_cubeItem = tmp_cubeItem->NextSiblingElement();
+			}
+		}
+
+		// sampler
+		tinyxml2::XMLElement * tmp_samplerElement = tmp_root->FirstChildElement("Sampler");
+		if (tmp_samplerElement)
+		{
+			tinyxml2::XMLElement * tmp_samplerItem = tmp_samplerElement->FirstChildElement();
+			while (tmp_samplerItem)
+			{
+				const char * tmp_key = tmp_samplerItem->Attribute("Key");
+				if (tmp_key != nullptr)
+				{
+					int tmp_minFilter = tmp_samplerItem->IntAttribute("MinFilter", -1);
+					int tmp_magFilter = tmp_samplerItem->IntAttribute("MagFilter", -1);
+					int tmp_wrapS = tmp_samplerItem->IntAttribute("WrapS", -1);
+					int tmp_wrapT = tmp_samplerItem->IntAttribute("WrapT", -1);
+					int tmp_wrapR = tmp_samplerItem->IntAttribute("WrapR", -1);
+
+					ISampler * tmp_sampler = g_Device->CreateSampler();
+					if (tmp_minFilter != -1)
+						tmp_sampler->SetMinFilter(static_cast<Filter>(tmp_minFilter));
+					if (tmp_magFilter != -1)
+						tmp_sampler->SetMagFilter(static_cast<Filter>(tmp_magFilter));
+					if (tmp_wrapS != -1)
+						tmp_sampler->SetWrapS(static_cast<WrapMode>(tmp_wrapS));
+					if (tmp_wrapT != -1)
+						tmp_sampler->SetWrapT(static_cast<WrapMode>(tmp_wrapT));
+					if (tmp_wrapR != -1)
+						tmp_sampler->SetWrapR(static_cast<WrapMode>(tmp_wrapR));
+
+					SetSampler(tmp_key, tmp_sampler);
+				}
+
+				tmp_samplerItem = tmp_samplerItem->NextSiblingElement();
 			}
 		}
 
@@ -226,24 +265,14 @@ namespace Catherine
 
 	void Material::SetTexture(const char * key, ITexture * value)
 	{
-		auto tmp_sampler = m_Samplers.find(key);
-		if (tmp_sampler == m_Samplers.end())
-		{
-			uint8_t tmp_slot = m_Slot++;
-			m_Samplers[key] = tmp_slot;
+		uint8_t tmp_slot = GetTextureSlot(key);
+		m_BindingTextures[tmp_slot] = value;
+	}
 
-			m_Program->Use();
-			m_Program->SetInt(key, tmp_slot);
-
-			if (m_ShadowProgram)
-			{
-				m_ShadowProgram->Use();
-				m_ShadowProgram->SetInt(key, tmp_slot);
-			}
-		}
-
-		uint8_t tmp_slot = m_Samplers[key];
-		m_Bindings[tmp_slot] = value;
+	void Material::SetSampler(const char * key, ISampler * value)
+	{
+		uint8_t tmp_slot = GetTextureSlot(key);
+		m_BindingSamplers[tmp_slot] = value;
 	}
 
 	void Material::SetModelUniform(const RenderContext * context)
@@ -354,7 +383,7 @@ namespace Catherine
 		StateManager::Instance()->SetBlendEquation(m_BlendEquation);
 		StateManager::Instance()->SetBlendFunc(m_SrcFunc, m_DstFunc, m_SrcAlphaFunc, m_DstAlphaFunc);
 
-		for (auto iter = m_Bindings.cbegin(); iter != m_Bindings.cend(); ++iter)
+		for (auto iter = m_BindingTextures.cbegin(); iter != m_BindingTextures.cend(); ++iter)
 		{
 			if (iter->second)
 			{
@@ -362,9 +391,38 @@ namespace Catherine
 			}
 		}
 
+		for (auto iter = m_BindingSamplers.cbegin(); iter != m_BindingSamplers.cend(); ++iter)
+		{
+			if (iter->second)
+			{
+				iter->second->Bind(iter->first);
+			}
+		}
+
 		if (pass == ShaderPass::Shadow)
 			m_ShadowProgram->Use();
 		else
 			m_Program->Use();
+	}
+
+	uint8_t Material::GetTextureSlot(const std::string & name)
+	{
+		auto tmp_slot = m_Slots.find(name);
+		if (tmp_slot == m_Slots.end())
+		{
+			uint8_t tmp_slot = m_Slot++;
+			m_Slots[name] = tmp_slot;
+
+			m_Program->Use();
+			m_Program->SetInt(name.c_str(), tmp_slot);
+
+			if (m_ShadowProgram)
+			{
+				m_ShadowProgram->Use();
+				m_ShadowProgram->SetInt(name.c_str(), tmp_slot);
+			}
+		}
+
+		return m_Slots[name];
 	}
 }

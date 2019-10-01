@@ -37,6 +37,8 @@ namespace Catherine
 		// resource
 		virtual IProgram * CreateProgram() override;
 
+		virtual ISampler * CreateSampler() override;
+
 		virtual ITexture * CreateTexture() override;
 		virtual ITexture * CreateCubeTexture() override;
 		virtual IRenderTarget * CreateRenderTarget() override;

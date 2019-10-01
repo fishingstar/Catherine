@@ -123,6 +123,19 @@ namespace Catherine
 	{
 		Nearest,
 		Linear,
+		Nearest_Mipmap_Nearest,
+		Linear_Mipmap_Nearest,
+		Nearest_Mipmap_Linear,
+		Linear_Mipmap_Linear,
+	};
+
+	enum class WrapMode
+	{
+		Clamp_To_Border,
+		Clamp_To_Edge,
+		Mirrored_Repeat,
+		Mirror_Clamp_To_Edge,
+		Repeat,
 	};
 
 	enum class BufferBit
