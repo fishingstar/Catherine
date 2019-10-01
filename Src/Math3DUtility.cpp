@@ -6,9 +6,9 @@ namespace Catherine
 	glm::mat4x4 Math3DUtility::RotationMatrix(const glm::vec3 & rotation)
 	{
 		glm::mat4x4 tmp_result = glm::mat4x4(1);
-		tmp_result = glm::rotate(tmp_result, glm::radians(rotation.x), glm::vec3(-1.0f, 0.0f, 0.0f));
-		tmp_result = glm::rotate(tmp_result, glm::radians(rotation.y), glm::vec3(0.0f, -1.0f, 0.0f));
 		tmp_result = glm::rotate(tmp_result, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, -1.0f));
+		tmp_result = glm::rotate(tmp_result, glm::radians(rotation.y), glm::vec3(0.0f, -1.0f, 0.0f));
+		tmp_result = glm::rotate(tmp_result, glm::radians(rotation.x), glm::vec3(-1.0f, 0.0f, 0.0f));
 		return tmp_result;
 	}
 
