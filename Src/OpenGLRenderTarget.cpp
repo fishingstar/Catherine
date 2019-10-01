@@ -120,19 +120,22 @@ namespace Catherine
 		glBindFramebuffer(tmp_target, m_FrameBuffer);
 		g_Device->SetViewPort(0, 0, GetWidth(), GetHeight());
 
-		GLenum tmp_buffers[GL_MAX_DRAW_BUFFERS] = { GL_NONE };
-		if (m_ColorAttachments.size() == 0 && !m_DepthAttachment && !m_StencilAttachment && !m_DepthStencilAttachment)
+		if (usage != RenderTargetUsage::Read)
 		{
-			tmp_buffers[0] = GL_BACK_LEFT;
-			glDrawBuffers(1, tmp_buffers);
-		}
-		else
-		{
-			for (size_t i = 0; i < m_ColorAttachments.size(); i++)
+			GLenum tmp_buffers[32] = { GL_NONE };
+			if (m_ColorAttachments.size() == 0 && !m_DepthAttachment && !m_StencilAttachment && !m_DepthStencilAttachment)
 			{
-				tmp_buffers[i] = GL_COLOR_ATTACHMENT0 + i;
+				tmp_buffers[0] = GL_BACK_LEFT;
+				glDrawBuffers(1, tmp_buffers);
 			}
-			glDrawBuffers(m_ColorAttachments.size(), tmp_buffers);
+			else
+			{
+				for (size_t i = 0; i < m_ColorAttachments.size(); i++)
+				{
+					tmp_buffers[i] = GL_COLOR_ATTACHMENT0 + i;
+				}
+				glDrawBuffers(m_ColorAttachments.size(), tmp_buffers);
+			}
 		}
 	}
 }
