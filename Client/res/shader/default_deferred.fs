@@ -24,7 +24,7 @@ void main()
 	vec4 tmp_lightClipPos = lightprojection * lightview * vec4(WorldPos, 1.0);
 	vec4 tmp_lightScreenPos = (tmp_lightClipPos.xyzw / tmp_lightClipPos.w + 1.0) / 2.0;
 	float tmp_depth = texture(shadowmap, tmp_lightScreenPos.xy).x + 0.01;
-	float tmp_shadow = step(tmp_lightScreenPos.z, tmp_depth);
+	float tmp_shadow = 1.0 - step(tmp_lightScreenPos.z, 1.0) * step(tmp_depth, tmp_lightScreenPos.z);
 
 	GColor = vec4(tmp_diffuse, tmp_shadow);
 	GNormal = vec4(tmp_normal, 1.0f);
