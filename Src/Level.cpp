@@ -64,20 +64,20 @@ namespace Catherine
 		m_SceneObjects.push_back(tmp_spotLight);
 
 		Transform * tmp_spotTransform = (Transform *)tmp_spotLight->AddComponent(ComponentKind::Transform);
-		tmp_spotTransform->SetPosition(glm::vec3(0.0f, 10.0f, 2.0f));
-		tmp_spotTransform->SetRotation(glm::vec3(0.0f, 0.0f, -1.0f));
+		tmp_spotTransform->SetPosition(glm::vec3(5.0f, 1.0f, -10.0f));
+		tmp_spotTransform->SetRotation(glm::vec3(90.0f, 0.0f, 0.0f));
 
 		Light * tmp_spotComponent = (Light *)tmp_spotLight->AddComponent(ComponentKind::Light);
 		tmp_spotComponent->SetLightType(LightType::Spot);
-		tmp_spotComponent->SetLightColor(glm::vec4(1.0f, 0.0f, 1.0f, 1.0f));
+		tmp_spotComponent->SetLightColor(glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
 		tmp_spotComponent->SetIntensity(10.0f);
 
 		
 		glm::vec3 tmp_pos[4] = {
-			glm::vec3(1.0f, 0.0f, 0.0f),
-			glm::vec3(0.0f, 1.0f, 0.0f),
-			glm::vec3(0.0f, 0.0f, 1.0f),
-			glm::vec3(1.0f, 1.0f, 0.0f)
+			glm::vec3(1.0f, 1.0f, -10.0f),
+			glm::vec3(-1.0f, 1.0f, -10.0f),
+			glm::vec3(0.0f, 1.0f, -9.0f),
+			glm::vec3(0.0f, 1.0f, -11.0f)
 		};
 
 		glm::vec4 tmp_color[4] = {
