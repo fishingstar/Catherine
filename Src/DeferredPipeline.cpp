@@ -41,6 +41,12 @@ namespace Catherine
 		m_ShadowSampler->SetWrapT(WrapMode::Clamp_To_Border);
 		m_ShadowSampler->SetBorderColor(glm::value_ptr(glm::vec4(1.0f)));
 
+		m_GBufferSampler = g_Device->CreateSampler();
+		m_GBufferSampler->SetMinFilter(Filter::Nearest);
+		m_GBufferSampler->SetMagFilter(Filter::Nearest);
+		m_GBufferSampler->SetWrapS(WrapMode::Clamp_To_Edge);
+		m_GBufferSampler->SetWrapT(WrapMode::Clamp_To_Edge);
+
 
 		struct ScreenVertex
 		{
@@ -244,9 +250,13 @@ namespace Catherine
 			ITexture * tmp_depth = m_RenderTarget_Geometry->GetDepthAttachment();
 
 			m_GeometryMaterial->SetTexture("GColor", tmp_diffuse);
+			m_GeometryMaterial->SetSampler("GColor", m_GBufferSampler);
 			m_GeometryMaterial->SetTexture("GNormal", tmp_normal);
+			m_GeometryMaterial->SetSampler("GNormal", m_GBufferSampler);
 			m_GeometryMaterial->SetTexture("GMask", tmp_mask);
+			m_GeometryMaterial->SetSampler("GMask", m_GBufferSampler);
 			m_GeometryMaterial->SetTexture("GDepth", tmp_depth);
+			m_GeometryMaterial->SetSampler("GDepth", m_GBufferSampler);
 
 			m_GeometryMaterial->SetCameraUniform(tmp_camera);
 			m_GeometryMaterial->SetLightUniform(tmp_light);

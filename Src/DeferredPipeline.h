@@ -48,6 +48,8 @@ namespace Catherine
 		IVertexArray * m_ScreenVertexArray = nullptr;
 
 		ISampler * m_ShadowSampler;
+		ISampler * m_GBufferSampler;
+
 		CameraContext m_ShadowCameraContext;
 	};
 }
