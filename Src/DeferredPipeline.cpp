@@ -360,7 +360,7 @@ namespace Catherine
 		glm::mat4x4 tmp_view = tmp_dirContext->GetDynamicViewMatrix(glm::vec3(0.0f, 0.0f, 0.0f));
 
 		// transform to light space
-		std::vector<glm::vec4> tmp_points = camera->GetFrustumPoints(0.0f, 20.0f);
+		std::vector<glm::vec4> tmp_points = camera->GetFrustumPoints(0.0f, 50.0f);
 		for (size_t i = 0; i < tmp_points.size(); ++i)
 		{
 			tmp_points[i] = tmp_view * tmp_points[i];
