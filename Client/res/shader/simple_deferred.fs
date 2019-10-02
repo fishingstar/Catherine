@@ -29,8 +29,6 @@ void main()
 	vec3 tmp_normalMap = texture(normalmap, Texcoord).xyz;
 	tmp_normalMap = normalize(tmp_normalMap * 2.0 - 1.0);
 	tmp_normalMap = normalize(mat3(tmp_tangent, tmp_binormal, tmp_normal) * tmp_normalMap);
-	// nanosuit's normal is wrong, turn off
-	tmp_normalMap = tmp_normal;
 	vec4 tmp_specularmap = texture(specularmap, Texcoord).xyzw;
 
 	// shadow
