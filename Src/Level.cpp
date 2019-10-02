@@ -40,6 +40,8 @@ namespace Catherine
 
 		Camera * tmp_cameraComponent = (Camera *)tmp_camera->AddComponent(ComponentKind::Camera);
 		tmp_cameraComponent->SetProjectionMode(ProjectionMode::Persperctive);
+		tmp_cameraComponent->SetNearPlane(0.1f);
+		tmp_cameraComponent->SetFarPlane(200.0f);
 		tmp_cameraComponent->SetClearColor(glm::vec3(0.2f, 0.3f, 0.4f));
 
 		
