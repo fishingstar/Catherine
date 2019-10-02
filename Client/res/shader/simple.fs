@@ -118,9 +118,10 @@ void main()
 	vec3 tmp_normalMap = texture(normalmap, Texcoord).xyz;
 	tmp_normalMap = normalize(tmp_normalMap * 2.0 - 1.0);
 	tmp_normalMap = normalize(mat3(tmp_tangent, tmp_binormal, tmp_normal) * tmp_normalMap);
-	// nanosuit's normal is wrong, turn off
-	tmp_normalMap = tmp_normal;
 	vec4 tmp_specularmap = texture(specularmap, Texcoord).xyzw;
+
+	// simple gamma correct
+	tmp_diffuse = pow(tmp_diffuse, vec3(2.2));
 
 	// caculate directional light color
 	vec3 tmp_dirColor = calculateDirLight(dirLight, tmp_viewDir, tmp_normalMap, tmp_diffuse, tmp_specularmap);
@@ -142,6 +143,7 @@ void main()
 	float tmp_shadow = 1.0 - step(tmp_lightScreenPos.z, 1.0) * step(tmp_depth, tmp_lightScreenPos.z);
 
 	vec3 tmp_result = ambient * tmp_diffuse + tmp_dirColor * tmp_shadow * 2.0f;
+	tmp_result = pow(tmp_result, vec3(1.0 / 2.2));
 
 	FragColor = vec4(tmp_result, 1.0f);
 }

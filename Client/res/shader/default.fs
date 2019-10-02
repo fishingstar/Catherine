@@ -49,7 +49,8 @@ void main()
 	float tmp_depth = texture(shadowmap, tmp_lightScreenPos.xy).x + 0.01;
 	float tmp_shadow = 1.0 - step(tmp_lightScreenPos.z, 1.0) * step(tmp_depth, tmp_lightScreenPos.z);
 
-	vec3 tmp_result = ambient * tmp_diffuse + tmp_dirColor * tmp_shadow;
+	vec3 tmp_result = ambient * tmp_diffuse + tmp_dirColor * tmp_shadow * 2.0;
+	tmp_result.rgb = pow(tmp_result.rgb, vec3(1.0 / 2.2));
 
 	FragColor = vec4(tmp_result, 1.0f);
 }
