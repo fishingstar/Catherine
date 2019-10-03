@@ -20,7 +20,7 @@ namespace Catherine
 	const char * s_bodyMaterial = "./res/model/nanosuit/material/nanosuit_body.mtl";
 
 	const char * s_planeModel = "./res/model/buildin/plane.fbx";
-	const char * s_planeMaterial = "./res/material/rust_iron.mtl";
+	const char * s_planeMaterial = "./res/material/bamboo_wood.mtl";
 
 	const char * s_sphereModel = "./res/model/buildin/PreviewMesh.fbx";
 	const char * s_sphereMaterial = "./res/material/rust_iron.mtl";
@@ -144,7 +144,7 @@ namespace Catherine
 
 		Transform * tmp_planeTransform = (Transform *)tmp_plane->AddComponent(ComponentKind::Transform);
 		tmp_planeTransform->SetRotation(glm::vec3(90.0f, 0.0f, 0.0f));
-		tmp_planeTransform->SetScale(glm::vec3(40.0f, 40.0f, 1.0f));
+		tmp_planeTransform->SetScale(glm::vec3(20.0f, 20.0f, 1.0f));
 		MeshFilter * tmp_planeMeshFilter = (MeshFilter *)tmp_plane->AddComponent(ComponentKind::MeshFilter);
 		tmp_planeMeshFilter->LoadFromFile(s_planeModel);
 		MeshRenderer * tmp_planeRenderer = (MeshRenderer *)tmp_plane->AddComponent(ComponentKind::MeshRenderer);
