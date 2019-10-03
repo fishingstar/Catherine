@@ -54,12 +54,19 @@ uniform sampler2D normalmap;
 uniform sampler2D metallicmap;
 uniform sampler2D roughnessmap;
 uniform sampler2D shadowmap;
+uniform sampler2D brdfLUT;
+uniform samplerCube prefilterMap;
 
 const float PI = 3.14159265359;
 
 vec3 fresnelSchlick(float cosTheta, vec3 F0)
 {
     return F0 + (1.0 - F0) * pow(1.0 - cosTheta, 5.0);
+}
+
+vec3 fresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness)
+{
+    return F0 + (max(vec3(1.0 - roughness), F0) - F0) * pow(1.0 - cosTheta, 5.0);
 }
 
 float DistributionGGX(vec3 N, vec3 H, float roughness)
@@ -161,6 +168,32 @@ vec3 PBRLighting(vec3 albedo, vec3 V, vec3 N, float roughness, float metallic, f
 	return tmp_color;
 }
 
+vec3 IBLLighting(vec3 albedo, vec3 V, vec3 N, float roughness, float metallic)
+{
+	vec3 F0 = vec3(0.04);
+	F0 = mix(F0, albedo, metallic);
+	vec3 F = fresnelSchlickRoughness(max(dot(N, V), 0.0), F0, roughness);
+
+	vec3 ks = F;
+	vec3 kd = 1.0 - ks;
+	kd *= 1.0 - metallic;
+
+	vec3 irradiance = texture(prefilterMap, N).rgb;
+	vec3 diffuse = irradiance * albedo;
+
+	// const float MAX_REFLECTION_LOD = 4.0;
+	// vec3 prefilteredColor = textureLod(prefilterMap, R,  roughness * MAX_REFLECTION_LOD).rgb;
+	vec3 R = reflect(-V, N);
+	vec3 prefilteredColor = texture(prefilterMap, R).rgb;   
+	vec2 envBRDF = texture(brdfLUT, vec2(max(dot(N, V), 0.0), roughness)).rg;
+	vec3 specular = prefilteredColor * (F * envBRDF.x + envBRDF.y);
+	
+	float ao = 1.0;
+	vec3 ambient = (kd * diffuse + specular) * ao;
+
+	return ambient;
+}
+
 void main()
 {
 	vec3 tmp_normal = normalize(WorldNormal);
@@ -182,10 +215,10 @@ void main()
 	float tmp_shadow = 1.0 - step(tmp_lightScreenPos.z, 1.0) * step(tmp_depth, tmp_lightScreenPos.z);
 
 	vec3 tmp_pbrColor = PBRLighting(tmp_albedo, tmp_viewDir, tmp_normaldir, tmp_roughness, tmp_metallic, tmp_shadow);
-	vec3 tmp_ambient = ambient * tmp_albedo * 1.0;
-	vec3 tmp_result = tmp_ambient + tmp_pbrColor;
+	vec3 tmp_iblColor = IBLLighting(tmp_albedo, tmp_viewDir, tmp_normaldir, tmp_roughness, tmp_metallic);
+	vec3 tmp_result = tmp_pbrColor + tmp_iblColor;
 
-	tmp_result = tmp_result / (tmp_result + vec3(1.0));
+	//tmp_result = tmp_result / (tmp_result + vec3(1.0));
 	tmp_result = pow(tmp_result, vec3(1.0 / 2.2));
 
 	FragColor = vec4(tmp_result, 1.0f);

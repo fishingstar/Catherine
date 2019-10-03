@@ -17,12 +17,24 @@
 		<Item Key = "normalmap" Value = "./res/texture/bamboo-wood-semigloss-normal.png" />
 		<Item Key = "metallicmap" Value = "./res/texture/bamboo-wood-semigloss-metal.png" />
 		<Item Key = "roughnessmap" Value = "./res/texture/bamboo-wood-semigloss-roughness.png" />
+		<Item Key = "brdfLUT" Value = "./res/texture/ibl_brdf_lut.png" />
 	</Texture>
+	<CubeTexture>
+		<Item Key ="prefilterMap"
+			Right = "./res/skybox/day/right.jpg"
+			Left = "./res/skybox/day/left.jpg"
+			Top = "./res/skybox/day/top.jpg"
+			Bottom = "./res/skybox/day/bottom.jpg"
+			Front = "./res/skybox/day/front.jpg"
+			Back = "./res/skybox/day/back.jpg"
+		/>
+	</CubeTexture>
 	<Sampler>
 		<Item Key = "albedo" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
 		<Item Key = "normalmap" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
 		<Item Key = "metallicmap" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
 		<Item Key = "roughnessmap" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "brdfLUT" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
 	</Sampler>
 	<RenderState>
 		<CullFaceMode Enabled = "true" Value = "0" />
