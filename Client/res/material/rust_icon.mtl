@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Catherine>
+	<ShadowShader>
+		<Vertex>./res/shader/standard.vs</Vertex>
+		<Fragment>./res/shader/standard.fs</Fragment>
+	</ShadowShader>
+	<ForwardShader>
+		<Vertex>./res/shader/standard.vs</Vertex>
+		<Fragment>./res/shader/standard.fs</Fragment>
+	</ForwardShader>
+	<DeferredShader>
+		<Vertex>./res/shader/default_deferred.vs</Vertex>
+		<Fragment>./res/shader/default_deferred.fs</Fragment>
+	</DeferredShader>
+	<Texture>
+		<Item Key = "albedo" Value = "./res/texture/rustediron2_basecolor.png" />
+		<Item Key = "normalmap" Value = "./res/texture/rustediron2_normal.png" />
+		<Item Key = "metallicmap" Value = "./res/texture/rustediron2_metallic.png" />
+		<Item Key = "roughnessmap" Value = "./res/texture/rustediron2_roughness.png" />
+	</Texture>
+	<Sampler>
+		<Item Key = "albedo" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "normalmap" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "metallicmap" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "roughnessmap" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
+	</Sampler>
+	<RenderState>
+		<CullFaceMode Enabled = "true" Value = "0" />
+		<DepthTestMode Enabled = "true" Value = "0" />
+		<BlendMode Enabled = "false" Src = "6" Dst = "7" SrcAlpha = "6" DstAlpha = "7" BlendEquation = "0" />
+	</RenderState>
+	<RenderPriority>2000</RenderPriority>
+</Catherine>
