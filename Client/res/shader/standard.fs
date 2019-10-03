@@ -55,59 +55,6 @@ uniform sampler2D metallicmap;
 uniform sampler2D roughnessmap;
 uniform sampler2D shadowmap;
 
-// vec3 calculateDirLight(DirectionalLight param_Light, vec3 param_ViewDir, vec3 param_Normal, vec3 param_Diffuse, vec4 param_Specular)
-// {
-// 	vec3 tmp_lightDir = normalize(-param_Light.lightDir.xyz);
-// 	vec3 tmp_half = normalize(tmp_lightDir + param_ViewDir);
-
-// 	float tmp_diffuse = max(0.0, dot(param_Normal, tmp_lightDir));
-// 	float tmp_specular = pow(max(0.0, dot(tmp_half, param_Normal)), 32);
-
-// 	vec3 tmp_color = (tmp_diffuse * param_Diffuse.rgb + tmp_specular * param_Specular.rgb * param_Specular.w) * param_Light.lightColor.rgb;
-
-// 	return tmp_color;
-// }
-
-// vec3 calculatePointLight(PointLight param_Light, vec3 param_ViewDir, vec3 param_Normal, vec3 param_Pos, vec3 param_Diffuse, vec4 param_Specular)
-// {
-// 	vec3 tmp_offset = param_Light.lightPos - param_Pos;
-// 	vec3 tmp_lightDir = normalize(tmp_offset);
-// 	vec3 tmp_half = normalize(tmp_lightDir + param_ViewDir);
-// 	float tmp_distance = length(tmp_offset);
-
-// 	float tmp_diffuse = max(0.0, dot(param_Normal, tmp_lightDir));
-// 	float tmp_specular = pow(max(0.0, dot(tmp_half, param_Normal)), 32);
-
-// 	// atten = 1 / (a*x*x + b*x + c)
-// 	float tmp_attenuation = 1.0 / (param_Light.constant + param_Light.linear * tmp_distance + param_Light.quadratic * tmp_distance * tmp_distance);
-
-// 	vec3 tmp_color = (tmp_diffuse * param_Diffuse + tmp_specular * param_Specular.rgb * param_Specular.w) * tmp_attenuation * param_Light.lightColor.rgb;
-
-// 	return tmp_color;
-// }
-
-vec3 calculateSpotLight(SpotLight param_Light, vec3 param_ViewDir, vec3 param_Normal, vec3 param_Pos, vec3 param_Diffuse, vec4 param_Specular)
-{
-	vec3 tmp_offset = param_Light.lightPos - param_Pos;
-	vec3 tmp_lightDir = normalize(tmp_offset);
-	vec3 tmp_half = normalize(tmp_lightDir + param_ViewDir);
-	float tmp_distance = length(tmp_offset);
-
-	float tmp_diffuse = max(0.0, dot(param_Normal, tmp_lightDir));
-	float tmp_specular = pow(max(0.0, dot(tmp_half, param_Normal)), 32);
-
-	// atten = 1 / (a*x*x + b*x + c)
-	float tmp_attenuation = 1.0 / (param_Light.constant + param_Light.linear * tmp_distance + param_Light.quadratic * tmp_distance * tmp_distance);
-
-	float tmp_cos = dot(tmp_lightDir, normalize(-param_Light.lightDir)); 
-    float tmp_epsilon = param_Light.innerCutoff - param_Light.outerCutoff;
-    float tmp_intensity = clamp((tmp_cos - param_Light.outerCutoff) / tmp_epsilon, 0.0, 1.0);
-
-    vec3 tmp_color = (tmp_diffuse * param_Diffuse + tmp_specular * param_Specular.rgb * param_Specular.w) * tmp_intensity * tmp_attenuation * param_Light.lightColor.rgb;
-
-	return tmp_color;
-}
-
 const float PI = 3.14159265359;
 
 vec3 fresnelSchlick(float cosTheta, vec3 F0)
@@ -237,6 +184,8 @@ void main()
 	vec3 tmp_pbrColor = PBRLighting(tmp_albedo, tmp_viewDir, tmp_normaldir, tmp_roughness, tmp_metallic, tmp_shadow);
 	vec3 tmp_ambient = ambient * tmp_albedo * 1.0;
 	vec3 tmp_result = tmp_ambient + tmp_pbrColor;
+
+	tmp_result = tmp_result / (tmp_result + vec3(1.0));
 	tmp_result = pow(tmp_result, vec3(1.0 / 2.2));
 
 	FragColor = vec4(tmp_result, 1.0f);
