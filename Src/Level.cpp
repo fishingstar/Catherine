@@ -20,9 +20,12 @@ namespace Catherine
 	const char * s_bodyMaterial = "./res/model/nanosuit/material/nanosuit_body.mtl";
 
 	const char * s_planeModel = "./res/model/buildin/plane.fbx";
-	const char * s_planeMaterial = "./res/material/rust_icon.mtl";
+	const char * s_planeMaterial = "./res/material/rust_iron.mtl";
 
-	const char * s_skyboxModel = "./res/model/buildin/box.fbx";
+	const char * s_sphereModel = "./res/model/buildin/PreviewMesh.fbx";
+	const char * s_sphereMaterial = "./res/material/rust_iron.mtl";
+
+	const char * s_skyboxModel = "./res/model/buildin/cube.fbx";
 	const char * s_skyboxMaterial = "./res/material/skybox.mtl";
 
 	bool Level::Initialize()
@@ -141,7 +144,7 @@ namespace Catherine
 
 		Transform * tmp_planeTransform = (Transform *)tmp_plane->AddComponent(ComponentKind::Transform);
 		tmp_planeTransform->SetRotation(glm::vec3(90.0f, 0.0f, 0.0f));
-		tmp_planeTransform->SetScale(glm::vec3(40.0f, 1.0f, 40.0f));
+		tmp_planeTransform->SetScale(glm::vec3(40.0f, 40.0f, 1.0f));
 		MeshFilter * tmp_planeMeshFilter = (MeshFilter *)tmp_plane->AddComponent(ComponentKind::MeshFilter);
 		tmp_planeMeshFilter->LoadFromFile(s_planeModel);
 		MeshRenderer * tmp_planeRenderer = (MeshRenderer *)tmp_plane->AddComponent(ComponentKind::MeshRenderer);
@@ -150,6 +153,28 @@ namespace Catherine
 		IMaterial * tmp_planeMtl = new Material();
 		tmp_planeMtl->Initialize(s_planeMaterial);
 		tmp_planeRenderer->AddMaterial(tmp_planeMtl);
+
+
+		// sphere
+		SceneObject * tmp_sphere = new SceneObject(this);
+		tmp_sphere->Initialize();
+		m_SceneObjects.push_back(tmp_sphere);
+
+		Transform * tmp_sphereTransform = (Transform *)tmp_sphere->AddComponent(ComponentKind::Transform);
+		tmp_sphereTransform->SetPosition(glm::vec3(-5.0f, 0.0f, 0.0f));
+		tmp_sphereTransform->SetRotation(glm::vec3(90.0f, 90.0f, 0.0f));
+		tmp_sphereTransform->SetScale(glm::vec3(0.02f, 0.02f, 0.02f));
+		MeshFilter * tmp_sphereMeshFilter = (MeshFilter *)tmp_sphere->AddComponent(ComponentKind::MeshFilter);
+		tmp_sphereMeshFilter->LoadFromFile(s_sphereModel);
+		MeshRenderer * tmp_sphereRenderer = (MeshRenderer *)tmp_sphere->AddComponent(ComponentKind::MeshRenderer);
+		tmp_sphereRenderer->SetCastShadow(true);
+		tmp_sphereRenderer->SetReceiveShadow(true);
+		IMaterial * tmp_sphereMtl = new Material();
+		tmp_sphereMtl->Initialize(s_sphereMaterial);
+		tmp_sphereRenderer->AddMaterial(tmp_sphereMtl);
+		tmp_sphereRenderer->AddMaterial(tmp_sphereMtl);
+		tmp_sphereRenderer->AddMaterial(tmp_sphereMtl);
+		tmp_sphereRenderer->AddMaterial(tmp_sphereMtl);
 
 
 		// skybox
