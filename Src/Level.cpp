@@ -172,9 +172,6 @@ namespace Catherine
 		IMaterial * tmp_sphereMtl = new Material();
 		tmp_sphereMtl->Initialize(s_sphereMaterial);
 		tmp_sphereRenderer->AddMaterial(tmp_sphereMtl);
-		tmp_sphereRenderer->AddMaterial(tmp_sphereMtl);
-		tmp_sphereRenderer->AddMaterial(tmp_sphereMtl);
-		tmp_sphereRenderer->AddMaterial(tmp_sphereMtl);
 
 
 		// skybox

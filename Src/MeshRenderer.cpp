@@ -48,11 +48,16 @@ namespace Catherine
 			if (tmp_meshFilter != nullptr)
 			{
 				const std::vector<IMesh *> & tmp_meshes = tmp_meshFilter->GetMeshes();
+				if (m_Materials.size() == 0)
+				{
+					LogError("MeshRenderer has no materials...");
+					return;
+				}
 
 				for (size_t i = 0; i < tmp_meshes.size(); i++)
 				{
 					RenderContext * tmp_renderContext = new RenderContext();
-					tmp_renderContext->SetMaterial(m_Materials[i]);
+					tmp_renderContext->SetMaterial(m_Materials[i < m_Materials.size() ? i : m_Materials.size() - 1]);
 					tmp_renderContext->SetVertexArray(tmp_meshes[i]->GetVertexArray());
 					tmp_renderContext->SetCastShadow(m_CastShadow);
 					tmp_renderContext->SetReceiveShadow(m_ReceiveShadow);
