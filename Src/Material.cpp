@@ -298,7 +298,7 @@ namespace Catherine
 
 	void Material::SetLightUniform(const LightContext * context)
 	{
-		SetFloat("ambient", 0.5f);
+		SetFloat("ambient", 0.05f);
 
 		const LightContext::DirectionalContext * tmp_dirContext = context->GetDirectionContext();
 		SetVec3("dirLight.lightDir", tmp_dirContext->m_Direction);
