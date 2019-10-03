@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Catherine>
+	<ShadowShader>
+		<Vertex>./res/shader/standard.vs</Vertex>
+		<Fragment>./res/shader/standard.fs</Fragment>
+	</ShadowShader>
+	<ForwardShader>
+		<Vertex>./res/shader/standard.vs</Vertex>
+		<Fragment>./res/shader/standard.fs</Fragment>
+	</ForwardShader>
+	<DeferredShader>
+		<Vertex>./res/shader/default_deferred.vs</Vertex>
+		<Fragment>./res/shader/default_deferred.fs</Fragment>
+	</DeferredShader>
+	<Texture>
+		<Item Key = "albedo" Value = "./res/model/Cerberus_by_Andrew_Maximov/Textures/Cerberus_A.tga" />
+		<Item Key = "normalmap" Value = "./res/model/Cerberus_by_Andrew_Maximov/Textures/Cerberus_N.tga" />
+		<Item Key = "metallicmap" Value = "./res/model/Cerberus_by_Andrew_Maximov/Textures/Cerberus_M.tga" />
+		<Item Key = "roughnessmap" Value = "./res/model/Cerberus_by_Andrew_Maximov/Textures/Cerberus_R.tga" />
+		<Item Key = "brdfLUT" Value = "./res/texture/ibl_brdf_lut.png" />
+	</Texture>
+	<CubeTexture>
+		<Item Key ="prefilterMap"
+			Right = "./res/skybox/day/right.jpg"
+			Left = "./res/skybox/day/left.jpg"
+			Top = "./res/skybox/day/top.jpg"
+			Bottom = "./res/skybox/day/bottom.jpg"
+			Front = "./res/skybox/day/front.jpg"
+			Back = "./res/skybox/day/back.jpg"
+		/>
+	</CubeTexture>
+	<Sampler>
+		<Item Key = "albedo" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "normalmap" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "metallicmap" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "roughnessmap" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "brdfLUT" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
+	</Sampler>
+	<RenderState>
+		<CullFaceMode Enabled = "true" Value = "0" />
+		<DepthTestMode Enabled = "true" Value = "0" />
+		<BlendMode Enabled = "false" Src = "6" Dst = "7" SrcAlpha = "6" DstAlpha = "7" BlendEquation = "0" />
+	</RenderState>
+	<RenderPriority>2000</RenderPriority>
+</Catherine>
