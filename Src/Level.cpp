@@ -22,8 +22,11 @@ namespace Catherine
 	const char * s_planeModel = "./res/model/buildin/plane.fbx";
 	const char * s_planeMaterial = "./res/material/bamboo_wood.mtl";
 
-	const char * s_sphereModel = "./res/model/buildin/PreviewMesh.fbx";
-	const char * s_sphereMaterial = "./res/material/rust_iron.mtl";
+	const char * s_demoModel_rust = "./res/model/buildin/PreviewMesh.fbx";
+	const char * s_demoMaterial_rust = "./res/material/rust_iron.mtl";
+
+	const char* s_demoModel_gold = "./res/model/buildin/PreviewMesh.fbx";
+	const char* s_demoMaterial_gold = "./res/material/gold.mtl";
 
 	const char * s_skyboxModel = "./res/model/buildin/cube.fbx";
 	const char * s_skyboxMaterial = "./res/material/skybox.mtl";
@@ -144,7 +147,7 @@ namespace Catherine
 
 		Transform * tmp_planeTransform = (Transform *)tmp_plane->AddComponent(ComponentKind::Transform);
 		tmp_planeTransform->SetRotation(glm::vec3(90.0f, 0.0f, 0.0f));
-		tmp_planeTransform->SetScale(glm::vec3(20.0f, 20.0f, 1.0f));
+		tmp_planeTransform->SetScale(glm::vec3(40.0f, 40.0f, 1.0f));
 		MeshFilter * tmp_planeMeshFilter = (MeshFilter *)tmp_plane->AddComponent(ComponentKind::MeshFilter);
 		tmp_planeMeshFilter->LoadFromFile(s_planeModel);
 		MeshRenderer * tmp_planeRenderer = (MeshRenderer *)tmp_plane->AddComponent(ComponentKind::MeshRenderer);
@@ -155,23 +158,42 @@ namespace Catherine
 		tmp_planeRenderer->AddMaterial(tmp_planeMtl);
 
 
-		// sphere
-		SceneObject * tmp_sphere = new SceneObject(this);
-		tmp_sphere->Initialize();
-		m_SceneObjects.push_back(tmp_sphere);
+		// rust
+		SceneObject * tmp_rust = new SceneObject(this);
+		tmp_rust->Initialize();
+		m_SceneObjects.push_back(tmp_rust);
 
-		Transform * tmp_sphereTransform = (Transform *)tmp_sphere->AddComponent(ComponentKind::Transform);
-		tmp_sphereTransform->SetPosition(glm::vec3(-5.0f, 0.0f, 0.0f));
-		tmp_sphereTransform->SetRotation(glm::vec3(90.0f, 90.0f, 0.0f));
-		tmp_sphereTransform->SetScale(glm::vec3(0.02f, 0.02f, 0.02f));
-		MeshFilter * tmp_sphereMeshFilter = (MeshFilter *)tmp_sphere->AddComponent(ComponentKind::MeshFilter);
-		tmp_sphereMeshFilter->LoadFromFile(s_sphereModel);
-		MeshRenderer * tmp_sphereRenderer = (MeshRenderer *)tmp_sphere->AddComponent(ComponentKind::MeshRenderer);
-		tmp_sphereRenderer->SetCastShadow(true);
-		tmp_sphereRenderer->SetReceiveShadow(true);
-		IMaterial * tmp_sphereMtl = new Material();
-		tmp_sphereMtl->Initialize(s_sphereMaterial);
-		tmp_sphereRenderer->AddMaterial(tmp_sphereMtl);
+		Transform * tmp_rustTransform = (Transform *)tmp_rust->AddComponent(ComponentKind::Transform);
+		tmp_rustTransform->SetPosition(glm::vec3(-5.0f, 0.0f, 0.0f));
+		tmp_rustTransform->SetRotation(glm::vec3(90.0f, 90.0f, 0.0f));
+		tmp_rustTransform->SetScale(glm::vec3(0.02f, 0.02f, 0.02f));
+		MeshFilter * tmp_rustMeshFilter = (MeshFilter *)tmp_rust->AddComponent(ComponentKind::MeshFilter);
+		tmp_rustMeshFilter->LoadFromFile(s_demoModel_rust);
+		MeshRenderer * tmp_rustRenderer = (MeshRenderer *)tmp_rust->AddComponent(ComponentKind::MeshRenderer);
+		tmp_rustRenderer->SetCastShadow(true);
+		tmp_rustRenderer->SetReceiveShadow(true);
+		IMaterial * tmp_rustMtl = new Material();
+		tmp_rustMtl->Initialize(s_demoMaterial_rust);
+		tmp_rustRenderer->AddMaterial(tmp_rustMtl);
+
+
+		// gold
+		SceneObject* tmp_gold = new SceneObject(this);
+		tmp_gold->Initialize();
+		m_SceneObjects.push_back(tmp_gold);
+
+		Transform* tmp_goldTransform = (Transform*)tmp_gold->AddComponent(ComponentKind::Transform);
+		tmp_goldTransform->SetPosition(glm::vec3(-10.0f, 0.0f, 0.0f));
+		tmp_goldTransform->SetRotation(glm::vec3(90.0f, 90.0f, 0.0f));
+		tmp_goldTransform->SetScale(glm::vec3(0.02f, 0.02f, 0.02f));
+		MeshFilter* tmp_goldMeshFilter = (MeshFilter*)tmp_gold->AddComponent(ComponentKind::MeshFilter);
+		tmp_goldMeshFilter->LoadFromFile(s_demoModel_gold);
+		MeshRenderer* tmp_goldRenderer = (MeshRenderer*)tmp_gold->AddComponent(ComponentKind::MeshRenderer);
+		tmp_goldRenderer->SetCastShadow(true);
+		tmp_goldRenderer->SetReceiveShadow(true);
+		IMaterial* tmp_goldMtl = new Material();
+		tmp_goldMtl->Initialize(s_demoMaterial_gold);
+		tmp_goldRenderer->AddMaterial(tmp_goldMtl);
 
 
 		// skybox
