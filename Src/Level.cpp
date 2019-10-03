@@ -28,6 +28,9 @@ namespace Catherine
 	const char* s_demoModel_gold = "./res/model/buildin/PreviewMesh.fbx";
 	const char* s_demoMaterial_gold = "./res/material/gold.mtl";
 
+	const char* s_demoModel_gun = "./res/model/Cerberus_by_Andrew_Maximov/Cerberus_LP.FBX";
+	const char* s_demoMaterial_gun = "./res/model/Cerberus_by_Andrew_Maximov/Materials/Cerberus.mtl";
+
 	const char * s_skyboxModel = "./res/model/buildin/cube.fbx";
 	const char * s_skyboxMaterial = "./res/material/skybox.mtl";
 
@@ -41,7 +44,7 @@ namespace Catherine
 		m_SceneObjects.push_back(tmp_camera);
 
 		Transform * tmp_cameraTransform = (Transform *)tmp_camera->AddComponent(ComponentKind::Transform);
-		tmp_cameraTransform->SetPosition(glm::vec3(6.0f, 12.0f, 12.0f));
+		tmp_cameraTransform->SetPosition(glm::vec3(6.0f, 12.0f, 15.0f));
 		tmp_cameraTransform->SetRotation(glm::vec3(15.0f, -15.0f, 0.0f));
 
 		Camera * tmp_cameraComponent = (Camera *)tmp_camera->AddComponent(ComponentKind::Camera);
@@ -115,6 +118,7 @@ namespace Catherine
 		m_SceneObjects.push_back(tmp_warrior);
 
 		Transform * tmp_meshTransform = (Transform *)tmp_warrior->AddComponent(ComponentKind::Transform);
+		tmp_meshTransform->SetPosition(glm::vec3(0.0f, 0.0f, -10.0f));
 		MeshFilter * tmp_meshFilter = (MeshFilter *)tmp_warrior->AddComponent(ComponentKind::MeshFilter);
 		tmp_meshFilter->LoadFromFile(s_testModel);
 		MeshRenderer * tmp_meshRenderer = (MeshRenderer *)tmp_warrior->AddComponent(ComponentKind::MeshRenderer);
@@ -164,7 +168,7 @@ namespace Catherine
 		m_SceneObjects.push_back(tmp_rust);
 
 		Transform * tmp_rustTransform = (Transform *)tmp_rust->AddComponent(ComponentKind::Transform);
-		tmp_rustTransform->SetPosition(glm::vec3(-5.0f, 0.0f, 0.0f));
+		tmp_rustTransform->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 		tmp_rustTransform->SetRotation(glm::vec3(90.0f, 90.0f, 0.0f));
 		tmp_rustTransform->SetScale(glm::vec3(0.02f, 0.02f, 0.02f));
 		MeshFilter * tmp_rustMeshFilter = (MeshFilter *)tmp_rust->AddComponent(ComponentKind::MeshFilter);
@@ -178,22 +182,41 @@ namespace Catherine
 
 
 		// gold
-		SceneObject* tmp_gold = new SceneObject(this);
+		SceneObject * tmp_gold = new SceneObject(this);
 		tmp_gold->Initialize();
 		m_SceneObjects.push_back(tmp_gold);
 
-		Transform* tmp_goldTransform = (Transform*)tmp_gold->AddComponent(ComponentKind::Transform);
-		tmp_goldTransform->SetPosition(glm::vec3(-10.0f, 0.0f, 0.0f));
+		Transform * tmp_goldTransform = (Transform *)tmp_gold->AddComponent(ComponentKind::Transform);
+		tmp_goldTransform->SetPosition(glm::vec3(-6.0f, 0.0f, 0.0f));
 		tmp_goldTransform->SetRotation(glm::vec3(90.0f, 90.0f, 0.0f));
 		tmp_goldTransform->SetScale(glm::vec3(0.02f, 0.02f, 0.02f));
-		MeshFilter* tmp_goldMeshFilter = (MeshFilter*)tmp_gold->AddComponent(ComponentKind::MeshFilter);
+		MeshFilter * tmp_goldMeshFilter = (MeshFilter *)tmp_gold->AddComponent(ComponentKind::MeshFilter);
 		tmp_goldMeshFilter->LoadFromFile(s_demoModel_gold);
-		MeshRenderer* tmp_goldRenderer = (MeshRenderer*)tmp_gold->AddComponent(ComponentKind::MeshRenderer);
+		MeshRenderer * tmp_goldRenderer = (MeshRenderer *)tmp_gold->AddComponent(ComponentKind::MeshRenderer);
 		tmp_goldRenderer->SetCastShadow(true);
 		tmp_goldRenderer->SetReceiveShadow(true);
-		IMaterial* tmp_goldMtl = new Material();
+		IMaterial * tmp_goldMtl = new Material();
 		tmp_goldMtl->Initialize(s_demoMaterial_gold);
 		tmp_goldRenderer->AddMaterial(tmp_goldMtl);
+
+
+		// gun
+		SceneObject * tmp_gun = new SceneObject(this);
+		tmp_gun->Initialize();
+		m_SceneObjects.push_back(tmp_gun);
+
+		Transform * tmp_gunTransform = (Transform *)tmp_gun->AddComponent(ComponentKind::Transform);
+		tmp_gunTransform->SetPosition(glm::vec3(10.0f, 2.0f, 0.0f));
+		tmp_gunTransform->SetRotation(glm::vec3(90.0f, 90.0f, 0.0f));
+		tmp_gunTransform->SetScale(glm::vec3(0.04f, 0.04f, 0.04f));
+		MeshFilter * tmp_gunMeshFilter = (MeshFilter *)tmp_gun->AddComponent(ComponentKind::MeshFilter);
+		tmp_gunMeshFilter->LoadFromFile(s_demoModel_gun);
+		MeshRenderer * tmp_gunRenderer = (MeshRenderer *)tmp_gun->AddComponent(ComponentKind::MeshRenderer);
+		tmp_gunRenderer->SetCastShadow(true);
+		tmp_gunRenderer->SetReceiveShadow(true);
+		IMaterial * tmp_gunMtl = new Material();
+		tmp_gunMtl->Initialize(s_demoMaterial_gun);
+		tmp_gunRenderer->AddMaterial(tmp_gunMtl);
 
 
 		// skybox
