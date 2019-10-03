@@ -30,8 +30,6 @@ namespace Catherine
 		const glm::vec3 & GetScale() const;
 		void SetScale(const glm::vec3 & scale);
 
-		const glm::mat4 & GetWorldMatrix();
-
 	private:
 		Transform * m_Parent = nullptr;
 		std::vector<Transform *> m_Children;

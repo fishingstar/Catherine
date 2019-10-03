@@ -79,18 +79,4 @@ namespace Catherine
 			m_WorldMatrixDirty = true;
 		}
 	}
-
-	const glm::mat4 & Transform::GetWorldMatrix()
-	{
-		if (m_WorldMatrixDirty)
-		{
-			m_WorldMatrix = glm::mat4(1.0f);
-			m_WorldMatrix = glm::scale(m_WorldMatrix, m_Scale);
-			m_WorldMatrix = glm::rotate(m_WorldMatrix, glm::radians(m_Rotation.x), glm::vec3(-1.0f, 0.0f, 0.0f));
-			m_WorldMatrix = glm::rotate(m_WorldMatrix, glm::radians(m_Rotation.y), glm::vec3(0.0f, -1.0f, 0.0f));
-			m_WorldMatrix = glm::rotate(m_WorldMatrix, glm::radians(m_Rotation.z), glm::vec3(0.0f, 0.0f, -1.0f));
-			m_WorldMatrix = glm::translate(m_WorldMatrix, m_Position);
-		}
-		return m_WorldMatrix;
-	}
 }
