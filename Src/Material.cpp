@@ -101,8 +101,8 @@ namespace Catherine
 				tmp_cubeTextures.push_back(tmp_cubeItem->Attribute("Left"));
 				tmp_cubeTextures.push_back(tmp_cubeItem->Attribute("Top"));
 				tmp_cubeTextures.push_back(tmp_cubeItem->Attribute("Bottom"));
-				tmp_cubeTextures.push_back(tmp_cubeItem->Attribute("Front"));
 				tmp_cubeTextures.push_back(tmp_cubeItem->Attribute("Back"));
+				tmp_cubeTextures.push_back(tmp_cubeItem->Attribute("Front"));
 
 				ITexture * tmp_resource = TextureManager::Instance()->GetCubeTexture(tmp_cubeTextures);
 				if (tmp_resource)
@@ -298,7 +298,7 @@ namespace Catherine
 
 	void Material::SetLightUniform(const LightContext * context)
 	{
-		SetFloat("ambient", 0.05f);
+		SetFloat("ambient", 0.1f);
 
 		const LightContext::DirectionalContext * tmp_dirContext = context->GetDirectionContext();
 		SetVec3("dirLight.lightDir", tmp_dirContext->m_Direction);
