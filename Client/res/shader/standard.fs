@@ -49,9 +49,10 @@ uniform vec3 viewPos;
 uniform mat4 lightview;
 uniform mat4 lightprojection;
 
-uniform sampler2D diffuse;
+uniform sampler2D albedo;
 uniform sampler2D normalmap;
-uniform sampler2D mask;
+uniform sampler2D metallicmap;
+uniform sampler2D roughnessmap;
 uniform sampler2D shadowmap;
 
 // vec3 calculateDirLight(DirectionalLight param_Light, vec3 param_ViewDir, vec3 param_Normal, vec3 param_Diffuse, vec4 param_Specular)
@@ -220,12 +221,12 @@ void main()
 	vec3 tmp_binormal = normalize(WorldBinormal);
 	vec3 tmp_viewDir = normalize(viewPos.xyz - WorldPos);
 
-	vec3 tmp_albedo = pow(texture(diffuse, Texcoord).xyz, vec3(2.2));
-	tmp_albedo = vec3(0.8);
-	vec3 tmp_normalMap = texture(normalmap, Texcoord).xyz;
-	tmp_normalMap = normalize(tmp_normalMap * 2.0 - 1.0);
-	tmp_normalMap = normalize(mat3(tmp_tangent, tmp_binormal, tmp_normal) * tmp_normalMap);
-	vec4 tmp_mask = texture(mask, Texcoord).xyzw;
+	vec3 tmp_albedo = pow(texture(albedo, Texcoord).xyz, vec3(2.2));
+	vec3 tmp_normaldir = texture(normalmap, Texcoord).xyz;
+	tmp_normaldir = normalize(tmp_normaldir * 2.0 - 1.0);
+	tmp_normaldir = normalize(mat3(tmp_tangent, tmp_binormal, tmp_normal) * tmp_normaldir);
+	float tmp_metallic = texture(metallicmap, Texcoord).r;
+	float tmp_roughness = texture(roughnessmap, Texcoord).r;
 
 	// shadow
 	vec4 tmp_lightClipPos = lightprojection * lightview * vec4(WorldPos, 1.0);
@@ -233,8 +234,8 @@ void main()
 	float tmp_depth = texture(shadowmap, tmp_lightScreenPos.xy).x + 0.01;
 	float tmp_shadow = 1.0 - step(tmp_lightScreenPos.z, 1.0) * step(tmp_depth, tmp_lightScreenPos.z);
 
-	vec3 tmp_pbrColor = PBRLighting(tmp_albedo, tmp_viewDir, tmp_normal, 0.2, 0.2, tmp_shadow);
-	vec3 tmp_ambient = ambient * tmp_albedo * 0.0;
+	vec3 tmp_pbrColor = PBRLighting(tmp_albedo, tmp_viewDir, tmp_normaldir, tmp_roughness, tmp_metallic, tmp_shadow);
+	vec3 tmp_ambient = ambient * tmp_albedo * 1.0;
 	vec3 tmp_result = tmp_ambient + tmp_pbrColor;
 	tmp_result = pow(tmp_result, vec3(1.0 / 2.2));
 
