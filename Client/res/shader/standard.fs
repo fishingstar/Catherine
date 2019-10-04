@@ -178,7 +178,7 @@ vec3 IBLLighting(vec3 albedo, vec3 V, vec3 N, float roughness, float metallic)
 	vec3 kd = 1.0 - ks;
 	kd *= 1.0 - metallic;
 
-	vec3 irradiance = texture(prefilterMap, N).rgb;
+	vec3 irradiance = texture(prefilterMap, N).rgb / 2.0;
 	vec3 diffuse = irradiance * albedo;
 
 	// const float MAX_REFLECTION_LOD = 4.0;

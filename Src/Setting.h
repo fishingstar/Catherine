@@ -8,4 +8,4 @@ enum class RenderPipeline
 	ForwardPlus
 };
 
-const RenderPipeline g_RenderPipeline = RenderPipeline::Deferred;
+const RenderPipeline g_RenderPipeline = RenderPipeline::Forward;
