@@ -106,8 +106,8 @@ vec3 PBRLightingImp(vec3 albedo, vec3 radiance, vec3 V, vec3 N, vec3 L, float ro
 	float NdotV = max(dot(N, V), 0.0);
 	float NdotL = max(dot(N, L), 0.0);
 
-	float NDF = DistributionGGX(N, H, roughness * roughness);
-	float G = GeometrySmith(N, V, L, roughness * roughness);
+	float NDF = DistributionGGX(N, H, roughness);
+	float G = GeometrySmith(N, V, L, roughness);
 	vec3 F = fresnelSchlick(HdotV, F0);
 
 	vec3 ks = F;
