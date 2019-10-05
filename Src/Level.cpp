@@ -170,7 +170,7 @@ namespace Catherine
 		Transform * tmp_rustTransform = (Transform *)tmp_rust->AddComponent(ComponentKind::Transform);
 		tmp_rustTransform->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 		tmp_rustTransform->SetRotation(glm::vec3(90.0f, 90.0f, 0.0f));
-		tmp_rustTransform->SetScale(glm::vec3(0.02f, 0.02f, 0.02f));
+		tmp_rustTransform->SetScale(glm::vec3(0.03f, 0.03f, 0.03f));
 		MeshFilter * tmp_rustMeshFilter = (MeshFilter *)tmp_rust->AddComponent(ComponentKind::MeshFilter);
 		tmp_rustMeshFilter->LoadFromFile(s_demoModel_rust);
 		MeshRenderer * tmp_rustRenderer = (MeshRenderer *)tmp_rust->AddComponent(ComponentKind::MeshRenderer);
@@ -187,9 +187,9 @@ namespace Catherine
 		m_SceneObjects.push_back(tmp_gold);
 
 		Transform * tmp_goldTransform = (Transform *)tmp_gold->AddComponent(ComponentKind::Transform);
-		tmp_goldTransform->SetPosition(glm::vec3(-6.0f, 0.0f, 0.0f));
+		tmp_goldTransform->SetPosition(glm::vec3(-9.0f, 0.0f, 0.0f));
 		tmp_goldTransform->SetRotation(glm::vec3(90.0f, 90.0f, 0.0f));
-		tmp_goldTransform->SetScale(glm::vec3(0.02f, 0.02f, 0.02f));
+		tmp_goldTransform->SetScale(glm::vec3(0.03f, 0.03f, 0.03f));
 		MeshFilter * tmp_goldMeshFilter = (MeshFilter *)tmp_gold->AddComponent(ComponentKind::MeshFilter);
 		tmp_goldMeshFilter->LoadFromFile(s_demoModel_gold);
 		MeshRenderer * tmp_goldRenderer = (MeshRenderer *)tmp_gold->AddComponent(ComponentKind::MeshRenderer);
@@ -206,9 +206,9 @@ namespace Catherine
 		m_SceneObjects.push_back(tmp_gun);
 
 		Transform * tmp_gunTransform = (Transform *)tmp_gun->AddComponent(ComponentKind::Transform);
-		tmp_gunTransform->SetPosition(glm::vec3(10.0f, 2.0f, 0.0f));
+		tmp_gunTransform->SetPosition(glm::vec3(13.0f, 4.0f, 0.0f));
 		tmp_gunTransform->SetRotation(glm::vec3(90.0f, 90.0f, 0.0f));
-		tmp_gunTransform->SetScale(glm::vec3(0.04f, 0.04f, 0.04f));
+		tmp_gunTransform->SetScale(glm::vec3(0.06f, 0.06f, 0.06f));
 		MeshFilter * tmp_gunMeshFilter = (MeshFilter *)tmp_gun->AddComponent(ComponentKind::MeshFilter);
 		tmp_gunMeshFilter->LoadFromFile(s_demoModel_gun);
 		MeshRenderer * tmp_gunRenderer = (MeshRenderer *)tmp_gun->AddComponent(ComponentKind::MeshRenderer);

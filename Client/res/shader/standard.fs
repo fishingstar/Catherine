@@ -64,11 +64,6 @@ vec3 fresnelSchlick(float cosTheta, vec3 F0)
     return F0 + (1.0 - F0) * pow(1.0 - cosTheta, 5.0);
 }
 
-vec3 fresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness)
-{
-    return F0 + (max(vec3(1.0 - roughness), F0) - F0) * pow(1.0 - cosTheta, 5.0);
-}
-
 float DistributionGGX(vec3 N, vec3 H, float roughness)
 {
     float a      = roughness*roughness;
@@ -115,8 +110,8 @@ vec3 PBRLightingImp(vec3 albedo, vec3 radiance, vec3 V, vec3 N, vec3 L, float ro
 	float NdotV = max(dot(N, V), 0.0);
 	float NdotL = max(dot(N, L), 0.0);
 
-	float NDF = DistributionGGX(N, H, roughness);
-	float G = GeometrySmith(N, V, L, roughness);
+	float NDF = DistributionGGX(N, H, roughness * roughness);
+	float G = GeometrySmith(N, V, L, roughness * roughness);
 	vec3 F = fresnelSchlick(HdotV, F0);
 
 	vec3 ks = F;
@@ -166,6 +161,11 @@ vec3 PBRLighting(vec3 albedo, vec3 V, vec3 N, float roughness, float metallic, f
     tmp_color += PBRLightingImp(albedo, tmp_spotColor, V, N, tmp_spotDir, roughness, metallic);
 
 	return tmp_color;
+}
+
+vec3 fresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness)
+{
+    return F0 + (max(vec3(1.0 - roughness), F0) - F0) * pow(1.0 - cosTheta, 5.0);
 }
 
 vec3 IBLLighting(vec3 albedo, vec3 V, vec3 N, float roughness, float metallic)

@@ -30,11 +30,12 @@
 		/>
 	</CubeTexture>
 	<Sampler>
-		<Item Key = "albedo" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
-		<Item Key = "normalmap" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
-		<Item Key = "metallicmap" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
-		<Item Key = "roughnessmap" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
-		<Item Key = "brdfLUT" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "albedo" MinFilter = "3" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "normalmap" MinFilter = "3" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "metallicmap" MinFilter = "3" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "roughnessmap" MinFilter = "3" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "brdfLUT" MinFilter = "0" MagFilter = "0" WrapS = "4" WrapT = "4" />
+		<Item Key = "prefilterMap" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" WrapR = "4" />
 	</Sampler>
 	<RenderState>
 		<CullFaceMode Enabled = "true" Value = "0" />

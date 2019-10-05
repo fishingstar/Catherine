@@ -14,6 +14,9 @@
 			Front = "./res/skybox/day/front.jpg"
 		/>
 	</CubeTexture>
+	<Sampler>
+		<Item Key = "environment" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" WrapR = "4" />
+	</Sampler>
 	<RenderState>
 		<CullFaceMode Enabled = "true" Value = "1" />
 		<DepthTestMode Enabled = "true" Value = "0" />

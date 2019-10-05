@@ -11,7 +11,7 @@ namespace Catherine
 		GLenum tmp_format = OpenGLCommon::GetOpenGLPixelFormat(format);
 		GLenum tmp_type = OpenGLCommon::GetOpenGLType(value_type);
 		glTexImage2D(GL_TEXTURE_2D, 0, tmp_inner_format, width, height, 0, tmp_format, tmp_type, data[0]);
-		//glGenerateMipmap(GL_TEXTURE_2D);
+		glGenerateMipmap(GL_TEXTURE_2D);
 
 		glBindTexture(GL_TEXTURE_2D, 0);
 
