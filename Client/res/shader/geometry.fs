@@ -164,6 +164,23 @@ vec3 fresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness)
     return F0 + (max(vec3(1.0 - roughness), F0) - F0) * pow(1.0 - cosTheta, 5.0);
 }
 
+vec3 EnvBRDFApprox(vec3 SpecularColor, float Roughness, float NoV)
+{
+	// [ Lazarov 2013, "Getting More Physical in Call of Duty: Black Ops II" ]
+	// Adaptation to fit our G term.
+	vec4 c0 = vec4(-1, -0.0275, -0.572, 0.022);
+	vec4 c1 = vec4(1, 0.0425, 1.04, -0.04);
+	vec4 r = Roughness * c0 + c1;
+	float a004 = min( r.x * r.x, exp2( -9.28 * NoV ) ) * r.x + r.y;
+	vec2 AB = vec2( -1.04, 1.04 ) * a004 + r.zw;
+
+	// Anything less than 2% is physically impossible and is instead considered to be shadowing
+	// Note: this is needed for the 'specular' show flag to work, since it uses a SpecularColor of 0
+	AB.y *= min(max( 50.0 * SpecularColor.g, 0.0 ), 1.0);
+
+	return SpecularColor * AB.x + AB.y;
+}
+
 vec3 IBLLighting(vec3 albedo, vec3 V, vec3 N, float roughness, float metallic)
 {
 	vec3 F0 = vec3(0.04);
@@ -174,7 +191,7 @@ vec3 IBLLighting(vec3 albedo, vec3 V, vec3 N, float roughness, float metallic)
 	vec3 kd = 1.0 - ks;
 	kd *= 1.0 - metallic;
 
-	vec3 irradiance = texture(prefilterMap, N).rgb / 2.0;
+	vec3 irradiance = texture(prefilterMap, N).rgb;
 	vec3 diffuse = irradiance * albedo;
 
 	// const float MAX_REFLECTION_LOD = 4.0;
@@ -183,6 +200,8 @@ vec3 IBLLighting(vec3 albedo, vec3 V, vec3 N, float roughness, float metallic)
 	vec3 prefilteredColor = texture(prefilterMap, R).rgb;   
 	vec2 envBRDF = texture(brdfLUT, vec2(max(dot(N, V), 0.0), roughness)).rg;
 	vec3 specular = prefilteredColor * (F * envBRDF.x + envBRDF.y);
+	vec3 approx = EnvBRDFApprox(F, roughness, max(dot(N, V), 0.0));
+	specular = prefilteredColor * approx;
 	
 	float ao = 1.0;
 	vec3 ambient = (kd * diffuse + specular) * ao;
@@ -200,24 +219,11 @@ vec4 GetWorldPosFromDepth(float depth)
 	return tmp_worldPosition;
 }
 
-vec3 calculateDirLight(DirectionalLight param_Light, vec3 param_ViewDir, vec3 param_Normal, vec3 param_Diffuse, vec4 param_Specular)
-{
-	vec3 tmp_lightDir = normalize(-param_Light.lightDir.xyz);
-	vec3 tmp_half = normalize(tmp_lightDir + param_ViewDir);
-
-	float tmp_diffuse = max(0.0, dot(param_Normal, tmp_lightDir));
-	float tmp_specular = pow(max(0.0, dot(tmp_half, param_Normal)), 32);
-
-	vec3 tmp_color = (tmp_diffuse * param_Diffuse.rgb + tmp_specular * param_Specular.rgb * param_Specular.w) * param_Light.lightColor.rgb;
-
-	return tmp_color;
-}
-
 void main()
 {
 	// extract albedo and shadow factor
 	vec4 tmp_color = texture(GColor, Texcoord);
-	vec3 tmp_albedo = tmp_color.rgb;
+	vec3 tmp_albedo = pow(tmp_color.rgb, vec3(2.2));
 	float tmp_shadow = tmp_color.a;
 	// extract normal
 	vec3 tmp_normal = normalize(texture(GNormal, Texcoord).xyz);

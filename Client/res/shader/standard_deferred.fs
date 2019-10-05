@@ -26,7 +26,7 @@ void main()
 	vec3 tmp_tangent = normalize(WorldTangent);
 	vec3 tmp_binormal = normalize(WorldBinormal);
 
-	vec3 tmp_albedo = pow(texture(albedo, Texcoord).xyz, vec3(2.2));
+	vec3 tmp_albedo = texture(albedo, Texcoord).xyz;
 	vec3 tmp_normaldir = texture(normalmap, Texcoord).xyz;
 	tmp_normaldir = normalize(tmp_normaldir * 2.0 - 1.0);
 	tmp_normaldir = normalize(mat3(tmp_tangent, tmp_binormal, tmp_normal) * tmp_normaldir);

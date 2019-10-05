@@ -28,5 +28,5 @@ void main()
 
 	GColor = vec4(tmp_diffuse, tmp_shadow);
 	GNormal = vec4(tmp_normal, 1.0f);
-	GMask = vec4(0.0f, 0.0f, 0.0f, 0.0f);
+	GMask = vec4(0.0f, 1.0f, 1.0f, 1.0f);
 }

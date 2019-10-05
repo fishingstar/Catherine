@@ -70,8 +70,8 @@ namespace Catherine
 
 		m_BRDF_LUT = TextureManager::Instance()->GetTexture(s_BRDF_LUT_Path);
 		m_BRDF_LUTSampler = g_Device->CreateSampler();
-		m_BRDF_LUTSampler->SetMinFilter(Filter::Nearest);
-		m_BRDF_LUTSampler->SetMagFilter(Filter::Nearest);
+		m_BRDF_LUTSampler->SetMinFilter(Filter::Linear);
+		m_BRDF_LUTSampler->SetMagFilter(Filter::Linear);
 		m_BRDF_LUTSampler->SetWrapS(WrapMode::Clamp_To_Edge);
 		m_BRDF_LUTSampler->SetWrapT(WrapMode::Clamp_To_Edge);
 

@@ -19,10 +19,10 @@
 		<Item Key = "roughnessmap" Value = "./res/texture/gold_roughness.png" />
 	</Texture>
 	<Sampler>
-		<Item Key = "albedo" MinFilter = "3" MagFilter = "1" WrapS = "4" WrapT = "4" />
-		<Item Key = "normalmap" MinFilter = "3" MagFilter = "1" WrapS = "4" WrapT = "4" />
-		<Item Key = "metallicmap" MinFilter = "3" MagFilter = "1" WrapS = "4" WrapT = "4" />
-		<Item Key = "roughnessmap" MinFilter = "3" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "albedo" MinFilter = "4" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "normalmap" MinFilter = "4" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "metallicmap" MinFilter = "4" MagFilter = "1" WrapS = "4" WrapT = "4" />
+		<Item Key = "roughnessmap" MinFilter = "4" MagFilter = "1" WrapS = "4" WrapT = "4" />
 	</Sampler>
 	<RenderState>
 		<CullFaceMode Enabled = "true" Value = "0" />
