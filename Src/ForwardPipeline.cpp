@@ -9,11 +9,24 @@
 #include "IRenderTarget.h"
 #include "RenderTargetManager.h"
 #include "ISampler.h"
+#include "TextureManager.h"
 #include <algorithm>
 
 namespace Catherine
 {
 	extern IDevice * g_Device;
+
+	const std::vector<std::string> s_PrefilterPath =
+	{
+		"./res/skybox/day/right.jpg",
+		"./res/skybox/day/left.jpg",
+		"./res/skybox/day/top.jpg",
+		"./res/skybox/day/bottom.jpg",
+		"./res/skybox/day/back.jpg",
+		"./res/skybox/day/front.jpg"
+	};
+
+	const std::string s_BRDF_LUT_Path = "./res/texture/ibl_brdf_lut.png";
 
 	bool ForwardPipeline::Initialize()
 	{
@@ -25,6 +38,21 @@ namespace Catherine
 		m_ShadowSampler->SetMagFilter(Filter::Linear);
 		m_ShadowSampler->SetWrapS(WrapMode::Clamp_To_Edge);
 		m_ShadowSampler->SetWrapT(WrapMode::Clamp_To_Edge);
+
+		m_PrefilterMap = TextureManager::Instance()->GetCubeTexture(s_PrefilterPath);
+		m_PrefilterSampler = g_Device->CreateSampler();
+		m_PrefilterSampler->SetMinFilter(Filter::Linear);
+		m_PrefilterSampler->SetMagFilter(Filter::Linear);
+		m_PrefilterSampler->SetWrapS(WrapMode::Clamp_To_Edge);
+		m_PrefilterSampler->SetWrapT(WrapMode::Clamp_To_Edge);
+		m_PrefilterSampler->SetWrapR(WrapMode::Clamp_To_Edge);
+
+		m_BRDF_LUT = TextureManager::Instance()->GetTexture(s_BRDF_LUT_Path);
+		m_BRDF_LUTSampler = g_Device->CreateSampler();
+		m_BRDF_LUTSampler->SetMinFilter(Filter::Nearest);
+		m_BRDF_LUTSampler->SetMagFilter(Filter::Nearest);
+		m_BRDF_LUTSampler->SetWrapS(WrapMode::Clamp_To_Edge);
+		m_BRDF_LUTSampler->SetWrapT(WrapMode::Clamp_To_Edge);
 
 		return true;
 	}
@@ -92,6 +120,10 @@ namespace Catherine
 				tmp_material->SetModelUniform(tmp_renderContext);
 				tmp_material->SetCameraUniform(&m_ShadowCameraContext);
 				tmp_material->SetLightUniform(tmp_light);
+				tmp_material->SetTexture("prefilterMap", m_PrefilterMap);
+				tmp_material->SetSampler("prefilterMap", m_PrefilterSampler);
+				tmp_material->SetTexture("brdfLUT", m_BRDF_LUT);
+				tmp_material->SetSampler("brdfLUT", m_BRDF_LUTSampler);
 				tmp_material->Use(ShaderPass::Shadow);
 
 				// vertex buffer
@@ -152,6 +184,10 @@ namespace Catherine
 				tmp_material->SetShadowUniform(&m_ShadowCameraContext);
 				tmp_material->SetTexture("shadowmap", m_RenderTarget_Shadow->GetDepthAttachment());
 				tmp_material->SetSampler("shadowmap", m_ShadowSampler);
+				tmp_material->SetTexture("prefilterMap", m_PrefilterMap);
+				tmp_material->SetSampler("prefilterMap", m_PrefilterSampler);
+				tmp_material->SetTexture("brdfLUT", m_BRDF_LUT);
+				tmp_material->SetSampler("brdfLUT", m_BRDF_LUTSampler);
 				tmp_material->Use(ShaderPass::Forward);
 
 				// vertex buffer

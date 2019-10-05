@@ -10,6 +10,7 @@ namespace Catherine
 	class CameraContext;
 	class IRenderTarget;
 	class IMaterial;
+	class ITexture;
 	class ISampler;
 
 	// TODO : remove vertexarray
@@ -47,8 +48,14 @@ namespace Catherine
 		IMaterial * m_GeometryMaterial = nullptr;
 		IVertexArray * m_ScreenVertexArray = nullptr;
 
-		ISampler * m_ShadowSampler;
-		ISampler * m_GBufferSampler;
+		ISampler * m_ShadowSampler = nullptr;
+		ISampler * m_GBufferSampler = nullptr;
+
+		ITexture * m_PrefilterMap = nullptr;
+		ISampler * m_PrefilterSampler = nullptr;
+
+		ITexture * m_BRDF_LUT = nullptr;
+		ISampler * m_BRDF_LUTSampler = nullptr;
 
 		CameraContext m_ShadowCameraContext;
 	};

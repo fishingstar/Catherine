@@ -127,7 +127,7 @@ vec3 PBRLightingImp(vec3 albedo, vec3 radiance, vec3 V, vec3 N, vec3 L, float ro
 	return tmp_color;
 }
 
-vec3 PBRLighting(vec3 albedo, vec3 V, vec3 N, float roughness, float metallic, float shadow)
+vec3 PBRLighting(vec3 albedo, vec3 worldPos, vec3 V, vec3 N, float roughness, float metallic, float shadow)
 {
 	vec3 tmp_color = vec3(0.0);
 
@@ -139,7 +139,7 @@ vec3 PBRLighting(vec3 albedo, vec3 V, vec3 N, float roughness, float metallic, f
 	// point light
 	for (int i = 0; i < POINT_LIGHT_COUNT; ++i)
 	{
-		vec3 tmp_pointOffset = pointLight[i].lightPos - WorldPos;
+		vec3 tmp_pointOffset = pointLight[i].lightPos - worldPos;
 		vec3 tmp_pointDir = normalize(tmp_pointOffset);
 		float tmp_distance = length(tmp_pointOffset);
 		// atten = 1 / (a*x*x + b*x + c)
@@ -149,7 +149,7 @@ vec3 PBRLighting(vec3 albedo, vec3 V, vec3 N, float roughness, float metallic, f
 	}
 
 	// spot light
-	vec3 tmp_spotOffset = spotLight.lightPos - WorldPos;
+	vec3 tmp_spotOffset = spotLight.lightPos - worldPos;
 	vec3 tmp_spotDir = normalize(tmp_spotOffset);
 	float tmp_spotDistance = length(tmp_spotOffset);
 	// atten = 1 / (a*x*x + b*x + c)
@@ -214,7 +214,7 @@ void main()
 	float tmp_depth = texture(shadowmap, tmp_lightScreenPos.xy).x + 0.01;
 	float tmp_shadow = 1.0 - step(tmp_lightScreenPos.z, 1.0) * step(tmp_depth, tmp_lightScreenPos.z);
 
-	vec3 tmp_pbrColor = PBRLighting(tmp_albedo, tmp_viewDir, tmp_normaldir, tmp_roughness, tmp_metallic, tmp_shadow);
+	vec3 tmp_pbrColor = PBRLighting(tmp_albedo, WorldPos, tmp_viewDir, tmp_normaldir, tmp_roughness, tmp_metallic, tmp_shadow);
 	vec3 tmp_iblColor = IBLLighting(tmp_albedo, tmp_viewDir, tmp_normaldir, tmp_roughness, tmp_metallic);
 	vec3 tmp_result = tmp_pbrColor + tmp_iblColor * ambient;
 

@@ -9,33 +9,20 @@
 		<Fragment>./res/shader/standard.fs</Fragment>
 	</ForwardShader>
 	<DeferredShader>
-		<Vertex>./res/shader/default_deferred.vs</Vertex>
-		<Fragment>./res/shader/default_deferred.fs</Fragment>
+		<Vertex>./res/shader/standard.vs</Vertex>
+		<Fragment>./res/shader/standard_deferred.fs</Fragment>
 	</DeferredShader>
 	<Texture>
 		<Item Key = "albedo" Value = "./res/texture/streaked-metal1-albedo.png" />
 		<Item Key = "normalmap" Value = "./res/texture/streaked-metal1-normal-dx.png" />
 		<Item Key = "metallicmap" Value = "./res/texture/streaked-metal1-metalness.png" />
 		<Item Key = "roughnessmap" Value = "./res/texture/streaked-metal1-rough.png" />
-		<Item Key = "brdfLUT" Value = "./res/texture/ibl_brdf_lut.png" />
 	</Texture>
-	<CubeTexture>
-		<Item Key ="prefilterMap"
-			Right = "./res/skybox/day/right.jpg"
-			Left = "./res/skybox/day/left.jpg"
-			Top = "./res/skybox/day/top.jpg"
-			Bottom = "./res/skybox/day/bottom.jpg"
-			Front = "./res/skybox/day/front.jpg"
-			Back = "./res/skybox/day/back.jpg"
-		/>
-	</CubeTexture>
 	<Sampler>
 		<Item Key = "albedo" MinFilter = "3" MagFilter = "1" WrapS = "4" WrapT = "4" />
 		<Item Key = "normalmap" MinFilter = "3" MagFilter = "1" WrapS = "4" WrapT = "4" />
 		<Item Key = "metallicmap" MinFilter = "3" MagFilter = "1" WrapS = "4" WrapT = "4" />
 		<Item Key = "roughnessmap" MinFilter = "3" MagFilter = "1" WrapS = "4" WrapT = "4" />
-		<Item Key = "brdfLUT" MinFilter = "0" MagFilter = "0" WrapS = "4" WrapT = "4" />
-		<Item Key = "prefilterMap" MinFilter = "1" MagFilter = "1" WrapS = "4" WrapT = "4" WrapR = "4" />
 	</Sampler>
 	<RenderState>
 		<CullFaceMode Enabled = "true" Value = "0" />

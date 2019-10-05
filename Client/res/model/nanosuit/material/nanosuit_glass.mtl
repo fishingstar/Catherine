@@ -9,7 +9,7 @@
 		<Fragment>./res/shader/simple.fs</Fragment>
 	</ForwardShader>
 	<DeferredShader>
-		<Vertex>./res/shader/simple_deferred.vs</Vertex>
+		<Vertex>./res/shader/simple.vs</Vertex>
 		<Fragment>./res/shader/simple_deferred.fs</Fragment>
 	</DeferredShader>
 	<Texture>
