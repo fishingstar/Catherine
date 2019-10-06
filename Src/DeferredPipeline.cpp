@@ -13,6 +13,8 @@
 #include "ISampler.h"
 #include "glm/gtc/type_ptr.hpp"
 #include "TextureManager.h"
+#include "Bloom.h"
+#include "Exposure.h"
 #include <algorithm>
 
 namespace Catherine
@@ -40,9 +42,27 @@ namespace Catherine
 
 	bool DeferredPipeline::Initialize()
 	{
+		// post process
+		IPostProcess * tmp_bloom = new Bloom();
+		tmp_bloom->Initialize();
+		m_PostProcessQueue.push_back(tmp_bloom);
+		IPostProcess * tmp_exposure = new Exposure();
+		tmp_exposure->Initialize();
+		m_PostProcessQueue.push_back(tmp_exposure);
+
 		m_RenderTarget_Back = RenderTargetManager::Instance()->GetDefaultRenderTarget();
 		m_RenderTarget_Geometry = RenderTargetManager::Instance()->CreateRenderTarget(m_RenderTarget_Back->GetWidth(), m_RenderTarget_Back->GetHeight(), 3, true, false);
 		m_RenderTarget_Shadow = RenderTargetManager::Instance()->CreateRenderTarget(1024, 1024, 0, true, false);
+		if (m_PostProcessQueue.size() > 0)
+		{
+			m_RenderTarget_PostSrc = RenderTargetManager::Instance()->CreateRenderTarget(m_RenderTarget_Back->GetWidth(), m_RenderTarget_Back->GetHeight(), 1, true, false);
+			m_RenderTarget_PostDst = RenderTargetManager::Instance()->CreateRenderTarget(m_RenderTarget_Back->GetWidth(), m_RenderTarget_Back->GetHeight(), 1, true, false);
+			m_RenderTarget_Main = m_RenderTarget_PostSrc;
+		}
+		else
+		{
+			m_RenderTarget_Main = m_RenderTarget_Back;
+		}
 
 		m_GeometryMaterial = new Material();
 		m_GeometryMaterial->Initialize(s_GeometryMaterial);
@@ -75,6 +95,9 @@ namespace Catherine
 		m_BRDF_LUTSampler->SetWrapS(WrapMode::Clamp_To_Edge);
 		m_BRDF_LUTSampler->SetWrapT(WrapMode::Clamp_To_Edge);
 
+
+
+		// temp code
 		struct ScreenVertex
 		{
 			glm::vec3 Position;
@@ -125,6 +148,8 @@ namespace Catherine
 		RenderDeferred(context);
 		// 3th render forward
 		RenderForward(context);
+		// 4th render postprocess
+		RenderPostProcess();
 	}
 
 	void DeferredPipeline::RenderShadow(const WorldContext * context)
@@ -265,7 +290,7 @@ namespace Catherine
 
 	void DeferredPipeline::RenderLighting(const WorldContext * context)
 	{
-		m_RenderTarget_Back->Bind();
+		m_RenderTarget_Main->Bind();
 		{
 			const CameraContext * tmp_camera = context->GetCameraContext();
 			const LightContext * tmp_light = context->GetLightContext();
@@ -321,17 +346,17 @@ namespace Catherine
 	void DeferredPipeline::BlitDepthBuffer()
 	{
 		m_RenderTarget_Geometry->Bind(RenderTargetUsage::Read);
-		m_RenderTarget_Back->Bind(RenderTargetUsage::Draw);
+		m_RenderTarget_Main->Bind(RenderTargetUsage::Draw);
 		g_Device->BlitFrameBuffer(
 			0, 0, m_RenderTarget_Geometry->GetWidth(), m_RenderTarget_Geometry->GetHeight(),
-			0, 0, m_RenderTarget_Back->GetWidth(), m_RenderTarget_Back->GetHeight(),
+			0, 0, m_RenderTarget_Main->GetWidth(), m_RenderTarget_Main->GetHeight(),
 			(BitField)BufferBit::Depth, Filter::Nearest
 		);
 	}
 
 	void DeferredPipeline::RenderOpaque(const WorldContext * context)
 	{
-		m_RenderTarget_Back->Bind();
+		m_RenderTarget_Main->Bind();
 		{
 			const CameraContext * tmp_camera = context->GetCameraContext();
 			const LightContext * tmp_light = context->GetLightContext();
@@ -387,6 +412,26 @@ namespace Catherine
 	void DeferredPipeline::RenderTransparent(const WorldContext * context)
 	{
 
+	}
+
+	void DeferredPipeline::RenderPostProcess()
+	{
+		IRenderTarget * tmp_src = m_RenderTarget_PostSrc;
+		IRenderTarget * tmp_dst = m_RenderTarget_PostDst;
+		IRenderTarget * tmp_temp = nullptr;
+
+		for (size_t i = 0; i < m_PostProcessQueue.size(); ++i)
+		{
+			if (i == m_PostProcessQueue.size() - 1)
+				tmp_dst = m_RenderTarget_Back;
+
+			IPostProcess * tmp_process = m_PostProcessQueue[i];
+			tmp_process->Process(tmp_src, tmp_dst);
+
+			tmp_temp = tmp_src;
+			tmp_src = tmp_dst;
+			tmp_dst = tmp_src;
+		}
 	}
 
 	CameraContext DeferredPipeline::GenerateShadowCameraContext(const LightContext * light, const CameraContext * camera)

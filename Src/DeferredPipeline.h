@@ -12,6 +12,7 @@ namespace Catherine
 	class IMaterial;
 	class ITexture;
 	class ISampler;
+	class IPostProcess;
 
 	// TODO : remove vertexarray
 	class IVertexArray;
@@ -38,16 +39,23 @@ namespace Catherine
 		void RenderOpaque(const WorldContext * context);
 		void RenderTransparent(const WorldContext * context);
 
+		void RenderPostProcess();
+
 		CameraContext GenerateShadowCameraContext(const LightContext * light, const CameraContext * camera);
 
 	private:
+		// render target
 		IRenderTarget * m_RenderTarget_Back = nullptr;
 		IRenderTarget * m_RenderTarget_Geometry = nullptr;
 		IRenderTarget * m_RenderTarget_Shadow = nullptr;
+		IRenderTarget * m_RenderTarget_PostSrc = nullptr;
+		IRenderTarget * m_RenderTarget_PostDst = nullptr;
+		IRenderTarget * m_RenderTarget_Main = nullptr;
 
-		IMaterial * m_GeometryMaterial = nullptr;
-		IVertexArray * m_ScreenVertexArray = nullptr;
+		// postprocess
+		std::vector<IPostProcess *> m_PostProcessQueue;
 
+		// internel texture and sampler
 		ISampler * m_ShadowSampler = nullptr;
 		ISampler * m_GBufferSampler = nullptr;
 
@@ -57,6 +65,9 @@ namespace Catherine
 		ITexture * m_BRDF_LUT = nullptr;
 		ISampler * m_BRDF_LUTSampler = nullptr;
 
+		// internel information
 		CameraContext m_ShadowCameraContext;
+		IMaterial* m_GeometryMaterial = nullptr;
+		IVertexArray* m_ScreenVertexArray = nullptr;
 	};
 }
