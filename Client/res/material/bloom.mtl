@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Catherine>
+	<ForwardShader>
+		<Vertex>./res/shader/bloom.vs</Vertex>
+		<Fragment>./res/shader/bloom.fs</Fragment>
+	</ForwardShader>
+	<RenderState>
+		<CullFaceMode Enabled = "true" Value = "0" />
+		<DepthTestMode Enabled = "false" Value = "0" />
+		<BlendMode Enabled = "false" Src = "6" Dst = "7" SrcAlpha = "6" DstAlpha = "7" BlendEquation = "0" />
+	</RenderState>
+	<RenderPriority>2000</RenderPriority>
+</Catherine>
