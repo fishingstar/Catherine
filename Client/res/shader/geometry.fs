@@ -129,7 +129,7 @@ vec3 PBRLighting(vec3 albedo, vec3 worldPos, vec3 V, vec3 N, float roughness, fl
 
 	// directional light
 	vec3 tmp_dirLight = normalize(-dirLight.lightDir.xyz);
-	vec3 tmp_dirColor = dirLight.lightColor.rgb;
+	vec3 tmp_dirColor = dirLight.lightColor.rgb * 3.0;
 	tmp_color += PBRLightingImp(albedo, tmp_dirColor, V, N, tmp_dirLight, roughness, metallic) * shadow;
 
 	// point light
@@ -244,6 +244,7 @@ void main()
 	vec3 tmp_result = tmp_pbrColor + tmp_iblColor * ambient;
 
 	// gamma correct
+	tmp_result = tmp_result / (tmp_result + vec3(1.0));
 	tmp_result.rgb = pow(tmp_result.rgb, vec3(1.0 / 2.2));
 
 	// output shading result
