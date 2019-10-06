@@ -110,8 +110,8 @@ vec3 PBRLightingImp(vec3 albedo, vec3 radiance, vec3 V, vec3 N, vec3 L, float ro
 	float NdotV = max(dot(N, V), 0.0);
 	float NdotL = max(dot(N, L), 0.0);
 
-	float NDF = DistributionGGX(N, H, roughness * roughness);
-	float G = GeometrySmith(N, V, L, roughness * roughness);
+	float NDF = DistributionGGX(N, H, roughness);
+	float G = GeometrySmith(N, V, L, roughness);
 	vec3 F = fresnelSchlick(HdotV, F0);
 
 	vec3 ks = F;
@@ -133,7 +133,7 @@ vec3 PBRLighting(vec3 albedo, vec3 worldPos, vec3 V, vec3 N, float roughness, fl
 
 	// directional light
 	vec3 tmp_dirLight = normalize(-dirLight.lightDir.xyz);
-	vec3 tmp_dirColor = dirLight.lightColor.rgb * 5.0;
+	vec3 tmp_dirColor = dirLight.lightColor.rgb * 2.7;
 	tmp_color += PBRLightingImp(albedo, tmp_dirColor, V, N, tmp_dirLight, roughness, metallic) * shadow;
 
 	// point light
@@ -168,6 +168,23 @@ vec3 fresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness)
     return F0 + (max(vec3(1.0 - roughness), F0) - F0) * pow(1.0 - cosTheta, 5.0);
 }
 
+vec3 EnvBRDFApprox(vec3 SpecularColor, float Roughness, float NoV)
+{
+	// [ Lazarov 2013, "Getting More Physical in Call of Duty: Black Ops II" ]
+	// Adaptation to fit our G term.
+	vec4 c0 = vec4(-1, -0.0275, -0.572, 0.022);
+	vec4 c1 = vec4(1, 0.0425, 1.04, -0.04);
+	vec4 r = Roughness * c0 + c1;
+	float a004 = min( r.x * r.x, exp2( -9.28 * NoV ) ) * r.x + r.y;
+	vec2 AB = vec2( -1.04, 1.04 ) * a004 + r.zw;
+
+	// Anything less than 2% is physically impossible and is instead considered to be shadowing
+	// Note: this is needed for the 'specular' show flag to work, since it uses a SpecularColor of 0
+	AB.y *= min(max( 50.0 * SpecularColor.g, 0.0 ), 1.0);
+
+	return SpecularColor * AB.x + AB.y;
+}
+
 vec3 IBLLighting(vec3 albedo, vec3 V, vec3 N, float roughness, float metallic)
 {
 	vec3 F0 = vec3(0.04);
@@ -178,7 +195,7 @@ vec3 IBLLighting(vec3 albedo, vec3 V, vec3 N, float roughness, float metallic)
 	vec3 kd = 1.0 - ks;
 	kd *= 1.0 - metallic;
 
-	vec3 irradiance = texture(prefilterMap, N).rgb / 2.0;
+	vec3 irradiance = texture(prefilterMap, N).rgb;
 	vec3 diffuse = irradiance * albedo;
 
 	// const float MAX_REFLECTION_LOD = 4.0;
@@ -187,6 +204,8 @@ vec3 IBLLighting(vec3 albedo, vec3 V, vec3 N, float roughness, float metallic)
 	vec3 prefilteredColor = texture(prefilterMap, R).rgb;   
 	vec2 envBRDF = texture(brdfLUT, vec2(max(dot(N, V), 0.0), roughness)).rg;
 	vec3 specular = prefilteredColor * (F * envBRDF.x + envBRDF.y);
+	vec3 approx = EnvBRDFApprox(F, roughness, max(dot(N, V), 0.0));
+	specular = prefilteredColor * approx;
 	
 	float ao = 1.0;
 	vec3 ambient = (kd * diffuse + specular) * ao;
