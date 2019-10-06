@@ -7,6 +7,7 @@ out vec4 FragColor;
 uniform samplerCube environment;
 
 void main()
-{    
-    FragColor = texture(environment, TexCoords);
+{
+	vec3 tmp_color = pow(texture(environment, TexCoords).rgb, vec3(2.2));
+    FragColor = vec4(tmp_color, 1.0);
 }
