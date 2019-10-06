@@ -176,7 +176,7 @@ vec3 EnvBRDFApprox(vec3 SpecularColor, float Roughness, float NoV)
 
 	// Anything less than 2% is physically impossible and is instead considered to be shadowing
 	// Note: this is needed for the 'specular' show flag to work, since it uses a SpecularColor of 0
-	AB.y *= min(max( 50.0 * SpecularColor.g, 0.0 ), 1.0);
+	AB.y *= clamp(50.0 * SpecularColor.g, 0.0, 1.0);
 
 	return SpecularColor * AB.x + AB.y;
 }
@@ -219,21 +219,6 @@ vec4 GetWorldPosFromDepth(float depth)
 	return tmp_worldPosition;
 }
 
-// ACES Filmic Tone Mapping Curve
-//
-// Adapted from code by Krzysztof Narkowicz
-// https://knarkowicz.wordpress.com/2016/01/06/
-// aces-filmic-tone-mapping-curve/
-vec3 ACESFilm(vec3 x)
-{
-    float tA = 2.51f;
-    float tB = 0.03f;
-    float tC = 2.43f;
-    float tD = 0.59f;
-    float tE = 0.14f;
-    return clamp((x * (tA * x + tB)) / (x * (tC * x + tD) + tE), 0.0, 1.0);
-}
-
 void main()
 {
 	// extract albedo and shadow factor
@@ -257,10 +242,6 @@ void main()
 	vec3 tmp_pbrColor = PBRLighting(tmp_albedo, tmp_worldPosition.xyz, tmp_viewDir, tmp_normal, tmp_roughness, tmp_metallic, tmp_shadow);
 	vec3 tmp_iblColor = IBLLighting(tmp_albedo, tmp_viewDir, tmp_normal, tmp_roughness, tmp_metallic);
 	vec3 tmp_result = tmp_pbrColor + tmp_iblColor * ambient;
-
-	// gamma correct
-	tmp_result = ACESFilm(tmp_result);//tmp_result / (tmp_result + vec3(1.0));
-	tmp_result.rgb = pow(tmp_result.rgb, vec3(1.0 / 2.2));
 
 	// output shading result
 	FragColor = vec4(tmp_result, 1.0f);
