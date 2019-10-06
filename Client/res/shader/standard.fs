@@ -133,7 +133,7 @@ vec3 PBRLighting(vec3 albedo, vec3 worldPos, vec3 V, vec3 N, float roughness, fl
 
 	// directional light
 	vec3 tmp_dirLight = normalize(-dirLight.lightDir.xyz);
-	vec3 tmp_dirColor = dirLight.lightColor.rgb * 10.0;
+	vec3 tmp_dirColor = dirLight.lightColor.rgb * 5.0;
 	tmp_color += PBRLightingImp(albedo, tmp_dirColor, V, N, tmp_dirLight, roughness, metallic) * shadow;
 
 	// point light
@@ -194,6 +194,21 @@ vec3 IBLLighting(vec3 albedo, vec3 V, vec3 N, float roughness, float metallic)
 	return ambient;
 }
 
+// ACES Filmic Tone Mapping Curve
+//
+// Adapted from code by Krzysztof Narkowicz
+// https://knarkowicz.wordpress.com/2016/01/06/
+// aces-filmic-tone-mapping-curve/
+vec3 ACESFilm(vec3 x)
+{
+    float tA = 2.51f;
+    float tB = 0.03f;
+    float tC = 2.43f;
+    float tD = 0.59f;
+    float tE = 0.14f;
+    return clamp((x * (tA * x + tB)) / (x * (tC * x + tD) + tE), 0.0, 1.0);
+}
+
 void main()
 {
 	vec3 tmp_normal = normalize(WorldNormal);
@@ -218,7 +233,7 @@ void main()
 	vec3 tmp_iblColor = IBLLighting(tmp_albedo, tmp_viewDir, tmp_normaldir, tmp_roughness, tmp_metallic);
 	vec3 tmp_result = tmp_pbrColor + tmp_iblColor * ambient;
 
-	tmp_result = tmp_result / (tmp_result + vec3(1.0));
+	tmp_result = ACESFilm(tmp_result);
 	tmp_result = pow(tmp_result, vec3(1.0 / 2.2));
 
 	FragColor = vec4(tmp_result, 1.0f);
