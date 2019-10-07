@@ -141,6 +141,16 @@ SET(Src_Render_Pipeline
 )
 source_group(Render\\Pipeline FILES ${Src_Render_Pipeline})
 
+# Render\\PostProcess
+SET(Src_Render_PostProcess
+	"${PROJECT_SOURCE_DIR}/Src/IPostProcess.h"
+	"${PROJECT_SOURCE_DIR}/Src/Bloom.h"
+	"${PROJECT_SOURCE_DIR}/Src/Bloom.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/Exposure.h"
+	"${PROJECT_SOURCE_DIR}/Src/Exposure.cpp"
+)
+source_group(Render\\PostProcess FILES ${Src_Render_PostProcess})
+
 # Render\\Renderer
 SET(Src_Render_Renderer
 	"${PROJECT_SOURCE_DIR}/Src/IRenderer.h"
@@ -289,6 +299,7 @@ add_executable(Catherine
 	${Src_Render_Material}
 	${Src_Render_Common}
 	${Src_Render_Pipeline}
+	${Src_Render_PostProcess}
 	${Src_Render_Renderer}
 	${Src_Render_Resource}
 	${Src_Render_State}
