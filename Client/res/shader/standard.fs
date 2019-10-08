@@ -251,9 +251,6 @@ void main()
 	vec3 tmp_pbrColor = PBRLighting(tmp_albedo, WorldPos, tmp_viewDir, tmp_normaldir, tmp_roughness, tmp_metallic, tmp_shadow);
 	vec3 tmp_iblColor = IBLLighting(tmp_albedo, tmp_viewDir, tmp_normaldir, tmp_roughness, tmp_metallic);
 	vec3 tmp_result = tmp_pbrColor + tmp_iblColor * ambient;
-
-	tmp_result = ACESFilm(tmp_result);
-	tmp_result = pow(tmp_result, vec3(1.0 / 2.2));
-
+	
 	FragColor = vec4(tmp_result, 1.0f);
 }
