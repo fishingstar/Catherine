@@ -2,6 +2,7 @@
 #include "IWorld.h"
 #include "ForwardPipeline.h"
 #include "DeferredPipeline.h"
+#include "TileBasedDeferredPipeline.h"
 #include "LogUtility.h"
 #include "Setting.h"
 
@@ -10,26 +11,17 @@ namespace Catherine
 	bool WorldRenderer::Initialize()
 	{
 		if (g_RenderPipeline == RenderPipeline::Forward)
-		{
-			m_ForwardPipeline = new ForwardPipeline();
-			bool tmp_forwardInited = m_ForwardPipeline->Initialize();
-			if (!tmp_forwardInited)
-			{
-				LogError("forward pipeline initialize failed...");
-				return false;
-			}
-			m_CurrentPipeline = m_ForwardPipeline;
-		}
+			m_RenderPipeline = new ForwardPipeline();
 		else if (g_RenderPipeline == RenderPipeline::Deferred)
+			m_RenderPipeline = new DeferredPipeline();
+		else if (g_RenderPipeline == RenderPipeline::TiledBasedDeferred)
+			m_RenderPipeline = new TileBasedDeferredPipeline();
+
+		bool tmp_Inited = m_RenderPipeline->Initialize();
+		if (!tmp_Inited)
 		{
-			m_DeferredPipeline = new DeferredPipeline();
-			bool tmp_deferredInited = m_DeferredPipeline->Initialize();
-			if (!tmp_deferredInited)
-			{
-				LogError("deferred pipeline initialize failed...");
-				return false;
-			}
-			m_CurrentPipeline = m_DeferredPipeline;
+			LogError("render pipeline initialize failed...");
+			return false;
 		}
 
 		return true;
@@ -37,16 +29,10 @@ namespace Catherine
 
 	void WorldRenderer::Uninitialize()
 	{
-		if (m_ForwardPipeline)
+		if (m_RenderPipeline)
 		{
-			delete m_ForwardPipeline;
-			m_ForwardPipeline = nullptr;
-		}
-
-		if (m_DeferredPipeline)
-		{
-			delete m_DeferredPipeline;
-			m_DeferredPipeline = nullptr;
+			delete m_RenderPipeline;
+			m_RenderPipeline = nullptr;
 		}
 	}
 
@@ -67,7 +53,7 @@ namespace Catherine
 
 			// send context to pipeline
 			const WorldContext * worldContext = m_Worlds[i]->GetWorldContext();
-			m_CurrentPipeline->Render(worldContext);
+			m_RenderPipeline->Render(worldContext);
 		}
 	}
 

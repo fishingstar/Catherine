@@ -200,8 +200,8 @@ vec3 IBLLighting(vec3 albedo, vec3 V, vec3 N, float roughness, float metallic)
 	vec3 prefilteredColor = texture(prefilterMap, R).rgb;   
 	vec2 envBRDF = texture(brdfLUT, vec2(max(dot(N, V), 0.0), roughness)).rg;
 	vec3 specular = prefilteredColor * (F * envBRDF.x + envBRDF.y);
-	vec3 approx = EnvBRDFApprox(F, roughness, max(dot(N, V), 0.0));
-	specular = prefilteredColor * approx;
+	// vec3 approx = EnvBRDFApprox(F, roughness, max(dot(N, V), 0.0));
+	// specular = prefilteredColor * approx;
 	
 	float ao = 1.0;
 	vec3 ambient = (kd * diffuse + specular) * ao;

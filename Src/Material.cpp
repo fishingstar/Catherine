@@ -40,11 +40,11 @@ namespace Catherine
 
 		// shader
 		tinyxml2::XMLElement * tmp_shader = nullptr;
-		if (g_RenderPipeline == RenderPipeline::Forward)
+		if (g_RenderPipeline == RenderPipeline::Forward || g_RenderPipeline == RenderPipeline::ForwardPlus)
 		{
 			tmp_shader = tmp_root->FirstChildElement("ForwardShader");
 		}
-		else if (g_RenderPipeline == RenderPipeline::Deferred)
+		else if (g_RenderPipeline == RenderPipeline::Deferred || g_RenderPipeline == RenderPipeline::TiledBasedDeferred || g_RenderPipeline == RenderPipeline::ClusterBasedDeferred)
 		{
 			tmp_shader = tmp_root->FirstChildElement("DeferredShader");
 			if (tmp_shader == nullptr)

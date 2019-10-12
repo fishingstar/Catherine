@@ -22,7 +22,7 @@ namespace Catherine
 	bool OpenGLDevice::Initialize()
 	{
 		glfwInit();
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
@@ -188,6 +188,11 @@ namespace Catherine
 		GLenum tmp_drawMode = OpenGLCommon::GetOpenGLDrawMode(mode);
 		GLenum tmp_valueType = OpenGLCommon::GetOpenGLType(type);
 		glDrawElements(tmp_drawMode, (GLsizei)count, tmp_valueType, (void *)offset);
+	}
+
+	void OpenGLDevice::DispatchCompute(uint32_t x, uint32_t y, uint32_t z)
+	{
+		glDispatchCompute(x, y, z);
 	}
 
 	void OpenGLDevice::BlitFrameBuffer(uint32_t src_x0, uint32_t src_y0, uint32_t src_x1, uint32_t src_y1, uint32_t dst_x0, uint32_t dst_y0, uint32_t dst_x1, uint32_t dst_y1, BitField bufferbits, Filter filter)

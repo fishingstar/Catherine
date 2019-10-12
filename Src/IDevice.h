@@ -60,6 +60,9 @@ namespace Catherine
 
 		virtual void DrawElement(DrawMode mode, size_t count, ValueType type, size_t offset) = 0;
 
+		// compute
+		virtual void DispatchCompute(uint32_t x, uint32_t y, uint32_t z) = 0;
+
 		// other
 		virtual void BlitFrameBuffer(uint32_t src_x0, uint32_t src_y0, uint32_t src_x1, uint32_t src_y1, uint32_t dst_x0, uint32_t dst_y0, uint32_t dst_x1, uint32_t dst_y1, BitField bufferbits, Filter filter) = 0;
 	};
