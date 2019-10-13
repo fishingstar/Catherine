@@ -21,9 +21,9 @@ namespace Catherine
 {
 	extern IDevice * g_Device;
 
-	const char * s_GeometryMaterial = "./res/material/geometry.mtl";
+	static const char * s_GeometryMaterial = "./res/material/geometry.mtl";
 
-	const std::vector<std::string> s_PrefilterPath =
+	static const std::vector<std::string> s_PrefilterPath =
 	{
 		"./res/skybox/day/right.jpg",
 		"./res/skybox/day/left.jpg",
@@ -33,7 +33,7 @@ namespace Catherine
 		"./res/skybox/day/front.jpg"
 	};
 
-	const std::string s_BRDF_LUT_Path = "./res/texture/ibl_brdf_lut.png";
+	static const std::string s_BRDF_LUT_Path = "./res/texture/ibl_brdf_lut.png";
 
 	DeferredPipeline::~DeferredPipeline()
 	{
@@ -52,7 +52,7 @@ namespace Catherine
 
 		m_RenderTarget_Back = RenderTargetManager::Instance()->GetDefaultRenderTarget();
 		m_RenderTarget_Geometry = RenderTargetManager::Instance()->CreateRenderTarget(m_RenderTarget_Back->GetWidth(), m_RenderTarget_Back->GetHeight(), 3, true, false);
-		m_RenderTarget_Shadow = RenderTargetManager::Instance()->CreateRenderTarget(1024, 1024, 0, true, false);
+		m_RenderTarget_Shadow = RenderTargetManager::Instance()->CreateRenderTarget(2048, 2048, 0, true, false);
 		if (m_PostProcessQueue.size() > 0)
 		{
 			m_RenderTarget_PostSrc = RenderTargetManager::Instance()->CreateRenderTarget(m_RenderTarget_Back->GetWidth(), m_RenderTarget_Back->GetHeight(), 1, true, false);
@@ -221,7 +221,7 @@ namespace Catherine
 	{
 		// 1st render geometry
 		RenderGeometry(context);
-		// 2st render shading
+		// 2nd render shading
 		RenderLighting(context);
 	}
 
