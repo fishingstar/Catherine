@@ -24,4 +24,9 @@ namespace Catherine
 	{
 		glBindBuffer(m_Target, m_Resource);
 	}
+
+	void OpenGLBuffer::Bind(uint8_t slot)
+	{
+		glBindBufferBase(m_Target, slot, m_Resource);
+	}
 }

@@ -1,4 +1,4 @@
-#version 330 core
+#version 430 core
 
 #define POINT_LIGHT_COUNT 4
 
@@ -52,6 +52,22 @@ uniform samplerCube prefilterMap;
 
 uniform mat4 invProjection;
 uniform mat4 invView;
+
+const uint MAX_POINT_LIGHT_COUNT = 4;
+const uint MAX_SPOT_LIGHT_COUNT = 4;
+
+struct TileLightList
+{
+	uint PointLightCount;
+    uint PointLightIndices[MAX_POINT_LIGHT_COUNT];
+    uint SpotLightCount;
+    uint SpotLightIndices[MAX_SPOT_LIGHT_COUNT];
+};
+
+layout(std430, binding = 0) buffer LightList
+{
+    TileLightList tile[];
+};
 
 const float PI = 3.14159265359;
 
@@ -133,9 +149,14 @@ vec3 PBRLighting(vec3 albedo, vec3 worldPos, vec3 V, vec3 N, float roughness, fl
 	tmp_color += PBRLightingImp(albedo, tmp_dirColor, V, N, tmp_dirLight, roughness, metallic) * shadow;
 
 	// point light
-	for (int i = 0; i < POINT_LIGHT_COUNT; ++i)
+
+	uvec2 tmp_tileTexcoord = uvec2(Texcoord.xy * vec2(80.0, 45.0));
+	tmp_tileTexcoord = clamp(tmp_tileTexcoord, uvec2(0, 0), uvec2(79, 44));
+	uint tmp_index = tmp_tileTexcoord.x + tmp_tileTexcoord.y * 80;
+	uint tmp_count = min(tile[tmp_index].PointLightCount, MAX_POINT_LIGHT_COUNT);
+	for (uint i = 0; i < tmp_count; ++i)
 	{
-		vec3 tmp_pointOffset = pointLight[i].lightPos - worldPos;
+		vec3 tmp_pointOffset = pointLight[tile[tmp_index].PointLightIndices[i]].lightPos - worldPos;
 		vec3 tmp_pointDir = normalize(tmp_pointOffset);
 		float tmp_distance = length(tmp_pointOffset);
 		// atten = 1 / (a*x*x + b*x + c)
@@ -242,6 +263,11 @@ void main()
 	vec3 tmp_pbrColor = PBRLighting(tmp_albedo, tmp_worldPosition.xyz, tmp_viewDir, tmp_normal, tmp_roughness, tmp_metallic, tmp_shadow);
 	vec3 tmp_iblColor = IBLLighting(tmp_albedo, tmp_viewDir, tmp_normal, tmp_roughness, tmp_metallic);
 	vec3 tmp_result = tmp_pbrColor + tmp_iblColor * ambient;
+
+	// uvec2 tmp_tileTexcoord = uvec2((Texcoord.xy - vec2(0.01)) * vec2(80.0, 45.0));
+	// tmp_tileTexcoord = clamp(tmp_tileTexcoord, uvec2(0, 0), uvec2(79, 44));
+	// uint tmp_index = tmp_tileTexcoord.x + tmp_tileTexcoord.y * 80;
+	// float tmp_data = float(tile[tmp_index].PointLightCount);
 
 	// output shading result
 	FragColor = vec4(tmp_result, 1.0f);

@@ -12,6 +12,7 @@ namespace Catherine
 		void Uninitialize();
 
 		void Bind();
+		void Bind(uint8_t slot);
 
 	private:
 		GLenum m_Target;

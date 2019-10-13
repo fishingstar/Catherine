@@ -10,6 +10,7 @@
 #include "OpenGLVertexArray.h"
 #include "OpenGLVertexBuffer.h"
 #include "OpenGLIndexBuffer.h"
+#include "OpenGLStorageBuffer.h"
 #include "OpenGLRenderTarget.h"
 
 namespace Catherine
@@ -177,6 +178,13 @@ namespace Catherine
 		return tmp_buffer;
 	}
 
+	IStorageBuffer * OpenGLDevice::CreateStorageBuffer(size_t size, Usage usage, const void * data)
+	{
+		OpenGLStorageBuffer * tmp_buffer = new OpenGLStorageBuffer(size, usage);
+		tmp_buffer->Initialize(data);
+		return tmp_buffer;
+	}
+
 	void OpenGLDevice::Clear(BitField bits)
 	{
 		GLbitfield tmp_bits = OpenGLCommon::GetOpenGLBufferBits(bits);
@@ -193,6 +201,8 @@ namespace Catherine
 	void OpenGLDevice::DispatchCompute(uint32_t x, uint32_t y, uint32_t z)
 	{
 		glDispatchCompute(x, y, z);
+		// TODO : temp code
+		glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
 	}
 
 	void OpenGLDevice::BlitFrameBuffer(uint32_t src_x0, uint32_t src_y0, uint32_t src_x1, uint32_t src_y1, uint32_t dst_x0, uint32_t dst_y0, uint32_t dst_x1, uint32_t dst_y1, BitField bufferbits, Filter filter)

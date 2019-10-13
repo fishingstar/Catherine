@@ -46,6 +46,7 @@ namespace Catherine
 		virtual IVertexArray * CreateVertexArray() override;
 		virtual IVertexBuffer * CreateVertexBuffer(size_t size, Usage usage, const void * data, const std::vector<AttributeLayout> & attributes) override;
 		virtual IIndexBuffer * CreateIndexBuffer(uint8_t stride, size_t size, Usage usage, const void * data) override;
+		virtual IStorageBuffer * CreateStorageBuffer(size_t size, Usage usage, const void * data) override;
 
 		// draw
 		virtual void Clear(BitField bits) override;

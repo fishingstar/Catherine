@@ -83,10 +83,10 @@ namespace Catherine
 
 		
 		glm::vec3 tmp_pos[4] = {
-			glm::vec3(1.0f, 1.0f, -10.0f),
-			glm::vec3(-1.0f, 1.0f, -10.0f),
-			glm::vec3(0.0f, 1.0f, -9.0f),
-			glm::vec3(0.0f, 1.0f, -11.0f)
+			glm::vec3(-3.5f, 1.0f, 1.0f),
+			glm::vec3(-5.5f, 1.0f, 1.0f),
+			glm::vec3(-4.5f, 1.0f, 0.0f),
+			glm::vec3(-4.5f, 1.0f, 2.0f)
 		};
 
 		glm::vec4 tmp_color[4] = {

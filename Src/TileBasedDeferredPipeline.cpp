@@ -16,6 +16,8 @@
 #include "TextureManager.h"
 #include "Bloom.h"
 #include "Exposure.h"
+#include "ITexture.h"
+#include "IStorageBuffer.h"
 
 #include <algorithm>
 
@@ -38,6 +40,9 @@ namespace Catherine
 	};
 
 	const std::string s_BRDF_LUT_Path = "./res/texture/ibl_brdf_lut.png";
+
+	static const size_t s_TileWidth = DEFAULT_SCREEN_WIDTH / 16;
+	static const size_t s_TileHeight = DEFAULT_SCREEN_HEIGHT / 16;
 
 	TileBasedDeferredPipeline::~TileBasedDeferredPipeline()
 	{
@@ -108,6 +113,21 @@ namespace Catherine
 		bool tmp_linkResult = m_ComputeProgram->Link();
 		if (!tmp_linkResult)
 			return false;
+
+		const uint32_t MAX_POINT_LIGHT_COUNT = 4;
+		const uint32_t MAX_SPOT_LIGHT_COUNT = 4;
+		struct TileLightList
+		{
+			uint32_t PointLightCount;
+			uint32_t PointLightIndices[MAX_POINT_LIGHT_COUNT];
+			uint32_t SpotLightCount;
+			uint32_t SpotLightIndices[MAX_SPOT_LIGHT_COUNT];
+		};
+		struct LightList
+		{
+			TileLightList tile[3600];
+		};
+		m_LightListBuffer = g_Device->CreateStorageBuffer(sizeof(LightList), Usage::Dynamic_Draw, nullptr);
 
 
 
@@ -306,8 +326,49 @@ namespace Catherine
 
 	void TileBasedDeferredPipeline::ComputeLight(const WorldContext * context)
 	{
+		// compute shader and uniform
 		m_ComputeProgram->Use();
-		g_Device->DispatchCompute(DEFAULT_SCREEN_WIDTH / 16, DEFAULT_SCREEN_HEIGHT / 16, 1);
+		m_ComputeProgram->SetInt("GDepth", 0);
+
+		// camera matrix
+		const CameraContext * tmp_camera = context->GetCameraContext();
+		const glm::mat4x4 & tmp_view = tmp_camera->GetViewMatrix();
+		m_ComputeProgram->SetMat4x4("view", tmp_view);
+		const glm::mat4x4 & tmp_projection = tmp_camera->GetProjectionMatrix();
+		m_ComputeProgram->SetMat4x4("projection", tmp_projection);
+		const glm::mat4x4 & tmp_invProjection = tmp_camera->GetProjectionMatrix();
+		m_ComputeProgram->SetMat4x4("invProjection", glm::inverse(tmp_invProjection));
+
+		// light info
+		const LightContext * tmp_light = context->GetLightContext();
+		for (unsigned int i = 0; i < LightContext::POINT_LIGHT_COUNT; i++)
+		{
+			const LightContext::PointContext * tmp_pointContext = tmp_light->GetPointConext(i);
+
+			std::string tmp_key;
+			std::string tmp_index = "pointLight[" + std::to_string(i) + "]";
+			tmp_key = tmp_index + ".lightPos";
+			m_ComputeProgram->SetVec3(tmp_key.c_str(), tmp_pointContext->m_Position);
+			tmp_key = tmp_index + ".lightColor";
+			m_ComputeProgram->SetVec4(tmp_key.c_str(), tmp_pointContext->m_LightColor);
+			tmp_key = tmp_index + ".constant";
+			m_ComputeProgram->SetFloat(tmp_key.c_str(), tmp_pointContext->m_AttenuationConstant);
+			tmp_key = tmp_index + ".linear";
+			m_ComputeProgram->SetFloat(tmp_key.c_str(), tmp_pointContext->m_AttenuationLinear);
+			tmp_key = tmp_index + ".quadratic";
+			m_ComputeProgram->SetFloat(tmp_key.c_str(), tmp_pointContext->m_AttenuationQuadratic);
+		}
+
+		// depth texture and sampler
+		ITexture * tmp_depth = m_RenderTarget_Geometry->GetDepthAttachment();
+		tmp_depth->Use(0);
+		m_GBufferSampler->Bind(0);
+
+		// storage buffer
+		m_LightListBuffer->Bind(0);
+
+		// dispatch
+		g_Device->DispatchCompute(s_TileWidth, s_TileHeight, 1);
 	}
 
 	void TileBasedDeferredPipeline::RenderLighting(const WorldContext * context)
@@ -344,6 +405,9 @@ namespace Catherine
 			m_GeometryMaterial->SetCameraUniform(tmp_camera);
 			m_GeometryMaterial->SetLightUniform(tmp_light);
 			m_GeometryMaterial->Use(ShaderPass::Deferred);
+
+			// light list
+			m_LightListBuffer->Bind(0);
 
 			m_ScreenVertexArray->Bind();
 

@@ -13,6 +13,7 @@ namespace Catherine
 	class IMaterial;
 	class IVertexArray;
 	class IPostProcess;
+	class IStorageBuffer;
 
 	class TileBasedDeferredPipeline : public IPipeline
 	{
@@ -63,7 +64,9 @@ namespace Catherine
 		ITexture * m_BRDF_LUT = nullptr;
 		ISampler * m_BRDF_LUTSampler = nullptr;
 
+		// compute resource
 		IProgram * m_ComputeProgram = nullptr;
+		IStorageBuffer * m_LightListBuffer = nullptr;
 
 		// internel information
 		CameraContext m_ShadowCameraContext;
