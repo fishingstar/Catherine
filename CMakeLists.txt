@@ -62,6 +62,7 @@ SET(Src_Device_Common
 	"${PROJECT_SOURCE_DIR}/Src/IVertexArray.h"
 	"${PROJECT_SOURCE_DIR}/Src/IRenderTarget.h"
 	"${PROJECT_SOURCE_DIR}/Src/ISampler.h"
+	"${PROJECT_SOURCE_DIR}/Src/IStorageBuffer.h"
 )
 source_group(Device\\Common FILES ${Src_Device_Common})
 
@@ -90,6 +91,8 @@ SET(Src_Device_OpenGL
 	"${PROJECT_SOURCE_DIR}/Src/OpenGLRenderTarget.cpp"
 	"${PROJECT_SOURCE_DIR}/Src/OpenGLSampler.h"
 	"${PROJECT_SOURCE_DIR}/Src/OpenGLSampler.cpp"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLStorageBuffer.h"
+	"${PROJECT_SOURCE_DIR}/Src/OpenGLStorageBuffer.cpp"
 )
 source_group(Device\\OpenGL FILES ${Src_Device_OpenGL})
 
