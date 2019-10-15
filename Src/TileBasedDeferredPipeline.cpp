@@ -336,8 +336,6 @@ namespace Catherine
 		m_ComputeProgram->SetMat4x4("view", tmp_view);
 		const glm::mat4x4 & tmp_projection = tmp_camera->GetProjectionMatrix();
 		m_ComputeProgram->SetMat4x4("projection", tmp_projection);
-		const glm::mat4x4 & tmp_invProjection = tmp_camera->GetProjectionMatrix();
-		m_ComputeProgram->SetMat4x4("invProjection", glm::inverse(tmp_invProjection));
 
 		// light info
 		const LightContext * tmp_light = context->GetLightContext();

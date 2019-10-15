@@ -38,46 +38,31 @@ uniform PointLight pointLight[POINT_LIGHT_COUNT];
 uniform sampler2D GDepth;
 uniform mat4 view;
 uniform mat4 projection;
-uniform mat4 invProjection;
 
 shared uint min_depth;
 shared uint max_depth;
 
-float GetViewDepth(float depth)
+float GetViewZ(float depth)
 {
-	vec4 tmp_position = invProjection * vec4(0.0, 0.0, depth * 2.0 - 1.0, 1.0);
-	tmp_position /= tmp_position.w;
-	return -tmp_position.z;
+	float tmp_viewDepth = projection[3][2] / (depth * 2.0 - 1.0 - projection[2][2] / projection[2][3]) / projection[2][3];
+	return tmp_viewDepth;
 }
 
 bool CheckIntersect(vec3 sphereCenter, float sphereRadius)
 {
-	vec2 tmp_origin = vec2(gl_WorkGroupID.xy) / vec2(gl_NumWorkGroups.xy);
-	vec2 tmp_step = vec2(1.0) / vec2(gl_NumWorkGroups.xy);
-
-	vec4 tmp_clipMin = projection * vec4(0.0, 0.0, -float(min_depth), 1.0);
-	tmp_clipMin /= tmp_clipMin.w;
-	vec4 tmp_clipMax = projection * vec4(0.0, 0.0, -float(max_depth), 1.0);
-	tmp_clipMax /= tmp_clipMax.w;
-
-	// 8 screen space point
-	vec3 tmp_point[8];
-	tmp_point[0] = vec3(tmp_origin, (tmp_clipMin.z + 1.0) / 2.0);
-	tmp_point[1] = vec3(tmp_origin + vec2(tmp_step.x, 0.0), (tmp_clipMin.z + 1.0) / 2.0);
-	tmp_point[2] = vec3(tmp_origin + tmp_step.xy, (tmp_clipMin.z + 1.0) / 2.0);
-	tmp_point[3] = vec3(tmp_origin + vec2(0.0, tmp_step.y), (tmp_clipMin.z + 1.0) / 2.0);
-	tmp_point[4] = vec3(tmp_origin, (tmp_clipMax.z + 1.0) / 2.0);
-	tmp_point[5] = vec3(tmp_origin + vec2(tmp_step.x, 0.0), (tmp_clipMax.z + 1.0) / 2.0);
-	tmp_point[6] = vec3(tmp_origin + tmp_step.xy, (tmp_clipMax.z + 1.0) / 2.0);
-	tmp_point[7] = vec3(tmp_origin + vec2(0.0, tmp_step.y), (tmp_clipMax.z + 1.0) / 2.0);
+	vec2 tmp_origin = (vec2(gl_WorkGroupID.xy) / vec2(gl_NumWorkGroups.xy) * 2.0 - 1.0) * projection[2][3] / vec2(projection[0][0], projection[1][1]);
+	vec2 tmp_step = (vec2(1.0) / vec2(gl_NumWorkGroups.xy) * 2.0) * projection[2][3] / vec2(projection[0][0], projection[1][1]);
 
 	// 8 view space point
-	for (int i = 0; i < 8; ++i)
-	{
-		vec4 tmp_viewPos = invProjection * vec4(tmp_point[i] * 2.0 - 1.0, 1.0);
-		tmp_viewPos /= tmp_viewPos.w;
-		tmp_point[i] = tmp_viewPos.xyz;
-	}
+	vec3 tmp_point[8];
+	tmp_point[0] = vec3(tmp_origin, 1.0) * -float(min_depth);
+	tmp_point[1] = vec3(tmp_origin + vec2(tmp_step.x, 0.0), 1.0) * -float(min_depth);
+	tmp_point[2] = vec3(tmp_origin + tmp_step.xy, 1.0) * -float(min_depth);
+	tmp_point[3] = vec3(tmp_origin + vec2(0.0, tmp_step.y), 1.0) * -float(min_depth);
+	tmp_point[4] = vec3(tmp_origin, 1.0) * -float(max_depth);
+	tmp_point[5] = vec3(tmp_origin + vec2(tmp_step.x, 0.0), 1.0) * -float(max_depth);
+	tmp_point[6] = vec3(tmp_origin + tmp_step.xy, 1.0) * -float(max_depth);
+	tmp_point[7] = vec3(tmp_origin + vec2(0.0, tmp_step.y), 1.0) * -float(max_depth);
 
 	// aabb box
 	vec3 tmp_min = tmp_point[0];
@@ -113,7 +98,7 @@ void main()
 	groupMemoryBarrier();
 
 	float tmp_depth = texture(GDepth, vec2(gl_GlobalInvocationID.x, gl_GlobalInvocationID.y) / vec2(1280, 720)).r;
-	float tmp_viewDepth = GetViewDepth(tmp_depth);
+	float tmp_viewDepth = -GetViewZ(tmp_depth);
 
 	atomicMin(min_depth, uint(tmp_viewDepth));
 	atomicMax(max_depth, uint(tmp_viewDepth));
