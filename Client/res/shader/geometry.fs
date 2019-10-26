@@ -149,7 +149,6 @@ vec3 PBRLighting(vec3 albedo, vec3 worldPos, vec3 V, vec3 N, float roughness, fl
 	tmp_color += PBRLightingImp(albedo, tmp_dirColor, V, N, tmp_dirLight, roughness, metallic) * shadow;
 
 	// point light
-
 	uvec2 tmp_tileTexcoord = uvec2(Texcoord.xy * vec2(80.0, 45.0));
 	tmp_tileTexcoord = clamp(tmp_tileTexcoord, uvec2(0, 0), uvec2(79, 44));
 	uint tmp_index = tmp_tileTexcoord.x + tmp_tileTexcoord.y * 80;
@@ -212,13 +211,13 @@ vec3 IBLLighting(vec3 albedo, vec3 V, vec3 N, float roughness, float metallic)
 	vec3 kd = 1.0 - ks;
 	kd *= 1.0 - metallic;
 
-	vec3 irradiance = texture(prefilterMap, N).rgb;
+	vec3 irradiance = pow(texture(prefilterMap, N).rgb, vec3(2.2));
 	vec3 diffuse = irradiance * albedo;
 
 	// const float MAX_REFLECTION_LOD = 4.0;
 	// vec3 prefilteredColor = textureLod(prefilterMap, R,  roughness * MAX_REFLECTION_LOD).rgb;
 	vec3 R = reflect(-V, N);
-	vec3 prefilteredColor = texture(prefilterMap, R).rgb;   
+	vec3 prefilteredColor = pow(texture(prefilterMap, R).rgb, vec3(2.2));
 	vec2 envBRDF = texture(brdfLUT, vec2(max(dot(N, V), 0.0), roughness)).rg;
 	vec3 specular = prefilteredColor * (F * envBRDF.x + envBRDF.y);
 	// vec3 approx = EnvBRDFApprox(F, roughness, max(dot(N, V), 0.0));
@@ -264,10 +263,11 @@ void main()
 	vec3 tmp_iblColor = IBLLighting(tmp_albedo, tmp_viewDir, tmp_normal, tmp_roughness, tmp_metallic);
 	vec3 tmp_result = tmp_pbrColor + tmp_iblColor * ambient;
 
-	// uvec2 tmp_tileTexcoord = uvec2((Texcoord.xy - vec2(0.01)) * vec2(80.0, 45.0));
+	// uvec2 tmp_tileTexcoord = uvec2(Texcoord.xy * vec2(80.0, 45.0));
 	// tmp_tileTexcoord = clamp(tmp_tileTexcoord, uvec2(0, 0), uvec2(79, 44));
 	// uint tmp_index = tmp_tileTexcoord.x + tmp_tileTexcoord.y * 80;
 	// float tmp_data = float(tile[tmp_index].PointLightCount);
+	// tmp_result.r += tmp_data;
 
 	// output shading result
 	FragColor = vec4(tmp_result, 1.0f);
